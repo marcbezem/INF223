@@ -2,84 +2,52 @@
 
  Tentative plan of Lectures (status 05.01.2121)
 
-1. Lecture 21.01.21
+1. Lecture 21.01.21 (week 3)
 
-3
+   1. what is Category Theory?  
+   1. shift of paradigm  
+   1. informal discussion of products, dualization, sums
 
-\- What is Category Theory?  
-\- shift of paradigm  
-\- informal discussion of products, dualization, sums
+1. Lecture 22.01.21 (week 3)
 
-1. Lecture
+   1. graphs and graph homomorphisms: motivation, examples, definition  
+   1. opposite graphs  
+   1. discussion of isomorhisms between graphs
 
-16.01.21
+1. Lecture 28.01.21 (week 4)
 
-3
+   1. composition of maps and identity maps  
+   1. composition of graph homomorphisms and identity graph homomorphisms  
+   1. associativity and identity law of composition  
+   1. definition of category  
+   1. categories 1. Lecture and **Graph**  
+   1. a universal definition of isomorphism
 
-\- graphs and graph homomorphisms: motivation, examples, definition  
-\- opposite graphs  
-\- discussion of isomorhisms between graphs
+1. Lecture 29.01.21 (week 4)
 
+   1. composition of isomorphisms is isomorphism  
+   1. isomorphisms in 1. Lecture are bijective maps  
+   1. isomorphisms in **Lecture Graph** are componentwise bijective graph homomorphisms  
+   1. some finite categories  
+   1. representation of finite categories by pictorial diagrams  
+   1. other categories with sets as objects: **Lecture Incl**, **Inj**, **Par**  
+   1. **Nat** and **Incl** as pre-order categories  
+   1. pre-order categories and partial order categories
 
+1. Lecture 05.02.21 (week 5)
 
+   1. subcategory: examples and definition  
+   1.discussion associations in class diagrams  
+   1. composition of relations  
+   1. category 1. Lecture  
+   1. association ends and multimaps
 
+1. Lecture 06.02.21 (week 5)
 
-
-1. Lecture
-
-22.01.21
-
-4
-
-\- composition of maps and identity maps  
-\- composition of graph homomorphisms and identity graph homomorphisms  
-\- associativity and identity law of composition  
-\- definition of category  
-\- categories 1. Lecture and **Graph**  
-\- a universal definition of isomorphism
-
-1. Lecture
-
-23.01.21
-
-4
-
-\- composition of isomorphisms is isomorphism  
-\- isomorphisms in 1. Lecture are bijective maps  
-\- isomorphisms in **Lecture Graph** are componentwise bijective graph homomorphisms  
-\- some finite categories  
-\- representation of finite categories by pictorial diagrams  
-\- other categories with sets as objects: **Lecture Incl**, **Inj**, **Par**  
-\- **Nat** and **Incl** as pre-order categories  
-\- pre-order categories and partial order categories
-
-
-
-
-
-
-1. Lecture
-
-29.01.21
-
-5
-
-\- subcategory: examples and definition  
-\- discussion associations in class diagrams  
-\- composition of relations  
-\- category 1. Lecture  
-\- association ends and multimaps
-
-1. Lecture
-
-30.01.21
-
-5
-
-\- category **Lecture Mult**  
-\- monoids: examples and definition  
-\- monoid morphisms: examples and definition  
-\- category 1. Lecture of monoids
+   1. category **Lecture Mult**  
+   1. monoids: examples and definition  
+   1. monoid morphisms: examples and definition  
+   1. category 1. Lecture of monoids
 
 
 
@@ -92,11 +60,11 @@
 
 6
 
-\- inductive definition of lists  
-\- universal property of lists (free monoids)  
-\- functors: motivation, definition  
-\- functors: examples  
-\- product graphs with finite example
+   1. inductive definition of lists  
+   1. universal property of lists (free monoids)  
+   1. functors: motivation, definition  
+   1. functors: examples  
+   1. product graphs with finite example
 
 1. Lecture
 
@@ -104,13 +72,13 @@
 
 6
 
-\- product categories  
-\- functors preserve isomorphisms  
-\- opposite category and contravariant functors  
-\- identity functors and composition of functors  
-\- categories of categories: 1. Lecture, **CAT**, **SET**, **GRAPH**  
-\- pathes: motivation, examples, definition  
-\- path graph and evaluation of paths
+   1. product categories  
+   1. functors preserve isomorphisms  
+   1. opposite category and contravariant functors  
+   1. identity functors and composition of functors  
+   1. categories of categories: 1. Lecture, **CAT**, **SET**, **GRAPH**  
+   1. pathes: motivation, examples, definition  
+   1. path graph and evaluation of paths
 
 
 
@@ -123,12 +91,12 @@
 
 7
 
-\- categorical diagrams: motivation, definition, examples  
-\- commutative diagram: definition and examples  
-\- path categories  
-\- summary of the first lectures about "structures"  
-\- general discussion about models and metamodels  
-\- discussion of a "metamodel" MG of graphs
+   1. categorical diagrams: motivation, definition, examples  
+   1. commutative diagram: definition and examples  
+   1. path categories  
+   1. summary of the first lectures about "structures"  
+   1. general discussion about models and metamodels  
+   1. discussion of a "metamodel" MG of graphs
 
 1. Lecture
 
@@ -136,11 +104,11 @@
 
 7
 
-\- graphs as interpretations of the graph MG in 1. Lecture  
-\- graph homomorphisms as natural transformations  
-\- definition of natural transformations  
-\- natural transformations: composition and identities  
-\- definition of interpretation categories
+   1. graphs as interpretations of the graph MG in 1. Lecture  
+   1. graph homomorphisms as natural transformations  
+   1. definition of natural transformations  
+   1. natural transformations: composition and identities  
+   1. definition of interpretation categories
 
 
 
@@ -153,13 +121,13 @@
 
 8
 
-\- indexed sets as functor category  
-\- arrow categories  
-\- category of E-graphs  
-\- discussion of arrows between arrows  
-\- path equations, satisfaction of path equations  
-\- model interpretations  
-\- reflexive graphs
+   1. indexed sets as functor category  
+   1. arrow categories  
+   1. category of E-graphs  
+   1. discussion of arrows between arrows  
+   1. path equations, satisfaction of path equations  
+   1. model interpretations  
+   1. reflexive graphs
 
 1. Lecture
 
@@ -167,12 +135,12 @@
 
 8
 
-\- motivation of "typing" by ER-diagrams and Petri nets  
-\- type graph and typed graphs and their morphisms  
-\- definition slice category  
-\- example typed E-graphs  
-\- indexed vs. typed sets  
-\- equivalence of categories
+   1. motivation of "typing" by ER-diagrams and Petri nets  
+   1. type graph and typed graphs and their morphisms  
+   1. definition slice category  
+   1. example typed E-graphs  
+   1. indexed vs. typed sets  
+   1. equivalence of categories
 
 
 
@@ -202,12 +170,12 @@
 
 10
 
-\- equivalence relations and equivalence classes  
-\- quotient sets and natural maps  
-\- unique factorization of maps  
-\- equivalences as abstraction in mathematics  
-\- representatives and normal forms  
-\- quotient path categories
+   1. equivalence relations and equivalence classes  
+   1. quotient sets and natural maps  
+   1.unique factorization of maps  
+   1. equivalences as abstraction in mathematics  
+   1. representatives and normal forms  
+   1. quotient path categories
 
 1. Lecture
 
@@ -215,10 +183,10 @@
 
 10
 
-\- monomorphisms: definition, examples in 1. Lecture, **Graph**, **Incl**  
-\- epimorphisms: definition, examples in 1. Lecture, **Graph**, **Incl**  
-\- split mono's and epi's  
-\- in 1. Lecture all epi's are split -> axiom of choice
+   1. monomorphisms: definition, examples in 1. Lecture, **Graph**, **Incl**  
+   1. epimorphisms: definition, examples in 1. Lecture, **Graph**, **Incl**  
+   1. split mono's and epi's  
+   1. in 1. Lecture all epi's are split -> axiom of choice
 
 
 
@@ -231,8 +199,8 @@
 
 11
 
-\- initial objects: definition, examples in , **Lecture Incl**, **Set**, , **Mult**, **Graph**  
-\- terminal objects: definition, examples in , **Lecture Incl**, **Set**, **Mult**, **Graph**
+   1. initial objects: definition, examples in , **Lecture Incl**, **Set**, , **Mult**, **Graph**  
+   1. terminal objects: definition, examples in , **Lecture Incl**, **Set**, **Mult**, **Graph**
 
 1. Lecture
 
@@ -240,8 +208,8 @@
 
 11
 
-\- sum: definition, examples in , **Lecture Incl**, **Set**, **Graph**  
-\- product: definition, examples in , **Lecture Incl**, **Set**, **Graph**
+   1. sum: definition, examples in , **Lecture Incl**, **Set**, **Graph**  
+   1. product: definition, examples in , **Lecture Incl**, **Set**, **Graph**
 
 
 
@@ -254,11 +222,11 @@
 
 12
 
-\- motivation pullbacks: intersection, inner join, products of typed graphs  
-\- pullbacks: definition, examples in **Lecture Incl**, **Set**, **Graph**  
-\- preimages as pullbacks  
-\- equalizers: definition, example in 1. Lecture  
-\- kernel and graph of a map f:A->B as equalizers
+   1. motivation pullbacks: intersection, inner join, products of typed graphs  
+   1. pullbacks: definition, examples in **Lecture Incl**, **Set**, **Graph**  
+   1. preimages as pullbacks  
+   1. equalizers: definition, example in 1. Lecture  
+   1. kernel and graph of a map f:A->B as equalizers
 
 1. Lecture
 
@@ -266,11 +234,11 @@
 
 12
 
-\- general construction of pullbacks by products and equalizers  
-\- fibred products  
-\- equalizers are mono  
-\- monics are reflected by pullbacks, coding of monics by pullbacks  
-\- composition of pullbacks is a pullback and decomposition of pullbacks
+   1. general construction of pullbacks by products and equalizers  
+   1.fibred products  
+   1. equalizers are mono  
+   1. monics are reflected by pullbacks, coding of monics by pullbacks  
+   1. composition of pullbacks is a pullback and decomposition of pullbacks
 
 
 
@@ -283,20 +251,20 @@
 
 13
 
-\- motivation pushouts: sharing, decomposition of graphs, rule applications  
-\- pushouts: definition, examples in , **Lecture Incl**, **Set**, **Graph**  
-\- coequalizers, general construction of pushouts by sums and coequalizers  
-\- discussion: two lines of constructions
+   1. motivation pushouts: sharing, decomposition of graphs, rule applications  
+   1. pushouts: definition, examples in , **Lecture Incl**, **Set**, **Graph**  
+   1. coequalizers, general construction of pushouts by sums and coequalizers  
+   1. discussion: two lines of constructions
 
 26.03.21
 
 13
 
-\- definition of diagrams  
-\- cones and limits  
-\- co-cones and colimits  
-\- completeness and co-completeness  
-\- stepwise construction of limits and colimits
+   1. definition of diagrams  
+   1. cones and limits  
+   1. co-cones and colimits  
+   1. completeness and co-completeness  
+   1. stepwise construction of limits and colimits
 
 
 
@@ -339,97 +307,14 @@
 
 1. Lecture
 
-15.04.21
-
-16
-
-\- research project: flexible and universal diagrammatic formalism  
-\- categorical sketches: example binary relations  
-\- criticism of sketch approach
-
-1. Lecture
-
-16.04.21
-
-16
-
-\- relation = jointly injective/monic  
-\- dualization = jointly surjective/epic (cover), example subclasses  
-\- ER diagrams in DPF  
-\- key = injective map  
-\- composite attributes = products  
-\- formalization of associations: predicate \[opp\]
-
-
-
 
 
 
 1. Lecture
 
-22.04.21
-
-17
-
-\- diagrammatic signature: definition and examples  
-\- atomic constraints  
-\- diagrammatic specification  
-\- discussion of two variants of EER models  
-\- semantic interpretations in a "semantic universe" **Lecture U**  
-\- indexed semantics = interpretation categories  
-\- satisfaction of atomic constraints  
-\- specification morphisms: definition and example; category of specifications
 
 1. Lecture
 
-23.04.21
-
-17
-
-\- revised type graph for ER diagrams  
-\- semantics-as-instances  
-\- discussion extending type graphs to metamodels  
-\- informal discussion of modelling hierarchies
-
-
-
-
-
-
-1. Lecture
-
-28.04.21
-
-18
-
-\- typed signatures, typed atomic constraints, typed specifications  
-\- conformant specification  
-\- modelling formalism and modelling hierarchies
-
-1. Lecture
-
-29.04.21
-
-18
-
-\- discussion model transformation  
-\- joined modelling formalism - example object-oriented models joined with relational data models  
-\- transformation rules: definition  
-\- model transformation = application of transformation rule = pushout  
-\- example from oo models to relational data models  
-\- discussion control of rule applications: negative application conditions, stratification  
-\- discussion: extracting the constructed relational data model by pullback
-
-
-
-
-
-
-1. Lecture
-
-06.05.21
-
-19
 
 TBA
 
@@ -440,42 +325,6 @@ TBA
 19
 
 \- course summary
-
-
-
-
-
-
-20
-
-**No more lectures**
-
-
-
-
-
-
-21
-
-**No more lectures**
-
-
-
-
-
-
-22
-
-**No more lectures**
-
-
-
-
-
-
-03.06.21
-
-23
 
 **Oral Exam (Plan)**
 
