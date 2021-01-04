@@ -37,28 +37,19 @@
 1. Lecture 05.02.21 (week 5)
 
    1. subcategory: examples and definition  
-   1.discussion associations in class diagrams  
+   1. associations in class diagrams  
    1. composition of relations  
    1. category 1. Lecture  
    1. association ends and multimaps
 
 1. Lecture 06.02.21 (week 5)
 
-   1. category **Lecture Mult**  
+   1. category **Mult**  
    1. monoids: examples and definition  
    1. monoid morphisms: examples and definition  
-   1. category 1. Lecture of monoids
+   1. category **Mon** of monoids
 
-
-
-
-
-
-1. Lecture
-
-05.02.21
-
-6
+1. Lecture 12.02.21 (week 6)
 
    1. inductive definition of lists  
    1. universal property of lists (free monoids)  
@@ -66,11 +57,7 @@
    1. functors: examples  
    1. product graphs with finite example
 
-1. Lecture
-
-06.02.21
-
-6
+1. Lecture 13.02.21 (week 6)
 
    1. product categories  
    1. functors preserve isomorphisms  
@@ -80,16 +67,7 @@
    1. pathes: motivation, examples, definition  
    1. path graph and evaluation of paths
 
-
-
-
-
-
-1. Lecture
-
-12.02.21
-
-7
+1. Lecture 19.02.21 (week 7)
 
    1. categorical diagrams: motivation, definition, examples  
    1. commutative diagram: definition and examples  
@@ -98,28 +76,15 @@
    1. general discussion about models and metamodels  
    1. discussion of a "metamodel" MG of graphs
 
-1. Lecture
-
-13.02.21
-
-7
-
+1. Lecture 20.02.21 (week 7)
+   
    1. graphs as interpretations of the graph MG in 1. Lecture  
    1. graph homomorphisms as natural transformations  
    1. definition of natural transformations  
    1. natural transformations: composition and identities  
    1. definition of interpretation categories
 
-
-
-
-
-
-1. Lecture
-
-19.02.21
-
-8
+1. Lecture 26.02.21 (week 8)
 
    1. indexed sets as functor category  
    1. arrow categories  
@@ -129,11 +94,7 @@
    1. model interpretations  
    1. reflexive graphs
 
-1. Lecture
-
-20.02.21
-
-8
+1. Lecture 26.02.21 (week 8) 
 
    1. motivation of "typing" by ER-diagrams and Petri nets  
    1. type graph and typed graphs and their morphisms  
@@ -142,27 +103,15 @@
    1. indexed vs. typed sets  
    1. equivalence of categories
 
+* 05.03.21
 
-
-
-
-
-26.02.21
-
-9
-
-**Lecture no lecture (Winter holiday)**
+**no lecture (Winter holiday)**
 
 27.02.21
 
 9
 
-**Lecture no lecture (Winter holiday)**
-
-
-
-
-
+**no lecture (Winter holiday)**
 
 1. Lecture
 
@@ -172,7 +121,7 @@
 
    1. equivalence relations and equivalence classes  
    1. quotient sets and natural maps  
-   1.unique factorization of maps  
+   1. unique factorization of maps  
    1. equivalences as abstraction in mathematics  
    1. representatives and normal forms  
    1. quotient path categories
@@ -183,10 +132,10 @@
 
 10
 
-   1. monomorphisms: definition, examples in 1. Lecture, **Graph**, **Incl**  
-   1. epimorphisms: definition, examples in 1. Lecture, **Graph**, **Incl**  
+   1. monomorphisms: definition, examples in **Set, Graph, Incl**  
+   1. epimorphisms: definition, examples in **Set, Graph, Incl**  
    1. split mono's and epi's  
-   1. in 1. Lecture all epi's are split -> axiom of choice
+   1. in **Set** all epi's are split -> axiom of choice
 
 
 
@@ -199,8 +148,8 @@
 
 11
 
-   1. initial objects: definition, examples in , **Lecture Incl**, **Set**, , **Mult**, **Graph**  
-   1. terminal objects: definition, examples in , **Lecture Incl**, **Set**, **Mult**, **Graph**
+   1. initial objects: definition, examples in , **Incl**, **Set**, , **Mult**, **Graph**  
+   1. terminal objects: definition, examples in , **Incl**, **Set**, **Mult**, **Graph**
 
 1. Lecture
 
@@ -208,8 +157,8 @@
 
 11
 
-   1. sum: definition, examples in , **Lecture Incl**, **Set**, **Graph**  
-   1. product: definition, examples in , **Lecture Incl**, **Set**, **Graph**
+   1. sum: definition, examples in , **Incl**, **Set**, **Graph**  
+   1. product: definition, examples in , **Incl**, **Set**, **Graph**
 
 
 
@@ -223,9 +172,9 @@
 12
 
    1. motivation pullbacks: intersection, inner join, products of typed graphs  
-   1. pullbacks: definition, examples in **Lecture Incl**, **Set**, **Graph**  
+   1. pullbacks: definition, examples in **Incl**, **Set**, **Graph**  
    1. preimages as pullbacks  
-   1. equalizers: definition, example in 1. Lecture  
+   1. equalizers: definition, example in **Set **  
    1. kernel and graph of a map f:A->B as equalizers
 
 1. Lecture
@@ -252,7 +201,7 @@
 13
 
    1. motivation pushouts: sharing, decomposition of graphs, rule applications  
-   1. pushouts: definition, examples in , **Lecture Incl**, **Set**, **Graph**  
+   1. pushouts: definition, examples in , **Incl**, **Set**, **Graph**  
    1. coequalizers, general construction of pushouts by sums and coequalizers  
    1. discussion: two lines of constructions
 
@@ -275,13 +224,13 @@
 
 14
 
-**Lecture no lecture (buffer/lecture monads?)**
+**no lecture (buffer/lecture monads?)**
 
 02.04.21
 
 14
 
-**Lecture no lecture (buffer/lecture monads?)**
+**no lecture (buffer/lecture monads?)**
 
 
 
@@ -292,13 +241,13 @@
 
 15
 
-**Lecture no lecture (Easter Holiday)**
+**no lecture (Easter Holiday)**
 
 09.04.21
 
 15
 
-**Lecture no lecture (Easter Holiday)**
+**no lecture (Easter Holiday)**
 
 
 
