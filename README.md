@@ -1,6 +1,8 @@
 # INF223 Spring 2021
 
  Tentative plan of Lectures (status 05.01.2121)
+ 
+ There are two important breaks that can be used to work on the compulsory exercises: the winter break and the easter break.
 
 1. Lecture 21.01.21 (week 3)
 
@@ -78,7 +80,7 @@
 
 1. Lecture 20.02.21 (week 7)
    
-   1. graphs as interpretations of the graph MG in 1. Lecture  
+   1. graphs as interpretations of the graph MG in **Set**  
    1. graph homomorphisms as natural transformations  
    1. definition of natural transformations  
    1. natural transformations: composition and identities  
