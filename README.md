@@ -2,7 +2,7 @@
 
  Tentative plan of Lectures (status 05.01.2121)
  
- There are two important breaks that can be used to work on the compulsory exercises: the winter break (first week of March, week 9) and an extended easter break (week 13 and 14).
+ There are two important breaks that can be used to work on compulsory exercises: the winter break (first week of March, week 9) and an extended Easter break (week 13 and 14).
 
 1. Lecture 21.01.21 (week 3)
 
@@ -123,13 +123,13 @@
 
 1. Lecture 18.03.21 (week 11)
 
-   1. initial objects: definition, examples in , **Incl**, **Set**, , **Mult**, **Graph**  
-   1. terminal objects: definition, examples in , **Incl**, **Set**, **Mult**, **Graph**
+   1. initial objects: definition, examples in **Incl**, **Set**, **Mult**, **Graph**  
+   1. terminal objects: definition, examples in **Incl**, **Set**, **Mult**, **Graph**
 
 1. Lecture 19.03.21 (week 11)
 
-   1. sum: definition, examples in , **Incl**, **Set**, **Graph**  
-   1. product: definition, examples in , **Incl**, **Set**, **Graph**
+   1. sum: definition, examples in **Incl**, **Set**, **Graph**  
+   1. product: definition, examples in **Incl**, **Set**, **Graph**
 
 1. Lecture 25.03.21 (week 12)
 
@@ -142,7 +142,7 @@
 1. Lecture 26.03.21 (week 12, no lectures in week 13, 14)
 
    1. general construction of pullbacks by products and equalizers  
-   1.fibred products  
+   1. fibred products  
    1. equalizers are mono  
    1. monics are reflected by pullbacks, coding of monics by pullbacks  
    1. composition of pullbacks is a pullback and decomposition of pullbacks
