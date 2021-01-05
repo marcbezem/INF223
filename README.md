@@ -2,7 +2,7 @@
 
  Tentative plan of Lectures (status 05.01.2121)
  
- There are two important breaks that can be used to work on the compulsory exercises: the winter break and the easter break.
+ There are two important breaks that can be used to work on the compulsory exercises: the winter break (first week of March, week 9) and an extended easter break (week 13 and 14).
 
 1. Lecture 21.01.21 (week 3)
 
@@ -96,7 +96,7 @@
    1. model interpretations  
    1. reflexive graphs
 
-1. Lecture 26.02.21 (week 8) 
+1. Lecture 27.02.21 (week 8, no lectures in week 9) 
 
    1. motivation of "typing" by ER-diagrams and Petri nets  
    1. type graph and typed graphs and their morphisms  
@@ -105,21 +105,7 @@
    1. indexed vs. typed sets  
    1. equivalence of categories
 
-* 05.03.21
-
-**no lecture (Winter holiday)**
-
-27.02.21
-
-9
-
-**no lecture (Winter holiday)**
-
-1. Lecture
-
-04.03.21
-
-10
+1. Lecture 11.03.21 (week 10)
 
    1. equivalence relations and equivalence classes  
    1. quotient sets and natural maps  
@@ -128,50 +114,24 @@
    1. representatives and normal forms  
    1. quotient path categories
 
-1. Lecture
-
-05.03.21
-
-10
+1. Lecture 12.03.21 (week 10)
 
    1. monomorphisms: definition, examples in **Set, Graph, Incl**  
    1. epimorphisms: definition, examples in **Set, Graph, Incl**  
    1. split mono's and epi's  
    1. in **Set** all epi's are split -> axiom of choice
 
-
-
-
-
-
-1. Lecture
-
-11.03.21
-
-11
+1. Lecture 18.03.21 (week 11)
 
    1. initial objects: definition, examples in , **Incl**, **Set**, , **Mult**, **Graph**  
    1. terminal objects: definition, examples in , **Incl**, **Set**, **Mult**, **Graph**
 
-1. Lecture
-
-12.03.21
-
-11
+1. Lecture 19.03.21 (week 11)
 
    1. sum: definition, examples in , **Incl**, **Set**, **Graph**  
    1. product: definition, examples in , **Incl**, **Set**, **Graph**
 
-
-
-
-
-
-1. Lecture
-
-18.03.21
-
-12
+1. Lecture 25.03.21 (week 12)
 
    1. motivation pullbacks: intersection, inner join, products of typed graphs  
    1. pullbacks: definition, examples in **Incl**, **Set**, **Graph**  
@@ -179,11 +139,7 @@
    1. equalizers: definition, example in **Set **  
    1. kernel and graph of a map f:A->B as equalizers
 
-1. Lecture
-
-19.03.21
-
-12
+1. Lecture 26.03.21 (week 12, no lectures in week 13, 14)
 
    1. general construction of pullbacks by products and equalizers  
    1.fibred products  
@@ -191,107 +147,29 @@
    1. monics are reflected by pullbacks, coding of monics by pullbacks  
    1. composition of pullbacks is a pullback and decomposition of pullbacks
 
+1. Lecture (15.04.21, week 15) TBA
 
+1. Lecture (16.04.21, week 15) TBA
 
+1. Lecture (22.04.21, week 16) TBA
 
+1. Lecture (23.04.21, week 16) TBA
 
+1. Lecture (29.04.21, week 17) TBA
 
-1. Lecture
+1. Lecture (30.04.21, week 17) TBA
 
-25.03.21
+1. Lecture (06.05.21, week 18) TBA
 
-13
+1. Lecture (07.05.21, week 18) TBA
 
-   1. motivation pushouts: sharing, decomposition of graphs, rule applications  
-   1. pushouts: definition, examples in , **Incl**, **Set**, **Graph**  
-   1. coequalizers, general construction of pushouts by sums and coequalizers  
-   1. discussion: two lines of constructions
+1. No lecture (13.05.21, Ascension Day, week 19) 
 
-26.03.21
+1. Lecture (14.05.21, week 19) TBA
 
-13
+1. Lecture (20.05.21, week 20) TBA
 
-   1. definition of diagrams  
-   1. cones and limits  
-   1. co-cones and colimits  
-   1. completeness and co-completeness  
-   1. stepwise construction of limits and colimits
-
-
-
-
-
-
-01.04.21
-
-14
-
-**no lecture (buffer/lecture monads?)**
-
-02.04.21
-
-14
-
-**no lecture (buffer/lecture monads?)**
-
-
-
-
-
-
-08.04.21
-
-15
-
-**no lecture (Easter Holiday)**
-
-09.04.21
-
-15
-
-**no lecture (Easter Holiday)**
-
-
-
-
-
-
-1. Lecture
-
-
-
-
-1. Lecture
-
-
-1. Lecture
-
-
-TBA
-
-1. Lecture
-
-07.05.21
-
-19
-
-\- course summary
-
-**Oral Exam (Plan)**
-
-04.06.21
-
-23
-
-**Oral Exam (Plan)**
-
-
-
-
-
-
-
-
+1. Lecture (21.05.21, week 20) TBA
 
 
 
