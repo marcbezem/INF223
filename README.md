@@ -4,7 +4,7 @@
 
 1. Lecture 21.01.21 (week 3)
 
-   1. what is Category Theory?  
+   1. What is Category Theory?  
    1. shift of paradigm  
    1. informal discussion of products, dualization, sums
 
@@ -20,17 +20,17 @@
    1. composition of graph homomorphisms and identity graph homomorphisms  
    1. associativity and identity law of composition  
    1. definition of category  
-   1. categories 1. Lecture and **Graph**  
+   1. categories **Set** and **Graph**  
    1. a universal definition of isomorphism
 
 1. Lecture 29.01.21 (week 4)
 
    1. composition of isomorphisms is isomorphism  
-   1. isomorphisms in 1. Lecture are bijective maps  
+   1. isomorphisms in **Set** are bijective maps  
    1. isomorphisms in **Lecture Graph** are componentwise bijective graph homomorphisms  
    1. some finite categories  
    1. representation of finite categories by pictorial diagrams  
-   1. other categories with sets as objects: **Lecture Incl**, **Inj**, **Par**  
+   1. other categories with sets as objects: **Incl**, **Inj**, **Par**  
    1. **Nat** and **Incl** as pre-order categories  
    1. pre-order categories and partial order categories
 
@@ -39,7 +39,7 @@
    1. subcategory: examples and definition  
    1. associations in class diagrams  
    1. composition of relations  
-   1. category 1. Lecture  
+   1. category **Rel** 
    1. association ends and multimaps
 
 1. Lecture 06.02.21 (week 5)
@@ -63,7 +63,7 @@
    1. functors preserve isomorphisms  
    1. opposite category and contravariant functors  
    1. identity functors and composition of functors  
-   1. categories of categories: 1. Lecture, **CAT**, **SET**, **GRAPH**  
+   1. categories of categories: **Cat**, **CAT**, **SET**, **GRAPH**  
    1. pathes: motivation, examples, definition  
    1. path graph and evaluation of paths
 
