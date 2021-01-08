@@ -2,7 +2,7 @@
 
  Tentative plan of Lectures (status 05.01.2121)
  
- There are two important breaks that can be used to work on compulsory exercises: the winter break (first week of March, week 9) and an extended Easter break (week 13 and 14).
+ There are two important breaks that can be used to work on compulsory exercises: the winter break (first week of March, week 9) and an extended Easter break (week 13 and 14). There will be a third compulsory exercise after the Easter break.
 
 1. Lecture 21.01.21 (week 3)
 
