@@ -1,0 +1,185 @@
+\documentclass[handout]{beamer}
+%\documentclass[slides]{beamer}
+% Vary the color applet  (try out your own if you like)
+%\colorlet{structure}{red!20!black}
+%\beamertemplateshadingbackground{yellow!20}{white}
+%\usepackage{beamerthemeshadow}
+%\usepackage[utf8x]{inputenc} CONFLICT!
+%\usepackage[english,norsk,nynorsk]{babel}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
+\usepackage[all]{xy}
+\usepackage{multicol}
+
+%\setbeamertemplate{navigation symbols}{}++++++
+%\setbeamertemplate{footline}[frame number]
+\usetheme{Montpellier}
+
+
+\input macros
+
+\newcommand{\To}{\Rightarrow}
+\newcommand{\Trt}{\stackrel{*}{\Rightarrow}}
+\newcommand{\ToG}{\Rightarrow_G}
+\newcommand{\redS}{{\color{red} S}}
+
+\newcommand{\Set}{\mathsf{Set}}
+
+\title[INF210 presentations]{}
+
+\begin{document}
+
+\section{Chapter 1}
+\subsection{Lecture 1}
+ 
+\frame
+  {   
+    \frametitle{What is Category Theory (CT)?}\label{Ch1:What is CT}
+
+ \begin{itemize}[<+->]
+\item CT is the study of mathematical structure at a convenient abstraction level
+\item Useful metaphor: ZF (Zermelo-Fraenkel, axiomatic) set theory is like an assembly language for mathematics, CT is like a higher programming language
+\item The abstractions and the toolbox of CT are also very useful for CS (Computer Science)
+\item We will try to give examples from (functional) programming
+\item 
+ 
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Sets}\label{Ch1:sets}
+
+ \begin{itemize}[<+->]
+\item Notations: $\in$, $\emptyset$, $\cup$, $\cap$, $\backslash$, 
+$\subseteq$, $\powset$, $\to$, $\circ$, $id_A : A\to A$
+\item Sets are usually denoted by capital letters, with/out decoration
+\item Elements of sets are usually denoted by lower case letters, with/out decorations, unless ...
+\item ...  they are sets themselves and we want to stress that
+\item Set builders: (explicit) $\{ \ldots \}$,  (subset) $\{x \in S \mid P(x) \}$, $P$ a predicate
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Cartesian Product}\label{Ch1:CartesianProduct}
+
+ \begin{itemize}[<+->]
+\item Definition: $A\times B := \set{(a,b) \mid a\in A,~b\in B}$
+\item Two problems (at least) with this definition of \emph{ordered pairs}:
+   \begin{itemize}[<+->]
+\item Set builder without `superset' $S$
+\item What in the name of Cantor is $(\_,\_)$ ?
+   \end{itemize}
+\item Solutions  (\myurl{en.wikipedia.org/wiki/Ordered_pair}) :
+ \begin{enumerate}[<+->]
+\item Set theory (Kuratowski): $(a,b)_K := \set{\set{a},\set{a,b}}$, \\
+           superset $S:= \powset\powset(X\cup Y)$
+\item Programming languages: Pair class in Java, tuple types in Haskell,
+$(\_,\_)$ is a primitive, no worries about $S$
+\item Category Theory: by a universal property (more abstract)
+ \end{enumerate}
+\item 1 and 2 above are implementations, 3 is `implementation independent'
+ \end{itemize}
+
+ }
+
+
+\frame
+  {   
+    \frametitle{Universal Property of Cartesian Product}\label{Ch1:CartesianProductUP}
+
+ \begin{itemize}[<+->]
+\item Fact 1.1.1, picture and explanation on Whiteboard
+\item Different implementation of $A\times B$ by $B\times A$ yields unique bijection
+$(A\times B) \to (B\times A)$
+\item The universal property guarantees that \emph{any} implementation
+of the cartesian product of sets yields such a bijection (`implementation independent')
+\item This example shows the ingredients of a category (here $\Set$):
+   \begin{itemize}[<+->]
+\item Objects (here: sets)
+\item Arrows (here: functions)
+\item Composition of (certain) arrows, identity arrows
+\item Properties: associativity and identity laws
+   \end{itemize}
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Dualization}\label{Ch1:sets}
+
+ \begin{itemize}[<+->]
+\item Dualization in CT means: reversing all arrows
+\item Fact 1.1.2, picture and explanation on Whiteboard
+\item Disjoint union: $A\uplus B := (A\times\set{1})\cup(A\times\set{2})$
+\item Duals of projections are injections
+\item Dual of $\langle f,g\rangle : C \to (A\times B)$ is $[ f,g] : (A\uplus B) \to C$ ...
+\item ... and this is case distinction!
+ \end{itemize}
+
+ }
+
+
+\frame
+  {   
+     \frametitle{More basics}\label{Ch1:setbasics}
+
+ \begin{itemize}[<+->]
+\item Functions (or maps) $A\to B$ are total unless stated otherwise, 
+$A$ is the domain (or source) $B$ is the co-domain (or target)
+\item We write $f: A\to B$ for $f\in (A\to B)$
+\item Pairs can be generalized to $n$-tuples
+\item $A^0 := \set{()}$, $A^{n+1}=A^n\times A$,
+$A^* := List(A) := \cup_{n\in\nat} A^n$
+\item $\powset_{fin}(A)$ is the set of finite subsets of $A$
+\item Image and preimage of $f: A\to B$ for points and subsets 
+\item Injective, surjective, bijective and idempotents maps
+\item Inclusion map and epi-mono factorization: every map
+is the (unique) composition of a surjection followed by an inclusion
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Some useful maps}\label{Ch1:usefulmaps}
+
+ \begin{itemize}[<+->]
+\item $del: A^* \to A^* $ removes subsequent duplicates (idempotent)
+\item $sort: A^* \to A^* $, given an order on $A$, sorts (idempotent)
+\item $len: A^* \to \nat $ gives the length of a list (surjective)
+\item $forget: A^* \to \powset(A) $ gives the elements of a list
+\item $forget^e: A^* \to \powset_{fin}(A) $ gives the elements of a list (surjective)
+\item $forget$ is the composition of $forget^e$ and an inclusion
+\item 
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Comments on script}\label{Ch1:comments}
+
+ \begin{itemize}[<+->]
+\item p. 6, last picture: $\pi'_1$ and  $\pi'_2$ interchanged
+\item p. 7: notations $A.a$ and $a:A$ not good if $B=A$
+ \end{itemize}
+
+ }
+
+
+
+\end{document}
+
+\myurl{en.wikipedia.org/wiki/Ordered_pair}
+ \begin{itemize}
+    \item emulation halts because of the partiality of $\delta$;
+    \item emulation halts because of "head left" with head at first cell;
+    \item emulation halts because of reaching a halting state;
+    \item the emulated TM goes on forever.
+ \end{itemize}
