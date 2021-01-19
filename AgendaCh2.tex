@@ -30,59 +30,90 @@
 
 \begin{document}
 
-\section{Chapter 1}
-\subsection{Lecture 1}
+\section{Chapter 2}
+\subsection{Directed Multigraphs}
  
 \frame
   {   
-    \frametitle{What is Category Theory (CT)?}\label{Ch1:What is CT}
+    \frametitle{Directed Multigraphs}\label{Ch2:DMG}
 
  \begin{itemize}[<+->]
-\item CT is the study of mathematical structure at a convenient abstraction level
-\item Useful metaphor: ZF (Zermelo-Fraenkel, axiomatic) set theory is like an assembly language for mathematics, CT is like a higher programming language
-\item The abstractions and the toolbox of CT are also very useful for CS (Computer Science)
-\item We will try to give examples from (functional) programming
-\item 
- 
- \end{itemize}
-
- }
-
-\frame
-  {   
-    \frametitle{Sets}\label{Ch1:sets}
-
- \begin{itemize}[<+->]
-\item Notations: $\in$, $\emptyset$, $\cup$, $\cap$, $\backslash$, 
-$\subseteq$, $\powset$, $\to$, $\circ$, $id_A : A\to A$
-\item Sets are usually denoted by capital letters, with/out decoration
-\item Elements of sets are usually denoted by lower case letters, with/out decorations, unless ...
-\item ...  they are sets themselves and we want to stress that
-\item Set builders: (explicit) $\{ \ldots \}$,  (subset) $\{x \in S \mid P(x) \}$, $P$ a predicate
- \end{itemize}
-
- }
-
-\frame
-  {   
-    \frametitle{Cartesian Product}\label{Ch1:CartesianProduct}
-
- \begin{itemize}[<+->]
-\item Definition: $A\times B := \set{(a,b) \mid a\in A,~b\in B}$
-\item Two problems (at least) with this definition of \emph{ordered pairs}:
+\item A directed multigraph $G$ consists of the following data:
    \begin{itemize}[<+->]
-\item Set builder without `superset' $S$
-\item What in the name of Cantor is $(\_,\_)$ ?
+\item A collection $G_V$ of vertices (also called nodes)
+\item A collection $G_E$ of (directed) edges (also called arrows)
+\item A function $sc^G : G_ E \to G_V$ called the source function
+\item A function $tg^G : G_ E \to G_V$ called the target function
    \end{itemize}
-\item Solutions  (\myurl{en.wikipedia.org/wiki/Ordered_pair}) :
- \begin{enumerate}[<+->]
-\item Set theory (Kuratowski): $(a,b)_K := \set{\set{a},\set{a,b}}$, \\
-           superset $S:= \powset\powset(X\cup Y)$
-\item Programming languages: Pair class in Java, tuple types in Haskell,
-$(\_,\_)$ is a primitive, no worries about $S$
-\item Category Theory: by a universal property (more abstract)
- \end{enumerate}
-\item 1 and 2 above are implementations, 3 is `implementation independent'
+\item Any $f:G_E$ is an arrow from node $sc^G(f)$ to node $tg^G(f)$
+\item We also write $f:v\to u$ and $v \stackrel{f}{\to} u$ to express
+that $sc^G(f)=v$ and $tg^G(f)=u$, colloquially  "from $v$ to $u$"
+\item Graphs are abundant in CS (un/directed, multi-, labelled, ...)
+\item Simple graphs: at most one edge $f:v\to u$, for any $v,u\in G_ V$
+\item For simple graphs we can put $G_ E \subseteq G_V\times G_V$
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Examples of  directed multigraphs}\label{Ch2:DMGexamples}
+
+ \begin{itemize}[<+->]
+\item Several examples from the script on Whiteboard
+\item As we will see, categories are directed multigraphs + ...
+\item With/out decoration: class diagrams, flow charts, state transition systems,
+entity relationship diagrams, ...
+\item Successor relation on $\nat$: $0\to 1,~1\to 2,~2\to 3,\ldots$
+\item Any binary relation on a set forms a simple graph
+\item (span) $A\stackrel{\pi_1}{\leftarrow} A\times B \stackrel{\pi_1}{\to} B$,
+(cospan) $A\stackrel{\kappa_1}{\to} A\uplus B \stackrel{\kappa_1}{\leftarrow} B$
+\item A (large) multigraph: nodes are sets, arrrows are functions $f:A\to B$,
+with $A,B$ sets
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Graph Operations}\label{Ch1:GraphOps}
+
+ \begin{itemize}[<+->]
+\item Nice intro in script: working on a graph as an abstract software model
+\item At some moment in time we have graph $G$, what next?
+   \begin{enumerate}[<+->]
+\item Add nodes and/or arrows and get a `supergraph' $H$ (provided all new edges
+have source and target)
+\item Delete nodes and/or arrows and get a `subgraph'
+(delete all arrows `orphaned' by deleting nodes)
+\item Rename nodes and/or arrows, and get an `isomorphic' graph
+\item Collapse (make equal) nodes and/or arrows, taking care we get a graph
+($f=g$ only if $f,g: u\to v$)
+   \end{enumerate}
+\item Examples on Whiteboard, illustrating the many different cases
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Graph Homomorphisms}\label{Ch1:GraphHoms}
+
+ \begin{itemize}[<+->]
+\item The operations on the previous slide lead to two new notions:
+ \begin{itemize}[<+->]
+\item $G\sqsubseteq H$ (sub/super graph) if $G_V\subseteq H_V$, $G_E\subseteq H_E$,
+and for all $f: v\to u$ in $G$ we have $f: v\to u$ in $H$
+\item $\varphi: G\to H$ graph homomorphisme if $\varphi$ maps nodes to nodes and arrows
+to arrows such that for all $f: v\to u$ in $G$ we have $\varphi(f): \varphi(v)\to \varphi(u)$ in $H$
+ \end{itemize}
+\item Trivial example: the identity graph homomorphism $G\to G$
+\item Actually, for all graphs $G,H$ with $G_V \subseteq H_V$ and $G_E \subseteq H_E$, 
+$G$ is a subgraph of $H$
+iff the two inclusion maps together form a homomorphism
+\item $\varphi: G\to H$ is a graph isomorphism if $\varphi$ is a graph
+homomor- phism and there is  a graph homomorphism $\psi: H\to G$ such that
+$\varphi\circ\psi$ and $\psi\circ\varphi$ are identity maps (cf.\ renaming above) 
  \end{itemize}
 
  }
@@ -90,89 +121,34 @@ $(\_,\_)$ is a primitive, no worries about $S$
 
 \frame
   {   
-    \frametitle{Universal Property of Cartesian Product}\label{Ch1:CartesianProductUP}
+    \frametitle{Opposite graph}\label{Ch1:oppgraph}
 
  \begin{itemize}[<+->]
-\item Fact 1.1.1, picture and explanation on Whiteboard
-\item Different implementation of $A\times B$ by $B\times A$ yields unique bijection
-$(A\times B) \to (B\times A)$
-\item The universal property guarantees that \emph{any} implementation
-of the cartesian product of sets yields such a bijection (`implementation independent')
-\item This example shows the ingredients of a category (here $\Set$):
-   \begin{itemize}[<+->]
-\item Objects (here: sets)
-\item Arrows (here: functions)
-\item Composition of (certain) arrows, identity arrows
-\item Properties: associativity and identity laws
-   \end{itemize}
+\item Given a graph $G$, the opposite graph $G^{opp}$ has the same nodes
+and arrows, but the directions of all arrows is reversed
+\item This boils down to interchanging the $sc$ and $tg$ functions
+\item Examples: the opposite of a span is a cospan;  the opposite of a cospan is a span;
+\item Clearly: ${G^{opp}}^{opp} = G$
  \end{itemize}
 
  }
 
-\frame
-  {   
-    \frametitle{Dualization}\label{Ch1:sets}
+\section{Chapter 2}
+\subsection{Categories}
 
- \begin{itemize}[<+->]
-\item Dualization in CT means: reversing all arrows
-\item Fact 1.1.2, picture and explanation on Whiteboard
-\item Disjoint union: $A\uplus B := (A\times\set{1})\cup(A\times\set{2})$
-\item Duals of projections are injections
-\item Dual of $\langle f,g\rangle : C \to (A\times B)$ is $[ f,g] : (A\uplus B) \to C$ ...
-\item ... and this is case distinction!
- \end{itemize}
-
- }
-
-
-\frame
-  {   
-     \frametitle{More basics}\label{Ch1:setbasics}
-
- \begin{itemize}[<+->]
-\item Functions (or maps) $A\to B$ are total unless stated otherwise, 
-$A$ is the domain (or source) $B$ is the co-domain (or target)
-\item We write $f: A\to B$ for $f\in (A\to B)$
-\item Pairs can be generalized to $n$-tuples
-\item $A^0 := \set{()}$, $A^{n+1}=A^n\times A$,
-$A^* := List(A) := \cup_{n\in\nat} A^n$
-\item $\powset_{fin}(A)$ is the set of finite subsets of $A$
-\item Image and preimage of $f: A\to B$ for points and subsets 
-\item Injective, surjective, bijective and idempotents maps
-\item Inclusion map and epi-mono factorization: every map
-is the (unique) composition of a surjection followed by an inclusion
- \end{itemize}
-
- }
-
-\frame
-  {   
-    \frametitle{Some useful maps}\label{Ch1:usefulmaps}
-
- \begin{itemize}[<+->]
-\item $del: A^* \to A^* $ removes subsequent duplicates (idempotent)
-\item $sort: A^* \to A^* $, given an order on $A$, sorts (idempotent)
-\item $len: A^* \to \nat $ gives the length of a list (surjective)
-\item $forget: A^* \to \powset(A) $ gives the elements of a list
-\item $forget^e: A^* \to \powset_{fin}(A) $ gives the elements of a list (surjective)
-\item $forget$ is the composition of $forget^e$ and an inclusion
-\item 
- \end{itemize}
-
- }
 
 \frame
   {   
     \frametitle{Comments on script}\label{Ch1:comments}
 
  \begin{itemize}[<+->]
-\item p. 6, last picture: $\pi'_1$ and  $\pi'_2$ interchanged
-\item p. 7: notations $A.a$ and $a:A$ not good if $B=A$
+\item p. 19, Cor. 2.1.15: $in_V = in_{G_V,H_V}$, $in_E = in_{G_E,H_E}$
+\item p. 29, Conv. 2.2.13: $C_V$ must be $C_E$ (twice)
+\item p. 29, Rem. 2.2.15: in Haskell and type theory, composition would be
+\emph{one} polymorphic function with type arguments $A,B,C$
  \end{itemize}
 
  }
-
-
 
 \end{document}
 

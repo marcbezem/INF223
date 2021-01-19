@@ -105,6 +105,7 @@ of the cartesian product of sets yields such a bijection (`implementation indepe
 \item Composition of (certain) arrows, identity arrows
 \item Properties: associativity and identity laws
    \end{itemize}
+\item Also: the first example of `diagram chasing'
  \end{itemize}
 
  }
@@ -131,7 +132,7 @@ of the cartesian product of sets yields such a bijection (`implementation indepe
 
  \begin{itemize}[<+->]
 \item Functions (or maps) $A\to B$ are total unless stated otherwise, 
-$A$ is the domain (or source) $B$ is the co-domain (or target)
+$A$ is the domain (or source) $B$ is the codomain (or target)
 \item We write $f: A\to B$ for $f\in (A\to B)$
 \item Pairs can be generalized to $n$-tuples
 \item $A^0 := \set{()}$, $A^{n+1}=A^n\times A$,
@@ -150,13 +151,13 @@ is the (unique) composition of a surjection followed by an inclusion
     \frametitle{Some useful maps}\label{Ch1:usefulmaps}
 
  \begin{itemize}[<+->]
+\item inclusion map $in_{A,B}$ for $A\subseteq B$, maps any $a\in A$ to $a\in B$
 \item $del: A^* \to A^* $ removes subsequent duplicates (idempotent)
 \item $sort: A^* \to A^* $, given an order on $A$, sorts (idempotent)
 \item $len: A^* \to \nat $ gives the length of a list (surjective)
-\item $forget: A^* \to \powset(A) $ gives the elements of a list
-\item $forget^e: A^* \to \powset_{fin}(A) $ gives the elements of a list (surjective)
+\item $forget: A^* \to \powset(A) $ gives the set of  elements of a list
+\item $forget^e: A^* \to \powset_{fin}(A)$, image = codomain (surjective)
 \item $forget$ is the composition of $forget^e$ and an inclusion
-\item 
  \end{itemize}
 
  }
