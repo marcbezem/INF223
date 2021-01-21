@@ -127,8 +127,16 @@ $\varphi\circ\psi$ and $\psi\circ\varphi$ are identity maps (cf.\ renaming above
 \item Given a graph $G$, the opposite graph $G^{opp}$ has the same nodes
 and arrows, but the directions of all arrows is reversed
 \item This boils down to interchanging the $sc$ and $tg$ functions
-\item Examples: the opposite of a span is a cospan;  the opposite of a cospan is a span;
+%\item Examples: the opposite of a span is a cospan;  the opposite of a cospan is a span
 \item Clearly: ${G^{opp}}^{opp} = G$
+\item NB1: $(b \stackrel{c}{\leftarrow} a) = (a \stackrel{c}{\to} b) \neq  
+(b \stackrel{c}{\to} a) = (a \stackrel{c}{\leftarrow} b) $
+if $a\neq b$
+\item NB2: As graphs with two nodes and one arrow, ${a \stackrel{c}{\to} b}$
+and ${b \stackrel{c}{\to} a}$ are each other's opposite, and happen to be isomorphic
+\item NB3: opposite graphs need not be isomorphic in general, e.g., the span
+${b \stackrel{c}{\leftarrow} a}\stackrel{d}{\to}a$ is not isomorphic to its cospan if $a\neq b$
+\item Elaboration on Whiteboard
  \end{itemize}
 
  }
@@ -136,6 +144,35 @@ and arrows, but the directions of all arrows is reversed
 \section{Chapter 2}
 \subsection{Categories}
 
+
+\frame
+  {   
+    \frametitle{Compostion and identities}\label{Ch2:comp-id}
+
+ \begin{itemize}[<+->]
+\item Two notations of composition of maps $f:A\to B$ and $g: B\to C$,
+both denoting the same map $A\to C$:
+   \begin{itemize}[<+->]
+\item Applicative order: ${g\circ f} : {A\to C}$ reflecting $a\mapsto g(f(a))$
+\item Diagram order: ${f;g} : A\to C$ reflecting $A\stackrel{f}{\to}B\stackrel{g}{\to}C$
+   \end{itemize}
+\item 
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Comments on script}\label{Ch2:comments}
+
+ \begin{itemize}[<+->]
+\item p. 19, Cor. 2.1.15: $in_V = in_{G_V,H_V}$, $in_E = in_{G_E,H_E}$
+\item p. 29, Conv. 2.2.13: $C_V$ must be $C_E$ (twice)
+\item p. 29, Rem. 2.2.15: in Haskell and type theory, composition would be
+\emph{one} polymorphic function with type arguments $A,B,C$
+ \end{itemize}
+
+ }
 
 \frame
   {   
