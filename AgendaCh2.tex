@@ -26,7 +26,7 @@
 
 \newcommand{\Set}{\mathsf{Set}}
 
-\title[INF210 presentations]{}
+\title[INF223 presentations]{}
 
 \begin{document}
 
@@ -38,7 +38,7 @@
     \frametitle{Directed Multigraphs}\label{Ch2:DMG}
 
  \begin{itemize}[<+->]
-\item A directed multigraph $G$ consists of the following data:
+\item A (directed multi)graph $G$ consists of the following data:
    \begin{itemize}[<+->]
 \item A collection $G_V$ of vertices (also called nodes)
 \item A collection $G_E$ of (directed) edges (also called arrows)
@@ -61,7 +61,7 @@ that $sc^G(f)=v$ and $tg^G(f)=u$, colloquially  "from $v$ to $u$"
 
  \begin{itemize}[<+->]
 \item Several examples from the script on Whiteboard
-\item As we will see, categories are directed multigraphs + ...
+\item As we will see, categories are directed multigraphs + extras
 \item With/out decoration: class diagrams, flow charts, state transition systems,
 entity relationship diagrams, ...
 \item Successor relation on $\nat$: $0\to 1,~1\to 2,~2\to 3,\ldots$
@@ -107,7 +107,7 @@ and for all $f: v\to u$ in $G$ we have $f: v\to u$ in $H$
 \item $\varphi: G\to H$ graph homomorphisme if $\varphi$ maps nodes to nodes and arrows
 to arrows such that for all $f: v\to u$ in $G$ we have $\varphi(f): \varphi(v)\to \varphi(u)$ in $H$
  \end{itemize}
-\item Trivial example: the identity graph homomorphism $G\to G$
+\item Example: the identity graph homomorphism $id_G : G\to G$
 \item Actually, for all graphs $G,H$ with $G_V \subseteq H_V$ and $G_E \subseteq H_E$, 
 $G$ is a subgraph of $H$
 iff the two inclusion maps together form a homomorphism
@@ -147,19 +147,51 @@ ${b \stackrel{c}{\leftarrow} a}\stackrel{d}{\to}a$ is not isomorphic to its cosp
 
 \frame
   {   
-    \frametitle{Compostion and identities}\label{Ch2:comp-id}
+    \frametitle{Composition and identities}\label{Ch2:comp-id}
 
  \begin{itemize}[<+->]
+\item For all maps $f:A\to B$ and $f':A\to B$ we have $f=f'$ if $f(a)=f'(a)$ for all $a\in A$
 \item Two notations of composition of maps $f:A\to B$ and $g: B\to C$,
 both denoting the same map $A\to C$:
    \begin{itemize}[<+->]
 \item Applicative order: ${g\circ f} : {A\to C}$ reflecting $a\mapsto g(f(a))$
-\item Diagram order: ${f;g} : A\to C$ reflecting $A\stackrel{f}{\to}B\stackrel{g}{\to}C$
+\item Diagrammatric order: ${f;g} : A\to C$ reflecting $A\stackrel{f}{\to}B\stackrel{g}{\to}C$
    \end{itemize}
-\item 
+\item The original sin here is the convention to write the function before its argument
+instead of after: $f(a)$ instead of $af$,
+while at the same time reading from left to right
+\item Anyway: $f;(g;h) = (f;g);h$, and so $h\circ(g\circ f) = (h\circ g)\circ f$,
+for all $A\stackrel{f}{\to}B\stackrel{g}{\to}C\stackrel{h}{\to}D$
+\item Also: $id_A ; f = f$ and $f; id_B = f$ for all $f:A\to B$
  \end{itemize}
 
  }
+
+\frame
+  {   
+    \frametitle{Composition of graph homomorphisms}\label{Ch2:Ghom-comp}
+
+ \begin{itemize}[<+->]
+\item A graph homomorphism $\varphi: G\to H$ is a pair of maps
+$\varphi_V : G_V \to H_V$ and $\varphi_E : G_E \to H_E$
+\item Similarly, a graph homomorphism $\psi: H\to K$ is a pair of maps
+$\psi_V : H_V \to K_V$ and $\psi_E : H_E \to K_E$
+\item Define $\varphi;\psi$ to be the pair of $\varphi_V;\psi_V$ and $\varphi_E;\psi_E$
+\item Then: $\varphi;\psi$ is a graph homomorphism $G\to K$
+\item Proof is spelled out in detail in the script
+\item A lighter touch: if $f: v\to u$ in $G$, 
+then $\varphi(f): \varphi(v)\to \varphi(u)$ in $H$
+since $\varphi$ is a graph homomorphism $G\to H$, 
+hence we have $\psi(\varphi(f)): \psi(\varphi(v))\to \psi(\varphi(u))$ in $K$
+since $\psi$ is a graph homomorphism $H\to K$, 
+which is what we need 
+%$\varphi;\psi(f)): \varphi;\psi(v))\to \varphi;\psi(u))$ in $K$
+\item Also: $id_G ; \varphi = \varphi$ and $\varphi; id_H = \varphi$ for all $\varphi:G\to H$
+ 
+ \end{itemize}
+
+ }
+
 
 \frame
   {   
