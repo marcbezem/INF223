@@ -66,8 +66,8 @@ that $sc^G(f)=v$ and $tg^G(f)=u$, colloquially  "from $v$ to $u$"
 entity relationship diagrams, ...
 \item Successor relation on $\nat$: $0\to 1,~1\to 2,~2\to 3,\ldots$
 \item Any binary relation on a set forms a simple graph
-\item (span) $A\stackrel{\pi_1}{\leftarrow} A\times B \stackrel{\pi_1}{\to} B$,
-(cospan) $A\stackrel{\kappa_1}{\to} A\uplus B \stackrel{\kappa_1}{\leftarrow} B$
+\item (span) $A\stackrel{\pi_1}{\leftarrow} A\times B \stackrel{\pi_2}{\to} B$,
+(cospan) $A\stackrel{\kappa_1}{\to} A\uplus B \stackrel{\kappa_2}{\leftarrow} B$
 \item A (large) multigraph: nodes are sets, arrrows are functions $f:A\to B$,
 with $A,B$ sets
  \end{itemize}
@@ -187,7 +187,7 @@ since $\psi$ is a graph homomorphism $H\to K$,
 which is what we need 
 %$\varphi;\psi(f)): \varphi;\psi(v))\to \varphi;\psi(u))$ in $K$
 \item Also: $id_G ; \varphi = \varphi$ and $\varphi; id_H = \varphi$ for all $\varphi:G\to H$
- 
+ \item Also: associativity $\varphi;(\psi;\rho) = (\varphi;\psi);\rho$
  \end{itemize}
 
  }
@@ -195,13 +195,22 @@ which is what we need
 
 \frame
   {   
-    \frametitle{Comments on script}\label{Ch2:comments}
+    \frametitle{Categories}\label{Ch2:categories}
 
  \begin{itemize}[<+->]
-\item p. 19, Cor. 2.1.15: $in_V = in_{G_V,H_V}$, $in_E = in_{G_E,H_E}$
-\item p. 29, Conv. 2.2.13: $C_V$ must be $C_E$ (twice)
-\item p. 29, Rem. 2.2.15: in Haskell and type theory, composition would be
-\emph{one} polymorphic function with type arguments $A,B,C$
+\item A category $C = (C_V,C_E,sc^C, tg^C, id^C,(\_;\_))$ consists of the following data:
+   \begin{enumerate}[<+->]
+\item A graph $gr(C) =  (C_V,C_E,sc^C, tg^C)$ where nodes are now also called objects
+and arrows also morphisms
+\item A partial composition operation $(\_;\_)$ mapping $f: A\to B$, $g: B\to C$
+to $(f;g): A\to C$, for all objects $A,B,C$
+\item A map $id^C$ mapping any object $A$ to a morphism $id^C_A: A\to A$
+   \end{enumerate}
+satisfying the identity laws and the associativity law:
+   \begin{itemize}[<+->]
+\item if $f: A\to B$, then $id^C_A;f = f$ and  $f;id^C_B = f$
+\item if $A \stackrel{f}{\to} B \stackrel{g}{\to} C \stackrel{h}{\to}D $, then $f;(g;h)=(f;g);h$
+   \end{itemize}
  \end{itemize}
 
  }
