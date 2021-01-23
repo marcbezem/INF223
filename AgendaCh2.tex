@@ -15,6 +15,7 @@
 %\setbeamertemplate{navigation symbols}{}++++++
 %\setbeamertemplate{footline}[frame number]
 \usetheme{Montpellier}
+\setbeamertemplate{footline}[frame number]
 
 
 \input macros
@@ -25,6 +26,10 @@
 \newcommand{\redS}{{\color{red} S}}
 
 \newcommand{\Set}{\mathsf{Set}}
+\newcommand{\Gra}{\mathsf{Graph}}
+\newcommand{\CC}{\mathsf{C}}
+\newcommand{\DD}{\mathsf{D}}
+
 
 \title[INF223 presentations]{}
 
@@ -198,22 +203,44 @@ which is what we need
     \frametitle{Categories}\label{Ch2:categories}
 
  \begin{itemize}[<+->]
-\item A category $C = (C_V,C_E,sc^C, tg^C, id^C,(\_;\_))$ consists of the following data:
+\item A category $\CC = (\CC_V,\CC_E,sc^\CC, tg^\CC, id^\CC,(\_;^\CC\_))$ consists of the following data:
    \begin{enumerate}[<+->]
-\item A graph $gr(C) =  (C_V,C_E,sc^C, tg^C)$ where nodes are now also called objects
+\item A graph $gr(\CC) =  (\CC_V,\CC_E,sc^\CC, tg^\CC)$ where nodes are now also called objects
 and arrows also morphisms
-\item A partial composition operation $(\_;\_)$ mapping $f: A\to B$, $g: B\to C$
+\item A (partial) composition operation $(\_;\_)$ mapping $f: A\to B$, $g: B\to C$
 to $(f;g): A\to C$, for all objects $A,B,C$
-\item A map $id^C$ mapping any object $A$ to a morphism $id^C_A: A\to A$
+\item A map $id^\CC$ mapping any object $A$ to a morphism $id^\CC_A: A\to A$
    \end{enumerate}
 satisfying the identity laws and the associativity law:
    \begin{itemize}[<+->]
-\item if $f: A\to B$, then $id^C_A;f = f$ and  $f;id^C_B = f$
+\item if $f: A\to B$, then $id^\CC_A;f = f$ and  $f;id^\CC_B = f$
 \item if $A \stackrel{f}{\to} B \stackrel{g}{\to} C \stackrel{h}{\to}D $, then $f;(g;h)=(f;g);h$
    \end{itemize}
+\item NB $\CC \neq C$ and ${;} = {;^\CC}$, we may omit superscripts $\CC$
  \end{itemize}
 
  }
+
+\frame
+  {   
+    \frametitle{Examples of Categories}\label{Ch2:ExaCat}
+
+ \begin{itemize}[<+->]
+\item Haskell (idealized), with types as objects and functions as morphisms, 
+the polymorphic identity function and polymorphic \myurl{https://wiki.haskell.org/Function_composition}
+\item $\Set$ with sets as objects, functions as morphisms,
+$id_A: A\to A$ the identity function, and ``$;$'' as on slide \ref{Ch2:comp-id}
+\item $\Gra$ with graphs as objects, graph homomorphisms as morphisms,
+$id_G: G\to G$ the identity graph homomorphism on slide \ref{Ch1:GraphHoms}, 
+and composition ``$;$' on slide \ref{Ch2:Ghom-comp}
+\item Cartesian product, coproduct and epi-mono factorization are additional
+features that a category may/not have. For example, $\Set$ with only injections,
+with only surjections, or with only bijections are all three categories, but
+with different features.
+ \end{itemize}
+
+ }
+
 
 \frame
   {   
