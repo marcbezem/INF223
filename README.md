@@ -29,7 +29,7 @@
 
    1. composition of isomorphisms is isomorphism  
    1. isomorphisms in **Set** are bijective maps  
-   1. isomorphisms in **Lecture Graph** are componentwise bijective graph homomorphisms  
+   1. isomorphisms in **Graph** are componentwise bijective graph homomorphisms  
    1. some finite categories  
    1. representation of finite categories by pictorial diagrams  
    1. other categories with sets as objects: **Incl**, **Inj**, **Par**  
@@ -136,7 +136,7 @@
    1. motivation pullbacks: intersection, inner join, products of typed graphs  
    1. pullbacks: definition, examples in **Incl**, **Set**, **Graph**  
    1. preimages as pullbacks  
-   1. equalizers: definition, example in **Set **  
+   1. equalizers: definition, example in **Set**  
    1. kernel and graph of a map f:A->B as equalizers
 
 1. Lecture 26.03.21 (week 12, no lectures in week 13, 14)
