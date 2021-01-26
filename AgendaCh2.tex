@@ -28,7 +28,9 @@
 \newcommand{\Set}{\mathsf{Set}}
 \newcommand{\Gra}{\mathsf{Graph}}
 \newcommand{\CC}{\mathsf{C}}
-\newcommand{\DD}{\mathsf{D}}
+\newcommand{\Nat}{\mathsf{Nat}}
+\newcommand{\Incl}{\mathsf{Incl}}
+\newcommand{\Rel}{\mathsf{Rel}}
 
 
 \title[INF223 presentations]{}
@@ -152,7 +154,7 @@ ${b \stackrel{c}{\leftarrow} a}\stackrel{d}{\to}a$ is not isomorphic to its cosp
 
 \frame
   {   
-    \frametitle{Composition and identities}\label{Ch2:comp-id}
+    \frametitle{Composition and identities in set theory}\label{Ch2:comp-id}
 
  \begin{itemize}[<+->]
 \item For all maps $f:A\to B$ and $f':A\to B$ we have $f=f'$ if $f(a)=f'(a)$ for all $a\in A$
@@ -178,9 +180,9 @@ for all $A\stackrel{f}{\to}B\stackrel{g}{\to}C\stackrel{h}{\to}D$
 
  \begin{itemize}[<+->]
 \item A graph homomorphism $\varphi: G\to H$ is a pair of maps
-$\varphi_V : G_V \to H_V$ and $\varphi_E : G_E \to H_E$
+$\varphi_V : G_V \to H_V$ and $\varphi_E : G_E \to H_E$ preserving graph structure 
 \item Similarly, a graph homomorphism $\psi: H\to K$ is a pair of maps
-$\psi_V : H_V \to K_V$ and $\psi_E : H_E \to K_E$
+$\psi_V : H_V \to K_V$ and $\psi_E : H_E \to K_E$ preserving graph structure
 \item Define $\varphi;\psi$ to be the pair of $\varphi_V;\psi_V$ and $\varphi_E;\psi_E$
 \item Then: $\varphi;\psi$ is a graph homomorphism $G\to K$
 \item Proof is spelled out in detail in the script
@@ -213,10 +215,12 @@ to $(f;g): A\to C$, for all objects $A,B,C$
    \end{enumerate}
 satisfying the identity laws and the associativity law:
    \begin{itemize}[<+->]
-\item if $f: A\to B$, then $id^\CC_A;f = f$ and  $f;id^\CC_B = f$
-\item if $A \stackrel{f}{\to} B \stackrel{g}{\to} C \stackrel{h}{\to}D $, then $f;(g;h)=(f;g);h$
+\item(ID) if $f: A\to B$, then $id^\CC_A;f = f$ and  $f;id^\CC_B = f$
+\item(ASS) if $A \stackrel{f}{\to} B \stackrel{g}{\to} C \stackrel{h}{\to}D $, then $f;(g;h)=(f;g);h$
    \end{itemize}
-\item NB $\CC \neq C$ and ${;} = {;^\CC}$, we may omit superscripts $\CC$
+\item NB $\CC \neq C$ and ${;} = {;^\CC}$, we may omit superscripts $\CC$,
+we write $\CC(A,B)$ for the collection of morphisms $A\to B$
+\item Indentities are uniquely determined by the identity laws
  \end{itemize}
 
  }
@@ -236,7 +240,79 @@ and composition ``$;$' on slide \ref{Ch2:Ghom-comp}
 \item Cartesian product, coproduct and epi-mono factorization are additional
 features that a category may/not have. For example, $\Set$ with only injections,
 with only surjections, or with only bijections are all three categories, but
-with different features.
+with different features (see next slide)
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{More Examples of Categories}\label{Ch2:MoreExaCat}
+
+ \begin{itemize}[<+->]
+\item Sets with injections ($A\times B \stackrel{\pi_1}{\to} A$ is not always injective)
+\item Sets with surjections ($ A\stackrel{\kappa_1}{\to} A\uplus B$ is not always surjective)
+\item Sets with bijections (both problems)
+\item One set $A$ with all maps $A\to A$ forms a category $\mathsf{A}$
+which does not satisfy epi-mono factorization if $A$ contains more than one element
+\item A category is called small if the collection of objects is a set, and locally small
+if $\CC(A,B)$ is a set for all objects $A,B$
+\item Examples: $\mathsf{A}$ is both small and locally small, $\Set$ is only locally small,
+but not small, since there is no set of all sets
+ \end{itemize}
+ }
+
+\frame
+  {   
+    \frametitle{Isomorphisms}\label{Ch2:Isos}
+
+ \begin{itemize}[<+->]
+\item A morphism $f : A\to B$ in a category $\CC$ is called an iso (isomorphism)
+if there exists a morphism $g : B\to A$ such that $f;g = id^\CC_A$ and
+$g;f = id^\CC_B$
+\item If it exists, the morphism $g$ above is called the inverse of $f$
+\item If $g$ is the inverse of $f$, then $g$ is unique: if $g'$ is also
+an inverse of $f$, then $g = id_B;g = (g';f);g = g';(f;g) = g';id_A = g'$.
+\item Examples: in any category, $id_A$ is an iso and $id_A^{-1} = id_A$;
+in $\Set$: iso = bijection; in $\Gra$ iso = graph isomorphism
+\item If there is an iso $f: A\to B$, we call $A$ and $B$ isomorphic, 
+denoted $A\simeq B$
+\item If  $A \stackrel{f}{\to} B \stackrel{g}{\to} C$ and $f,g$ are isos, then
+$f;g$ is iso and $(f;g)^{-1} = g^{-1}; f^{-1}$
+(Proof on Whiteboard, add loop $id_B$)
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Even More Examples of Categories}\label{Ch2:evenMoreExaCat}
+
+ \begin{itemize}[<+->]
+\item The empty category $\mathbf{0}$: no obejcts, and hence no morphisms
+\item Discrete categories: only identity morphisms, $\mathbf{n}$ denotes
+the discrete category with $n$ objects
+\item Finite categories and pictorial diagrams: WYSIWYG?
+\item Complete underlying graph: WYSCanBeWrong, WYSIAllYG (objects and morphisms,
+extra info may be needed for ;
+\item Several examples on Whiteboard
+\item Really nice: 2.2.5, exercise 5
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Ever More Examples of Categories}\label{Ch2:everMoreExaCat}
+ \begin{itemize}[<+->]
+\item The category $\Incl$: inclusion maps $A\to B$ if $A\subseteq B$ ($A,B$ sets)
+\item The category $\Nat$: one morphism $n\to m$ if $n\leq m$  ($n,m\in\nat$)
+\item The category $\mathsf Pow(S)$: small `subcategory' of $\Incl$ with object
+set $\powset{S}$, given some fixed but arbitrary set $S$
+\item More general: preorder category and partial order category
+\item The category $\Rel$: morphisms $R\subseteq A\times B$ ($A,B$ sets),
+composition of relations, $id_A = \set{(a,a)\mid a\in A}$
+\item Subcategory of $\Rel$: morphisms $A\to B$ are partial functions
  \end{itemize}
 
  }
