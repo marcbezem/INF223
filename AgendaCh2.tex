@@ -25,12 +25,13 @@
 \newcommand{\ToG}{\Rightarrow_G}
 \newcommand{\redS}{{\color{red} S}}
 
-\newcommand{\Set}{\mathsf{Set}}
-\newcommand{\Gra}{\mathsf{Graph}}
-\newcommand{\CC}{\mathsf{C}}
-\newcommand{\Nat}{\mathsf{Nat}}
-\newcommand{\Incl}{\mathsf{Incl}}
-\newcommand{\Rel}{\mathsf{Rel}}
+\newcommand{\bfsf}[1]{{\boldsymbol{#1}}}
+\newcommand{\Set}{\bfsf{Set}}
+\newcommand{\Gra}{\bfsf{Graph}}
+\newcommand{\CC}{\bfsf{C}}
+\newcommand{\Nat}{\bfsf{Nat}}
+\newcommand{\Incl}{\bfsf{Incl}}
+\newcommand{\Rel}{\bfsf{Rel}}
 
 
 \title[INF223 presentations]{}
@@ -289,12 +290,12 @@ $f;g$ is iso and $(f;g)^{-1} = g^{-1}; f^{-1}$
     \frametitle{Even More Examples of Categories}\label{Ch2:evenMoreExaCat}
 
  \begin{itemize}[<+->]
-\item The empty category $\mathbf{0}$: no obejcts, and hence no morphisms
+\item The empty category $\mathbf{0}$: no objects, and hence no morphisms
 \item Discrete categories: only identity morphisms, $\mathbf{n}$ denotes
 the discrete category with $n$ objects
 \item Finite categories and pictorial diagrams: WYSIWYG?
 \item Complete underlying graph: WYSCanBeWrong, WYSIAllYG (objects and morphisms,
-extra info may be needed for ;
+extra info may be needed for ;)
 \item Several examples on Whiteboard
 \item Really nice: 2.2.5, exercise 5
  \end{itemize}
@@ -305,14 +306,15 @@ extra info may be needed for ;
   {   
     \frametitle{Ever More Examples of Categories}\label{Ch2:everMoreExaCat}
  \begin{itemize}[<+->]
-\item The category $\Incl$: inclusion maps $A\to B$ if $A\subseteq B$ ($A,B$ sets)
+\item The category $\Incl$: maps $in_{A,B} :A\to B$ if $A\subseteq B$ ($A,B$ sets)
 \item The category $\Nat$: one morphism $n\to m$ if $n\leq m$  ($n,m\in\nat$)
 \item The category $\mathsf Pow(S)$: small `subcategory' of $\Incl$ with object
 set $\powset{S}$, given some fixed but arbitrary set $S$
 \item More general: preorder category and partial order category
 \item The category $\Rel$: morphisms $R\subseteq A\times B$ ($A,B$ sets),
-composition of relations, $id_A = \set{(a,a)\mid a\in A}$
+composition of relations (DBs: join!), $id_A = \set{(a,a)\mid a\in A}$
 \item Subcategory of $\Rel$: morphisms $A\to B$ are partial functions
+(a partial function may leave $f(a)$ undefined)
  \end{itemize}
 
  }
