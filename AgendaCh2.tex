@@ -303,6 +303,60 @@ extra info may be needed for ;)
  }
 
 \frame
+  {
+    
+    \frametitle{Relation Therapy (after MNF130)}\label{Ch2:BinRels}
+
+ \begin{itemize}[<+->]\label{right-left-invariance}
+    \item Binary relation $R$ is an \emph{equivalence} on a set $S$ if:
+    \begin{itemize}[<+->]
+    \item $R$ is \emph{reflexive}: $\forall x\in S~(xRx)$, and
+    \item $R$ is \emph{symmetric}: $\forall x,y\in S~(xRy \implies yRx)$, and
+    \item $R$ is \emph{transitive}: $\forall x,y,z\in S~(xRy \wedge yRz \implies xRz)$.
+    \end{itemize}
+    \item Any equivalence relation $R$ on $S$ \emph{partitions} $S$ 
+    in \emph{classes} $[x]_R = \set{y \mid xRy}$; 
+    the \emph{quotient} is $S/R = \set{[x]_R \mid x\in S}$
+    \item Binary relation $R$ on $S$ is
+    \begin{itemize}[<+->]
+     \item a \emph{preorder} if $R$ is reflexive and transitive
+     \item a \emph{partial order} if $R$ is a preorder and antisymmetrisk:
+     $\forall x,y\in S~(xRy \wedge yRx \implies x=y)$
+     \item a \emph{(total) order} if $R$ is a partial order and total:
+     $\forall x,y\in S~(xRy \vee yRx)$
+    \end{itemize}
+ \end{itemize}
+
+}
+
+\frame
+  {
+    
+    \frametitle{Relation Therapy (ctnd)}\label{Ch2:BinRelsCtnd}
+
+ \begin{itemize}[<+->]\label{right-left-invariance}
+    \item Examples
+    \begin{itemize}[<+->]
+    \item total order: $\leq$ on sets of numbers
+    \item partial order: $\subseteq$ on sets % often on the set $\powset S$
+    \item preorder: $\sqsubseteq$ on persons defined by age comparison
+%$p\sqsubseteq p'$  if $p'$ is older than $p$
+    \end{itemize}
+    \item Any equivalence relation $R$ on $S$ \emph{partitions} $S$ 
+    in \emph{classes} $[x]_R = \set{y \mid xRy}$; 
+    the \emph{quotient} is $S/R = \set{[x]_R \mid x\in S}$
+    \item Example of the an equivalence relation: let $R$ be a preorder
+and define $p\simeq p'$ if $(p R p' \wedge p' R p)$. Then $\simeq$ is an equivalence
+relation.In the case of $R$ being ${\sqsubseteq}$ above, we have that  
+$[p]_\simeq = \set{p' \mid p\simeq p'}$  is the age class of $p$. Moreover,
+we can define a relation $[R]$ on classes by $[p]\,[R]\, [q] $ if $pRq$.
+The relation $[R]$ is a partial ordering of the classes, 
+explaning why $R$ is called preorder. Age classes are even totally ordered.
+ \end{itemize}
+
+}
+
+\frame
   {   
     \frametitle{Ever More Examples of Categories}\label{Ch2:everMoreExaCat}
  \begin{itemize}[<+->]
