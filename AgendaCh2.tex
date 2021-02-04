@@ -33,6 +33,7 @@
 \newcommand{\Nat}{\bfsf{Nat}}
 \newcommand{\Incl}{\bfsf{Incl}}
 \newcommand{\Rel}{\bfsf{Rel}}
+\newcommand{\Mult}{\bfsf{Mult}}
 
 
 \title[INF223 presentations]{}
@@ -342,8 +343,8 @@ extra info may be needed for ;)
     \item Examples
     \begin{itemize}[<+->]
     \item total order: $\leq$ on a set of numbers
-    \item partial order: $\subseteq$ on sets % often on the set $\powset S$
-    \item preorder: $\sqsubseteq$ on a set persons defined by age comparison
+    \item partial order: $\subseteq$ on a collection of  sets 
+    \item preorder: $\sqsubseteq$ on a set of persons defined by age comparison
 %$p\sqsubseteq p'$  if $p'$ is older than $p$
     \end{itemize}
     \item Any equivalence relation $R$ on $S$ \emph{partitions} $S$ 
@@ -351,10 +352,10 @@ extra info may be needed for ;)
     the \emph{quotient} is $S/R = \set{[x]_R \mid x\in S}$
     \item Example of the an equivalence relation: let $R$ be a preorder
 and define $p\simeq p'$ if $(p R p' \wedge p' R p)$. Then $\simeq$ is an equivalence
-relation.In the case of $R$ being ${\sqsubseteq}$ above, we have that  
+relation. In the case of $R$ being ${\sqsubseteq}$ above, we have that  
 $[p]_\simeq = \set{p' \mid p\simeq p'}$  is the age class of $p$. Moreover,
-we can define a relation $[R]$ on classes by $[p]\,[R]\, [q] $ if $pRq$.
-The relation $[R]$ is a partial ordering of the classes, 
+we can define a relation $[R]$ on classes by $[p]\,[R]\, [q] $ if $pRq$ (why?).
+The relation $[R]$ is a partial order on the classes, 
 explaining why $R$ is called preorder. Age classes are even totally ordered.
  \end{itemize}
 
@@ -371,11 +372,12 @@ indeed a subgraph with the extras coming from the category
 \item A category $\DD$ is  a subcategory of a category $\CC$ if 
    \begin{enumerate}[<+->]
 \item $gr(\DD) \sqsubseteq gr(\CC)$, i.e., $gr(\DD)$ is a subgraph of $gr(\CC)$
-\item $(f;^\DD g) =(f;^\CC g)$ for all  objects $A,B,C$ of $\DD$ and $f\in\DD(A,B)$, $g\in\DD(B,C)$
 \item $id^\DD_A =  id^\CC_A$ for all objects $A$ of $\DD$
+\item $(f;^\DD g) =(f;^\CC g)$ for all  objects $A,B,C$ of $\DD$ and $f\in\DD(A,B)$, $g\in\DD(B,C)$
    \end{enumerate}
-\item An equivalent definition of subcategory is obtained by requiring that
-$\DD_V$ and $\DD_E$ are closed under $sc^\CC,tg^\CC, ;^\CC, id^\CC$
+\item Equivalent definition of subcategory:
+$\DD_V\subseteq \CC_V$ and $\DD_E\subseteq \CC_E$  and $\DD_V,\DD_E$
+are closed under $sc^\CC,tg^\CC, ;^\CC, id^\CC$
 \item Examples on next slide
  \end{itemize}
 
@@ -407,13 +409,13 @@ composition of relations (DBs: join!), $id_A = \set{(a,a)\mid a\in A}$
  \begin{itemize}[<+->]\label{right-left-invariance}
     \item Binary relation $R\subseteq A\times B$ from $A$ to $B$ is
     \begin{itemize}[<+->]
+    \item \emph{total} if  $\forall a\in A~\exists b\in B~(aRb)$ (alt-not.: $(a,b)\in R$, $R(a,b)$)
     \item \emph{single-valued} if  $\forall a\in A,~b,b'\in B~(aRb \wedge aRb' \implies b=b')$
-    \item \emph{total} if  $\forall a\in A~\exists b\in B~(aRb)$
     \item a \emph{partial function} if  $R$ is single-valued
     \item a \emph{(total) function} if  $R$ is single-valued and total
     \end{itemize}
    \item If $R\subseteq A\times B$ and $S\subseteq B\times C$ then their \emph{composition}          
-     $R;S$ is \[\set{(a,c) \mid \exists b\in B~(aRb\wedge bRc)}\subseteq A\times C\]
+     $R;S$ is \[\set{(a,c) \mid \exists b\in B~(aRb\wedge bSc)}\subseteq A\times C\]
     \item The notion of composition of relations is compatible with that of partial and
      total function (in ZF set theory, the latter two are defined by the former);
      associativity everywhere!
@@ -428,16 +430,89 @@ composition of relations (DBs: join!), $id_A = \set{(a,a)\mid a\in A}$
   {   
     \frametitle{The Category of Multimaps}\label{Ch2:Multimaps}
  \begin{itemize}[<+->]
-\item Binary relation $R\subseteq A\times B$ from $A$ to $B$  can also
-be seen as a \emph{multimap} $f_R$ from $A$ to $B$ which is
-actually an ordinary map  $f_R : A\to \powset{B}$
-\item Conversely, any $f : A\to \powset{B}$ defines a relation from $A$ to $B$
-defined by $b\in f(a)$
-\item To be continued
-
+\item Binary relation $R\subseteq A\times B$ from $A$ to $B$  can also be seen as 
+\begin{itemize}[<+->]
+\item a \emph{multimap} $\rho_R$ from $A$ to $B$ which is
+actually an ordinary map  $\rho_R : A\to \powset{B}$, 
+defined by $\rho_R(a) = \set{b\in B\mid R(a,b)}$, and as a
+\item a \emph{multimap} $\lambda_R$ from $B$ to $A$ which is
+actually an ordinary map  $\lambda_R : B\to \powset{A}$, 
+defined by $\lambda_R(b) = \set{a\in B\mid R(a,b)}$
+\end{itemize}
+\item Conversely, any $f : X\to \powset{Y}$ defines a relation $R_f$ from $X$ to $Y$
+defined by $xR_f y$ if $y\in f(x)$
+\item In fact, we have bijections ($R^c = \set{(b,a)\mid (a,b)\in R$})
+\begin{itemize}[<+->]
+\item between $\powset(A\times B)$ and $A\to \powset{B}$: $R_{\rho_R} = R$ and 
+$\rho_{R_f} = f$
+\item between $\powset(A\times B)$ and $\powset(B\times A)$: $R\mapsto R^c$
+\item between $\powset(A\times B)$ and $B\to \powset{A}$: $R_{\lambda_R} = R^c$ and $\lambda_{R_g} = g$
+ \end{itemize}
+\item The catergory $\Mult$ has sets as objects and multimaps as morphisms,
+with identity morphisms and composition as spelled out in the script 
  \end{itemize}
 
  }
+
+\frame
+  {   
+    \frametitle{Composition of multimaps}\label{Ch1:compmultimap}
+
+ \begin{itemize}[<+->]
+\item Let $f : A\to \powset{B}$ and $g : B\to \powset{C}$ and
+recall $aR_fb = (b\in f(a))$ and $bR_g c = (c\in f(b))$
+\item Recall $(R_f;R_g) = \set{(a,c) \mid \exists b\in B~(aR_fb\wedge bR_gc)}\subseteq A\times C$
+\item Hence $(R_f;R_g) = \set{(a,c) \mid \exists b\in B~(b\in f(a)\wedge c\in g(b))}$
+\item So $(R_f;R_g) = \set{(a,c) \mid c\in \bigcup \set{g(b)\mid b\in f(a)}}$
+\item Define $(f;^\Mult g) = \set{(a,c) \mid c\in \bigcup \set{g(b)\mid b\in f(a)}}$
+\item Define $id^\Mult_A: A\to \powset(A)$ by $id^\Mult_A(a) = \set{a}$ for all $a\in A$
+\item Then $R_{id^\Mult_A}$ is ... $\Delta_A = \set{(a,a)\mid a\in A }$
+\item ID and ASS for $\Mult$ are inherited from $\Rel$
+ \end{itemize}
+
+ }
+
+
+\section{Chapter 2}
+\subsection{More on Graphs}
+
+\frame
+  {   
+    \frametitle{Simple and ordinary graphs}\label{Ch1:oGraph}
+
+ \begin{itemize}[<+->]
+\item Recall \emph{simple} graph $G$: at most one arrow per $(v,u)\in G_V^2$
+\item Recall \emph{canonical} graph $G$:  $G_E\subseteq G_V^2$, $sc=in{;}\pi_1$, $tg=in{;}\pi_2$
+\item Now: \emph{ordinary} graph $G$:  $G_V$ a set, $G_E\subseteq G_V^2$
+\item Homomorphism $\varphi: G\to H$ of ordinary graphs: map $\varphi: G_V\to H_V$
+such that $(v,u)\in G_E$ implies $(\varphi(v),\varphi(u))\in H_E$
+\item Tempting but wrong: an iso is a bijective homomorphism.
+\item Wrong since $H$ can have more arrows than $G$
+\item Correct: an iso is a bijective homomorphism whose inverse is also a homomorphism
+\item Also correct (script): $(v,u)\in G_E$ iff $(\varphi(v),\varphi(u))\in H_E$
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Reflexive graphs}\label{Ch1:rGraph}
+
+ \begin{itemize}[<+->]
+\item This is an example how adding structure changes the notion of homomorphism
+(of course, since that concept is about preserving structure)
+\item A \emph{reflexive} graph $G$ is a graph plus a function $id^G : G_V \to G_E$
+such that $id^G(A): A \to A$ for all $A\in G_V$
+\item Homomorphism $\varphi: G\to H$ of ordinary graphs: map $\varphi: G_V\to H_V$
+such that $(v,u)\in G_E$ implies $(\varphi(v),\varphi(u))\in H_E$
+\item Tempting but wrong: an iso is a bijective homomorphism.
+\item Wrong since $H$ can have more arrows than $G$
+\item Correct: an iso is a bijective homomorphism whose inverse is also a homomorphism
+\item Also correct (script): $(v,u)\in G_E$ iff $(\varphi(v),\varphi(u))\in H_E$
+ \end{itemize}
+
+ }
+
 \frame
   {   
     \frametitle{Comments on script}\label{Ch1:comments}
