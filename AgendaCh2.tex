@@ -29,6 +29,7 @@
 \newcommand{\Set}{\bfsf{Set}}
 \newcommand{\Gra}{\bfsf{Graph}}
 \newcommand{\CC}{\bfsf{C}}
+\newcommand{\DD}{\bfsf{D}}
 \newcommand{\Nat}{\bfsf{Nat}}
 \newcommand{\Incl}{\bfsf{Incl}}
 \newcommand{\Rel}{\bfsf{Rel}}
@@ -219,7 +220,7 @@ satisfying the identity laws and the associativity law:
 \item(ID) if $f: A\to B$, then $id^\CC_A;f = f$ and  $f;id^\CC_B = f$
 \item(ASS) if $A \stackrel{f}{\to} B \stackrel{g}{\to} C \stackrel{h}{\to}D $, then $f;(g;h)=(f;g);h$
    \end{itemize}
-\item NB $\CC \neq C$ and ${;} = {;^\CC}$, we may omit superscripts $\CC$,
+\item NB $\CC \neq C$, we may omit superscripts $\CC$,
 we write $\CC(A,B)$ for the collection of morphisms $A\to B$
 \item Indentities are uniquely determined by the identity laws
  \end{itemize}
@@ -292,7 +293,7 @@ $f;g$ is iso and $(f;g)^{-1} = g^{-1}; f^{-1}$
  \begin{itemize}[<+->]
 \item The empty category: no objects, and hence no morphisms
 \item Discrete categories: only identity morphisms, $\bfsf{n}$ denotes
-the discrete category with $n$ objects
+the discrete category with $n$ objects (later: names don't matter)
 \item Finite categories and pictorial diagrams: WYSIWYG?
 \item Complete underlying graph: WYSCanBeWrong, WYSIAllYG (objects and morphisms,
 extra info may be needed for ;)
@@ -302,10 +303,13 @@ extra info may be needed for ;)
 
  }
 
+\section{Chapter 2}
+\subsection{Sets and Relations}
+
 \frame
   {
     
-    \frametitle{Relation Therapy (after MNF130)}\label{Ch2:BinRels}
+    \frametitle{Binary Relation Therapy (after MNF130)}\label{Ch2:BinRels}
 
  \begin{itemize}[<+->]\label{right-left-invariance}
     \item Binary relation $R$ is an \emph{equivalence} on a set $S$ if:
@@ -332,14 +336,14 @@ extra info may be needed for ;)
 \frame
   {
     
-    \frametitle{Relation Therapy (ctnd)}\label{Ch2:BinRelsCtnd}
+    \frametitle{Binary Relation Therapy (ctnd)}\label{Ch2:BinRelsCtnd}
 
  \begin{itemize}[<+->]\label{right-left-invariance}
     \item Examples
     \begin{itemize}[<+->]
-    \item total order: $\leq$ on sets of numbers
+    \item total order: $\leq$ on a set of numbers
     \item partial order: $\subseteq$ on sets % often on the set $\powset S$
-    \item preorder: $\sqsubseteq$ on persons defined by age comparison
+    \item preorder: $\sqsubseteq$ on a set persons defined by age comparison
 %$p\sqsubseteq p'$  if $p'$ is older than $p$
     \end{itemize}
     \item Any equivalence relation $R$ on $S$ \emph{partitions} $S$ 
@@ -351,10 +355,31 @@ relation.In the case of $R$ being ${\sqsubseteq}$ above, we have that
 $[p]_\simeq = \set{p' \mid p\simeq p'}$  is the age class of $p$. Moreover,
 we can define a relation $[R]$ on classes by $[p]\,[R]\, [q] $ if $pRq$.
 The relation $[R]$ is a partial ordering of the classes, 
-explaning why $R$ is called preorder. Age classes are even totally ordered.
+explaining why $R$ is called preorder. Age classes are even totally ordered.
  \end{itemize}
 
 }
+
+\frame
+  {   
+    \frametitle{Subcategories}\label{Ch2:Subcategories}
+
+ \begin{itemize}[<+->]
+\item A saying: in CT all things that ought be true are in fact true
+\item Since a category is a graph + extras (id, ``;'', ID, ASS), a subcategory is ...
+indeed a subgraph with the extras coming from the category
+\item A category $\DD$ is  a subcategory of a category $\CC$ if 
+   \begin{enumerate}[<+->]
+\item $gr(\DD) \sqsubseteq gr(\CC)$, i.e., $gr(\DD)$ is a subgraph of $gr(\CC)$
+\item $(f;^\DD g) =(f;^\CC g)$ for all  objects $A,B,C$ of $\DD$ and $f\in\DD(A,B)$, $g\in\DD(B,C)$
+\item $id^\DD_A =  id^\CC_A$ for all objects $A$ of $\DD$
+   \end{enumerate}
+\item An equivalent definition of subcategory is obtained by requiring that
+$\DD_V$ and $\DD_E$ are closed under $sc^\CC,tg^\CC, ;^\CC, id^\CC$
+\item Examples on next slide
+ \end{itemize}
+
+ }
 
 \frame
   {   
@@ -362,7 +387,7 @@ explaning why $R$ is called preorder. Age classes are even totally ordered.
  \begin{itemize}[<+->]
 \item The category $\Incl$: maps $in_{A,B} :A\to B$ if $A\subseteq B$ ($A,B$ sets)
 \item The category $\Nat$: one morphism $n\to m$ if $n\leq m$  ($n,m\in\nat$)
-\item The category $\bfsf{Pow}(S)$: small `subcategory' of $\Incl$ with object
+\item The category $\bfsf{Pow}(S)$: small subcategory of $\Incl$ with object
 set $\powset{S}$, given some fixed but arbitrary set $S$
 \item More general: preorder category and partial order category
 \item The category $\Rel$: morphisms $R\subseteq A\times B$ ($A,B$ sets),
@@ -374,6 +399,45 @@ composition of relations (DBs: join!), $id_A = \set{(a,a)\mid a\in A}$
  }
 
 
+\frame
+  {   
+    \frametitle{More Basics on Sets}\label{Ch2:SetBasics}
+
+
+ \begin{itemize}[<+->]\label{right-left-invariance}
+    \item Binary relation $R\subseteq A\times B$ from $A$ to $B$ is
+    \begin{itemize}[<+->]
+    \item \emph{single-valued} if  $\forall a\in A,~b,b'\in B~(aRb \wedge aRb' \implies b=b')$
+    \item \emph{total} if  $\forall a\in A~\exists b\in B~(aRb)$
+    \item a \emph{partial function} if  $R$ is single-valued
+    \item a \emph{(total) function} if  $R$ is single-valued and total
+    \end{itemize}
+   \item If $R\subseteq A\times B$ and $S\subseteq B\times C$ then their \emph{composition}          
+     $R;S$ is \[\set{(a,c) \mid \exists b\in B~(aRb\wedge bRc)}\subseteq A\times C\]
+    \item The notion of composition of relations is compatible with that of partial and
+     total function (in ZF set theory, the latter two are defined by the former);
+     associativity everywhere!
+    \item NB Composition of partial functions is \emph{strict}, $f(a)=b$ and $g(b)=c$ must exist
+          in order to get $g(f(a))=c$
+    \item Lazy Haskell is not strict: try $(fun~x\mapsto 0)(1/0)$
+ \end{itemize}
+
+}
+
+\frame
+  {   
+    \frametitle{The Category of Multimaps}\label{Ch2:Multimaps}
+ \begin{itemize}[<+->]
+\item Binary relation $R\subseteq A\times B$ from $A$ to $B$  can also
+be seen as a \emph{multimap} $f_R$ from $A$ to $B$ which is
+actually an ordinary map  $f_R : A\to \powset{B}$
+\item Conversely, any $f : A\to \powset{B}$ defines a relation from $A$ to $B$
+defined by $b\in f(a)$
+\item To be continued
+
+ \end{itemize}
+
+ }
 \frame
   {   
     \frametitle{Comments on script}\label{Ch1:comments}
