@@ -48,7 +48,7 @@
     \frametitle{Directed Multigraphs}\label{Ch2:DMG}
 
  \begin{itemize}[<+->]
-\item A (directed multi)graph $G$ consists of the following data:
+\item A (directed multi) \emph{graph} $G$ consists of the following data:
    \begin{itemize}[<+->]
 \item A collection $G_V$ of vertices (also called nodes)
 \item A collection $G_E$ of (directed) edges (also called arrows)
@@ -485,8 +485,8 @@ recall $aR_fb = (b\in f(a))$ and $bR_g c = (c\in f(b))$
 \item Recall \emph{canonical} graph $G$:  $G_E\subseteq G_V^2$, $sc=in{;}\pi_1$, $tg=in{;}\pi_2$
 \item Now: \emph{ordinary} graph $G$:  $G_V$ a set, $G_E\subseteq G_V^2$
 \item Homomorphism $\varphi: G\to H$ of ordinary graphs: map $\varphi: G_V\to H_V$
-such that $(v,u)\in G_E$ implies $(\varphi(v),\varphi(u))\in H_E$
-\item Tempting but wrong: an iso is a bijective homomorphism.
+such that $(\varphi(v),\varphi(u))\in H_E$ for all $(v,u)\in G_E$
+\item Tempting but wrong: an iso is a bijective homomorphism
 \item Wrong since $H$ can have more arrows than $G$
 \item Correct: an iso is a bijective homomorphism whose inverse is also a homomorphism
 \item Also correct (script): $(v,u)\in G_E$ iff $(\varphi(v),\varphi(u))\in H_E$
@@ -502,16 +502,52 @@ such that $(v,u)\in G_E$ implies $(\varphi(v),\varphi(u))\in H_E$
 \item This is an example how adding structure changes the notion of homomorphism
 (of course, since that concept is about preserving structure)
 \item A \emph{reflexive} graph $G$ is a graph plus a function $id^G : G_V \to G_E$
-such that $id^G(A): A \to A$ for all $A\in G_V$
-\item Homomorphism $\varphi: G\to H$ of ordinary graphs: map $\varphi: G_V\to H_V$
-such that $(v,u)\in G_E$ implies $(\varphi(v),\varphi(u))\in H_E$
-\item Tempting but wrong: an iso is a bijective homomorphism.
-\item Wrong since $H$ can have more arrows than $G$
-\item Correct: an iso is a bijective homomorphism whose inverse is also a homomorphism
-\item Also correct (script): $(v,u)\in G_E$ iff $(\varphi(v),\varphi(u))\in H_E$
+such that $id^G(A): A \to A$ for all nodes $A\in G_V$
+\item A homomorphism $\varphi: (G,C)\to (H,id^H)$ of reflexive graphs
+is a graph homomorphism $\varphi: G\to H$ such 
+that $\varphi_E(id^G(A)) = id^H(\varphi_V(A))$ for all nodes $A$ of $G$
+\item Composition and identity reflexive graph homomorphisms as expected,
+yielding a category of reflexive graphs
  \end{itemize}
 
  }
+
+\section{Chapter 2}
+\subsection{Monoids}
+
+
+\frame
+  {   
+    \frametitle{Monoids in CT}\label{Ch1:CTMonoid}
+
+ \begin{itemize}[<+->]
+\item CTheorist: \\a \emph{monoid} is a locally small category with one object
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Monoids}\label{Ch1:Monoid}
+
+ \begin{itemize}[<+->]
+\item A \emph{monoid} $M=(M,c^M,b^M)$ consists of the following data:
+   \begin{itemize}[<+->]
+\item A set $M$, called the \emph{carrier} (notation!)
+\item An element $c^M \in M$ called the \emph{neutral} element or \emph{unit}
+\item A binary operation $b^M : (M\times M) \to M$
+   \end{itemize}
+satisfying the identity laws ID and associativity ASS
+\item Examples:   \begin{itemize}[<+->]
+\item Natural numbers with 0 and + (also other sets of numbers)
+\item Natural numbers with 1 and * (also other sets of numbers)
+\item Lists with $[]$ and concatenation (any set of elements)
+\item Maps $X\to X$ with $id_X$ and composition (any set $X$)
+   \end{itemize}
+ \end{itemize}
+
+ }
+
 
 \frame
   {   
