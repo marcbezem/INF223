@@ -406,7 +406,7 @@ composition of relations (DBs: join!), $id_A = \set{(a,a)\mid a\in A}$
     \frametitle{More Basics on Sets}\label{Ch2:SetBasics}
 
 
- \begin{itemize}[<+->]\label{right-left-invariance}
+ \begin{itemize}[<+->]
     \item Binary relation $R\subseteq A\times B$ from $A$ to $B$ is
     \begin{itemize}[<+->]
     \item \emph{total} if  $\forall a\in A~\exists b\in B~(aRb)$ (alt-not.: $(a,b)\in R$, $R(a,b)$)
@@ -437,7 +437,7 @@ actually an ordinary map  $\rho_R : A\to \powset{B}$,
 defined by $\rho_R(a) = \set{b\in B\mid R(a,b)}$, and as a
 \item a \emph{multimap} $\lambda_R$ from $B$ to $A$ which is
 actually an ordinary map  $\lambda_R : B\to \powset{A}$, 
-defined by $\lambda_R(b) = \set{a\in B\mid R(a,b)}$
+defined by $\lambda_R(b) = \set{a\in A\mid R(a,b)}$
 \end{itemize}
 \item Conversely, any $f : X\to \powset{Y}$ defines a relation $R_f$ from $X$ to $Y$
 defined by $xR_f y$ if $y\in f(x)$
@@ -446,9 +446,9 @@ defined by $xR_f y$ if $y\in f(x)$
 \item between $\powset(A\times B)$ and $A\to \powset{B}$: $R_{\rho_R} = R$ and 
 $\rho_{R_f} = f$
 \item between $\powset(A\times B)$ and $\powset(B\times A)$: $R\mapsto R^c$
-\item between $\powset(A\times B)$ and $B\to \powset{A}$: $R_{\lambda_R} = R^c$ and $\lambda_{R_g} = g$
+\item between $\powset(A\times B)$ and $B\to \powset{A}$: $R_{\lambda_R} = R^c$ and $\lambda_{R^c_g} = g$
  \end{itemize}
-\item The catergory $\Mult$ has sets as objects and multimaps as morphisms,
+\item The category $\Mult$ has sets as objects and multimaps as morphisms,
 with identity morphisms and composition as spelled out in the script 
  \end{itemize}
 
@@ -460,7 +460,7 @@ with identity morphisms and composition as spelled out in the script
 
  \begin{itemize}[<+->]
 \item Let $f : A\to \powset{B}$ and $g : B\to \powset{C}$ and
-recall $aR_fb = (b\in f(a))$ and $bR_g c = (c\in f(b))$
+recall $aR_fb = (b\in f(a))$ and $bR_g c = (c\in g(b))$
 \item Recall $(R_f;R_g) = \set{(a,c) \mid \exists b\in B~(aR_fb\wedge bR_gc)}\subseteq A\times C$
 \item Hence $(R_f;R_g) = \set{(a,c) \mid \exists b\in B~(b\in f(a)\wedge c\in g(b))}$
 \item So $(R_f;R_g) = \set{(a,c) \mid c\in \bigcup \set{g(b)\mid b\in f(a)}}$
