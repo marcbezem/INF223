@@ -34,6 +34,7 @@
 \newcommand{\Incl}{\bfsf{Incl}}
 \newcommand{\Rel}{\bfsf{Rel}}
 \newcommand{\Mult}{\bfsf{Mult}}
+\newcommand{\Mon}{\bfsf{Mon}}
 
 
 \title[INF223 presentations]{}
@@ -86,7 +87,7 @@ with $A,B$ sets
 
 \frame
   {   
-    \frametitle{Graph Operations}\label{Ch1:GraphOps}
+    \frametitle{Graph Operations}\label{Ch2:GraphOps}
 
  \begin{itemize}[<+->]
 \item Nice intro in script: working on a graph as an abstract software model
@@ -107,7 +108,7 @@ have source and target)
 
 \frame
   {   
-    \frametitle{Graph Homomorphisms}\label{Ch1:GraphHoms}
+    \frametitle{Graph Homomorphisms}\label{Ch2:GraphHoms}
 
  \begin{itemize}[<+->]
 \item The operations on the previous slide lead to two new notions:
@@ -131,7 +132,7 @@ $\varphi\circ\psi$ and $\psi\circ\varphi$ are identity maps (cf.\ renaming above
 
 \frame
   {   
-    \frametitle{Opposite graph}\label{Ch1:oppgraph}
+    \frametitle{Opposite graph}\label{Ch2:oppgraph}
 
  \begin{itemize}[<+->]
 \item Given a graph $G$, the opposite graph $G^{opp}$ has the same nodes
@@ -238,7 +239,7 @@ the polymorphic identity function and polymorphic \myurl{https://wiki.haskell.or
 \item $\Set$ with sets as objects, functions as morphisms,
 $id_A: A\to A$ the identity function, and ``$;$'' as on slide \ref{Ch2:comp-id}
 \item $\Gra$ with graphs as objects, graph homomorphisms as morphisms,
-$id_G: G\to G$ the identity graph homomorphism on slide \ref{Ch1:GraphHoms}, 
+$id_G: G\to G$ the identity graph homomorphism on slide \ref{Ch2:GraphHoms}, 
 and composition ``$;$' on slide \ref{Ch2:Ghom-comp}
 \item Cartesian product, coproduct and epi-mono factorization are additional
 features that a category may/not have. For example, $\Set$ with only injections,
@@ -456,7 +457,7 @@ with identity morphisms and composition as spelled out in the script
 
 \frame
   {   
-    \frametitle{Composition of multimaps}\label{Ch1:compmultimap}
+    \frametitle{Composition of multimaps}\label{Ch2:compmultimap}
 
  \begin{itemize}[<+->]
 \item Let $f : A\to \powset{B}$ and $g : B\to \powset{C}$ and
@@ -478,7 +479,7 @@ recall $aR_fb = (b\in f(a))$ and $bR_g c = (c\in g(b))$
 
 \frame
   {   
-    \frametitle{Simple and ordinary graphs}\label{Ch1:oGraph}
+    \frametitle{Simple and ordinary graphs}\label{Ch2:oGraph}
 
  \begin{itemize}[<+->]
 \item Recall \emph{simple} graph $G$: at most one arrow per $(v,u)\in G_V^2$
@@ -496,14 +497,14 @@ such that $(\varphi(v),\varphi(u))\in H_E$ for all $(v,u)\in G_E$
 
 \frame
   {   
-    \frametitle{Reflexive graphs}\label{Ch1:rGraph}
+    \frametitle{Reflexive graphs}\label{Ch2:rGraph}
 
  \begin{itemize}[<+->]
 \item This is an example how adding structure changes the notion of homomorphism
 (of course, since that concept is about preserving structure)
 \item A \emph{reflexive} graph $G$ is a graph plus a function $id^G : G_V \to G_E$
 such that $id^G(A): A \to A$ for all nodes $A\in G_V$
-\item A homomorphism $\varphi: (G,C)\to (H,id^H)$ of reflexive graphs
+\item A homomorphism $\varphi: (G,id^G)\to (H,id^H)$ of reflexive graphs
 is a graph homomorphism $\varphi: G\to H$ such 
 that $\varphi_E(id^G(A)) = id^H(\varphi_V(A))$ for all nodes $A$ of $G$
 \item Composition and identity reflexive graph homomorphisms as expected,
@@ -518,7 +519,7 @@ yielding a category of reflexive graphs
 
 \frame
   {   
-    \frametitle{Monoids in CT}\label{Ch1:CTMonoid}
+    \frametitle{Monoids in CT}\label{Ch2:CTMonoid}
 
  \begin{itemize}[<+->]
 \item CTheorist: \\a \emph{monoid} is a locally small category with one object
@@ -528,7 +529,7 @@ yielding a category of reflexive graphs
 
 \frame
   {   
-    \frametitle{Monoids}\label{Ch1:Monoid}
+    \frametitle{Monoids}\label{Ch2:Monoid}
 
  \begin{itemize}[<+->]
 \item A \emph{monoid} $M=(M,c^M,b^M)$ consists of the following data:
@@ -538,20 +539,121 @@ yielding a category of reflexive graphs
 \item A binary operation $b^M : (M\times M) \to M$
    \end{itemize}
 satisfying the identity laws ID and associativity ASS
-\item Examples:   \begin{itemize}[<+->]
+\item Examples of monoids with carrier set, unit and operation:   
+\begin{itemize}[<+->]
 \item Natural numbers with 0 and + (also other sets of numbers)
 \item Natural numbers with 1 and * (also other sets of numbers)
-\item Lists with $[]$ and concatenation (any set of elements)
-\item Maps $X\to X$ with $id_X$ and composition (any set $X$)
+\item Lists with $[]$ and concatenation $\oplus$ (over any set of elements)
+\item Sets with $\emptyset$ and union $\cup$ (any powerset of a set)
+\item Maps $X\to X$ with $id_X$ and composition $\circ$ (any set $X$)
    \end{itemize}
  \end{itemize}
 
  }
 
+\frame
+  {   
+    \frametitle{Monoid Homomorphism}\label{Ch2:MonoidHom}
+
+ \begin{itemize}[<+->]
+\item For monoids $M,N$, a monoid homomorphism $f: M\to N$ is a
+map (of the carrier sets) such that $f(c^M) = c^N$ and $f(b^M(x,y)) = b^N(f(x),f(y))$ for all $x,y\in M$
+\item Example: $length : ([A],[],\oplus) \to (\nat,0,{+})$, for any set $A$
+\item Submonoid: $M\subseteq N$ and $in_{M,N}: M\to N$ a monoid homomorphism
+\item Alternatively: $N$ a monoid and $M$ a \emph{closed subset} $M\subseteq N$,
+where closed \emph{here} (cf. subgraph) means: $c^N \in M$ and $b^N(x,y)\in M$ if $x,y\in M$
+\item Example:  $([A],[],\oplus)$ is a submonoid of  $([B],[],\oplus)$, for any sets $A\subseteq B$
+\item Haskell: $map~f: [A] \to [B]$ is a monoid 
+homomorphism for any $f: A\to B$ (recall in Haskell $map~f~[] = []$ and $map~f~(a:as) =$ 
+$ f~a : map~f~as$)
+ \end{itemize}
+
+ }
 
 \frame
   {   
-    \frametitle{Comments on script}\label{Ch1:comments}
+    \frametitle{More examples of Monoids}\label{Ch2:ExaMonoid}
+
+ \begin{itemize}[<+->]
+\item Any locally small category $\CC$ with one object $\bullet$ is a 
+monoid with carrier set $\CC(\bullet,\bullet)$, unit $id_\bullet$ and composition
+of morphisms %(by ID and ASS)
+\item The \emph{unit monoid} is the discrete category with one object
+\item For any set $A$, $\powfin A$ is a submonoid of $(\powset A,\emptyset,{\cup})$
+\item Given a monoid $M=(M,c,b)$ and a set $X$, we can define a monoid 
+$(X\to M , c^{X\to M}, b^{X\to M})$:
+   \begin{itemize}[<+->]
+\item the unit of $X\to M$ is the function $c^{X\to M}(x) =c$ for all $x\in X$
+\item given $f,g: X\to M$, we define $b^{X\to M}(f,g)(x) = b(f(x),g(x))$ for all $x\in X$
+\item ID and ASS are inherited from the monoid $M$
+   \end{itemize}
+\item The above construction gives us several interesting monoids, old and new:
+   \begin{itemize}[<+->]
+\item $(\powset A,\emptyset,{\cup})$ by taking $M= ...$ (exercise) 
+\item The monoid of multisets  over $X$, by taking $M=(\nat,0,{+})$
+   \end{itemize}
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{The Category of Monoids}\label{Ch2:CatMon}
+
+ \begin{itemize}[<+->]
+\item Composition of monoid homomorphisms is just composition of them as maps
+(this preserves monoid structure and is associative)
+\item The identity monoid homomorphisms is just the identity map 
+(trivially preserving monoid structure and satisfying the identity laws)
+\item The category $\Mon$ has monoids as objects and monoid homomorphisms
+ as morphisms, with identity morphisms and composition as above
+\item An iso in $\Mon$ is a bijective monoid  homomorphism (the inverse
+is then automatically also a monoid  homomorphism) 
+\item Examples: $[\set{|}] \simeq (\nat,0,{+})$, 
+$(\powset{\set{0}},\emptyset,{\cup}) \simeq (\set{0,1},0,{\max})$,
+$(\powset{\set{0}},\emptyset,{\cap}) \simeq (\set{0,1},0,{\min})$
+
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{The free monoid generated by a set }\label{Ch2:freemonoid}
+
+ \begin{itemize}[<+->]
+\item `free' means: no more equalities than required by the laws
+\item `generated by a set' means: no more elements in the monoid
+ than in the set and required by the laws
+\item Discussion: free and no generators, free and one generator, free and two generators, etc
+\item The universal property: $[\_] : A \to [A]$ mapping 
+$a\in A$ to the list $[a]$ of length 1 satisfies: for every monoid $(M,c,b)$ and $f: A\to M$
+there is a unique monoid homomorphism $f^*: ([A],[],{\oplus}) \to (M,c,b)$ 
+such that $f^*([a]) = f(a)$ % for all $a\in A$
+\item Defining $f^*$ by list recursion: $f^*([]) = c$, 
+$f^*([a]\oplus l) = b(f(a),f^*(l))$ for all $a\in A$ and $l\in[A]$
+\item In Haskell: $f^*(l) = fold~b~c~(map~f~l)$, e.g. $fold\,{*}\,1\,[2,3] = 6$
+\item Spelled out in script: $f^*$ monoid homomorphism and unique
+ \end{itemize}
+
+ }
+
+\section{Chapter 2}
+\subsection{Functors}
+
+\frame
+  {   
+    \frametitle{Functors}\label{Ch2:Functors}
+
+ \begin{itemize}[<+->]
+\item Functors are `category homomorphisms', preserving category structure
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Comments on script}\label{Ch2:comments}
 
  \begin{itemize}[<+->]
 \item p. 19, Cor. 2.1.15: $in_V = in_{G_V,H_V}$, $in_E = in_{G_E,H_E}$
