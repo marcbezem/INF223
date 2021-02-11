@@ -30,11 +30,14 @@
 \newcommand{\Gra}{\bfsf{Graph}}
 \newcommand{\CC}{\bfsf{C}}
 \newcommand{\DD}{\bfsf{D}}
+\newcommand{\EE}{\bfsf{E}}
 \newcommand{\Nat}{\bfsf{Nat}}
 \newcommand{\Incl}{\bfsf{Incl}}
 \newcommand{\Rel}{\bfsf{Rel}}
 \newcommand{\Mult}{\bfsf{Mult}}
 \newcommand{\Mon}{\bfsf{Mon}}
+\newcommand{\Cat}{\bfsf{Cat}}
+\newcommand{\CAT}{\bfsf{CAT}}
 
 
 \title[INF223 presentations]{}
@@ -259,8 +262,8 @@ with different features (see next slide)
 \item Sets with bijections (both problems)
 \item One set $A$ with all maps $A\to A$ forms a category $\mathsf{A}$
 which does not satisfy epi-mono factorization if $A$ contains more than one element
-\item A category is called small if the collection of objects is a set, and locally small
-if $\CC(A,B)$ is a set for all objects $A,B$
+\item A category is called small if the collections of objects and morphisms are sets, 
+and locally small if $\CC(A,B)$ is a set for all objects $A,B$
 \item Examples: $\mathsf{A}$ is both small and locally small, $\Set$ is only locally small,
 but not small, since there is no set of all sets
  \end{itemize}
@@ -442,7 +445,7 @@ defined by $\lambda_R(b) = \set{a\in A\mid R(a,b)}$
 \end{itemize}
 \item Conversely, any $f : X\to \powset{Y}$ defines a relation $R_f$ from $X$ to $Y$
 defined by $xR_f y$ if $y\in f(x)$
-\item In fact, we have bijections ($R^c = \set{(b,a)\mid (a,b)\in R$})
+\item In fact, we have bijections ($R^c = \set{(b,a)\mid (a,b)\in R}$)
 \begin{itemize}[<+->]
 \item between $\powset(A\times B)$ and $A\to \powset{B}$: $R_{\rho_R} = R$ and 
 $\rho_{R_f} = f$
@@ -609,9 +612,9 @@ $(X\to M , c^{X\to M}, b^{X\to M})$:
  as morphisms, with identity morphisms and composition as above
 \item An iso in $\Mon$ is a bijective monoid  homomorphism (the inverse
 is then automatically also a monoid  homomorphism) 
-\item Examples: $[\set{|}] \simeq (\nat,0,{+})$, 
-$(\powset{\set{0}},\emptyset,{\cup}) \simeq (\set{0,1},0,{\max})$,
-$(\powset{\set{0}},\emptyset,{\cap}) \simeq (\set{0,1},0,{\min})$
+\item Examples: $([\set{|}],[],\oplus) \simeq (\nat,0,{+})$, 
+$({\powset}{\set{0}},\emptyset,{\cup}) \simeq (\set{0,1},0,{\max})$,
+$({\powset}{\set{0}},\set{0},{\cap}) \simeq (\set{0,1},1,{\min})$
 
  \end{itemize}
 
@@ -651,7 +654,7 @@ i.e., graph homomorphisms that preserve the `extras'
 \item A functor $F: \CC\to\DD$ is a graph homomorphism 
 $F=(F_V,F_E): gr(\CC)\to gr(\DD)$ satisfying
    \begin{itemize}[<+->]
-\item $F_E(f;^\CC g) = F_E(f);^\DD F(g)$ for all objects $A,B,C$ of $\CC$ 
+\item $F_E(f;^\CC g) = F_E(f);^\DD F_E(g)$ for all objects $A,B,C$ of $\CC$ 
 and $f\in\CC(A,B)$, $g\in\CC(B,C)$
 \item $F_E(id^\CC_A) = id^\DD_{F_V(A)}$ for all objects $A$ of $\CC$ 
    \end{itemize}
@@ -659,7 +662,6 @@ and $f\in\CC(A,B)$, $g\in\CC(B,C)$
    \begin{itemize}[<+->]
 \item $F: \Mon \to \Set$ mapping $(M,c,b)$ to $M$ and a monoid homomorphism
 $f: M\to N$ to $f$ as map of the carriers (what does this $F$ forget?)
-and $f\in\CC(A,B)$, $g\in\CC(B,C)$
 \item  $G_V: \Gra \to \Set$ mapping a graph to its node set, and ...
 \item  $G_E: \Gra \to \Set$ mapping a graph to its arrow set, and ...
    \end{itemize}
@@ -684,7 +686,7 @@ and $f\in\CC(A,B)$, $g\in\CC(B,C)$
 \item $map~(f;g) = (map~f);(map~g)$
 \item $map~id_T = id_{[T]}$
    \end{itemize}
-\item Later: e.g., reversing lists is a natural transformation, and can therefore be
+\item Later: reversing lists, e.g., is a natural transformation, and can therefore be
 programmed generically (`same code for all $[T]$')
  \end{itemize}
 
@@ -710,6 +712,80 @@ defined by $(sc^G\times sc^H)(f,g) = (sc^G(f), sc^H(h))$
 \item Definition 2.6.7 in script: the product category $\CC\times\DD$ 
 has underlying graph $gr(\CC)\times gr(\DD)$ with composition $;^{\CC\times\DD}$
 and $id^{\CC\times\DD}$ defined componentwise 
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{More on Functors}\label{Ch2:MoreOnFunctors}
+
+ \begin{itemize}[<+->]
+\item Functors preserve iso's: if $F: \CC\to\DD$ is a functor and
+$f:A\to B$ an iso, then $F(f): F(A)\to F(B)$ is also an iso
+\item Proof: if $id^\CC_A = f;^\CC g$, then $id^\DD_{F(A)} = F(f) ;^\DD F(g)$ etc.
+\item If $\CC$ is a subcategory of $\DD$, then we have a canonical 
+\emph{inclusion functor} $in_{\CC,\DD}:\CC\hookrightarrow\DD$ (note the form of the arrow)
+\item A functor $F: \CC\to\DD$ is an \emph{embedding} if both $F_V$ and $F_E$ are
+injective
+\item A functor $F: \CC\to\DD$ gives a map $F_{(A,B)}: \CC(A,B)\to\DD(F(A),F(B))$
+and is called
+   \begin{itemize}[<+->]
+\item \emph{faithful} if  $F_{(A,B)}$ is injective for all objects $A,B$ of $\CC$
+\item \emph{full} if  $F_{(A,B)}$ is surjective for all objects $A,B$ of $\CC$
+   \end{itemize}
+\item A subcategory $\CC$ of $\DD$ is \emph{full} 
+if $in_{\CC,\DD}: \CC\hookrightarrow\DD$ is full, i.e., $\CC(A,B) = \DD(A,B)$ 
+for all objects $A,B$ in $\CC$ (NB $\CC_ V \subseteq \DD_V$)
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Opposite category}\label{Ch2:OppCat}
+
+ \begin{itemize}[<+->]
+\item Given a category $\CC$, its opposite category $\CC^{op}$ has the same
+objects, but all morphisms are reversed: $gr(\CC^{op}) = gr(\CC)^{op}$
+\item This is simple, but can be confusing: $f: A\to B$ in $\CC$ is now a
+morphism $B\to A$ in $\CC^{op}$ that we denote $f^{op}$. Now we have:
+   \begin{itemize}[<+->]
+\item$g^{op}; f^{op} = (f;g)^{op}$ if $g^{op}:C\to B$ and $f^{op}: B\to A$ in $\CC^{op}$
+\item $id^{\CC^{op}}_A = (id^\CC_A)^{op} = id^\CC_A$ for all objects $A$,
+so $id^{\CC^{op}} = id^\CC$
+   \end{itemize}
+\item Of course, $(\CC^{op})^{op}= \CC$ and $(f^{op})^{op}= f$
+\item Functors $\CC\to\DD^{op}$ and $(\CC^{op})\to \DD$ are called
+\emph{contravariant} functors from $\CC$ to $\DD$
+\item Example: $\Rel^{op}$ has $\Rel^{op}(A,B)=\powset(B\times A)$
+for sets $A,B$. Functor $conv: \Rel\to\Rel^{op}$ is the identity on objects 
+and maps $R\in\powset(A\times B)$ to $R^c = \set{(b,a)\mid (a,b)\in R}$.
+We also have $vnoc: \Rel^{op}\to\Rel$ mapping $S$ to $S^c$. NB The functors
+$conv$ and $vnoc$ have different source and target.
+ \end{itemize}
+
+ }
+
+\section{Chapter 2}
+\subsection{Category of categories}
+
+\frame
+  {   
+    \frametitle{Category of categories}\label{Ch2:CatofCats}
+
+ \begin{itemize}[<+->]
+\item For any category $\CC$, we have an identity functor $id_\CC : \CC\to\CC$ 
+which is a glorified identity graph homomorphism
+\item For categories $\CC,\DD,\EE$, functors $F:\CC\to\DD$, $G:\DD\to\EE$,
+we have $F;G$ as a composite of graph homomorphisms, and $F;G$ can easily
+be seen to be a functor $\CC\to\EE$.
+\item ID and ASS also hold for functors
+\item The category $\CAT$ ($\Cat$) has as objects (small) categories
+and functors as morphisms
+\item Deep into CT size does matter, but here we don't bother too much 
+\item An iso of categories is a functor $F: \CC\to\DD$ that has an inverse $G:\DD\to\CC$
+\item Example: $conv$ and $vnoc$ on slide \ref{Ch2:OppCat} above
  \end{itemize}
 
  }
