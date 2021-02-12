@@ -755,7 +755,7 @@ morphism $B\to A$ in $\CC^{op}$ that we denote $f^{op}$. Now we have:
 \item $id^{\CC^{op}}_A = (id^\CC_A)^{op} = id^\CC_A$ for all objects $A$,
 so $id^{\CC^{op}} = id^\CC$
    \end{itemize}
-\item Of course, $(\CC^{op})^{op}= \CC$ and $(f^{op})^{op}= f$
+\item We have $\CC^{op}(A,B)=\CC(B,A)$, $(\CC^{op})^{op}= \CC$ and $(f^{op})^{op}= f$
 \item Functors $\CC\to\DD^{op}$ and $(\CC^{op})\to \DD$ are called
 \emph{contravariant} functors from $\CC$ to $\DD$
 \item Example: $\Rel^{op}$ has $\Rel^{op}(A,B)=\powset(B\times A)$
@@ -766,6 +766,35 @@ $conv$ and $vnoc$ have different source and target.
  \end{itemize}
 
  }
+
+\frame
+  {   
+    \frametitle{More Examples of Functors}\label{Ch2:MoreExaFunctors}
+
+ \begin{itemize}[<+->]
+\item Recall that for sets $A,B$ and $f: A\to B$ we have the defined
+   \begin{itemize}[<+->]
+\item the \emph{image} of  $X\subseteq A$ under $f$ is 
+$f(X)=\set{f(x)\mid x\in X} \subseteq B$ 
+\item the \emph{preimage} of  $Y\subseteq B$ under $f$ is 
+$f^-(Y)=\set{a\in A \mid f(a)\in Y} \subseteq A$ 
+   \end{itemize}
+\item These give two functors based on power sets
+   \begin{itemize}[<+->]
+\item $Pim:\Set\to\Set$ with $Pim(A) = \powset A$ and for all $f:A\to B$,
+$Pim(f) : \powset A \to\powset B$ defined by $Pim(f)(X) = f(X)$
+\item $Pom:\Set\to\Set^op$ with $Pom(A) = \powset A$ and %for all $f:A\to B$,
+\begin{align*}
+Pom(f)^{op} &\in \Set^{op}(Pom(A),Pom(B))\\ & =  \Set^{op}(\powset A,\powset B) \\&=
+\Set(\powset B,\powset A), \text{~for all $f:A\to B$}
+\end{align*} defined by 
+$Pom(f)(Y)= f^-(Y)): \powset B \to\powset A$
+   \end{itemize}
+\item $Pom$ is a contravariant functor $\Set\to\Set$
+ \end{itemize}
+
+ }
+
 
 \section{Chapter 2}
 \subsection{Category of categories}
@@ -789,6 +818,28 @@ and functors as morphisms
  \end{itemize}
 
  }
+
+\section{Chapter 2}
+\subsection{Path Categories}
+
+\frame
+  {   
+    \frametitle{Path Categories}\label{Ch2:PathCats}
+
+ \begin{itemize}[<+->]
+\item Given an ordinary graph with $E\subseteq V\times V$, the
+reflexive transitive closure $E^*$ of $E$ is a preorder,
+so we can consider the corresponding preorder category
+\item This construction hides that there can be different paths
+justifing $E^*(a,c)$, e.g., if $E(a,x), E(x,b), E(a,y), E(y,b)$
+\item In a multigraph we can have multiple edges and we get
+get a more general construction: the path category of a multigraph:
+in the above example we would get two morphisms (=paths) from $a$ to $c$
+\item to be continued
+ \end{itemize}
+
+ }
+
 
 
 \frame
