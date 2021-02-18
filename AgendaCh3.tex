@@ -106,14 +106,13 @@ or \emph{type polymorphism}
 \item $C(\nat)_E$ maps any $f: T\to T'$ to $id_\nat: C(\nat)(T) \to C(\nat)(T')$
    \end{itemize}
 \item $[\_],C(\nat):\HH\to\HH$ are functors, $length: [\_] \To C(\nat)$ 
-is a natural transformation. Why?
+is a natural transformation. Why? \vspace*{-0.5cm}
 \item Because this diagram commutes:
-\[
 \begin{tikzcd}[ampersand replacement=\&]
-A \arrow[swap]{d}{f} \& {[A]}  \arrow[swap]{d}{map~f}\arrow{rr}{length_A} \&\& \nat \arrow{d}{id_\nat}\\
-B \& {[B]}  \arrow{rr}{length_B}\& \& \nat
+A \arrow[swap]{r}{f} \& B\\
+{[A]}  \arrow[swap]{d}{length_A}\arrow{r}{map~f} \&{[B]}  \arrow{d}{length_B}\\
+\nat \arrow{r}{id_\nat} \& \nat
 \end{tikzcd}
-\]
 \item What is natural about computing the length of a list?\\
 That you can program $length_A$ uniformly in $A$
  \end{itemize}
@@ -123,85 +122,35 @@ That you can program $length_A$ uniformly in $A$
 
 \frame
   {   
-    \frametitle{Universal Property of Cartesian Product}\label{Ch3:CartesianProductUP}
+    \frametitle{Metamodel of graphs}\label{Ch3:MG}
 
  \begin{itemize}[<+->]
-\item Fact 1.1.1, picture and explanation on Whiteboard
-\item Different implementation of $A\times B$ by $B\times A$ yields a bijection
-$(A\times B) \to (B\times A)$, usually called $swap$
-\item The universal property guarantees that \emph{any} implementation
-of the cartesian product of sets yields such a bijection (`implementation independent')
-\item This example shows the ingredients of a category (here $\Set$):
+\item Small graphs are given by two sets and two functions
+\item More precisely: if the sets are $Nod,Arr$ we have $beg,end: Nod\to Arr$
+\item This data has itself the form of a graph, a metamodel!
+\item Define $MG = 
+\begin{tikzcd}[ampersand replacement=\&]
+Arr \arrow[yshift=0.5ex]{r}{beg} \arrow[swap, yshift=-0.5ex]{r}{end} \& Nod,
+\end{tikzcd} $ or:
    \begin{itemize}[<+->]
-\item Objects (here: sets)
-\item Arrows (here: functions)
-\item Composition of (certain) arrows, identity arrows
-\item Properties: associativity and identity laws
+\item $MG_V = \set{Nod,Arr}$
+\item $MG_E = \set{beg,end}$
+\item $sc^{MG}(beg) = sc^{MG}(end) = Arr$
+\item $tg^{MG}(beg) = tg^{MG}(end) = Nod$
    \end{itemize}
-\item Also: we saw the first example of `diagram chasing'
+\item Small graphs are now graph homomorphisms $MG \to gr(\Set)$
+\item Graph homomorphisms are now natural transformations (...)
  \end{itemize}
 
  }
 
-\frame
-  {   
-    \frametitle{Dualization}\label{Ch3:sets}
-
- \begin{itemize}[<+->]
-\item Dualization in CT means: reversing all arrows
-\item Fact 1.1.2, picture and explanation on Whiteboard
-\item Disjoint union: $A\uplus B := (A\times\set{1})\cup(A\times\set{2})$
-\item Duals of projections are injections $A \to (A\uplus B)$, $B \to (A\uplus B)$
-\item Dual of $\langle f,g\rangle : C \to (A\times B)$ is $[ f,g] : (A\uplus B) \to C$ ...
-\item ... and this turns out to be case distinction!
- \end{itemize}
-
- }
-
-
-\frame
-  {   
-     \frametitle{More basics}\label{Ch3:setbasics}
-
- \begin{itemize}[<+->]
-\item Functions (or maps) $A\to B$ are total unless stated otherwise, 
-$A$ is the domain (or source) $B$ is the codomain (or target)
-\item We write $f: A\to B$ for $f\in (A\to B)$
-\item Pairs can be generalized to $n$-tuples
-\item $A^0 := \set{()}$, $A^{n+1}=A^n\times A$,
-$A^* := List(A) := \cup_{n\in\nat} A^n$
-\item $\powset_{fin}(A)$ is the set of finite subsets of $A$
-\item Image and preimage of $f: A\to B$ for points and subsets 
-\item Injective, surjective, bijective and idempotents maps
-\item Inclusion map and epi-mono factorization: every map
-is the (unique) composition of a surjection followed by an inclusion
- \end{itemize}
-
- }
-
-\frame
-  {   
-    \frametitle{Some useful maps}\label{Ch3:usefulmaps}
-
- \begin{itemize}[<+->]
-\item inclusion map $in_{A,B}$ for $A\subseteq B$, maps any $a\in A$ to $a\in B$
-\item $del: A^* \to A^* $ removes subsequent duplicates (idempotent)
-\item $sort: A^* \to A^* $, given an order on $A$, sorts (idempotent)
-\item $len: A^* \to \nat $ gives the length of a list (surjective)
-\item $forget: A^* \to \powset(A) $ gives the set of  elements of a list
-\item $forget^e: A^* \to \powset_{fin}(A)$, image = codomain (surjective)
-\item $forget$ is the composition of $forget^e$ and an inclusion
- \end{itemize}
-
- }
 
 \frame
   {   
     \frametitle{Comments on script}\label{Ch3:comments}
 
  \begin{itemize}[<+->]
-\item p. 6, last picture: $\pi'_1$ and  $\pi'_2$ interchanged
-\item p. 7: notations $A.a$ and $a:A$ not good if $B=A$
+\item 
  \end{itemize}
 
  }
