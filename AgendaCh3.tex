@@ -144,6 +144,20 @@ Arr \arrow[yshift=0.5ex]{r}{beg} \arrow[swap, yshift=-0.5ex]{r}{end} \& Nod,
 
  }
 
+\frame
+  {   
+    \frametitle{A hierarchy of models}\label{Ch3:metameta}
+
+ \begin{itemize}[<+->]
+\item A formal definition of the grammar class (metametamodel, e.g., CFGs
+$(\mathcal T, \mathcal N, S, \mathcal R)$ with $S\in\mathcal N$ and
+$\mathcal R \subseteq\mathcal N \times (\mathcal N \cup\mathcal T)^*$
+\item A specific context-free grammar describing the syntax (metamodel)
+\item A program written in a this specific syntax (model)
+\item A machine performing a task (or not, reality :-)
+ \end{itemize}
+
+ }
 
 \frame
   {   
