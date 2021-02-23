@@ -102,10 +102,10 @@ or \emph{type polymorphism}
 \item Functors can be constant
 \item Example in $\HH$: the functor $C(\nat)$ 
    \begin{itemize}[<+->]
-\item $C(\nat)_V$ maps any type $T$ to type $\nat$
-\item $C(\nat)_E$ maps any $f: T\to T'$ to $id_\nat: C(\nat)(T) \to C(\nat)(T')$
+\item $C(\nat)_V$ maps any type $T$ to type $\nat$, $C(\nat)_V(T)$
+\item $C(\nat)_E$ maps any $f: T\to T'$ to $id_\nat: \nat\to\nat$
    \end{itemize}
-\item $[\_],C(\nat):\HH\to\HH$ are functors, $length: [\_] \To C(\nat)$ 
+\item $[\_],C(\nat):\HH\to\HH$ are functors (why?), $length: [\_] \To C(\nat)$ 
 is a natural transformation. Why? \vspace*{-0.5cm}
 \item Because this diagram commutes:
 \begin{tikzcd}[ampersand replacement=\&]
@@ -114,11 +114,25 @@ A \arrow[swap]{r}{f} \& B\\
 \nat \arrow{r}{id_\nat} \& \nat
 \end{tikzcd}
 \item What is natural about computing the length of a list?\\
-That you can program $length_A$ uniformly in $A$
+That you can program $length_A$ uniformly in $A$.
  \end{itemize}
 
  }
 
+\frame
+  {   
+    \frametitle{A hierarchy of (meta)models}\label{Ch3:metameta}
+
+ \begin{itemize}[<+->]
+\item A formal definition of the grammar class (metametamodel, e.g., CFGs
+$(\mathcal T, \mathcal N, S, \mathcal R)$ with $S\in\mathcal N$ and
+$\mathcal R \subseteq\mathcal N \times (\mathcal N \cup\mathcal T)^*$
+\item A specific context-free grammar describing the syntax (metamodel)
+\item A program written in a this specific syntax (model)
+\item A machine performing a specific task (or not, that's reality :-)
+ \end{itemize}
+
+ }
 
 \frame
   {   
@@ -126,9 +140,9 @@ That you can program $length_A$ uniformly in $A$
 
  \begin{itemize}[<+->]
 \item Small graphs are given by two sets and two functions
-\item More precisely: if the sets are $Nod,Arr$ we have $beg,end: Nod\to Arr$
+\item More precisely: if the sets are $Nod,Arr$ we have $beg,end: Arr\to Nod$
 \item This data has itself the form of a graph, a metamodel!
-\item Define $MG = 
+\item Define the metagraph $MG = 
 \begin{tikzcd}[ampersand replacement=\&]
 Arr \arrow[yshift=0.5ex]{r}{beg} \arrow[swap, yshift=-0.5ex]{r}{end} \& Nod,
 \end{tikzcd} $ or:
@@ -146,15 +160,146 @@ Arr \arrow[yshift=0.5ex]{r}{beg} \arrow[swap, yshift=-0.5ex]{r}{end} \& Nod,
 
 \frame
   {   
-    \frametitle{A hierarchy of models}\label{Ch3:metameta}
+    \frametitle{Exploring the idea of the metagraph MG}\label{Ch3:ideaMG}
 
  \begin{itemize}[<+->]
-\item A formal definition of the grammar class (metametamodel, e.g., CFGs
-$(\mathcal T, \mathcal N, S, \mathcal R)$ with $S\in\mathcal N$ and
-$\mathcal R \subseteq\mathcal N \times (\mathcal N \cup\mathcal T)^*$
-\item A specific context-free grammar describing the syntax (metamodel)
-\item A program written in a this specific syntax (model)
-\item A machine performing a task (or not, reality :-)
+\item As graph \begin{tikzcd}[ampersand replacement=\&]
+Arr \arrow[yshift=0.5ex]{r}{beg} \arrow[swap, yshift=-0.5ex]{r}{end} \& Nod,
+\end{tikzcd} since there are no composable arrows,  $MG$ is almost its path category:
+ just add identities  %($= []_{Arr}, []_{Nod}$)
+\item Similarly, any graph homomorphism $MG\to gr(\CC)$ is almost a functor to
+the category $\CC$: just map identities to identities
+\item Generally: extend $\varphi: G\to gr(\CC)$ to functor $\varphi^*: \PP(G)\to\CC$
+\item A graph homomorphism $F : MG\to gr(\Set)$ consists of
+   \begin{itemize}[<+->]
+\item a set $F_V(Nod)$ the we call the set of nodes
+\item a set $F_V(Arr)$ the we call the set of arrows
+\item a map $F_E(beg) : F_V(Arr)\to F_V(Nod)$, the source map $sc$
+\item a map $F_E(end) : F_V(Arr)\to F_V(Nod)$, the target map $tg$
+   \end{itemize}
+and in this way you can get any small graph by a suitable $F$!
+\item We call such $F$'s \emph{interpretations} of $MG$ % , also written $F : MG\to \Set$
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Interpretations  of a graph}\label{Ch3:interpretations}
+
+ \begin{itemize}[<+->]
+\item An \emph{interpretation} of a graph $M$ in a category $\CC$
+is a graph homomorphism $F: M\to gr(\CC)$ also written $F : M\to \CC$
+\item Example: small hypergraphs, with arrows  between sets of nodes
+are interpretations $M\to \Mult$, 
+a graph homomorphism $F : MG\to gr(\Set)$ consists of
+   \begin{itemize}[<+->]
+\item a set $F_V(Nod)$ the we call the set of nodes
+\item a set $F_V(Arr)$ the we call the set of arrows
+\item a multimap $F_E(beg) : F_V(Arr)\to F_V(Nod)$, the source map:  
+$F_E(beg)(a)\in {\color{red}\powset} F_V(Nod)$ for all $a\in F_V(Arr)$
+\item a multimap $F_E(end) : F_V(Arr)\to F_V(Nod)$, the target map: 
+ $F_E(end)(a)\in {\color{red}\powset} F_V(Nod)$  for all $a\in F_V(Arr)$,
+   \end{itemize}
+\item In this way you can get any small {\color{red}hyper}graph by a suitable $F$!
+\item By varying the category $\CC$ we get lots of interpretations
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Homomorphisms recovered (1)}\label{Ch3:Homs1}
+
+ \begin{itemize}[<+->]
+\item With the {interpretations} of a graph $M$ in a the category $\Set$
+being small graphs, where are the graph homomorphisms?
+\item Let $F,G : M\to \CC$ be two interpretations. They can be promoted
+to functors $F^*,G^* : \PP(M)\to \CC$. Any natural transformation
+$\alpha: F^* \To G^*$ satisfies
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+v \arrow[swap]{d}{[f_1,...,f_n]} \&\& {F^*(v)}  \arrow[swap]{d}{F^*([f_1,...,f_n])}\arrow{rr}{\alpha_v} 
+\&\& {G^*(v})\arrow{d}{G^*([f_1,...,f_n])}\\
+u \&\&{F^*(u)}  \arrow{rr}{\alpha_u}\& \& {G^*(u)}
+\end{tikzcd}
+\]
+where $F^*([f_1,...,f_n]) = F(f_1);...;F(f_n)$ and likewise for $G$
+\item This will be simplified from $\PP(G)$ to $G$ in the next slide
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Homomorphisms recovered (2)}\label{Ch3:Homs2}
+
+ \begin{itemize}[<+->]
+\item Recall we have {interpretations} $F,G : M\to \CC$ and a natural transformation
+$\alpha: F^* \To G^*$. By list recursion and using $F^*(v) = F(v)$ the following
+naturality diagram is equivalent:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+v \arrow[swap]{d}{f} \&\& {F(v)}  \arrow[swap]{d}{F(f)}\arrow{rr}{\alpha_v} 
+\&\& {G(v})\arrow{d}{G(f)}\\
+u \&\&{F(u)}  \arrow{rr}{\alpha_u}\& \& {G(u)}
+\end{tikzcd}
+\]
+\item This is about data in $F,G : M\to \CC$ only and the script calls 
+such $\alpha$ a natural transformation of interpretations
+\item The next slide recovers graph homomorphisms as
+the special case $M=MG$ and $\CC=\Set$, but the generality will be useful
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Homomorphisms recovered (3)}\label{Ch3:Homs3}
+
+ \begin{itemize}[<+->]
+\item $MG = 
+\begin{tikzcd}[ampersand replacement=\&]
+Arr \arrow[yshift=0.5ex]{r}{beg} \arrow[swap, yshift=-0.5ex]{r}{end} \& Nod,
+\end{tikzcd} $ $F,G: MG\to\Set$, $\alpha:F\To G$
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+Arr \arrow[swap]{d}{beg} \&\& {F(Arr)}  \arrow[swap]{d}{F(beg)}\arrow{rr}{\alpha_{Arr}} 
+\&\& {G(Arr})\arrow{d}{G(beg)}\\
+Nod \&\&{F(Nod)}  \arrow{rr}{\alpha_{Nod}}\& \& {G(Nod)}
+\end{tikzcd}
+\]
++
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+Arr \arrow[swap]{d}{end} \&\& {F(Arr)}  \arrow[swap]{d}{F(end)}\arrow{rr}{\alpha_{Arr}} 
+\&\& {G(Arr})\arrow{d}{G(end)}\\
+Nod \&\&{F(Nod)}  \arrow{rr}{\alpha_{Nod}}\& \& {G(Nod)}
+\end{tikzcd}
+\]
+= graph homomorphism represented by $\alpha$ 
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{An unnatural transformation}\label{Ch3:unnat}
+
+ \begin{itemize}[<+->]
+\item Is removing duplicates $nodup_A : [A] \to [A]$ natural?
+\item No, this diagram need not commute:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow[swap]{d}{f} \& {[A]}  \arrow[swap]{d}{map~f}\arrow{rr}{nodup_A} \&\& {[A]}\arrow{d}{map~f}\\
+B \& {[B]}  \arrow{rr}{nodup_B}\& \& {[B]}
+\end{tikzcd}
+\]
+\item Why not?
+\item Fix: codomain is the wrong category, take $[\_],\powset : \Set\to\Set$ as functors
+and it is easy to define a natural $list2set : [\_]\to\powset$, e.g.,
+$\left\{\begin{array}{ll}list2set_A([]) &= \emptyset\\list2set_A(a:as) &=\set{a}\cup list2set_A(as)
+\end{array}\right.$
  \end{itemize}
 
  }
