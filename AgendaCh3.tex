@@ -287,7 +287,7 @@ Nod \&\&{F(Nod)}  \arrow{rr}{\alpha_{Nod}}\& \& {G(Nod)}
     \frametitle{An unnatural transformation}\label{Ch3:unnat}
 
  \begin{itemize}[<+->]
-\item Is removing duplicates $nodup_A : [A] \to [A]$ natural?
+\item Is removing duplicates $nodup_A : [A] \to [A]$ natural in $A$?
 \item No, this diagram need not commute:
 \[
 \begin{tikzcd}[ampersand replacement=\&]
@@ -297,12 +297,64 @@ B \& {[B]}  \arrow{rr}{nodup_B}\& \& {[B]}
 \]
 \item Why not?
 \item Fix: codomain is the wrong category, take $[\_],\powset : \Set\to\Set$ as functors
-and it is easy to define a natural $list2set : [\_]\to\powset$, e.g.,
+and it is easy to define a natural $list2set : [\_]\To\powset$,
 $\left\{\begin{array}{ll}list2set_A([]) &= \emptyset\\list2set_A(a:as) &=\set{a}\cup list2set_A(as)
 \end{array}\right.$
  \end{itemize}
 
  }
+
+\frame
+  {   
+    \frametitle{Sorting, naturally}\label{Ch3:sorting}
+
+ \begin{itemize}[<+->]
+\item For sorting we need to equip the type $A$ with an ordering $\leq$
+\item This changes the category to $\Set^{<}$: objects are ordered sets (or types) and
+morphisms are order-preserving maps, i.e., $f: (A,\leq)\to (B,\preceq)$ 
+such that $f(a)\preceq f(a')$ for all $a\leq a'$. 
+\item Then we should also order $[A]$! Take $\leq_{lex}$, and observe:
+if $l \leq_{lex} l'$, then $map~f~l \preceq_{lex} map~f~l'$ for any $f$ as above.
+\item This shows that we have a functor $[\_]^{<} : \Set^{<} \to \Set^{<}$
+   \begin{itemize}[<+->]
+\item mapping object $(A,\leq)$ to object $([A],\leq_{lex})$, 
+\item just $map$ on the morphisms of $\Set^{<}$ (order-preserving $f$'s).
+   \end{itemize}
+\item Sorting before or after mapping $f$ makes no difference:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+(A,\leq) \arrow[swap]{d}{f} \& {[A]}  \arrow[swap]{d}{map~f}\arrow{rr}{sort_A} \&\& {[A]}\arrow{d}{map~f}\\
+(B,\preceq) \& {[B]}  \arrow{rr}{sort_B}\& \& {[B]}
+\end{tikzcd}
+\]
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{An unnatural transformation}\label{Ch3:unnat}
+
+ \begin{itemize}[<+->]
+\item Is removing duplicates $nodup_A : [A] \to [A]$ natural in $A$?
+\item No, this diagram need not commute:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow[swap]{d}{f} \& {[A]}  \arrow[swap]{d}{map~f}\arrow{rr}{nodup_A} \&\& {[A]}\arrow{d}{map~f}\\
+B \& {[B]}  \arrow{rr}{nodup_B}\& \& {[B]}
+\end{tikzcd}
+\]
+\item Why not?
+\item Fix: codomain is the wrong category, take $[\_],\powset : \Set\to\Set$ as functors
+and it is easy to define a natural $list2set : [\_]\To\powset$,
+$\left\{\begin{array}{ll}list2set_A([]) &= \emptyset\\list2set_A(a:as) &=\set{a}\cup list2set_A(as)
+\end{array}\right.$
+ \end{itemize}
+
+ }
+
+
+
 
 \frame
   {   
