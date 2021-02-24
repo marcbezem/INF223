@@ -45,7 +45,7 @@
 \begin{document}
 
 \section{Chapter 3}
-\subsection{Natural transformations}
+\subsection{3.1 Natural transformations}
  
 \frame
   {   
@@ -333,28 +333,81 @@ if $l \leq_{lex} l'$, then $map~f~l \preceq_{lex} map~f~l'$ for any $f$ as above
 
 \frame
   {   
-    \frametitle{An unnatural transformation}\label{Ch3:unnat}
+    \frametitle{Opposite functors and natural transformations}\label{Ch3:oppnat}
 
  \begin{itemize}[<+->]
-\item Is removing duplicates $nodup_A : [A] \to [A]$ natural in $A$?
-\item No, this diagram need not commute:
+\item Any functor $F:\CC\to\DD$ has an opposite $F^{op}:\CC^{op}\to\DD^{op}$,
+same on objects,  and $F^{op}(f^{op}) = F(f)^{op}$ for all $f\in \CC(A,B)$
+\item For natural transformations, taking opposites does this:
+%$F,G:\CC\to\DD$ and $\alpha:F\To G$
 \[
 \begin{tikzcd}[ampersand replacement=\&]
-A \arrow[swap]{d}{f} \& {[A]}  \arrow[swap]{d}{map~f}\arrow{rr}{nodup_A} \&\& {[A]}\arrow{d}{map~f}\\
-B \& {[B]}  \arrow{rr}{nodup_B}\& \& {[B]}
+A \arrow[swap]{d}{f} \& F(A)  \arrow[swap]{d}{F(f)}\&\arrow[swap]{d}{G(f)} \arrow[swap]{l}{\alpha_A} G(A)
+\& A \& F(A)   \& \arrow[swap]{l}{(\alpha_A)^{op}} G(A)
+\\
+B \& F(B)  \arrow{r}{\alpha_B} \& G(B)
+\&B  \arrow{u}{f^{op}} \& F(B) \arrow{u}{F(f)^{op}}  \&\arrow{u}{G(f)^{op}} \color{red} \arrow[swap]{l}{(\alpha_B)^{op}}G(B)
 \end{tikzcd}
 \]
-\item Why not?
-\item Fix: codomain is the wrong category, take $[\_],\powset : \Set\to\Set$ as functors
-and it is easy to define a natural $list2set : [\_]\To\powset$,
-$\left\{\begin{array}{ll}list2set_A([]) &= \emptyset\\list2set_A(a:as) &=\set{a}\cup list2set_A(as)
-\end{array}\right.$
+\item Naturality left (in $\DD$) should imply naturality right (in $\DD^{op})$. 
+It does, starting in $\color{red}G(B)$! 
+%but as a natural transformation $G^{op}\To F^{op}$, 
+\item Define: $(\alpha^{op})_A = (\alpha_A)^{op}$ to get $\alpha^{op}: G^{op}\To F^{op}$
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Functor categories}\label{Ch3:functorcats}
+
+ \begin{itemize}[<+->]
+\item For categories $\CC,\DD$ and functor $F: \CC\to\DD$, the 
+\emph{identity transformation} $id_F : F\To F$ is defined by $(id_F)_A = id^\DD_{F(A)}$
+\item For functors $F,G,H: \CC\to\DD$, and natural
+transformations $\alpha: F\To G$ and $\beta:G\To H$, the composition
+$\alpha;\beta: F\To H$ is a natural transformation defined by 
+$(\alpha;\beta)_A= \alpha_A;\beta_A$
+ \item The \emph{functor category} $[\CC\to\DD]$
+   \begin{itemize}[<+->]
+\item has as objects all functors $\CC\to\DD$
+\item has as morphisms all natural transformations between functors
+\item has identities and composition as above, satisfying ASS and ID
+   \end{itemize}
+\item * The category $\Cat$ can now be made into a 2-category with
+small categories as objects, functors as 1-morphisms and natural transformations
+as 2-morphisms
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Interpretation categories}\label{Ch3:interpretationcats}
+
+ \begin{itemize}[<+->]
+\item For any graph $M$,  category $\CC$ and interpretation $G: M\to\CC$, the 
+\emph{identity transformation} $id_G : G\To G$ has $(id_G)_v = id^\CC_{G(v)}$
+\item For interpretations $F,G,H: M\to\CC$, and natural
+transforma- tions $\alpha: F\To G$ and $\beta:G\To H$, the composition
+$\alpha;\beta: F\To H$ is a natural transf.\ defined by 
+$(\alpha;\beta)_v= \alpha_v;\beta_v$
+ \item The \emph{interpretation category} $[M\to\DD]$
+   \begin{itemize}[<+->]
+\item has as objects all interpretations $M\to\CC$
+\item has as morphisms all natural transf.s  between interpretations
+\item has identities and composition as above, satisfying ASS and ID
+   \end{itemize}
+\item The above notions can also be obtained from the corresponding
+notions for functor categories by extending interpretations
+to functors on the path category.
  \end{itemize}
 
  }
 
 
-
+\section{Chapter 3}
+\subsection{3.2 Indexing}
 
 \frame
   {   
