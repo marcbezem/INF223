@@ -124,7 +124,10 @@ That you can program $length_A$ uniformly in $A$.
     \frametitle{A hierarchy of (meta)models}\label{Ch3:metameta}
 
  \begin{itemize}[<+->]
-\item A formal definition of the grammar class (metametamodel, e.g., CFGs
+\item A formal definition of a grammar (metametametamodel), e.g.,
+$(\mathcal T, \mathcal N, S, \mathcal R)$ with $S\in\mathcal N$ and
+$\mathcal R \subseteq(\mathcal N \cup\mathcal T)^* \times (\mathcal N \cup\mathcal T)^*$, ...
+\item A formal definition of the grammar class (metametamodel), e.g., CFGs
 $(\mathcal T, \mathcal N, S, \mathcal R)$ with $S\in\mathcal N$ and
 $\mathcal R \subseteq\mathcal N \times (\mathcal N \cup\mathcal T)^*$
 \item A specific context-free grammar describing the syntax (metamodel)
@@ -139,8 +142,8 @@ $\mathcal R \subseteq\mathcal N \times (\mathcal N \cup\mathcal T)^*$
     \frametitle{Metamodel of graphs}\label{Ch3:MG}
 
  \begin{itemize}[<+->]
-\item Small graphs are given by two sets and two functions
-\item More precisely: if the sets are $Nod,Arr$ we have $beg,end: Arr\to Nod$
+\item Small graphs are given by two sets and two functions of a specific type,
+if the sets are called $Nod,Arr$, then the functions ca be called $beg,end: Arr\to Nod$
 \item This data has itself the form of a graph, a metamodel!
 \item Define the metagraph $MG = 
 \begin{tikzcd}[ampersand replacement=\&]
@@ -190,15 +193,15 @@ and in this way you can get any small graph by a suitable $F$!
  \begin{itemize}[<+->]
 \item An \emph{interpretation} of a graph $M$ in a category $\CC$
 is a graph homomorphism $F: M\to gr(\CC)$ also written $F : M\to \CC$
-\item Example: small hypergraphs, with arrows  between sets of nodes
-are interpretations $M\to \Mult$, 
-a graph homomorphism $F : MG\to gr(\Set)$ consists of
+\item Example: small hypergraphs, with arrows  between two \emph{sets} of nodes,
+are interpretations $M\to \Mult$ 
+\item A graph homomorphism $F : MG\to gr(\Mult)$ consists of
    \begin{itemize}[<+->]
 \item a set $F_V(Nod)$ the we call the set of nodes
 \item a set $F_V(Arr)$ the we call the set of arrows
-\item a multimap $F_E(beg) : F_V(Arr)\to F_V(Nod)$, the source map:  
+\item a {\color{red}multi}map $F_E(beg) : F_V(Arr)\to F_V(Nod)$, the source map:  
 $F_E(beg)(a)\in {\color{red}\powset} F_V(Nod)$ for all $a\in F_V(Arr)$
-\item a multimap $F_E(end) : F_V(Arr)\to F_V(Nod)$, the target map: 
+\item a {\color{red}multi}map $F_E(end) : F_V(Arr)\to F_V(Nod)$, the target map: 
  $F_E(end)(a)\in {\color{red}\powset} F_V(Nod)$  for all $a\in F_V(Arr)$,
    \end{itemize}
 \item In this way you can get any small {\color{red}hyper}graph by a suitable $F$!
@@ -212,9 +215,9 @@ $F_E(beg)(a)\in {\color{red}\powset} F_V(Nod)$ for all $a\in F_V(Arr)$
     \frametitle{Homomorphisms recovered (1)}\label{Ch3:Homs1}
 
  \begin{itemize}[<+->]
-\item With the {interpretations} of a graph $M$ in a the category $\Set$
+\item With the {interpretations} of the graph $MG$ in a the category $\Set$
 being small graphs, where are the graph homomorphisms?
-\item Let $F,G : M\to \CC$ be two interpretations. They can be promoted
+\item Let $M$ be a graph and $F,G : M\to \CC$ two interpretations. They can be promoted
 to functors $F^*,G^* : \PP(M)\to \CC$. Any natural transformation
 $\alpha: F^* \To G^*$ satisfies
 \[
@@ -236,8 +239,8 @@ where $F^*([f_1,...,f_n]) = F(f_1);...;F(f_n)$ and likewise for $G$
 
  \begin{itemize}[<+->]
 \item Recall we have {interpretations} $F,G : M\to \CC$ and a natural transformation
-$\alpha: F^* \To G^*$. By list recursion and using $F^*(v) = F(v)$ the following
-naturality diagram is equivalent:
+$\alpha: F^* \To G^*$. By list recursion the following
+naturality diagram is sufficient for the previous one:
 \[
 \begin{tikzcd}[ampersand replacement=\&]
 v \arrow[swap]{d}{f} \&\& {F(v)}  \arrow[swap]{d}{F(f)}\arrow{rr}{\alpha_v} 
@@ -248,7 +251,7 @@ u \&\&{F(u)}  \arrow{rr}{\alpha_u}\& \& {G(u)}
 \item This is about data in $F,G : M\to \CC$ only and the script calls 
 such $\alpha$ a natural transformation of interpretations
 \item The next slide recovers graph homomorphisms as
-the special case $M=MG$ and $\CC=\Set$, but the generality will be useful
+the special case $M=MG$ and $\CC=\Set$, but the generality here is useful
  \end{itemize}
 
  }
@@ -368,15 +371,15 @@ It does, starting in $\color{red}G(B)$!
 transformations $\alpha: F\To G$ and $\beta:G\To H$, the composition
 $\alpha;\beta: F\To H$ is a natural transformation defined by 
 $(\alpha;\beta)_A= \alpha_A;\beta_A$
- \item The \emph{functor category} $[\CC\to\DD]$
+ \item The \emph{functor category} $[\CC\to\DD]$ has:
    \begin{itemize}[<+->]
-\item has as objects all functors $\CC\to\DD$
-\item has as morphisms all natural transformations between functors
-\item has identities and composition as above, satisfying ASS and ID
+\item all functors $\CC\to\DD$ as objects 
+\item all natural transformations between functors as morphisms 
+\item identities and composition as above, satisfying ASS and ID
    \end{itemize}
-\item * The category $\Cat$ can now be made into a 2-category with
-small categories as objects, functors as 1-morphisms and natural transformations
-as 2-morphisms
+\item * The category $\Cat$ can now be made into a 
+\myurl{https://ncatlab.org/nlab/show/2-category} with small categories 
+as objects, 1-morphisms as functors, and natural transformations as 2-morphisms
  \end{itemize}
 
  }
@@ -392,15 +395,15 @@ as 2-morphisms
 transforma- tions $\alpha: F\To G$ and $\beta:G\To H$, the composition
 $\alpha;\beta: F\To H$ is a natural transf.\ defined by 
 $(\alpha;\beta)_v= \alpha_v;\beta_v$
- \item The \emph{interpretation category} $[M\to\DD]$
+ \item The \emph{interpretation category} $[M\to\DD]$ has:
    \begin{itemize}[<+->]
-\item has as objects all interpretations $M\to\CC$
-\item has as morphisms all natural transf.s  between interpretations
-\item has identities and composition as above, satisfying ASS and ID
+\item all interpretations $M\to\CC$ as objects 
+\item all natural transf.s  between interpretations as morphisms 
+\item identities and composition as above, satisfying ASS and ID
    \end{itemize}
 \item The above notions can also be obtained from the corresponding
 notions for functor categories by extending interpretations
-to functors on the path category.
+to functors on the path category
  \end{itemize}
 
  }
