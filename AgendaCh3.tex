@@ -116,8 +116,58 @@ A \arrow[swap]{r}{f} \& B\\
 \item What is natural about computing the length of a list?\\
 That you can program $length_A$ uniformly in $A$.
  \end{itemize}
+ 
+}
+
+\frame
+  {   
+    \frametitle{An unnatural transformation}\label{Ch3:unnat}
+
+ \begin{itemize}[<+->]
+\item Is removing duplicates $nodup_A : [A] \to [A]$ natural in $A$?
+\item No, this diagram need not commute:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow[swap]{d}{f} \& {[A]}  \arrow[swap]{d}{map~f}\arrow{rr}{nodup_A} \&\& {[A]}\arrow{d}{map~f}\\
+B \& {[B]}  \arrow{rr}{nodup_B}\& \& {[B]}
+\end{tikzcd}
+\]
+\item Why not?
+\item Fix: codomain is the wrong category, take $[\_],\powset : \Set\to\Set$ as functors
+and it is easy to define a natural $list2set : [\_]\To\powset$,
+$\left\{\begin{array}{ll}list2set_A([]) &= \emptyset\\list2set_A(a:as) &=\set{a}\cup list2set_A(as)
+\end{array}\right.$
+ \end{itemize}
 
  }
+
+\frame
+  {   
+    \frametitle{Sorting, naturally}\label{Ch3:sorting}
+
+ \begin{itemize}[<+->]
+\item For sorting we need to equip the type $A$ with an ordering $\leq$
+\item This changes the category to $\Set^{<}$: objects are ordered sets (or types) and
+morphisms are order-preserving maps, i.e., $f: (A,\leq)\to (B,\preceq)$ 
+such that $f(a)\preceq f(a')$ for all $a\leq a'$. 
+\item Then we should also order $[A]$! Take $\leq_{lex}$, and observe:
+if $l \leq_{lex} l'$, then $map~f~l \preceq_{lex} map~f~l'$ for any $f$ as above.
+\item This shows that we have a functor $[\_]^{<} : \Set^{<} \to \Set^{<}$
+   \begin{itemize}[<+->]
+\item mapping object $(A,\leq)$ to object $([A],\leq_{lex})$, 
+\item just $map$ on the morphisms of $\Set^{<}$ (order-preserving $f$'s).
+   \end{itemize}
+\item Sorting before or after mapping $f$ makes no difference:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+(A,\leq) \arrow[swap]{d}{f} \& {[A]}  \arrow[swap]{d}{map~f}\arrow{rr}{sort_A} \&\& {[A]}\arrow{d}{map~f}\\
+(B,\preceq) \& {[B]}  \arrow{rr}{sort_B}\& \& {[B]}
+\end{tikzcd}
+\]
+ \end{itemize}
+
+ }
+
 
 \frame
   {   
@@ -143,7 +193,7 @@ $\mathcal R \subseteq\mathcal N \times (\mathcal N \cup\mathcal T)^*$
 
  \begin{itemize}[<+->]
 \item Small graphs are given by two sets and two functions of a specific type,
-if the sets are called $Nod,Arr$, then the functions ca be called $beg,end: Arr\to Nod$
+if the sets are called $Nod,Arr$, then the functions can be called $beg,end: Arr\to Nod$
 \item This data has itself the form of a graph, a metamodel!
 \item Define the metagraph $MG = 
 \begin{tikzcd}[ampersand replacement=\&]
@@ -194,7 +244,7 @@ and in this way you can get any small graph by a suitable $F$!
 \item An \emph{interpretation} of a graph $M$ in a category $\CC$
 is a graph homomorphism $F: M\to gr(\CC)$ also written $F : M\to \CC$
 \item Example: small hypergraphs, with arrows  between two \emph{sets} of nodes,
-are interpretations $M\to \Mult$ 
+are interpretations $MG\to \Mult$ 
 \item A graph homomorphism $F : MG\to gr(\Mult)$ consists of
    \begin{itemize}[<+->]
 \item a set $F_V(Nod)$ the we call the set of nodes
@@ -285,54 +335,6 @@ Nod \&\&{F(Nod)}  \arrow{rr}{\alpha_{Nod}}\& \& {G(Nod)}
 
  }
 
-\frame
-  {   
-    \frametitle{An unnatural transformation}\label{Ch3:unnat}
-
- \begin{itemize}[<+->]
-\item Is removing duplicates $nodup_A : [A] \to [A]$ natural in $A$?
-\item No, this diagram need not commute:
-\[
-\begin{tikzcd}[ampersand replacement=\&]
-A \arrow[swap]{d}{f} \& {[A]}  \arrow[swap]{d}{map~f}\arrow{rr}{nodup_A} \&\& {[A]}\arrow{d}{map~f}\\
-B \& {[B]}  \arrow{rr}{nodup_B}\& \& {[B]}
-\end{tikzcd}
-\]
-\item Why not?
-\item Fix: codomain is the wrong category, take $[\_],\powset : \Set\to\Set$ as functors
-and it is easy to define a natural $list2set : [\_]\To\powset$,
-$\left\{\begin{array}{ll}list2set_A([]) &= \emptyset\\list2set_A(a:as) &=\set{a}\cup list2set_A(as)
-\end{array}\right.$
- \end{itemize}
-
- }
-
-\frame
-  {   
-    \frametitle{Sorting, naturally}\label{Ch3:sorting}
-
- \begin{itemize}[<+->]
-\item For sorting we need to equip the type $A$ with an ordering $\leq$
-\item This changes the category to $\Set^{<}$: objects are ordered sets (or types) and
-morphisms are order-preserving maps, i.e., $f: (A,\leq)\to (B,\preceq)$ 
-such that $f(a)\preceq f(a')$ for all $a\leq a'$. 
-\item Then we should also order $[A]$! Take $\leq_{lex}$, and observe:
-if $l \leq_{lex} l'$, then $map~f~l \preceq_{lex} map~f~l'$ for any $f$ as above.
-\item This shows that we have a functor $[\_]^{<} : \Set^{<} \to \Set^{<}$
-   \begin{itemize}[<+->]
-\item mapping object $(A,\leq)$ to object $([A],\leq_{lex})$, 
-\item just $map$ on the morphisms of $\Set^{<}$ (order-preserving $f$'s).
-   \end{itemize}
-\item Sorting before or after mapping $f$ makes no difference:
-\[
-\begin{tikzcd}[ampersand replacement=\&]
-(A,\leq) \arrow[swap]{d}{f} \& {[A]}  \arrow[swap]{d}{map~f}\arrow{rr}{sort_A} \&\& {[A]}\arrow{d}{map~f}\\
-(B,\preceq) \& {[B]}  \arrow{rr}{sort_B}\& \& {[B]}
-\end{tikzcd}
-\]
- \end{itemize}
-
- }
 
 \frame
   {   
@@ -345,7 +347,7 @@ same on objects,  and $F^{op}(f^{op}) = F(f)^{op}$ for all $f\in \CC(A,B)$
 %$F,G:\CC\to\DD$ and $\alpha:F\To G$
 \[
 \begin{tikzcd}[ampersand replacement=\&]
-A \arrow[swap]{d}{f} \& F(A)  \arrow[swap]{d}{F(f)}\&\arrow[swap]{d}{G(f)} \arrow[swap]{l}{\alpha_A} G(A)
+A \arrow[swap]{d}{f} \& F(A)   \arrow{r}{\alpha_A}\arrow[swap]{d}{F(f)}\&\arrow[swap]{d}{G(f)} G(A)
 \& A \& F(A)   \& \arrow[swap]{l}{(\alpha_A)^{op}} G(A)
 \\
 B \& F(B)  \arrow{r}{\alpha_B} \& G(B)
@@ -356,6 +358,7 @@ B \& F(B)  \arrow{r}{\alpha_B} \& G(B)
 It does, starting in $\color{red}G(B)$! 
 %but as a natural transformation $G^{op}\To F^{op}$, 
 \item Define: $(\alpha^{op})_A = (\alpha_A)^{op}$ to get $\alpha^{op}: G^{op}\To F^{op}$
+\item The opposite natural transformation $\alpha^{op}$ goes the other way
  \end{itemize}
 
  }
@@ -411,6 +414,52 @@ to functors on the path category
 
 \section{Chapter 3}
 \subsection{3.2 Indexing}
+
+\frame
+  {   
+    \frametitle{Indexing with sets}\label{Ch3:indexset}
+
+ \begin{itemize}[<+->]
+\item Given a set $I$, an $I$-indexed family of sets is a map $A : I\to \Set$,
+also denoted $(A_i \mid i\in I)$; we write $A(i)=A_i$
+\item We can promote any set $I$ to a graph without edges: 
+$(I,\emptyset,in_{\emptyset,I},in_{\emptyset,I})$, also denoted I (abusively)
+ \item Then an $I$-indexed family of sets is an interpretation $A$ in $[I\to \Set]$
+ \item A morphism $f: A\to B$ in $[I\to \Set]$ is then a natural transformation
+such that $f_i: A_i \to B_i$ in $\Set$, a family of maps that we also denote
+$(f_i \mid i\in I)$ or $(f_i: A_i\to B_i \mid i\in I)$
+\item No worries about naturality, in the absence of arrows
+\item Indexing with sets is very common: arrays, vectors, infinite sequences ($I=\nat$)
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Indexing with structured objects}\label{Ch3:indexgraph}
+
+ \begin{itemize}[<+->]
+\item Even simpler than $MG$ is the graph $Ar$:
+\begin{tikzcd}[ampersand replacement=\&]
+L\arrow{r}{ar}\&R
+\end{tikzcd}
+\item $Ar$ is almost its path category, just add identities
+to get $\PP(Ar)$, commonly denoted as ${\cdot}{\to}{\cdot}$
+\item The interpretation category $[Ar\to\CC]$ has:
+   \begin{itemize}[<+->]
+\item graph homomorphisms $f: Ar\to gr(\CC)$ as objects, being 
+morphisms $f(ar): f(L) \to f(R)$ in $\CC$
+\item natural transf.s $\alpha: f\To g$ between such interpretations, being
+morphisms $\alpha_L: f(L)\To g(L)$ and $\alpha_R: f(R)\To g(R)$ such that
+the naturality square holds for $ar: L\to R$: $f(ar);\alpha_L = \alpha_R;f(ar)$
+   \end{itemize}
+\item The interpretation category $[Ar\to\CC]$ and the functor category
+$[{\cdot}{\to}{\cdot}\to\CC]$ are isomorphic
+\item Uhh, what's this? Well, let's say small $\CC$, so in $\Cat$
+
+ \end{itemize}
+
+ }
 
 \frame
   {   
