@@ -392,15 +392,14 @@ as objects, 1-morphisms as functors, and natural transformations as 2-morphisms
     \frametitle{Interpretation categories}\label{Ch3:interpretationcats}
 
  \begin{itemize}[<+->]
-\item For any graph $M$,  category $\CC$ and interpretation $G: M\to\CC$, the 
-\emph{identity transformation} $id_G : G\To G$ has $(id_G)_v = id^\CC_{G(v)}$
-\item For interpretations $F,G,H: M\to\CC$, and natural
+\item For any graph $M$,  category $\DD$ and interpretation $G: M\to\DD$, the 
+\emph{identity transformation} $id_G : G\To G$ sends $v$ to $id^\DD_{G(v)}$
+\item For interpretations $F,G,H: M\to\DD$, and natural
 transforma- tions $\alpha: F\To G$ and $\beta:G\To H$, the composition
-$\alpha;\beta: F\To H$ is a natural transf.\ defined by 
-$(\alpha;\beta)_v= \alpha_v;\beta_v$
+$\alpha;\beta: F\To H$ sends $v$ to $\alpha_v;\beta_v$, well defined and natural
  \item The \emph{interpretation category} $[M\to\DD]$ has:
    \begin{itemize}[<+->]
-\item all interpretations $M\to\CC$ as objects 
+\item all interpretations $M\to\DD$ as objects 
 \item all natural transf.s  between interpretations as morphisms 
 \item identities and composition as above, satisfying ASS and ID
    \end{itemize}
@@ -420,17 +419,17 @@ to functors on the path category
     \frametitle{Indexing with sets}\label{Ch3:indexset}
 
  \begin{itemize}[<+->]
-\item Given a set $I$, an $I$-indexed family of sets is a map $A : I\to \Set$,
-also denoted $(A_i \mid i\in I)$,  writing $A(i)=A_i$
+\item Given a set $I$, an $I$-indexed family of sets is a map $A$
+sending any $i\in I$ to a set denoted $A_i$. We write $A=(A_i \mid i\in I)$
 \item We can promote any set $I$ to a graph without edges: 
-$(I,\emptyset,in_{\emptyset,I},in_{\emptyset,I})$, also denoted $I$ (mild abuse of notation)
+$(I,\emptyset,in_{\emptyset,I},in_{\emptyset,I})$, also denoted as $I$ (mild abuse of notation)
  \item $I$-indexed families of sets are now interpretations in $[I\to \Set]$
  \item A morphism $f: A\to B$ in $[I\to \Set]$ is then a natural transformation
 such that $f_i: A_i \to B_i$ in $\Set$, a family of maps that we also denote
 $(f_i \mid i\in I)$ or $(f_i: A_i\to B_i \mid i\in I)$
 \item No worries about naturality, in the absence of arrows
-\item Indexing with sets is very common: arrays, vectors, infinite sequences ($I=\nat$),
-as are componentwise operations
+\item Indexing is common: records, 
+vector spaces $R^i$ ($I=\nat$), matrices $R^{n,m}$ ($I={\nat\times\nat}$)
  \end{itemize}
 
  }
@@ -452,7 +451,7 @@ to get $\PP(Ar)$, commonly denoted as ${\cdot}{\to}{\cdot}$
 morphisms $f(ar): f(L) \to f(R)$ in $\CC$
 \item natural transformations $\alpha: f\To g$, for any $f,g: Ar\to gr(\CC)$, as morphisms, 
 being a pair $(\alpha_L,\alpha_R)$ such that
-the naturality square holds for $ar: L\to R$ in $Ar$: $f(ar);\alpha_R = \alpha_L;g(ar)$
+the naturality square holds for $ar: L\to R$, formally $f(ar);\alpha_R = \alpha_L;g(ar)$
    \end{itemize}
 \item The interpretation category $[Ar\to\CC]$ and the functor category
 $[{\cdot}{\to}{\cdot}\to\CC]$ are isomorphic
@@ -469,7 +468,7 @@ $[{\cdot}{\to}{\cdot}\to\CC]$ are isomorphic
 
 Given a category $\CC$, its \emph{arrow category} $\CC^\to$ has:
    \begin{itemize}[<+->]
-\item triples $A = (A_L, ar^A, A_R)$ with $ar^A: A_L \to A_R$ in $\CC$ as objects,
+\item triples $A = (A_L, ar^A, A_R)$ with $ar^A: A_L \to A_R$ in $\CC$ as objects
 \item pairs $(f_L,f_R): A\to B$ with $f_L:A_L\to B_L$, $f_R:A_R\to B_R$ such that
 $ar^A;f^R = f^L;ar^ B$, as morphisms (see left square under)
 \item composition: if $(f_L,f_R): A\to B$ and $(g_L,g_R): B\to C$,
