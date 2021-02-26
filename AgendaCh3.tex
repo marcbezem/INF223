@@ -421,15 +421,16 @@ to functors on the path category
 
  \begin{itemize}[<+->]
 \item Given a set $I$, an $I$-indexed family of sets is a map $A : I\to \Set$,
-also denoted $(A_i \mid i\in I)$; we write $A(i)=A_i$
+also denoted $(A_i \mid i\in I)$,  writing $A(i)=A_i$
 \item We can promote any set $I$ to a graph without edges: 
-$(I,\emptyset,in_{\emptyset,I},in_{\emptyset,I})$, also denoted I (abusively)
- \item Then an $I$-indexed family of sets is an interpretation $A$ in $[I\to \Set]$
+$(I,\emptyset,in_{\emptyset,I},in_{\emptyset,I})$, also denoted $I$ (mild abuse of notation)
+ \item $I$-indexed families of sets are now interpretations in $[I\to \Set]$
  \item A morphism $f: A\to B$ in $[I\to \Set]$ is then a natural transformation
 such that $f_i: A_i \to B_i$ in $\Set$, a family of maps that we also denote
 $(f_i \mid i\in I)$ or $(f_i: A_i\to B_i \mid i\in I)$
 \item No worries about naturality, in the absence of arrows
-\item Indexing with sets is very common: arrays, vectors, infinite sequences ($I=\nat$)
+\item Indexing with sets is very common: arrays, vectors, infinite sequences ($I=\nat$),
+as are componentwise operations
  \end{itemize}
 
  }
@@ -443,19 +444,79 @@ $(f_i \mid i\in I)$ or $(f_i: A_i\to B_i \mid i\in I)$
 \begin{tikzcd}[ampersand replacement=\&]
 L\arrow{r}{ar}\&R
 \end{tikzcd}
-\item $Ar$ is almost its path category, just add identities
+\item $Ar$ is almost its own path category, just add identities
 to get $\PP(Ar)$, commonly denoted as ${\cdot}{\to}{\cdot}$
 \item The interpretation category $[Ar\to\CC]$ has:
    \begin{itemize}[<+->]
 \item graph homomorphisms $f: Ar\to gr(\CC)$ as objects, being 
 morphisms $f(ar): f(L) \to f(R)$ in $\CC$
-\item natural transf.s $\alpha: f\To g$ between such interpretations, being
-morphisms $\alpha_L: f(L)\To g(L)$ and $\alpha_R: f(R)\To g(R)$ such that
-the naturality square holds for $ar: L\to R$: $f(ar);\alpha_L = \alpha_R;f(ar)$
+\item natural transformations $\alpha: f\To g$, for any $f,g: Ar\to gr(\CC)$, as morphisms, 
+being a pair $(\alpha_L,\alpha_R)$ such that
+the naturality square holds for $ar: L\to R$ in $Ar$: $f(ar);\alpha_R = \alpha_L;g(ar)$
    \end{itemize}
 \item The interpretation category $[Ar\to\CC]$ and the functor category
 $[{\cdot}{\to}{\cdot}\to\CC]$ are isomorphic
-\item Uhh, what's this? Well, let's say small $\CC$, so in $\Cat$
+\item Uhh, what's that? Well, let's say small $\CC$, so in $\Cat$ (...)
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Arrow categories}\label{Ch3:arrowcats}
+
+% \begin{itemize}[<+-> \item 
+
+Given a category $\CC$, its \emph{arrow category} $\CC^\to$ has:
+   \begin{itemize}[<+->]
+\item triples $A = (A_L, ar^A, A_R)$ with $ar^A: A_L \to A_R$ in $\CC$ as objects,
+\item pairs $(f_L,f_R): A\to B$ with $f_L:A_L\to B_L$, $f_R:A_R\to B_R$ such that
+$ar^A;f^R = f^L;ar^ B$, as morphisms (see left square under)
+\item composition: if $(f_L,f_R): A\to B$ and $(g_L,g_R): B\to C$,
+then $(f_L,f_R);(g_L,g_R) = (f_L;g_L,f_R;g_R): A\to C$, in a diagram:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+%L \arrow[swap]{d}{ar} \& 
+A_L  \arrow[swap]{d}{ar^A}\arrow{r}{f_L} \&\arrow{d}{ar^B} B_L
+ \arrow{r}{g_L} \&\arrow{d}{ar^C} C_L\\
+%R \&  
+A_R \arrow{r}{f_R} \& B_R \arrow{r}{g_R} \& C_R
+\end{tikzcd}
+\]
+\item  identities: $id^{\CC^\to}_{(A_L, ar^A, A_R)} = (id^{\CC}_{A_L},id^{\CC}_{A_R})$
+(make a diagram)
+
+\item ASS and ID are OK, inherited from $\CC$
+   \end{itemize}
+
+
+% \end{itemize}
+}
+
+\frame
+  {   
+    \frametitle{Modelling experiments}\label{Ch3:Modelling}
+
+ \begin{itemize}[<+->]
+\item E-graphs: script p.\ 103 ff
+\item Path equations in a graph, in order to model
+   \begin{itemize}[<+->]
+\item 2-arrows (arrows between arrows)
+\[M2G:~~~~~ 
+\begin{tikzcd}[ampersand replacement=\&]
+2Ar \arrow[yshift=0.5ex]{r}{dom} \arrow[swap, yshift=-0.5ex]{r}{cod} \& Arr \arrow[yshift=0.5ex]{r}{beg} \arrow[swap, yshift=-0.5ex]{r}{end} \& Nod,
+\end{tikzcd}\]
+with path equations in $\PP(M2G)$:
+\[
+[dom,beg]=[cod,beg] \text{~and~} [dom,end]=[cod,end]
+\] 
+\item Reflexive graphs
+ \[MRG:~~~~~
+\begin{tikzcd}[ampersand replacement=\&]
+Arr \arrow[yshift=2ex]{r}{beg} \arrow[swap, yshift=-2ex]{r}{end}  \& \arrow{l}[description]{id} Nod,
+\end{tikzcd}\] 
+with path equation in $\PP(MRG)$: $[id,beg]=[id,end]$ 
+   \end{itemize}
 
  \end{itemize}
 
