@@ -410,8 +410,6 @@ to functors on the path category
 
  }
 
-
-\section{Chapter 3}
 \subsection{3.2 Indexing}
 
 \frame
@@ -512,9 +510,9 @@ with path equations in $\PP(M2G)$:
 \item Reflexive graphs
  \[MRG:~~~~~
 \begin{tikzcd}[ampersand replacement=\&]
-Arr \arrow[yshift=2ex]{r}{beg} \arrow[swap, yshift=-2ex]{r}{end}  \& \arrow{l}[description]{id} Nod,
+Arr \arrow[yshift=2ex]{r}{beg} \arrow[swap, yshift=-2ex]{r}{end}  \& \arrow{l}[description]{rfl} Nod,
 \end{tikzcd}\] 
-with path equation in $\PP(MRG)$: $[id,beg]=[id,end]$ 
+with path equation in $\PP(MRG)$: $[rfl,beg]=[rfl,end]=[]_{Nod}$ 
    \end{itemize}
 
  \end{itemize}
@@ -523,10 +521,131 @@ with path equation in $\PP(MRG)$: $[id,beg]=[id,end]$
 
 \frame
   {   
+    \frametitle{Path Equations}\label{Ch3:PathEqs}
+
+ \begin{itemize}[<+->]
+\item What do path equations like $[rfl,beg]=[rfl,end]=[]_{Nod}$ in $MRG$ mean?
+\item For $F : \PP(MRG)\to\Set$ and paths $p_1,p_2$ in $MRG$, define $F\models p_1=p_2$
+to mean $F^*(p_1) = F^*(p_2)$
+\item Adding path equations to a (meta)graph means that we restrict to interpretations
+that satisfy the path equations in the sense of $\models$
+\item Example: $F\models [rfl,beg]=[rfl,end]=[]_{Nod}$, $F: MRG\to\Set$
+means $F(rfl);F(beg)=F(rfl);F_E(end)=id_{F(Nod)}$, i.e., 
+$F_E(beg)(F_E(rfl)(v)) = F_E(end)(F_E(rfl)(v)) = v$ for all $v\in F_V(Nod)$,
+or as the commutative diagram on the right:
+ \[
+\begin{tikzcd}[ampersand replacement=\&]
+MRG: ~ ~Arr \arrow[yshift=2ex]{r}{beg} \arrow[swap, yshift=-2ex]{r}{end}  \& \arrow{l}[description]{rfl} Nod,
+\end{tikzcd}
+~~ ~ ~ \begin{tikzcd}[ampersand replacement=\&]
+F(Nod) \arrow{r}{F(rfl)}\arrow[swap]{d}{F(rfl)}\arrow{rd}{id}\& F(Arr) \arrow{d}{F(beg)} \\
+F(Arr) \arrow{r}{F(end)} \& F(Nod)
+\end{tikzcd}
+\]
+with path equation in $\PP(MRG)$: $[id,beg]=[id,end]=[]_{Nod}$ 
+
+ \end{itemize}
+
+ }
+
+\subsection{3.3 Typing}
+
+
+\frame
+  {   
+    \frametitle{Typing}\label{Ch3:Typing}
+
+ \begin{itemize}[<+->]
+\item More modelling: Petri nets (p. 111 of script) and 
+Entity Relationship diagrams (p. 112 of script)
+\item Both have different `types' of nodes and arrows: 
+ \begin{itemize}
+\item Petri-nets: $P$- and $T$-nodes and arrows $P\to T$ and $T\to P$
+\item ER-diagrams: $E$-, $R$-, $A$-nodes and arrows $E\to A$ and $R\to A$ 
+ \end{itemize}
+\item This `typing' info can be encoded in a graph,
+ \begin{itemize}
+\item for Petri-nets the graph $PT$:
+\begin{tikzcd}[ampersand replacement=\&]
+P \arrow[yshift=0.5ex]{r}{in} \& 
+T \arrow[yshift=-0.5ex]{l}{out}
+\end{tikzcd}
+\item for ER-diagrams the graph $RAE$:
+\begin{tikzcd}[ampersand replacement=\&]
+R \arrow{dr}{}\arrow{rr}{} \&\&  E \arrow{dl}{} \\
+\& A
+\end{tikzcd}
+ \end{itemize}
+\item Given a (type)graph $TG$,  a \emph{$TG$-typed graph} is a pair $(G,t)$ of a graph $G$ and a
+homomorphism $t : G \to TG$ 
+\item Examples: $TG{=}PT$ (Petri-nets), or $TG{=}RAE$ (ER-diagrams)
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Refinements of Typing}\label{Ch3:RefineTyp}
+
+ \begin{itemize}[<+->]
+\item In ER-diagrams, attributes can have attributes: add a loop around $A$
+\item Example: `compound' attributes like first name, last name
+\item Petri-nets are not `multi': at most one arrow between nodes
+\item This can be encoded by requiring that $t: G\to PT$ in $(G,t)$
+has the property that for all nodes $v,v'$ of $G$, $t : G \to PT$ is injective on the
+arrows $v\to v'$ (works since $PT$ is not `multi')
+\item For a (type)graph $TG$, let $(G,t_G)$ and  $(H,t_H)$ be $TG$-typed graphs.
+Q: what would a morphism $\varphi: (G,t_G)\to(H,t_H)$ be?
+\item A: a graph homomorphism $\varphi: G\to H$ \emph{preserving the typing}:
+\begin{tikzcd}[ampersand replacement=\&]
+G \arrow[swap]{rr}{\varphi}\arrow[swap]{dr}{t_G} \&\& H \arrow{dl}{t_H}\\
+\& TG 
+\end{tikzcd}
+\item $TG$-typed graphs and morphisms form a category $\Gra/PT$
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Slice categories}\label{Ch3:SliceCat}
+
+ \begin{itemize}[<+->]
+\item In defining $\Gra/PT$ only categorical concepts are used
+\item Slice categories are a generalization of  $\Gra/PT$
+\item Given a category $\CC$ and an object $T$, the \emph{slice category}
+$\CC/T$ has
+   \begin{itemize}[<+->]
+\item as objects all pairs $(A,t)$ with $A$ object of $\CC$ and $t: A\to T$
+\item as morphisms $(A,T_A)\to(B,T_B)$ all morphisms $f: A\to B$ in $\CC$ such that
+$t_A= f;t_B$ (see left triangle under)
+\item identities and composition as in $\CC$, satisfying ID and ASS:
+
+   \end{itemize}
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+A\arrow[swap]{d}{t_A}\arrow[loop left]{}{id_A}
+\&\&A \arrow[swap]{r}{f}\arrow[swap]{dr}{t_A} \arrow[bend left]{rr}{f;g} \&
+B \arrow[swap]{r}{g}\arrow[swap]{d}{t_B} \& 
+C \arrow{dl}{t_C}  \\
+T
+\&\&\& T 
+\end{tikzcd}
+\]
+
+\item Example: the category $I$-typed sets $\Gra/I$
+\item Remark:
+ \end{itemize}
+
+ }
+
+
+\frame
+  {   
     \frametitle{Comments on script}\label{Ch3:comments}
 
  \begin{itemize}[<+->]
-\item p. 105, last diagram: reverse arrow $d$
+\item Example 3.2.10: "repaired"  means arrow $d$ reversed to keep $\gamma$
  \end{itemize}
 
  }
