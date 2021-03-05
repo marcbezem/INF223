@@ -399,7 +399,7 @@ transforma- tions $\alpha: F\To G$ and $\beta:G\To H$, the composition
 $\alpha;\beta: F\To H$ sends $v$ to $\alpha_v;\beta_v$, well defined and natural
  \item The \emph{interpretation category} $[M\to\DD]$ has:
    \begin{itemize}[<+->]
-\item all interpretations $M\to\DD$ as objects 
+\item all interpretations in $M\to\DD$ as objects 
 \item all natural transf.s  between interpretations as morphisms 
 \item identities and composition as above, satisfying ASS and ID
    \end{itemize}
@@ -498,7 +498,7 @@ A_R \arrow{r}{f_R} \& B_R \arrow{r}{g_R} \& C_R
 \item E-graphs: script p.\ 103 ff
 \item Path equations in a graph, in order to model, for example:
    \begin{itemize}[<+->]
-\item 2-arrows (arrows between arrows)
+\item 2-arrows (arrows between arrows, p. 105 script)
 \[M2G:~~~~~ 
 \begin{tikzcd}[ampersand replacement=\&]
 2Ar \arrow[yshift=0.5ex]{r}{dom} \arrow[swap, yshift=-0.5ex]{r}{cod} \& Arr \arrow[yshift=0.5ex]{r}{beg} \arrow[swap, yshift=-0.5ex]{r}{end} \& Nod,
@@ -507,12 +507,12 @@ with path equations in $\PP(M2G)$:
 \[
 [dom,beg]=[cod,beg] \text{~and~} [dom,end]=[cod,end]
 \] 
-\item Reflexive graphs
+\item Reflexive graphs (p. 106 script)
  \[MRG:~~~~~
 \begin{tikzcd}[ampersand replacement=\&]
 Arr \arrow[yshift=2ex]{r}{beg} \arrow[swap, yshift=-2ex]{r}{end}  \& \arrow{l}[description]{rfl} Nod,
 \end{tikzcd}\] 
-with path equation in $\PP(MRG)$: $[rfl,beg]=[rfl,end]=[]_{Nod}$ 
+with path equations in $\PP(MRG)$: $[rfl,beg]=[rfl,end]=[]_{Nod}$ 
    \end{itemize}
 
  \end{itemize}
@@ -542,7 +542,6 @@ F(Nod) \arrow{r}{F(rfl)}\arrow[swap]{d}{F(rfl)}\arrow{rd}{id}\& F(Arr) \arrow{d}
 F(Arr) \arrow{r}{F(end)} \& F(Nod)
 \end{tikzcd}
 \]
-with path equation in $\PP(MRG)$: $[id,beg]=[id,end]=[]_{Nod}$ 
 
  \end{itemize}
 
@@ -617,7 +616,7 @@ G \arrow[swap]{rr}{\varphi}\arrow[swap]{dr}{t_G} \&\& H \arrow{dl}{t_H}\\
 $\CC/T$ has
    \begin{itemize}[<+->]
 \item as objects all pairs $(A,t)$ with $A$ object of $\CC$ and $t: A\to T$
-\item as morphisms $(A,T_A)\to(B,T_B)$ all morphisms $f: A\to B$ in $\CC$ such that
+\item as morphisms $(A,t_a)\to(B,t_B)$ all morphisms $f: A\to B$ in $\CC$ such that
 $t_A= f;t_B$ (see left triangle under)
 \item identities and composition as in $\CC$, satisfying ID and ASS:
 
@@ -634,11 +633,65 @@ T
 \]
 
 \item Example: the category $I$-typed sets $\Gra/I$
-\item Remark:
+\item Example: E-graphs are $MD$-typed graphs (p. 116 script)
  \end{itemize}
 
  }
 
+\frame
+  {   
+    \frametitle{Change of base}\label{Ch3:BaseChng}
+
+ \begin{itemize}[<+->]
+\item What can we say about $\CC/T$ and $\CC/S$ when $\tau: T\to S$ in $\CC$?
+\item Postcomposition with $\tau$ gives this:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow{rr}{f}\arrow{dr}{t_A} \arrow[swap]{ddr}{t_A;\tau}\&\& 
+B \arrow[swap]{dl}{t_B} \arrow{ddl}{t_B;\tau}\\
+\& T \arrow{d}[description]{\tau}\\
+\& S
+\end{tikzcd}
+\]
+\item We get a functor $Ch_\tau : \CC/T\to\CC/S$ sending
+ \begin{itemize}
+\item objects  $(A,t_A)$ to $(A,t_A;\tau)$
+\item morphisms $f: (A,t_a)\to(B,t_B)$ to $f: (A,t_a;\tau)\to(B,t_B;\tau)$
+ \end{itemize}
+\item Applying $Ch_\tau$ only changes the types
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Natural isomorphisms}\label{Ch3:NatIsos}
+
+ \begin{itemize}[<+->]
+\item Recall: the \emph{interpretation category} $[M\to\DD]$ with 
+all interpretations $G: M\to\DD$ as objects and, given such $G,H$,
+all natural transformations  $\alpha: G\To H$ as morphisms 
+\item Such $\alpha: G\To H$ is an isomorphism if there is $\beta: H\To G$ such that
+$\alpha;\beta = id_G$ and $\beta;\alpha = id_H$ in $[M\to\DD]$
+\item Then by definition, for all nodes $v$ in $M$, we have in $\CC$
+$\alpha_v;\beta_v = (\alpha;\beta)_v = (id_G)_v = id_{G(v)}$, 
+and also $\beta_v;\alpha_v = id_{H(v)}$
+\item So each $\alpha_v: G(v) \to H(v) $ is an isomorphism in $\CC$
+\item Is the converse also true? Yes!
+Let $\alpha: G\To H$ be a natural transformation such that $\alpha_v$
+is an isomorphism for all $v$ in $M$. Let inverses be $\beta_v = (\alpha_v)^{-1}$
+for all $v$, then $\beta$ is natural:
+% the following diagram 
+
+\begin{tikzcd}[ampersand replacement=\&]
+v \arrow[swap]{d}{f} \& H(v)\arrow{r}{\beta_v} \& {G(v)} \arrow[swap]{d}{G(f)}\arrow{r}{\alpha_v} 
+\& {H(v)}\arrow{d}{H(f)} \\
+u \&\&{G(u)}  \arrow{r}{\alpha_u}\& {H(u)}\arrow{r}{\beta_u} \& G(u)
+\end{tikzcd}
+
+ \end{itemize}
+
+ }
 
 \frame
   {   
