@@ -782,8 +782,8 @@ B \& B  \arrow{r}{\eta_B} \& (B_i\times \set{i}\mid  i\in I)
  \begin{itemize}[<+->]
 \item To do: natural ismorphism $\varepsilon :  id_\DD \To G;F$
 \item Recall: $F(G(X,t)) = (\uplus(t^-(i) \mid i\in I),\pi_2)$ for $t:X\to I$
-\item The following diagram commutes with $\varepsilon_{(X,t)}(x) = (x,t(x))$ :
-see upper triangle in diagram below
+\item  $\uplus(t^-(i) \mid i\in I) = \set{(x,t(x))\mid x\in X}$,
+$\varepsilon_{(X,t)}(x) = (x,t(x))$ makes the upper triangle in the diagram below commute
 %{\small\begin{tikzcd}[ampersand replacement=\&]
 %X \arrow[swap]{rr}{\varepsilon_{(X,t)}}\arrow[swap]{dr}{t}\&\& 
 % \set{(x,i)\mid x\in X,\ t(x)=i)} \arrow{dl}{\pi_2}\\
@@ -794,17 +794,31 @@ see upper triangle in diagram below
 \[
 \begin{tikzcd}[ampersand replacement=\&]
 (X,t) \arrow[swap]{dd}{f} \& X  \arrow[swap]{dd}{f}\arrow[swap]{dr}{t}\arrow{rr}{\varepsilon_{(X,t)}} 
-\&\&\arrow{dd}{F(G(f))}  \set{(x,i)\mid x\in X,\ t(x)=i)}\arrow{dl}{\pi_2} \\
+\&\&\arrow{dd}{F(G(f))}  \set{(x,t(x))\mid x\in X}\arrow{dl}{\pi_2} \\
 \&\&I\\
 (Y,s) \& Y  \arrow[swap]{rr}{\varepsilon_{(Y,s)}}\arrow{ur}{s} 
-\&\&  \set{(y,i)\mid y\in Y,\ s(y)=i)} \arrow[swap]{ul}{\pi_2}
+\&\&  \set{(y,s(y))\mid y\in Y} \arrow[swap]{ul}{\pi_2}
 \end{tikzcd}
 \]
 \item Exercise: figure out that $F(G(f))$ does the right thing
-
  \end{itemize}
 
  }
+
+\frame
+  {   
+    \frametitle{Summary Chapter 3}\label{Ch3:Summary}
+
+ \begin{enumerate}[<+->]
+\item Metamodel of graphs, natural transformations, functor and interpretation categories
+\item Indexing sets, with an index graph, $[MG\to\Set]$
+\item Petri nets, ER-diagrams, typing, typed graphs, $\Set/I$, slice category $\CC/T$
+\item Indexing versus typing, the equivalence of $[I\to\Set]$ and $\Set/I$
+\item[NB] $[M\to\Gra]$ and $\Gra/M$ are in general not equivalent
+ \end{enumerate}
+
+}
+
 
 
 \frame
