@@ -60,41 +60,58 @@ some elements `equal' that were not equal before
 properties that any equality relations has: reflexivity, symmetry and transitivity 
 (\emph{refsymtra})
 \item There are at least 3 ways to define an equivalence on a set $A$:
-   \begin{itemize}[<+->]
+   \begin{enumerate}[<+->]
 \item directly, by defining a refsymtra relation ${\simeq}\subseteq A\times A$
-\item partitioning $A = \cup_{i\in I} A_i $ in non-empty, disjoint, I-indexed $A_i$
+\item by partitioning $A = \cup_{i\in I} A_i $ in non-empty, disjoint, I-indexed $A_i$
 \item by defining a (typing) map $f: A\to T$ to some set $T$
-   \end{itemize}
+   \end{enumerate}
 \item These three ways are logically equivalent ($\approx$ MNF130): 
-   \begin{itemize}[<+->]
+   \begin{enumerate}[<+->]
 \item $[a]_\simeq = \set{x\in A\mid a\simeq x}$, 
 $A/{\simeq}=\set{[a]_\simeq \mid a\in A}$, $[\_] : A \to A/{\simeq}$
 \item $a\simeq a' $ iff $a,a' \in A_i$ is refsymtra, and $I = A/{\simeq}$, $A_i = i$
 \item $a\simeq a' $ iff $f(a)=f(a')$ is refsymtra, and  $T = A/{\simeq}$, $f=[\_]$
-   \end{itemize}
+   \end{enumerate}
+\item If $f$ in 3 is surjective, the equivalence classes are the preimages
  \end{itemize}
 
  }
 
 \frame
   {   
-    \frametitle{Example: equality modulo}\label{Ch4:Eqmod}
+    \frametitle{Example: equality modulo}\label{Ch4:EqExa}
 
  \begin{itemize}[<+->]
-\item 
-\item There are at least 3 ways to define an equivalence on a set $A$:
+\item Let $\zet$ be the set of integers and $k\in\zet$, $k>0$
+\item We define $=_k$, equality modulo $k$ :
    \begin{itemize}[<+->]
-\item directly, by defining a refsymtra relation ${\simeq}\subseteq A\times A$
-\item partitioning $A = \cup_{i\in I} A_i $ in non-empty, disjoint, I-indexed $A_i$
-\item by defining a (typing) map $f: A\to T$ to some set $T$
+\item directly, $x =_k y$ iff $x-y$ is a multiple of $k$
+\item partitioning $\zet = \cup_{i\in \set{0,...,k-1}} \zet_i $, $\zet_i = \set{kz+i \mid z\in\zet}$
+\item by defining  $m_k: \zet\to \set{0,...,k-1}$, $m_k(z) = (z \mod k)$ 
    \end{itemize}
-\item These three ways are logically equivalent ($\approx$ MNF130): 
+\item Q: which operations/relations carry over from $\zet$ to $\zet/{=_k}$?
+\item A: only those that are \emph{invariant} under ${=_k}$, i.e., are
+independent of the choice of representative:
    \begin{itemize}[<+->]
-\item $[a]_\simeq = \set{x\in A\mid a\simeq x}$, 
-$A/{\simeq}=\set{[a]_\simeq \mid a\in A}$, $[\_] : A \to A/{\simeq}$
-\item $a\simeq a' $ iff $a,a' \in A_i$ is refsymtra, and $I = A/{\simeq}$, $A_i = i$
-\item $a\simeq a' $ iff $f(a)=f(a')$ is refsymtra, and  $T = A/{\simeq}$, $f=[\_]$
+\item for function $f$:  $f(z) = f(z')$ if $z =_k z'$ 
+\item for relation $R$:  $R(z,u) \iff R(z',u')$    if $z =_k z'$ and $u =_k u'$
+\item similarly for other arities
    \end{itemize}
+\item Example: \emph{modulo arithmetic} (addition, multiplication)
+\item {\color{red}NB}: $2^0 = 1 \neq_3 8 = 2^3$, whereas $0 =_3 3$
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{More examples}\label{Ch4:EqMorExa}
+
+ \begin{itemize}[<+->]
+\item Logical equivalence
+\item Isomorphy of objects of a category $\CC$ is a equivalence
+\item Isomorphy of categories is an equivalence
+\item Equivalence of categories is an even coarser equivalence
  \end{itemize}
 
  }
