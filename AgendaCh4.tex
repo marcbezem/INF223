@@ -1,0 +1,133 @@
+\documentclass[handout]{beamer}
+%\documentclass[slides]{beamer}
+% Vary the color applet  (try out your own if you like)
+%\colorlet{structure}{red!20!black}
+%\beamertemplateshadingbackground{yellow!20}{white}
+%\usepackage{beamerthemeshadow}
+%\usepackage[utf8x]{inputenc} CONFLICT!
+%\usepackage[english,norsk,nynorsk]{babel}
+\usepackage{tikz}
+\usepackage{tikz-cd} 
+\usetikzlibrary{trees}
+
+\usepackage[all]{xy}
+\usepackage{multicol}
+
+%\setbeamertemplate{navigation symbols}{}++++++
+%\setbeamertemplate{footline}[frame number]
+\usetheme{Montpellier}
+\setbeamertemplate{footline}[frame number]
+
+
+\input macros
+
+\newcommand{\To}{\Rightarrow}
+\newcommand{\Trt}{\stackrel{*}{\Rightarrow}}
+\newcommand{\ToG}{\Rightarrow_G}
+\newcommand{\redS}{{\color{red} S}}
+
+\newcommand{\bfsf}[1]{{\boldsymbol{#1}}}
+\newcommand{\Set}{\bfsf{Set}}
+\newcommand{\Gra}{\bfsf{Graph}}
+\newcommand{\CC}{\bfsf{C}}
+\newcommand{\DD}{\bfsf{D}}
+\newcommand{\EE}{\bfsf{E}}
+\newcommand{\PP}{\bfsf{P}}
+\newcommand{\Nat}{\bfsf{Nat}}
+\newcommand{\Incl}{\bfsf{Incl}}
+\newcommand{\Rel}{\bfsf{Rel}}
+\newcommand{\Mult}{\bfsf{Mult}}
+\newcommand{\Mon}{\bfsf{Mon}}
+\newcommand{\Cat}{\bfsf{Cat}}
+\newcommand{\CAT}{\bfsf{CAT}}
+
+
+\title[INF223 presentations]{}
+
+\begin{document}
+
+\section{Chapter 4}
+\subsection{Properties and Constructions}
+ 
+\frame
+  {   
+    \frametitle{Equivalences}\label{Ch4:Eqvs}
+
+ \begin{itemize}[<+->]
+\item One method of abstraction: make equality coarser, by making
+some elements `equal' that were not equal before
+\item Such a new `equality' called \emph{equivalence} should have some important 
+properties that any equality relations has: reflexivity, symmetry and transitivity 
+(\emph{refsymtra})
+\item There are at least 3 ways to define an equivalence on a set $A$:
+   \begin{itemize}[<+->]
+\item directly, by defining a refsymtra relation ${\simeq}\subseteq A\times A$
+\item partitioning $A = \cup_{i\in I} A_i $ in non-empty, disjoint, I-indexed $A_i$
+\item by defining a (typing) map $f: A\to T$ to some set $T$
+   \end{itemize}
+\item These three ways are logically equivalent ($\approx$ MNF130): 
+   \begin{itemize}[<+->]
+\item $[a]_\simeq = \set{x\in A\mid a\simeq x}$, 
+$A/{\simeq}=\set{[a]_\simeq \mid a\in A}$, $[\_] : A \to A/{\simeq}$
+\item $a\simeq a' $ iff $a,a' \in A_i$ is refsymtra, and $I = A/{\simeq}$, $A_i = i$
+\item $a\simeq a' $ iff $f(a)=f(a')$ is refsymtra, and  $T = A/{\simeq}$, $f=[\_]$
+   \end{itemize}
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Example: equality modulo}\label{Ch4:Eqmod}
+
+ \begin{itemize}[<+->]
+\item 
+\item There are at least 3 ways to define an equivalence on a set $A$:
+   \begin{itemize}[<+->]
+\item directly, by defining a refsymtra relation ${\simeq}\subseteq A\times A$
+\item partitioning $A = \cup_{i\in I} A_i $ in non-empty, disjoint, I-indexed $A_i$
+\item by defining a (typing) map $f: A\to T$ to some set $T$
+   \end{itemize}
+\item These three ways are logically equivalent ($\approx$ MNF130): 
+   \begin{itemize}[<+->]
+\item $[a]_\simeq = \set{x\in A\mid a\simeq x}$, 
+$A/{\simeq}=\set{[a]_\simeq \mid a\in A}$, $[\_] : A \to A/{\simeq}$
+\item $a\simeq a' $ iff $a,a' \in A_i$ is refsymtra, and $I = A/{\simeq}$, $A_i = i$
+\item $a\simeq a' $ iff $f(a)=f(a')$ is refsymtra, and  $T = A/{\simeq}$, $f=[\_]$
+   \end{itemize}
+ \end{itemize}
+
+ }
+
+
+
+\frame
+  {   
+    \frametitle{Summary Chapter 4}\label{Ch4:Summary}
+
+ \begin{enumerate}[<+->]
+\item 
+ \end{enumerate}
+
+
+}
+
+\frame
+  {   
+    \frametitle{Comments on script}\label{Ch4:comments}
+
+ \begin{itemize}[<+->]
+\item 
+ \end{itemize}
+
+ }
+
+\end{document}
+
+\myurl{en.wikipedia.org/wiki/Ordered_pair}
+ \begin{itemize}
+    \item emulation halts because of the partiality of $\delta$;
+    \item emulation halts because of "head left" with head at first cell;
+    \item emulation halts because of reaching a halting state;
+    \item the emulated TM goes on forever.
+ \end{itemize}
