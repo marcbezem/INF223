@@ -524,8 +524,8 @@ with path equations in $\PP(MRG)$: $[rfl,beg]=[rfl,end]=[]_{Nod}$
     \frametitle{Path Equations}\label{Ch3:PathEqs}
 
  \begin{itemize}[<+->]
-\item What do path equations like $[rfl,beg]=[rfl,end]=[]_{Nod}$ in $MRG$ mean?
-\item For $F : \PP(MRG)\to\Set$ and paths $p_1,p_2$ in $MRG$, define $F\models p_1=p_2$
+\item What does $[rfl,beg]=[rfl,end]=[]_{Nod}$ in $MRG$ mean?
+\item For $F : \PP(MRG)\to\CC$ and paths $p_1,p_2$ in $MRG$, define $F\models p_1=p_2$
 to mean $F^*(p_1) = F^*(p_2)$
 \item Adding path equations to a (meta)graph means that we restrict to interpretations
 that satisfy the path equations in the sense of $\models$
@@ -588,7 +588,7 @@ homomorphism $t : G \to TG$
 
  \begin{itemize}[<+->]
 \item In ER-diagrams, attributes can have attributes: add a loop around $A$
-\item Example: `compound' attributes like first name, last name
+\item Example: `compound' attributes like first/last of name
 \item Petri-nets are not `multi': at most one arrow between nodes
 \item This can be encoded by requiring that $t: G\to PT$ in $(G,t)$
 has the property that for all nodes $v,v'$ of $G$, $t : G \to PT$ is injective on the
@@ -599,8 +599,8 @@ Q: what would a morphism $\varphi: (G,t_G)\to(H,t_H)$ be?
 \begin{tikzcd}[ampersand replacement=\&]
 G \arrow[swap]{rr}{\varphi}\arrow[swap]{dr}{t_G} \&\& H \arrow{dl}{t_H}\\
 \& TG 
-\end{tikzcd}
-\item $TG$-typed graphs and morphisms form a category $\Gra/PT$
+\end{tikzcd} so $t_G = \varphi; t_H$
+\item $TG$-typed graphs and morphisms form a category $\Gra/TG$
  \end{itemize}
 
  }
@@ -616,9 +616,9 @@ G \arrow[swap]{rr}{\varphi}\arrow[swap]{dr}{t_G} \&\& H \arrow{dl}{t_H}\\
 $\CC/T$ has
    \begin{itemize}[<+->]
 \item as objects all pairs $(A,t)$ with $A$ object of $\CC$ and $t: A\to T$
-\item as morphisms $(A,t_a)\to(B,t_B)$ all morphisms $f: A\to B$ in $\CC$ such that
+\item as morphisms $(A,t_A)\to(B,t_B)$ all morphisms $f: A\to B$ in $\CC$ such that
 $t_A= f;t_B$ (see left triangle under)
-\item identities and composition as in $\CC$, satisfying ID and ASS:
+\item identities and composition as in $\CC$, inheriting ID and ASS:
 
    \end{itemize}
 \[
@@ -632,8 +632,8 @@ T
 \end{tikzcd}
 \]
 
-\item Example: the category $I$-typed sets $\Gra/I$
-\item Example: E-graphs are $MD$-typed graphs (p. 116 script)
+\item Example: the category $I$-typed sets $\Set/I$
+\item Example: E-graphs are $MD$-typed graphs (p. 104 script)
  \end{itemize}
 
  }
@@ -673,6 +673,7 @@ all interpretations $G: M\to\DD$ as objects and, given such $G,H$,
 all natural transformations  $\alpha: G\To H$ as morphisms 
 \item Such $\alpha: G\To H$ is an isomorphism if there is $\beta: H\To G$ such that
 $\alpha;\beta = id_G$ and $\beta;\alpha = id_H$ in $[M\to\DD]$
+({\color{red} what was $id_G$?})
 \item Then by definition, for all nodes $v$ in $M$, we have in $\CC$
 $\alpha_v;\beta_v = (\alpha;\beta)_v = (id_G)_v = id_{G(v)}$, 
 and also $\beta_v;\alpha_v = id_{H(v)}$
@@ -837,6 +838,7 @@ of interpretation categories, different from but equivalent to the usual definit
  \begin{itemize}[<+->]
 \item Example 3.2.10: "repaired"  means arrow $d$ reversed to keep $\gamma$,
 in other cases it means deleting wrong arrows between arrows
+\item Typo in 3.3.8: $PT$ must be $TG$
  \end{itemize}
 
  }
