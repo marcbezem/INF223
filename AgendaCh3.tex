@@ -739,9 +739,9 @@ Then $G;F = id_\DD$, but $F;G$ is {\color{red}not} $id_\CC$. However,
 and for  $B = (B_i \mid i\in I)$, $f  : A\to B$ in $\CC$, $F(f)(a_i,i)=(f_i(a_i),i)$.
 Indeed, $F(f): \uplus A \to \uplus B$ with $\pi_2 = F(f);\pi_2$.
 \item Define $G(X,t) = (t^-(i) \mid i\in I)$ for $t:X\to I$, 
-with preimage $t^-(i)=$ $\set{x\in X\mid t(x)=i}$, and for $g: (X,t)\to(Y,s)$ in $\Set/I$,
-$G(g) = (G(g)_i\mid i\in I)$ with $G(g)_i : t^-(i) \to s^-(i)$: % given by $g$.
-$i\in I$
+with preimage $t^-(i)=$ $\set{x\in X\mid t(x)=i}$; for $g: (X,t)\to(Y\!,s)$ in $\Set/I$,
+$G(g) = (G(g)_i\mid i\in I)$ with $G(g)_i = g: t^-(i) \to s^-(i)$ for all
+$i\in I$,
 \begin{tikzcd}[ampersand replacement=\&]
 t^-(i)\subseteq X \arrow{rr}{g}\arrow{dr}{t}\&\& 
 Y \supseteq s^-(i) \arrow[swap]{dl}{s}\\
@@ -759,17 +759,18 @@ Indeed, $G(g): (t^-(i) \mid i\in I) \to (s^-(i) \mid i\in I)$
  \begin{itemize}[<+->]
 \item Functors  $F :\CC\to\DD$ and $G:\DD\to\CC$ are not inverses:
 $F(G(X,t)) = F(t^-(i) \mid i\in I) = (\uplus(t^-(i) \mid i\in I),\pi_2)$,
-$G(F(A)) = G (\uplus A,\pi_2) = (\pi_2^-(i) \mid i\in I)$. 
+where $\uplus(t^-(i) \mid i\in I) = \set{(x,t(x)) \mid x\in X}$ (exercise!). Also:
+$G(F(A)) = G (\uplus A,\pi_2) = (\pi_2^-(i) \mid i\in I) = (A_i \times \set{i}) \mid i\in I)$. 
 \item Q: and now, what?
+\item A: natural ismorphisms $\eta: id_\CC \To F;G$ and $\varepsilon :  id_\DD \To G;F$
 \item First figure out what $G(F(f)$ for $f:A\to B$. 
 We have $F(f): \uplus A \to \uplus B$ with $\pi_2 = F(f);\pi_2$.
-Now $G(F(f))_i$ is a map from $\pi_2^{-1}(i)$ of $\pi_2 : \uplus A \to I$ to
-{\color{red} another $\pi_2^{-1}(i)$ of $\pi_2 : \uplus B \to I$}
-where $\pi_2^{-1}(i) = A_i \times \set{i}$ and
-{\color{red}  the other $\pi_2^{-1}(i)= B_i \times \set{i}$}!
-This map is $f_i \times id_{\set{i}}$.
-\item Exercise: verify the details
-\item Exercise: figure out $F(G(g))$ for $g: (X,t) \to (Y,s)$ in an similar way
+Now $G(F(f))_i$ is a map from $\pi_2^-(i)$ of $\pi_2 : \uplus A \to I$ to
+{\color{red} another $\pi_2^-(i)$ of $\pi_2 : \uplus B \to I$}
+where $\pi_2^-(i) = A_i \times \set{i}$ and
+{\color{red}  the other $\pi_2^-(i)= B_i \times \set{i}$}!
+This map is $f_i \times id_{\set{i}}$ (exercise: verify the details).
+\item Exercise: show $F(G(g)) = g\times id_I$ for all $g: (X,t) \to (Y,s)$
  \end{itemize}
 
  }
@@ -779,10 +780,10 @@ This map is $f_i \times id_{\set{i}}$.
     \frametitle{Equivalence of indexing and typing sets (three)}\label{Ch3:Eq-ind-typ-Set-eta}
 
  \begin{itemize}[<+->]
-\item A: natural ismorphisms $\eta: id_\CC \To F;G$ and $\varepsilon :  id_\DD \To G;F$
+
 \item Recall $G(F(A)) = (\pi_2^-(i) \mid i\in I)$ with $\pi_2: \uplus A \to I$.
 This is not far off: $(A_i\mid  i\in I)$ versus $(A_i\times \set{i}\mid  i\in I)$.
-\item An $I$-family of bijections $\eta_{A,i}(a)= (a,i)$ shows isomorphy.
+\item An $I$-family of bijections $\eta_{A,i}(a)= (a,i)$ shows isomorphy in $\CC$.
 It remains to show that this is natural in $A$ :
 \[
 \begin{tikzcd}[ampersand replacement=\&]
@@ -802,7 +803,7 @@ B \& B  \arrow{r}{\eta_B} \& (B_i\times \set{i}\mid  i\in I)
     \frametitle{Equivalence of indexing and typing sets (four)}\label{Ch3:Eq-ind-typ-Set-eps}
 
  \begin{itemize}[<+->]
-\item To do: natural ismorphism $\varepsilon :  id_\DD \To G;F$
+\item To do: natural isomorphism $\varepsilon :  id_\DD \To G;F$
 \item Recall: $F(G(X,t)) = (\uplus(t^-(i) \mid i\in I),\pi_2)$ for $t:X\to I$
 \item  $\uplus(t^-(i) \mid i\in I) = \set{(x,t(x))\mid x\in X}$,
 $\varepsilon_{(X,t)}(x) = (x,t(x))$ makes the upper triangle in the diagram below commute
