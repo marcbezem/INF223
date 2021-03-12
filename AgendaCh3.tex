@@ -525,12 +525,12 @@ with path equations in $\PP(MRG)$: $[rfl,beg]=[rfl,end]=[]_{Nod}$
 
  \begin{itemize}[<+->]
 \item What does $[rfl,beg]=[rfl,end]=[]_{Nod}$ in $MRG$ mean?
-\item For $F : \PP(MRG)\to\CC$ and paths $p_1,p_2$ in $MRG$, define $F\models p_1=p_2$
+\item For $F :MRG\to\CC$ and paths $p_1,p_2$ in $MRG$, define $F\models p_1=p_2$
 to mean $F^*(p_1) = F^*(p_2)$
 \item Adding path equations to a (meta)graph means that we restrict to interpretations
 that satisfy the path equations in the sense of $\models$
-\item Example: $F\models [rfl,beg]=[rfl,end]=[]_{Nod}$, $F: MRG\to\Set$
-means $F(rfl);F(beg)=F(rfl);F_E(end)=id_{F(Nod)}$, i.e., 
+\item Example: $F\models [rfl,beg]=[rfl,end]=[]_{Nod}$ %, $F: MRG\to\Set$
+means $F(rfl);F(beg)=F(rfl);F(end)=id_{F(Nod)}$, i.e., 
 $F_E(beg)(F_E(rfl)(v)) = F_E(end)(F_E(rfl)(v)) = v$ for all $v\in F_V(Nod)$,
 or as the commutative diagram on the right:
  \[
@@ -653,10 +653,10 @@ B \arrow[swap]{dl}{t_B} \arrow{ddl}{t_B;\tau}\\
 \& S
 \end{tikzcd}
 \]
-\item We get a functor $Ch_\tau : \CC/T\to\CC/S$ sending
+\item We get a functor ({\color{red} why?}) $Ch_\tau : \CC/T\to\CC/S$ sending
  \begin{itemize}
 \item objects  $(A,t_A)$ to $(A,t_A;\tau)$
-\item morphisms $f: (A,t_a)\to(B,t_B)$ to $f: (A,t_a;\tau)\to(B,t_B;\tau)$
+\item morphisms $f: (A,t_A)\to(B,t_B)$ to $f: (A,t_A;\tau)\to(B,t_B;\tau)$
  \end{itemize}
 \item Applying $Ch_\tau$ only changes the types
  \end{itemize}
@@ -674,10 +674,10 @@ all natural transformations  $\alpha: G\To H$ as morphisms
 \item Such $\alpha: G\To H$ is an isomorphism if there is $\beta: H\To G$ such that
 $\alpha;\beta = id_G$ and $\beta;\alpha = id_H$ in $[M\to\DD]$
 ({\color{red} what was $id_G$?})
-\item Then by definition, for all nodes $v$ in $M$, we have in $\CC$
+\item Then by definition, for all nodes $v$ in $M$, we have in $\DD$
 $\alpha_v;\beta_v = (\alpha;\beta)_v = (id_G)_v = id_{G(v)}$, 
 and also $\beta_v;\alpha_v = id_{H(v)}$
-\item So each $\alpha_v: G(v) \to H(v) $ is an isomorphism in $\CC$
+\item So each $\alpha_v: G(v) \to H(v) $ is an isomorphism in $\DD$
 \item Is the converse also true? Yes!
 Let $\alpha: G\To H$ be a natural transformation such that $\alpha_v$
 is an isomorphism for all $v$ in $M$. Let inverses be $\beta_v = (\alpha_v)^{-1}$
@@ -714,9 +714,9 @@ consists of: % the following data:
 \item functors  $F :\CC\to\DD$ and $G:\DD\to\CC$
 \item natural ismorphisms $\eta: id^\Cat_\CC \To F;G$ and $\varepsilon :  id^\Cat_\DD \To G;F$
  \end{itemize}
-\item Example: $F: \CC\to\DD$ is completely determined by $F(A)=F(B)= 1$,
- $G: \DD\to\CC$ is completely determined by $G(1)=A$, 
-then $G;F = id_\DD$, but $F;G$ is {\color{red}not} $id_\CC$. However,
+\item Example: functor $F: \CC\to\DD$ is completely determined by $F(A)=F(B)= 1$;
+ $G: \DD\to\CC$ is completely determined by $G(1)=A$. 
+Then $G;F = id_\DD$, but $F;G$ is {\color{red}not} $id_\CC$. However,
 \item Exercise: give $\eta$ and $\varepsilon$ that make $F$ and $G$ into equivalences
 \item Next slide(s): a more interesting example of equivalence
  \end{itemize}
@@ -736,7 +736,8 @@ then $G;F = id_\DD$, but $F;G$ is {\color{red}not} $id_\CC$. However,
 \begin{tikzcd}[ampersand replacement=\&]
 \uplus A \arrow{r}{\pi_2} \& 	I 
 \end{tikzcd} in $\Set/I$,  %= (f_i \mid i\in I)
-and for  $B = (B_i \mid i\in I)$, $f  : A\to B$ in $\CC$, $F(f)(a_i,i)=(f_i(a_i),i)$
+and for  $B = (B_i \mid i\in I)$, $f  : A\to B$ in $\CC$, $F(f)(a_i,i)=(f_i(a_i),i)$.
+Indeed, $F(f): \uplus A \to \uplus B$ with $\pi_2 = F(f);\pi_2$.
 \item Define $G(X,t) = (t^-(i) \mid i\in I)$ for $t:X\to I$, 
 with preimage $t^-(i)=$ $\set{x\in X\mid t(x)=i}$, and for $g: (X,t)\to(Y,s)$ in $\Set/I$,
 $G(g) = (G(g)_i\mid i\in I)$ with $G(g)_i : t^-(i) \to s^-(i)$: % given by $g$.
@@ -746,16 +747,36 @@ t^-(i)\subseteq X \arrow{rr}{g}\arrow{dr}{t}\&\&
 Y \supseteq s^-(i) \arrow[swap]{dl}{s}\\
 \& I
 \end{tikzcd} NB $g;s=t$
-\item Functors  $F :\CC\to\DD$ and $G:\DD\to\CC$ are not inverses:
-$F(G(X,t)) = F(t^-(i) \mid i\in I) = (\uplus(t^-(i) \mid i\in I),\pi_2)$,
-$G(F(A)) = G (\uplus A,\pi_2) = (\pi_2^-(i) \mid i\in I)$. Q: and now, what?
+Indeed, $G(g): (t^-(i) \mid i\in I) \to (s^-(i) \mid i\in I)$
  \end{itemize}
 
  }
 
 \frame
   {   
-    \frametitle{Equivalence of indexing and typing sets (two)}\label{Ch3:Eq-ind-typ-Set-eta}
+    \frametitle{Equivalence of indexing and typing sets (two)}\label{Ch3:Eq-ind-typ-ctnd}
+
+ \begin{itemize}[<+->]
+\item Functors  $F :\CC\to\DD$ and $G:\DD\to\CC$ are not inverses:
+$F(G(X,t)) = F(t^-(i) \mid i\in I) = (\uplus(t^-(i) \mid i\in I),\pi_2)$,
+$G(F(A)) = G (\uplus A,\pi_2) = (\pi_2^-(i) \mid i\in I)$. 
+\item Q: and now, what?
+\item First figure out what $G(F(f)$ for $f:A\to B$. 
+We have $F(f): \uplus A \to \uplus B$ with $\pi_2 = F(f);\pi_2$.
+Now $G(F(f))_i$ is a map from $\pi_2^{-1}(i)$ of $\pi_2 : \uplus A \to I$ to
+{\color{red} another $\pi_2^{-1}(i)$ of $\pi_2 : \uplus B \to I$}
+where $\pi_2^{-1}(i) = A_i \times \set{i}$ and
+{\color{red}  the other $\pi_2^{-1}(i)= B_i \times \set{i}$}!
+This map is $f_i \times id_{\set{i}}$.
+\item Exercise: verify the details
+\item Exercise: figure out $F(G(g))$ for $g: (X,t) \to (Y,s)$ in an similar way
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Equivalence of indexing and typing sets (three)}\label{Ch3:Eq-ind-typ-Set-eta}
 
  \begin{itemize}[<+->]
 \item A: natural ismorphisms $\eta: id_\CC \To F;G$ and $\varepsilon :  id_\DD \To G;F$
@@ -770,15 +791,15 @@ A \arrow[swap]{d}{f} \& A  \arrow[swap]{d}{f}\arrow{r}{\eta_A}
 B \& B  \arrow{r}{\eta_B} \& (B_i\times \set{i}\mid  i\in I)
 \end{tikzcd}
 \]
-\item Exercise: figure out that $G(F(f_i \mid i\in I)) = (f_i \times id_{\set{i}} \mid i\in I)$
-\item This give the natural isomorphism $\eta: id_\CC \To F;G$
+\item As seen before: $G(F(f_i \mid i\in I)) = (f_i \times id_{\set{i}} \mid i\in I)$
+\item This gives the natural isomorphism $\eta: id_\CC \To F;G$
  \end{itemize}
 
  }
 
 \frame
   {   
-    \frametitle{Equivalence of indexing and typing sets (three)}\label{Ch3:Eq-ind-typ-Set-eps}
+    \frametitle{Equivalence of indexing and typing sets (four)}\label{Ch3:Eq-ind-typ-Set-eps}
 
  \begin{itemize}[<+->]
 \item To do: natural ismorphism $\varepsilon :  id_\DD \To G;F$
@@ -794,14 +815,14 @@ $\varepsilon_{(X,t)}(x) = (x,t(x))$ makes the upper triangle in the diagram belo
 %it remains to show that $\varepsilon_{(X,t)}$ is natural in $(X,t)$ :
 \[
 \begin{tikzcd}[ampersand replacement=\&]
-(X,t) \arrow[swap]{dd}{f} \& X  \arrow[swap]{dd}{f}\arrow[swap]{dr}{t}\arrow{rr}{\varepsilon_{(X,t)}} 
-\&\&\arrow{dd}{F(G(f))}  \set{(x,t(x))\mid x\in X}\arrow{dl}{\pi_2} \\
+(X,t) \arrow[swap]{dd}{g} \& X  \arrow[swap]{dd}{g}\arrow[swap]{dr}{t}\arrow{rr}{\varepsilon_{(X,t)}} 
+\&\&\arrow{dd}{F(G(g))}  \set{(x,t(x))\mid x\in X}\arrow{dl}{\pi_2} \\
 \&\&I\\
 (Y,s) \& Y  \arrow[swap]{rr}{\varepsilon_{(Y,s)}}\arrow{ur}{s} 
 \&\&  \set{(y,s(y))\mid y\in Y} \arrow[swap]{ul}{\pi_2}
 \end{tikzcd}
 \]
-\item Exercise: figure out that $F(G(f))$ does the right thing
+\item Exercise: figure out that $F(G(g))$ does the right thing
  \end{itemize}
 
  }

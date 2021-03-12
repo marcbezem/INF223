@@ -47,7 +47,7 @@
 \begin{document}
 
 \section{Chapter 4}
-\subsection{Properties and Constructions}
+\subsection{4.1 Equivalences and quotients}
  
 \frame
   {   
@@ -62,7 +62,7 @@ properties that any equality relations has: reflexivity, symmetry and transitivi
 \item There are at least 3 ways to define an equivalence on a set $A$:
    \begin{enumerate}[<+->]
 \item directly, by defining a refsymtra relation ${\simeq}\subseteq A\times A$
-\item by partitioning $A = \cup_{i\in I} A_i $ in non-empty, disjoint, I-indexed $A_i$
+\item by partitioning $A = \cup_{i\in I} A_i $ in non-empty, disjoint, $I$-indexed $A_i$
 \item by defining a (typing) map $f: A\to T$ to some set $T$
    \end{enumerate}
 \item These three ways are logically equivalent ($\approx$ MNF130): 
@@ -105,15 +105,64 @@ independent of the choice of representative:
 
 \frame
   {   
+    \frametitle{More termonology on equivalences}\label{Ch4:Eqvs}
+
+ \begin{itemize}[<+->]
+\item The map $[\_] \_] A\to A/{\simeq}$ is called the \emph{quotient} map (`class of')
+\item The equivalence relation defined by $f(a)=f(a')$  is called the \emph{kernel} of $f:A\to T$,
+ denoted $ker(f)$
+\item Map Theorem: if $f:A\to T$ is surjective and $g:A\to S$ is such that $ker(f)\subseteq ker(g)$,
+then there is a unique $h: T\to S$ such that $f;h=g$ ($h$ blurs the  nuances 
+that $f$ sees but not $g$)
+\item Universal property of quotients: if $\simeq$ is an equivalence relation on $A$,
+then every $A\to B$  satifying $f(a)=f(a')$ for all $a\simeq a'$ factors uniquely
+through $[\_]:  A\to A/{\simeq}$, i.e., there is a unique $g: (A/{\simeq})\to B$ such
+that $f(a) = g([a])$ for all $a\in A$ (by Map Theorem since $[\_]$ is surjective)
+ \end{itemize}
+
+ }
+
+\frame
+  {   
     \frametitle{More examples}\label{Ch4:EqMorExa}
 
  \begin{itemize}[<+->]
+\item Classic: $(j,k)\simeq(m,n)$ iff $j+n = m+k$ gives $\zet=\nat/{\simeq}$
 \item Logical equivalence
-\item Isomorphy of objects of a category $\CC$ is a equivalence
+\item Isomorphy of objects of a category $\CC$ is an equivalence
 \item Isomorphy of categories is an equivalence
-\item Every category is isomorphic to a quotient of the path category of
-its underlying graph 
+\item Every category $\CC$ is isomorphic to a quotient of $\PP(gr(\CC))$,
+the path category of its underlying graph (proof: take the quotient generated
+by all path equalities $[id^\CC_A]=[]_A$ and $[f,g] = [f;g]$)
 \item Equivalence of categories is an even coarser equivalence
+ \end{itemize}
+
+ }
+
+\subsection{4.2 Special morphisms}
+ 
+\frame
+  {   
+    \frametitle{Monomorphisms}\label{Ch4:Monos}
+
+ \begin{itemize}[<+->]
+\item Monomorphism is the categorical version of an injective map in $\Set$
+\item In a given a category $\CC$ and objects $A,B$, a morphism $f: A\to B$ is a
+\emph{monomorphism} or \emph{mono} if for all objects $X$ and 
+morphisms $g,h: X\to A$ we have $g=h$ if $g;f = h;f$ %(`right cancellation')
+\item In diagrams: if
+\begin{tikzcd}[ampersand replacement=\&]
+%1 \arrow[yshift=0.5ex]{r}{y} \& 2, \arrow[yshift=-0.5ex]{l}{z}  \&
+X \arrow[bend left]{r}{g}\arrow[bend right]{r}{h} \& 
+A \arrow{r}{f}\& B
+\end{tikzcd}
+ commutes, then $g=h$
+\item In $\Set$ this is equivalent with $f$ being injective:
+ \begin{itemize}
+    \item if $f$ injective, then $f(g(x))=f(h(x)$ implies $g(x)=h(x)$ for all $x\in X$
+    \item if $f$ mono, then ...
+ \end{itemize}
+
  \end{itemize}
 
  }
