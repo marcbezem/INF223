@@ -146,8 +146,8 @@ by all path equalities $[id^\CC_A]=[]_A$ and $[f,g] = [f;g]$)
     \frametitle{Monomorphisms}\label{Ch4:Monos}
 
  \begin{itemize}[<+->]
-\item Monomorphism is the categorical version of an injective map in $\Set$
-\item In a given a category $\CC$ and objects $A,B$, a morphism $f: A\to B$ is a
+\item A monomorphism is the categorical generalization of an injective map in $\Set$
+\item Given a category $\CC$ and objects $A,B$, a morphism $f: A\to B$ is a
 \emph{monomorphism} or \emph{mono} if for all objects $X$ and 
 morphisms $g,h: X\to A$ we have $g=h$ if $g;f = h;f$ %(`right cancellation')
 \item In diagrams: if
@@ -159,14 +159,79 @@ A \arrow{r}{f}\& B
  commutes, then $g=h$
 \item In $\Set$ this is equivalent with $f$ being injective:
  \begin{itemize}
-    \item if $f$ injective, then $f(g(x))=f(h(x)$ implies $g(x)=h(x)$ for all $x\in X$
-    \item if $f$ mono, then ...
- \end{itemize}
-
+    \item if $f$ injective, then indeed $f(g(x))=f(h(x)$ implies $g(x)=h(x)$ for all $x\in X$
+    \item if $f$ mono and $f(a)=f(a')$, then 
+for constant functions $c_a,c_{a'} : X\to A$,
+ \begin{tikzcd}[ampersand replacement=\&]
+X \arrow[bend left]{r}{c_a}\arrow[swap, bend right]{r}{c_{a'}} \& 
+A \arrow{r}{f}\& B
+\end{tikzcd}
+commutes, so $c_{a}=c_{a'}$ which implies $c_{a}(x)=c_{a'}(x)$ for all $x\in X$, so $a=a'$
+{\color{red}provided we have $x\in X $ (important proviso)}. Take, e.g., $X=\set{0}$.
+\end{itemize}
  \end{itemize}
 
  }
 
+\frame
+  {   
+    \frametitle{More on monos}\label{Ch4:Moronmonos}
+
+ \begin{itemize}[<+->]
+\item In a preorder category (such as $\Incl$) all morphisms are monos
+\item In the category of sets with injections all morphisms are monos,
+for a different reason as in the previous point
+\item If $f:A\to B$ and $g:B\to C$ are monos, then so is $f;g$
+\item If $f;g: A\to C$ is mono, then so is $f:A\to B$ (for any $g$)
+\item Proofs: right cancelling and diagrammatic reasoning in
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+X \arrow[bend left]{r}{g}\arrow[bend right]{r}{h} \& 
+A \arrow{r}{f}\& B \arrow{r}{g} \& C
+\end{tikzcd}
+\]
+\item In $\Gra$, $\varphi: G\to H$ is a graph monomorphism iff both
+maps $\varphi_V: G_V\to H_V$ and $\varphi_E: G_E\to H_E$ are monos in $\Set$
+ \begin{itemize}
+    \item if $\varphi_V,\varphi_E$ injective, and $\psi_x,\psi_y: X\to G$ in $\Gra$
+with $\psi_x;\varphi = \psi_y;\varphi$, then we reason $(\__E,\__V)$-wise $\Set$
+    \item if $\varphi$ is mono, use the reasoning pattern  of the previous
+slide with $X=gr(\bfsf{1\!\!1})$ for $\varphi_V$ and $X=gr({\cdot}{\to}{\cdot})$ for $\varphi_E$
+\end{itemize}
+\item Similar result for functors $F: \CC\to\DD$ in $\Cat$ (exercise)
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Monomorphisms in $\Rel$}\label{Ch4:MonosRel}
+
+ \begin{itemize}[<+->]
+\item How would a monomorhism in $\Rel$ look like?
+\item 
+If
+\begin{tikzcd}[ampersand replacement=\&]
+X \arrow[bend left]{r}{S}\arrow[bend right]{r}{T} \& 
+A \arrow{r}{R}\& B
+\end{tikzcd} %($S;R=T;R$)
+commutes, then $S=T$
+\item Recall  $\rho_R : A\to \powset{B}$, 
+defined by $\rho_R(a) = \set{b\in B\mid R(a,b)}$,
+in fact an isomorphism from $\Rel$ to $\Mult$ in $\Cat$ (exercise)
+\item Define $P_R : \powset{A}\to \powset{B}$ by $P_R(X) = \cup\set{\rho_R(x) \mid x\in X}$
+%for all $X\subseteq A$
+\item We have: $R$ is mono iff  $P_R : \powset{A}\to \powset{B}$ injective
+ \begin{itemize}
+    \item if $\varphi_V,\varphi_E$ injective, and $\psi_x,\psi_y: X\to G$ in $\Gra$
+with $\psi_x;\varphi = \psi_y;\varphi$, then we reason $(\__E,\__V)$-wise $\Set$
+    \item if $\varphi$ is mono, use the reasoning pattern
+for $\varphi_V$ and $X=gr({\cdot}{\to}{\cdot})$ for $\varphi_E$
+\end{itemize}
+\item 
+ \end{itemize}
+
+ }
 
 
 \frame
