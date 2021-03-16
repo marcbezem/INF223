@@ -105,7 +105,7 @@ independent of the choice of representative:
 
 \frame
   {   
-    \frametitle{More termonology on equivalences}\label{Ch4:Eqvs}
+    \frametitle{More terminology on equivalences}\label{Ch4:Eqvs}
 
  \begin{itemize}[<+->]
 \item The map $[\_] \_] A\to A/{\simeq}$ is called the \emph{quotient} map (`class of')
@@ -149,7 +149,7 @@ by all path equalities $[id^\CC_A]=[]_A$ and $[f,g] = [f;g]$)
 \item A monomorphism is the categorical generalization of an injective map in $\Set$
 \item Given a category $\CC$ and objects $A,B$, a morphism $f: A\to B$ is a
 \emph{monomorphism} or \emph{mono} if for all objects $X$ and 
-morphisms $g,h: X\to A$ we have $g=h$ if $g;f = h;f$ %(`right cancellation')
+morphisms $g,h: X\to A$ we have $g=h$ if $g;{\color{red}f} = h;{\color{red}f}$
 \item In diagrams: if
 \begin{tikzcd}[ampersand replacement=\&]
 %1 \arrow[yshift=0.5ex]{r}{y} \& 2, \arrow[yshift=-0.5ex]{l}{z}  \&
@@ -183,7 +183,7 @@ commutes, so $c_{a}=c_{a'}$ which implies $c_{a}(x)=c_{a'}(x)$ for all $x\in X$,
 for a different reason as in the previous point
 \item If $f:A\to B$ and $g:B\to C$ are monos, then so is $f;g$
 \item If $f;g: A\to C$ is mono, then so is $f:A\to B$ (for any $g$)
-\item Proofs: right cancelling and diagrammatic reasoning in
+\item Proofs: by `right' cancelling  and diagrammatic reasoning in
 \[
 \begin{tikzcd}[ampersand replacement=\&]
 X \arrow[bend left]{r}{g}\arrow[bend right]{r}{h} \& 
@@ -218,21 +218,75 @@ A \arrow{r}{R}\& B
 commutes, then $S=T$
 \item Recall  $\rho_R : A\to \powset{B}$, 
 defined by $\rho_R(a) = \set{b\in B\mid R(a,b)}$,
-in fact an isomorphism from $\Rel$ to $\Mult$ in $\Cat$ (exercise)
+in fact $\Rel$ and $\Mult$ are isomorphic in $\Cat$ (exercise)
 \item Define $P_R : \powset{A}\to \powset{B}$ by $P_R(X) = \cup\set{\rho_R(x) \mid x\in X}$
 %for all $X\subseteq A$
 \item We have: $R$ is mono iff  $P_R : \powset{A}\to \powset{B}$ injective
  \begin{itemize}
-    \item if $\varphi_V,\varphi_E$ injective, and $\psi_x,\psi_y: X\to G$ in $\Gra$
-with $\psi_x;\varphi = \psi_y;\varphi$, then we reason $(\__E,\__V)$-wise $\Set$
-    \item if $\varphi$ is mono, use the reasoning pattern
-for $\varphi_V$ and $X=gr({\cdot}{\to}{\cdot})$ for $\varphi_E$
+    \item if $P_R$ injective, $S,T: X\to R$ in $\Rel$ with $S;R = T;R$, 
+then for all $x\in X$, $P_R(\rho_S(x)) = P_R(\rho_T(x))$, so $\rho_S(x) = \rho_T(x)$ %, so $S=T$
+    \item if $P_R$ is mono, $A_1,A_2\subseteq A$ with $P_R(A_1)=P_R(A_2)$,
+find the right $X$ and $S_1,S_2: X\to A$ to prove $A_1=A_2$ (exercise)
 \end{itemize}
 \item 
  \end{itemize}
 
  }
 
+\frame
+  {   
+    \frametitle{Epimorphisms}\label{Ch4:Epis}
+
+ \begin{itemize}[<+->]
+\item Given a category $\CC$ and objects $A,B$, a morphism $f: A\to B$ is an
+\emph{epimorphism} or \emph{epi} if $f^{op}: B\to A$ is a mono in $\CC^{op}$
+\item An epimorphism is the categorical generalization of an surjective map in $\Set$
+({\color{red}`injective map' in $\Set^{op}$})
+\item Rather than stopping here, we give the dual diagram:
+for all objects $X$ and morphisms $g,h: A\to X$, we have $g=h$ if  
+\begin{tikzcd}[ampersand replacement=\&]
+%1 \arrow[yshift=0.5ex]{r}{y} \& 2, \arrow[yshift=-0.5ex]{l}{z}  \&
+X  \& 
+A \arrow[bend left]{l}{g}\arrow[bend right]{l}{h} \& B\arrow[swap]{l}{f}
+\end{tikzcd}
+ commutes, that is, if ${\color{red}f};g={\color{red}f};h$   %,`left cancellation')
+\item In $\Set$ this is indeed equivalent with $f$ being surjective:
+ \begin{itemize}
+    \item if $f$ surjective, then indeed $g(f(b))=h(f(b)$ for all $b\in B$
+      implies $g(a)=h(a)$ for all $a\in A$, since the image of $f$ is $A$
+    \item if $f$ epi and $a\in A$, then we have to show that $a$ is in the image of $f$.
+Suppose not (by contradiction). Take $X=\set{0,1}$ and consider $c_0: A\to X$
+and $d_a : A\to X$ defined by $d(x) = 0$ if $x=a$ and $d(a)=1$. Then $f;c_0 = f;d_a$
+(why?), so $c_0 = d_a$, so $0=c_0(a) = d_a(a)=1$, contradiction.
+
+\end{itemize}
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Properties of monos and epis}\label{Ch4:EqMorExa}
+
+ \begin{itemize}[<+->]
+\item Let $F: \CC\to\DD$ be a faithful functor (injective on morphisms),
+then $F$ \emph{reflects} monos and epis in the following sense:
+\item If $F(f)$ is a mono (epi) in $\DD$, then $f$ is a mono (epi) in $\CC$
+\item Proof sketches: if $g;f=h;f$, then $F(g);F(f) = F(h); F(f)$, so $F(g)=F(h)$, so $g=h$;
+$f;g=f;h$, then $F(f);F(g) =  F(f);F(h)$, so $F(g)=F(h)$, so $g=h$
+\item Cor: isomorphism $F: \CC\to\DD$ preserve monos and epis
+\item Exercise: show that $\varphi: G\to H$ is an epi in $\Gra$ iff
+$\varphi_V$ and $\varphi_E$ are epis in $\Set$   
+\item Not surprisingly, epis have the dual properties of monos
+\item Example: if $f$ and $g$ epis, then  $f^{op}$ and $g^{op}$ are monos,
+so $(f;g)^{op}=g^{op} ; f^{op}$ mono, so $f;g$ epi
+\item Exercise: prove that $g$ is epi if $f;g$ is epi
+ \end{itemize}
+
+ }
+
+\subsection{4.3 Special objects}
+ 
 
 \frame
   {   
