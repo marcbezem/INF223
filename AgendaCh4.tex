@@ -108,7 +108,7 @@ independent of the choice of representative:
     \frametitle{More terminology on equivalences}\label{Ch4:Eqvs}
 
  \begin{itemize}[<+->]
-\item The map $[\_] \_] A\to A/{\simeq}$ is called the \emph{quotient} map (`class of')
+\item The map $[\_] : A\to A/{\simeq}$ is called the \emph{quotient} map (`class of')
 \item The equivalence relation defined by $f(a)=f(a')$  is called the \emph{kernel} of $f:A\to T$,
  denoted $ker(f)$
 \item Map Theorem: if $f:A\to T$ is surjective and $g:A\to S$ is such that $ker(f)\subseteq ker(g)$,
@@ -159,7 +159,7 @@ A \arrow{r}{f}\& B
  commutes, then $g=h$
 \item In $\Set$ this is equivalent with $f$ being injective:
  \begin{itemize}
-    \item if $f$ injective, then indeed $f(g(x))=f(h(x)$ implies $g(x)=h(x)$ for all $x\in X$
+    \item if $f$ injective, then indeed $f(g(x))=f(h(x))$ implies $g(x)=h(x)$ for all $x\in X$
     \item if $f$ mono and $f(a)=f(a')$, then 
 for constant functions $c_a,c_{a'} : X\to A$,
  \begin{tikzcd}[ampersand replacement=\&]
@@ -254,11 +254,9 @@ A \arrow[bend left]{l}{g}\arrow[bend right]{l}{h} \& B\arrow[swap]{l}{f}
  \begin{itemize}
     \item if $f$ surjective, then indeed $g(f(b))=h(f(b)$ for all $b\in B$
       implies $g(a)=h(a)$ for all $a\in A$, since the image of $f$ is $A$
-    \item if $f$ epi and $a\in A$, then we have to show that $a$ is in the image of $f$.
-Suppose not (by contradiction). Take $X=\set{0,1}$ and consider $c_0: A\to X$
-and $d_a : A\to X$ defined by $d(x) = 0$ if $x=a$ and $d(a)=1$. Then $f;c_0 = f;d_a$
-(why?), so $c_0 = d_a$, so $0=c_0(a) = d_a(a)=1$, contradiction.
-
+    \item if $f$ epi we take $X=\powset{\set{0}}$ and define $g,h: A\to X$ by $g(a)=\set{0}$
+and {\color{red}$h(a)=\set{ x\in\set{0}\mid \exists b\in B (f(b)=a)}$ (tricky!).}
+Clearly $f;g=f;h$, so $g=h$. Hence $f$ is surjective.
 \end{itemize}
  \end{itemize}
 
@@ -266,7 +264,34 @@ and $d_a : A\to X$ defined by $d(x) = 0$ if $x=a$ and $d(a)=1$. Then $f;c_0 = f;
 
 \frame
   {   
-    \frametitle{Properties of monos and epis}\label{Ch4:EqMorExa}
+    \frametitle{Subobject classifiers}\label{Ch4:SubObj}
+
+ \begin{itemize}[<+->]
+\item Puzzled by $\set{ x\in\set{0}\mid \exists b\in B (f(b)=a)} \in \powset{\set{0}}$?
+\item Actually, $\powset{\set{0}}$ is isomorphic to $\set{T,F}$ in $\Set$
+and is a \emph{subset classifier}, a codomain for characteristic $\chi_A : B\to \set{T,F}$
+for $A\subseteq B$, $\chi_A (b) = T$ if $b\in A$ and $\chi_A (b) = F$ otherwise
+\item How would a \emph{subgraph classifier} look like? Like this $SGC$:
+\begin{tikzcd}[ampersand replacement=\&]
+out \arrow[loop left]{}{oo} \arrow[bend left]{r}{oi} \& 
+in \arrow[bend left]{l}{io} \arrow[loop right,out = 15, looseness=30]{}{ii} \arrow[loop right,looseness=6]{}{out}
+\end{tikzcd} (why $in$, $out$, $io$, etc ?)
+\item Let $\varphi: G \to H$ in $\Gra$ be epi. Now:
+ \begin{itemize}
+    \item define $\psi : H\to SGC$ constant $in$ on nodes and $ii$ on arrows
+    \item define $\xi : H\to SGC$ $in/out$ on nodes in/out $\varphi$'s image,
+     and $oo,io,oi$ on edges if enforced by  $\xi_V$, and $ii/out$ if the edge 
+     is in/out $\varphi$'s image
+    \item Clearly $\varphi;\psi=\varphi;\xi$, so $\psi=\xi$.
+\end{itemize}
+It follows that $\varphi_V$ and  $\varphi_E$ are surjective in $\Set$; converse easy.
+ \end{itemize}
+% (beautifully)
+ }
+
+\frame
+  {   
+    \frametitle{Properties of monos and epis}\label{Ch4:MonandEp}
 
  \begin{itemize}[<+->]
 \item Let $F: \CC\to\DD$ be a faithful functor (injective on morphisms),
@@ -278,15 +303,54 @@ $f;g=f;h$, then $F(f);F(g) =  F(f);F(h)$, so $F(g)=F(h)$, so $g=h$
 \item Exercise: show that $\varphi: G\to H$ is an epi in $\Gra$ iff
 $\varphi_V$ and $\varphi_E$ are epis in $\Set$   
 \item Not surprisingly, epis have the dual properties of monos
-\item Example: if $f$ and $g$ epis, then  $f^{op}$ and $g^{op}$ are monos,
-so $(f;g)^{op}=g^{op} ; f^{op}$ mono, so $f;g$ epi
+\item Example: if $f$ and $g$ are epis, then  $f^{op}$ and $g^{op}$ are monos,
+so $(f;g)^{op}=g^{op} ; f^{op}$ is mono, so $f;g$ is epi
 \item Exercise: prove that $g$ is epi if $f;g$ is epi
  \end{itemize}
 
  }
 
+\frame
+  {   
+    \frametitle{Split monos and epis}\label{Ch4:SplitMonEp}
+
+ \begin{itemize}[<+->]
+\item For $f:A\to B$ and $g:B\to A$ in a given catergory $\CC$,
+if $f;g=id_A$, then $f$ is mono and $g$ is epi
+\item Proof: from previous results, since $id_A$ is both epi and mono
+\item Definition: $f$ is a \emph{split} mono if $f;g=id_A$ for some $g$
+\item Definition: $g$ is a \emph{split} epi if $f;g=id_A$ for some $f$
+\item In $\Set$, every epi is split epi (equivalent to the Axiom of Choice)
+\item Example: if $f$ and $g$ are epis, then  $f^{op}$ and $g^{op}$ are monos,
+so $(f;g)^{op}=g^{op} ; f^{op}$ is mono, so $f;g$ is epi
+\item Exercise: prove that $g$ is epi if $f;g$ is epi
+ \end{itemize}
+
+ }
+
+
 \subsection{4.3 Special objects}
  
+\frame
+  {   
+    \frametitle{Initial objects}\label{Ch4:InitialObj}
+
+ \begin{itemize}[<+->]
+\item object $i$ is initial in category $\CC$ if $\CC(i,x)$ a singleton for all objects $x$ of $\CC$
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Final objects}\label{Ch4:FinalObj}
+
+ \begin{itemize}[<+->]
+\item object $f$ is final in category $\CC$ if $\CC(x,f)$ a singleton for all objects $x$ of $\CC$
+ \end{itemize}
+
+ }
+
 
 \frame
   {   
