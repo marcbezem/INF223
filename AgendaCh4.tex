@@ -117,7 +117,7 @@ then there is a unique $h: T\to B$ such that $f;h=g$ ($h$ blurs the  nuances
 that $f$ sees but not $g$)
 \begin{tikzcd}[ampersand replacement=\&]
 B \&  \arrow[swap]{l}{g} \arrow{r}{f} A  \& T \arrow[swap, bend left]{ll}{h}
-\end{tikzcd} NB $T$ isomorph with $A/ker(f)$ in $\Set$
+\end{tikzcd} NB $T$ isomorphic to $A/ker(f)$ in $\Set$
 \item Proof uses the Axiom of Choice: for $t\in T$, 
 pick $a$ with $f(a)=t$ and define $h(t)=g(a)$, independent of choice of $a$
 \item Universal property of quotients: if $\simeq$ is an equivalence relation on $A$,
@@ -135,7 +135,7 @@ B \&  \arrow[swap]{l}{f} \arrow{r}{[\_]} A  \& A/{\simeq} \arrow[swap, bend left
     \frametitle{More examples}\label{Ch4:EqMorExa}
 
  \begin{itemize}[<+->]
-\item Classic: $(j,k)\simeq(m,n)$ iff $j+n = m+k$ gives $\zet=\nat/{\simeq}$
+\item Classic: $(j,k)\simeq(m,n)$ iff $j+n = m+k$ gives $\zet=(\nat\times\nat)/{\simeq}$
 \item Logical equivalence
 \item Isomorphy of objects of a category $\CC$ is an equivalence
 \item Isomorphy of categories is an equivalence
@@ -194,7 +194,7 @@ for a different reason as in the previous point
 \item Proofs: by `right' cancelling  and diagrammatic reasoning in
 \[
 \begin{tikzcd}[ampersand replacement=\&]
-X \arrow[bend left]{r}{g}\arrow[bend right]{r}{h} \& 
+X \arrow[bend left]{r}{h}\arrow[bend right]{r}{h'} \& 
 A \arrow{r}{f}\& B \arrow{r}{g} \& C
 \end{tikzcd}
 \]
@@ -204,7 +204,7 @@ maps $\varphi_V: G_V\to H_V$ and $\varphi_E: G_E\to H_E$ are monos in $\Set$
     \item if $\varphi_V,\varphi_E$ injective, and $\psi_x,\psi_y: X\to G$ in $\Gra$
 with $\psi_x;\varphi = \psi_y;\varphi$, then we reason $(\__E,\__V)$-wise in $\Set$
     \item if $\varphi$ is mono, use the reasoning pattern  of the previous
-slide with $X=(\set{0},\emptyset,\emptyset,\emptyset)$ for 
+slide with $X=(\set{0},\emptyset,...)$ for 
 $\varphi_V$ and $X=gr({\cdot}{\to}{\cdot})$ for $\varphi_E$
 \end{itemize}
 \item Similar result for functors $F: \CC\to\DD$ in $\Cat$ (exercise)
@@ -218,8 +218,8 @@ $\varphi_V$ and $X=gr({\cdot}{\to}{\cdot})$ for $\varphi_E$
 
  \begin{itemize}[<+->]
 \item How would a monomorhism in $\Rel$ look like?
-\item 
-If
+\item Recall $\Rel$ is the category of sets with relations as morphisms
+\item $R$ mono: if
 \begin{tikzcd}[ampersand replacement=\&]
 X \arrow[bend left]{r}{S}\arrow[bend right]{r}{T} \& 
 A \arrow{r}{R}\& B
@@ -228,16 +228,16 @@ commutes, then $S=T$
 \item Recall  $\rho_R : A\to \powset{B}$, 
 defined by $\rho_R(a) = \set{b\in B\mid R(a,b)}$,
 in fact $\Rel$ and $\Mult$ are isomorphic in $\Cat$ (exercise)
-\item Define $P_R : \powset{A}\to \powset{B}$ by $P_R(X) = \cup\set{\rho_R(x) \mid x\in X}$
+\item Define $P_R : \powset{A}\to \powset{B}$ by $P_R(Z) = \cup\set{\rho_R(z) \mid z\in Z}$
 %for all $X\subseteq A$
 \item We have: $R$ is mono iff  $P_R : \powset{A}\to \powset{B}$ injective
  \begin{itemize}
     \item if $P_R$ injective, $S,T: X\to R$ in $\Rel$ with $S;R = T;R$, 
-then for all $x\in X$, $P_R(\rho_S(x)) = P_R(\rho_T(x))$, so $\rho_S(x) = \rho_T(x)$ %, so $S=T$
+then for all $x\in X$, $P_R(\rho_S(x)) = P_R(\rho_T(x))$, so $\rho_S(x) = \rho_T(x)$, so $S=T$
     \item if $P_R$ is mono, $A_1,A_2\subseteq A$ with $P_R(A_1)=P_R(A_2)$,
 find the right $X$ and $S_1,S_2: X\to A$ to prove $A_1=A_2$ (exercise)
 \end{itemize}
-\item 
+
  \end{itemize}
 
  }
@@ -250,7 +250,7 @@ find the right $X$ and $S_1,S_2: X\to A$ to prove $A_1=A_2$ (exercise)
 \item Given a category $\CC$ and objects $A,B$, a morphism $f: A\to B$ is an
 \emph{epimorphism} or \emph{epi} if $f^{op}: B\to A$ is a mono in $\CC^{op}$
 \item An epimorphism is the categorical generalization of an surjective map in $\Set$
-({\color{red}`injective map' in $\Set^{op}$})
+({\color{red}`injective pam' in $\Set^{op}$})
 \item Rather than stopping here, we give the dual diagram:
 for all objects $X$ and morphisms $g,h: A\to X$, we have $g=h$ if  
 \begin{tikzcd}[ampersand replacement=\&]
@@ -344,17 +344,54 @@ so $(f;g)^{op}=g^{op} ; f^{op}$ is mono, so $f;g$ is epi
     \frametitle{Initial objects}\label{Ch4:InitialObj}
 
  \begin{itemize}[<+->]
-\item object $i$ is initial in category $\CC$ if $\CC(i,x)$ a singleton for all objects $x$ of $\CC$
- \end{itemize}
+\item object $I$ of category $\CC$ is \emph{initial}  
+if $\CC(I,X)$ a singleton for all objects $X$ of $\CC$, 
+notation $\CC({\color{red}I},X)=\set{{\color{red}0_X}}$ with $0_X: I\to X$
+\item Examples of initial objects: 
+ \begin{itemize}
+\item $\emptyset$ in $\Set$, 
+with $\Set(\emptyset,A)=\set{in_{\emptyset,A}}$ %for any $A$
+\item $\emptyset$ in $\Rel$ and $\Mult$ as well, 
+with $\Rel(\emptyset,A) = \set{\emptyset} $ (why?) 
+and $ \Mult(\emptyset,A) = \set{in_{\emptyset,\powset A}}$
+\item$(\emptyset,\emptyset,id_{\emptyset},id_{\emptyset})$
+in $\Gra$, the unit monoid in $\Mon$, the empty category in $\Cat$, etc.
+ \end{itemize} 
+\item LEM if $0$ is initial in $\CC$, then $0_0 = id_0$, and $0_X;f = 0_Y$ for 
+all $f: X\to Y$, $0_X;f = id_0$ if $Y=0$,
+and $A\simeq 0$ iff $A$ is
+initial in $\CC$, for all $A$
+\item LEM initiality of objects is preserved by isomorphisms and
+equivalences of categories
+\item Exercise: proof the lemmas above
+\end{itemize}
 
  }
 
 \frame
   {   
-    \frametitle{Final objects}\label{Ch4:FinalObj}
+    \frametitle{Final objects, the dual notion of initial object}\label{Ch4:FinalObj}
 
  \begin{itemize}[<+->]
-\item object $f$ is final in category $\CC$ if $\CC(x,f)$ a singleton for all objects $x$ of $\CC$
+\item object $F$ of category $\CC$ is \emph{final} 
+if $\CC(X,F)$ a singleton for all objects $X$ of $\CC$, 
+notation $\CC(X,{\color{red}F})=\set{{\color{red}1_X}}$, with $1_X : X\to F$
+\item Examples of final objects: 
+ \begin{itemize}
+\item any singleton set in $\Set$, 
+with, e.g., $\Set(A,\set{0})=\set{a\mapsto 0}$ %for any $A$
+\item surprise: $\emptyset$ in $\Rel$ and $\Mult$ (why?), 
+with $\Rel(A,\emptyset) = \set{\emptyset} $ (why?) 
+and $ \Mult(A,\emptyset) = \set{a\mapsto \emptyset}$
+\item$(\set{0},\set{0},id_{\set{0}},id_{\set{0}})$
+in $\Gra$, the unit monoid in $\Mon$ (why?), which is also initial in $\Cat$ (why?), etc.
+ \end{itemize} 
+\item LEM if $1$ is final in $\CC$, then $1_1 = id_1$, 
+and $f;1_Y = 1_X$ for all $f: X\to Y$, $f;1_Y = id_1$ if $X=1$,
+and $A\simeq 1$ iff $A$ is final in $\CC$
+\item LEM finality of objects is preserved by isomorphisms and
+equivalences of categories
+\item Exercise: proof the lemmas above
  \end{itemize}
 
  }
