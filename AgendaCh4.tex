@@ -54,7 +54,7 @@
     \frametitle{Equivalences}\label{Ch4:Eqvs}
 
  \begin{itemize}[<+->]
-\item One method of abstraction: make equality coarser, by making
+\item Important method of abstraction: make equality coarser, by making
 some elements `equal' that were not equal before
 \item Such a new `equality' called \emph{equivalence} should have some important 
 properties that any equality relations has: reflexivity, symmetry and transitivity 
@@ -65,12 +65,12 @@ properties that any equality relations has: reflexivity, symmetry and transitivi
 \item by partitioning $A = \cup_{i\in I} A_i $ in non-empty, disjoint, $I$-indexed $A_i$
 \item by defining a (typing) map $f: A\to T$ to some set $T$
    \end{enumerate}
-\item These three ways are logically equivalent ($\approx$ MNF130): 
+\item These three ways are logically equivalent (cf.\ MNF130): 
    \begin{enumerate}[<+->]
 \item $[a]_\simeq = \set{x\in A\mid a\simeq x}$, 
 $A/{\simeq}=\set{[a]_\simeq \mid a\in A}$, $[\_] : A \to A/{\simeq}$
-\item $a\simeq a' $ iff $a,a' \in A_i$ is refsymtra, and $I = A/{\simeq}$, $A_i = i$
-\item $a\simeq a' $ iff $f(a)=f(a')$ is refsymtra, and  $T = A/{\simeq}$, $f=[\_]$
+\item $a\simeq a' $ iff $a,a' \in A_i$ is refsymtra; conversely, $I = A/{\simeq}$, $A_i = i$
+\item $a\simeq a' $ iff $f(a)=f(a')$ is refsymtra; conv-ly,  $T = A/{\simeq}$, $f=[\_]$
    \end{enumerate}
 \item If $f$ in 3 is surjective, the equivalence classes are the preimages
  \end{itemize}
@@ -84,21 +84,21 @@ $A/{\simeq}=\set{[a]_\simeq \mid a\in A}$, $[\_] : A \to A/{\simeq}$
  \begin{itemize}[<+->]
 \item Let $\zet$ be the set of integers and $k\in\zet$, $k>0$
 \item We define $=_k$, equality modulo $k$ :
-   \begin{itemize}[<+->]
+   \begin{enumerate}[<+->]
 \item directly, $x =_k y$ iff $x-y$ is a multiple of $k$
 \item partitioning $\zet = \cup_{i\in \set{0,...,k-1}} \zet_i $, $\zet_i = \set{kz+i \mid z\in\zet}$
 \item by defining  $m_k: \zet\to \set{0,...,k-1}$, $m_k(z) = (z \mod k)$ 
-   \end{itemize}
+   \end{enumerate}
 \item Q: which operations/relations carry over from $\zet$ to $\zet/{=_k}$?
 \item A: only those that are \emph{invariant} under ${=_k}$, i.e., are
-independent of the choice of representative:
+independent of the choice of representative of a class
    \begin{itemize}[<+->]
 \item for function $f$:  $f(z) = f(z')$ if $z =_k z'$ 
 \item for relation $R$:  $R(z,u) \iff R(z',u')$    if $z =_k z'$ and $u =_k u'$
 \item similarly for other arities
    \end{itemize}
 \item Example: \emph{modulo arithmetic} (addition, multiplication)
-\item {\color{red}NB}: $2^0 = 1 \neq_3 8 = 2^3$, whereas $0 =_3 3$
+\item {\color{red}NB}: $2^0 = 1 \neq_3 8 = 2^3$, whereas $0 =_3 3$ (no base 2 exp mod 3)
  \end{itemize}
 
  }
@@ -111,13 +111,21 @@ independent of the choice of representative:
 \item The map $[\_] : A\to A/{\simeq}$ is called the \emph{quotient} map (`class of')
 \item The equivalence relation defined by $f(a)=f(a')$  is called the \emph{kernel} of $f:A\to T$,
  denoted $ker(f)$
-\item Map Theorem: if $f:A\to T$ is surjective and $g:A\to S$ is such that $ker(f)\subseteq ker(g)$,
-then there is a unique $h: T\to S$ such that $f;h=g$ ($h$ blurs the  nuances 
+\item Map Theorem: if $f:A\to T$ is surjective and $g:A\to B$ is 
+such that $ker(f)\subseteq ker(g)$,
+then there is a unique $h: T\to B$ such that $f;h=g$ ($h$ blurs the  nuances 
 that $f$ sees but not $g$)
+\begin{tikzcd}[ampersand replacement=\&]
+B \&  \arrow[swap]{l}{g} \arrow{r}{f} A  \& T \arrow[swap, bend left]{ll}{h}
+\end{tikzcd} NB $T$ isomorph with $A/ker(f)$ in $\Set$
+\item Proof uses the Axiom of Choice: for $t\in T$, 
+pick $a$ with $f(a)=t$ and define $h(t)=g(a)$, independent of choice of $a$
 \item Universal property of quotients: if $\simeq$ is an equivalence relation on $A$,
-then every $A\to B$  satifying $f(a)=f(a')$ for all $a\simeq a'$ factors uniquely
-through $[\_]:  A\to A/{\simeq}$, i.e., there is a unique $g: (A/{\simeq})\to B$ such
-that $f(a) = g([a])$ for all $a\in A$ (by Map Theorem since $[\_]$ is surjective)
+then for every $f: A\to B$  satifying $f(a)=f(a')$ for all $a\simeq a'$,  there exists a unique
+$g: (A/{\simeq})\to B$ such that $g([a]) = f(a)$ for all $a\in A$, i.e., 
+\begin{tikzcd}[ampersand replacement=\&]
+B \&  \arrow[swap]{l}{f} \arrow{r}{[\_]} A  \& A/{\simeq} \arrow[swap, bend left]{ll}{g}
+\end{tikzcd}
  \end{itemize}
 
  }
@@ -163,11 +171,11 @@ A \arrow{r}{f}\& B
     \item if $f$ mono and $f(a)=f(a')$, then 
 for constant functions $c_a,c_{a'} : X\to A$,
  \begin{tikzcd}[ampersand replacement=\&]
-X \arrow[bend left]{r}{c_a}\arrow[swap, bend right]{r}{c_{a'}} \& 
+X \arrow[bend left]{r}{c_a}\arrow[bend right]{r}{c_{a'}} \& 
 A \arrow{r}{f}\& B
 \end{tikzcd}
 commutes, so $c_{a}=c_{a'}$ which implies $c_{a}(x)=c_{a'}(x)$ for all $x\in X$, so $a=a'$
-{\color{red}provided we have $x\in X $ (important proviso)}. Take, e.g., $X=\set{0}$.
+{\color{red}provided we have an $x\in X $ (important proviso)}. Take, e.g., $X=\set{0}$.
 \end{itemize}
  \end{itemize}
 
@@ -178,7 +186,7 @@ commutes, so $c_{a}=c_{a'}$ which implies $c_{a}(x)=c_{a'}(x)$ for all $x\in X$,
     \frametitle{More on monos}\label{Ch4:Moronmonos}
 
  \begin{itemize}[<+->]
-\item In a preorder category (such as $\Incl$) all morphisms are monos
+\item In preorder categories (such as $\Incl$) all morphisms are monos
 \item In the category of sets with injections all morphisms are monos,
 for a different reason as in the previous point
 \item If $f:A\to B$ and $g:B\to C$ are monos, then so is $f;g$
@@ -194,9 +202,10 @@ A \arrow{r}{f}\& B \arrow{r}{g} \& C
 maps $\varphi_V: G_V\to H_V$ and $\varphi_E: G_E\to H_E$ are monos in $\Set$
  \begin{itemize}
     \item if $\varphi_V,\varphi_E$ injective, and $\psi_x,\psi_y: X\to G$ in $\Gra$
-with $\psi_x;\varphi = \psi_y;\varphi$, then we reason $(\__E,\__V)$-wise $\Set$
+with $\psi_x;\varphi = \psi_y;\varphi$, then we reason $(\__E,\__V)$-wise in $\Set$
     \item if $\varphi$ is mono, use the reasoning pattern  of the previous
-slide with $X=gr(\bfsf{1\!\!1})$ for $\varphi_V$ and $X=gr({\cdot}{\to}{\cdot})$ for $\varphi_E$
+slide with $X=(\set{0},\emptyset,\emptyset,\emptyset)$ for 
+$\varphi_V$ and $X=gr({\cdot}{\to}{\cdot})$ for $\varphi_E$
 \end{itemize}
 \item Similar result for functors $F: \CC\to\DD$ in $\Cat$ (exercise)
  \end{itemize}
@@ -276,13 +285,12 @@ for $A\subseteq B$, $\chi_A (b) = T$ if $b\in A$ and $\chi_A (b) = F$ otherwise
 out \arrow[loop left]{}{oo} \arrow[bend left]{r}{oi} \& 
 in \arrow[bend left]{l}{io} \arrow[loop right,out = 15, looseness=30]{}{ii} \arrow[loop right,looseness=6]{}{out}
 \end{tikzcd} (why $in$, $out$, $io$, etc ?)
-\item Let $\varphi: G \to H$ in $\Gra$ be epi. Now:
+\item Let $\varphi: G \to H$ in $\Gra$ be epi. Now define:
  \begin{itemize}
-    \item define $\psi : H\to SGC$ constant $in$ on nodes and $ii$ on arrows
-    \item define $\xi : H\to SGC$ $in/out$ on nodes in/out $\varphi$'s image,
+    \item $\psi : H\to SGC$ constant $in$ on nodes and $ii$ on arrows
+    \item $\xi : H\to SGC$ $in/out$ on nodes in/out $\varphi$'s image,
      and $oo,io,oi$ on edges if enforced by  $\xi_V$, and $ii/out$ if the edge 
-     is in/out $\varphi$'s image
-    \item Clearly $\varphi;\psi=\varphi;\xi$, so $\psi=\xi$.
+     is in/out $\varphi$'s image. Clearly $\varphi;\psi=\varphi;\xi$, so $\psi=\xi$.
 \end{itemize}
 It follows that $\varphi_V$ and  $\varphi_E$ are surjective in $\Set$; converse easy.
  \end{itemize}
