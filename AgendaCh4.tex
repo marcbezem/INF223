@@ -323,15 +323,15 @@ so $(f;g)^{op}=g^{op} ; f^{op}$ is mono, so $f;g$ is epi
     \frametitle{Split monos and epis}\label{Ch4:SplitMonEp}
 
  \begin{itemize}[<+->]
-\item For $f:A\to B$ and $g:B\to A$ in a given catergory $\CC$,
+\item For $f:A\to B$ and $g:B\to A$ in a given category $\CC$,
 if $f;g=id_A$, then $f$ is mono and $g$ is epi
 \item Proof: from previous results, since $id_A$ is both epi and mono
 \item Definition: $f$ is a \emph{split} mono if $f;g=id_A$ for some $g$
 \item Definition: $g$ is a \emph{split} epi if $f;g=id_A$ for some $f$
 \item In $\Set$, every epi is split epi (equivalent to the Axiom of Choice)
-\item Example: if $f$ and $g$ are epis, then  $f^{op}$ and $g^{op}$ are monos,
-so $(f;g)^{op}=g^{op} ; f^{op}$ is mono, so $f;g$ is epi
-\item Exercise: prove that $g$ is epi if $f;g$ is epi
+\item If $f:A\to B$ is an iso with inverse $g:B\to A$, then both $f$ and $g$ are
+both split mono and split epi
+\item Proof: use that $f;g = id_A$  and $g;f = id_B$
  \end{itemize}
 
  }
@@ -384,7 +384,8 @@ with, e.g., $\Set(A,\set{0})=\set{a\mapsto 0}$ %for any $A$
 with $\Rel(A,\emptyset) = \set{\emptyset} $ (why?) 
 and $ \Mult(A,\emptyset) = \set{a\mapsto \emptyset}$
 \item$(\set{0},\set{0},id_{\set{0}},id_{\set{0}})$
-in $\Gra$, the unit monoid in $\Mon$ (why?), which is also initial in $\Cat$ (why?), etc.
+in $\Gra$, the unit monoid in $\Mon$ (surprise, why?), 
+which is also final in $\Cat$ (why?), etc.
  \end{itemize} 
 \item LEM if $1$ is final in $\CC$, then $1_1 = id_1$ 
 and $f;1_Y = 1_X$ for all $f: X\to Y$, $f;1_Y = id_1$ if $X=1$,
@@ -393,6 +394,166 @@ and $F\simeq 1$ iff $F$ is final in $\CC$
 equivalences of categories
 \item Exercise: prove the lemmas above
  \end{itemize}
+
+ }
+
+\subsection{4.4 Universal constructions}
+ 
+\frame
+  {   
+    \frametitle{Universal properties}\label{Ch4:UnivProp}
+
+ \begin{itemize}[<+->]
+\item The definition "object $I$ of category $\CC$ is \emph{initial}  
+if for all objects $X$ of $\CC$ there is a unique morphism $I\to X$" characterizes  
+initial objects up to unique isomorphism by what is called a \emph{universal property}
+\item One can say it is a universal construction of arity  0 (no input)
+\item Now: two universal constructions of arity 2 (two inputs)
+\begin{itemize}
+    \item sum (or coproduct), generalising disjoint sum of sets
+    \item product, generalising cartesian product of sets
+ \end{itemize}
+They are each other's dual, and we do the diagrams first %(next slide)
+\item Seen already (not in an arbitrary category):
+\begin{itemize}
+    \item a universal property of lists
+    \item a universal property of quotients
+ \end{itemize}
+\end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Sum and product}\label{Ch4:SumProd}
+
+ \begin{itemize}[<+->]
+\item Diagrams for sum (coproduct) and product of given objects $A$ and $B$
+in an arbitrary category $\CC$ :
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_x}\&
+C\arrow{d}[description]{\exists!k} \& 
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_y} \&
+A \&
+C\arrow[swap]{l}{\pi_1} \arrow{r}{\pi_2}\&
+B\\
+\& X\&\& \&
+X\arrow{ul}{f_x}\arrow{u}[description]{\exists!k} \arrow[swap]{ur}{f_y}
+\end{tikzcd}
+\]
+\item Sum in $\CC$: a co-span $A\stackrel{\kappa_1}{\to} C \stackrel{\kappa_2}{\leftarrow}B$ 
+is called a \emph{sum} of $A$ and $B$ 
+if for any co-span 
+$A\stackrel{f_x}{\to} X \stackrel{f_y}{\leftarrow}B$ 
+there is a unique morphism $k: C\to X$
+such that $f_x = \kappa_1;k$ and $f_y = \kappa_2;k$
+
+\item Product in $\CC$: a span $A\stackrel{\pi_1}{\leftarrow} C \stackrel{\pi_2}{\to}B$ 
+is called a \emph{product} of $A$ and $B$ if for any span 
+$A\stackrel{f_x}{\leftarrow} X \stackrel{f_y}{\to}B$ 
+there is a unique morphism $k: X\to C$
+such that $f_x = k;\pi_1$ and $f_y = k;\pi_2$
+
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Examples of sums}\label{Ch4:SumExa}
+
+% \begin{itemize}[<+->]
+%\item 
+In the category $\Set$, the co-span 
+$A\stackrel{\kappa_1}{\to} A\uplus B \stackrel{\kappa_2}{\leftarrow}B$,
+with $\kappa_1(a) = (a,1)$ and $\kappa_2(b) = (b,2)$ has the universal property
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_1}\&
+A\uplus B\arrow{d}[description]{\exists!k} \& 
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_2} \\
+\& X\&
+\end{tikzcd}
+by $k(p) =\left\{\begin{array}{ll} f_1(a) & \text{if $p=(a,1)$}\\f_2(b) &  \text{if $p=(b,2)$}\end{array}\right.$\\\vspace*{0.3cm}
+%\end{itemize}
+In the category $\Rel$, the co-span 
+$A\stackrel{\kappa_1}{\to} A\uplus B \stackrel{\kappa_2}{\leftarrow}B$,
+with (relation)
+$\kappa_1 = \set{(a,(a,1))\mid a\in A}$ and $\kappa_2 = ...$  has the universal property
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{R_1}\&
+A\uplus B\arrow{d}[description]{\exists!K} \& 
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{R_2} \\
+\& X\&
+\end{tikzcd}
+$K=\set{((c,i),x ) \mid i\in\set{1,2}, R_i(c,x)}$ %iff  $\left\{\begin{array}{ll} R_x(a,q) & \text{if $p=(a,1)$}\\R_y(b,q) &  \text{if $p=(b,2)$}\end{array}\right.$
+ }
+
+\frame
+  {   
+    \frametitle{More examples of sums}\label{Ch4:MoreSums}
+
+In the category $\Incl$, the preorder category of sets with inclusions,
+the co-span 
+$A\stackrel{\kappa_1}{\to} A\cup B \stackrel{\kappa_2}{\leftarrow}B$,
+with $\kappa_1= in_{A,A\cup B})$ and $\kappa_2= in_{B,A\cup B})$ has the universal property
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_1}\&
+A\cup B\arrow{d}[description]{\exists!k} \& 
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_2} \\
+\& X\&
+\end{tikzcd}
+by $k =  in_{A\cup B,X}$, since we have $A\cup B\subseteq X$ when
+$A\subseteq X$ and $B\subseteq X$.
+\\\vspace*{0.2cm}
+This example show how important the morphisms are: $\Incl$
+and $\Set$ have different morphisms, and even though they have 
+the same objects, the sums are different.
+\\\vspace*{0.2cm}
+Not every preorder category  has sums, since sums are 
+\emph{least upper bounds}, and they need not exist.
+For example, $\bfsf{2\!\!2}$ has sums $1+1 = 1$,
+$2+2=2$, but no sum $1+2$ (no lub of $1$ and $2$).
+
+ }
+
+\frame
+  {   
+    \frametitle{Uniqueness of sums}\label{Ch4:SumUnique}
+
+ %\begin{itemize}[<+->]
+%\item 
+If also the co-span $A\stackrel{f_x}{\to} X \stackrel{f_y}{\leftarrow}B$
+is a sum we have:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_x}\&
+C\arrow{d}[description]{\exists!k} \& 
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_y} \&
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_x}\&
+C \& 
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_y} \\
+\& X\&\& \&
+X\arrow{u}[description]{\exists!j}
+\end{tikzcd}
+\]
+and hence $j;k = id_X$ and $k;j = id_C$ by uniqueness in: % the outer diagrams:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+\& X\arrow{d}[description]{j}\&\& \&
+C\arrow{d}[description]{k}\\
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_x} \arrow{ur}{f_x}\&
+C\arrow{d}[description]{k} \& 
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_y} \arrow[swap]{ul}{f_y}\&
+A \arrow{ru}{\kappa_1} \arrow{r}{f_x} \arrow[swap]{dr}{\kappa_1}\&
+X \arrow{d}[description]{j}\& 
+B \arrow[swap]{l}{f_y}\arrow{dl}{\kappa_2} \arrow[swap]{ul}{\kappa_2}\\
+\& X\&\& \&
+C%\arrow{u}[description]{\exists!j}
+\end{tikzcd}
+\]
+so $X$ and $C$ are isomorphic in $\CC$ (if fact the co-spans are!)
+ %\end{itemize}
 
  }
 
