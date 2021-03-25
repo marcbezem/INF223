@@ -413,12 +413,13 @@ initial objects up to unique isomorphism by what is called a \emph{universal pro
     \item sum (or coproduct), generalising disjoint sum of sets
     \item product, generalising cartesian product of sets
  \end{itemize}
-They are each other's dual, and we do the diagrams first %(next slide)
-\item Seen already (not in an arbitrary category):
+They are each other's dual, and we show the diagrams next %(next slide)
+\item Seen already (in $Set$):
 \begin{itemize}
     \item a universal property of lists
     \item a universal property of quotients
  \end{itemize}
+\item NB all are properties that a category may or may not have!
 \end{itemize}
 
  }
@@ -432,28 +433,28 @@ They are each other's dual, and we do the diagrams first %(next slide)
 in an arbitrary category $\CC$ :
 \[
 \begin{tikzcd}[ampersand replacement=\&]
-A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_x}\&
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_1}\&
 C\arrow{d}[description]{\exists!k} \& 
-B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_y} \&
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_2} \&
 A \&
 C\arrow[swap]{l}{\pi_1} \arrow{r}{\pi_2}\&
 B\\
 \& X\&\& \&
-X\arrow{ul}{f_x}\arrow{u}[description]{\exists!k} \arrow[swap]{ur}{f_y}
+X\arrow{ul}{f_1}\arrow{u}[description]{\exists!k} \arrow[swap]{ur}{f_2}
 \end{tikzcd}
 \]
 \item Sum in $\CC$: a co-span $A\stackrel{\kappa_1}{\to} C \stackrel{\kappa_2}{\leftarrow}B$ 
 is called a \emph{sum} of $A$ and $B$ 
 if for any co-span 
-$A\stackrel{f_x}{\to} X \stackrel{f_y}{\leftarrow}B$ 
+$A\stackrel{f_1}{\to} X \stackrel{f_2}{\leftarrow}B$ 
 there is a unique morphism $k: C\to X$
-such that $f_x = \kappa_1;k$ and $f_y = \kappa_2;k$
+such that $f_1 = \kappa_1;k$ and $f_2 = \kappa_2;k$
 
 \item Product in $\CC$: a span $A\stackrel{\pi_1}{\leftarrow} C \stackrel{\pi_2}{\to}B$ 
 is called a \emph{product} of $A$ and $B$ if for any span 
-$A\stackrel{f_x}{\leftarrow} X \stackrel{f_y}{\to}B$ 
+$A\stackrel{f_1}{\leftarrow} X \stackrel{f_2}{\to}B$ 
 there is a unique morphism $k: X\to C$
-such that $f_x = k;\pi_1$ and $f_y = k;\pi_2$
+such that $f_1 = k;\pi_1$ and $f_2 = k;\pi_2$
 
  \end{itemize}
 
@@ -478,7 +479,7 @@ by $k(p) =\left\{\begin{array}{ll} f_1(a) & \text{if $p=(a,1)$}\\f_2(b) &  \text
 %\end{itemize}
 In the category $\Rel$, the co-span 
 $A\stackrel{\kappa_1}{\to} A\uplus B \stackrel{\kappa_2}{\leftarrow}B$,
-with (relation)
+with (relations)
 $\kappa_1 = \set{(a,(a,1))\mid a\in A}$ and $\kappa_2 = ...$  has the universal property
 \begin{tikzcd}[ampersand replacement=\&]
 A \arrow{r}{\kappa_1} \arrow[swap]{dr}{R_1}\&
@@ -496,7 +497,7 @@ $K=\set{((c,i),x ) \mid i\in\set{1,2}, R_i(c,x)}$ %iff  $\left\{\begin{array}{ll
 In the category $\Incl$, the preorder category of sets with inclusions,
 the co-span 
 $A\stackrel{\kappa_1}{\to} A\cup B \stackrel{\kappa_2}{\leftarrow}B$,
-with $\kappa_1= in_{A,A\cup B})$ and $\kappa_2= in_{B,A\cup B})$ has the universal property
+with $\kappa_1= in_{A,A\cup B}$ and $\kappa_2= in_{B,A\cup B}$ has the universal property
 \begin{tikzcd}[ampersand replacement=\&]
 A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_1}\&
 A\cup B\arrow{d}[description]{\exists!k} \& 
@@ -506,33 +507,60 @@ B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_2} \\
 by $k =  in_{A\cup B,X}$, since we have $A\cup B\subseteq X$ when
 $A\subseteq X$ and $B\subseteq X$.
 \\\vspace*{0.2cm}
-This example show how important the morphisms are: $\Incl$
-and $\Set$ have different morphisms, and even though they have 
-the same objects, the sums are different.
+This example shows how important the morphisms are: $\Incl$
+and $\Set$ have different sums since the morphisms are different, 
+even though they have the same objects ({\color{red}why not sum $A\uplus B$ in $\Incl$?})
 \\\vspace*{0.2cm}
 Not every preorder category  has sums, since sums are 
 \emph{least upper bounds}, and they need not exist.
 For example, $\bfsf{2\!\!2}$ has sums $1+1 = 1$,
-$2+2=2$, but no sum $1+2$ (no lub of $1$ and $2$).
+$2+2=2$, but no sum $1+2$ (no lub of $1$ and $2$, {\color{red}why?})
 
  }
 
 \frame
   {   
-    \frametitle{Uniqueness of sums}\label{Ch4:SumUnique}
+    \frametitle{Basic properties of sums}\label{Ch4:SumProp}
+
+ \begin{itemize}[<+->]
+\item Let $A$ and $B$ be objects of a category $\CC$. 
+If their sum exists, we denote it by $A+B$ (leaving the $\kappa_i$ often implicit). 
+The unique morphisms $k:  A+B \to X$ in the universal property are
+called \emph{mediating} morphisms and denoted by $[\_,\_]$
+%as in the diagrams below.
+\item Postcomposition with $g: X\to Y$ gives this:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow{r}{\kappa_1}\arrow{dr}{f_1} \arrow[swap]{ddr}{f_1;g}\&
+A+B\arrow{d}[description]{[f_1,f_2]}\& 
+B \arrow{l}{\kappa_2}\arrow[swap]{dl}{f_2} \arrow{ddl}{f_2;g}\\
+\& X \arrow{d}[description]{g}\\
+\& Y
+\end{tikzcd}
+\]
+\item By uniqueness we get $[f_1;g,f_2;g] = [f_1,f_2] ; g$, {\color{red}why?}
+\item Exercise: show that $[\kappa_1,\kappa_2] = id_{A+B}$
+ \end{itemize}
+
+ }
+
+
+\frame
+  {   
+    \frametitle{Uniqueness of sums up to unique isomorphism}\label{Ch4:SumUnique}
 
  %\begin{itemize}[<+->]
 %\item 
-If also the co-span $A\stackrel{f_x}{\to} X \stackrel{f_y}{\leftarrow}B$
+If also the co-span $A\stackrel{f_1}{\to} X \stackrel{f_2}{\leftarrow}B$
 is a sum we have:
 \[
 \begin{tikzcd}[ampersand replacement=\&]
-A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_x}\&
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_1}\&
 C\arrow{d}[description]{\exists!k} \& 
-B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_y} \&
-A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_x}\&
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_2} \&
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_1}\&
 C \& 
-B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_y} \\
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_2} \\
 \& X\&\& \&
 X\arrow{u}[description]{\exists!j}
 \end{tikzcd}
@@ -542,12 +570,12 @@ and hence $j;k = id_X$ and $k;j = id_C$ by uniqueness in: % the outer diagrams:
 \begin{tikzcd}[ampersand replacement=\&]
 \& X\arrow{d}[description]{j}\&\& \&
 C\arrow{d}[description]{k}\\
-A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_x} \arrow{ur}{f_x}\&
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_1} \arrow{ur}{f_1}\&
 C\arrow{d}[description]{k} \& 
-B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_y} \arrow[swap]{ul}{f_y}\&
-A \arrow{ru}{\kappa_1} \arrow{r}{f_x} \arrow[swap]{dr}{\kappa_1}\&
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_2} \arrow[swap]{ul}{f_2}\&
+A \arrow{ru}{\kappa_1} \arrow{r}{f_1} \arrow[swap]{dr}{\kappa_1}\&
 X \arrow{d}[description]{j}\& 
-B \arrow[swap]{l}{f_y}\arrow{dl}{\kappa_2} \arrow[swap]{ul}{\kappa_2}\\
+B \arrow[swap]{l}{f_2}\arrow{dl}{\kappa_2} \arrow[swap]{ul}{\kappa_2}\\
 \& X\&\& \&
 C%\arrow{u}[description]{\exists!j}
 \end{tikzcd}
@@ -557,6 +585,222 @@ so $X$ and $C$ are isomorphic in $\CC$ (if fact the co-spans are!)
 
  }
 
+\frame
+  {   
+    \frametitle{Advanced properties of sums}\label{Ch4:SumPropAdv}
+
+Sums in the category $\Gra$ are based on sums in $\Set$.
+If $G=(G_V,G_E,sc^G,tg^G)$ and $H=(H_V,H_E,sc^H,tg^H)$,
+then $G+H  = (G_V \uplus H_V,G_E \uplus H_E,sc^G+sc^H,tg^G+tg^H)$,
+where $f_1+f_2 : A_1\uplus B_1 \to B_1+B_2$ is defined case-wise.\\\vspace*{0.3cm}
+
+If category $\CC$ has sums, then so has the interpretation category
+$[G\to\CC]$, for any graph $G$\\\vspace*{0.3cm}
+
+If category $\CC$ has sums, and $T$ is an object of $\CC$, then the slice category
+$\CC/T$ has sums: $(A\uplus B, [f_1,f_2])$ is an object of $\CC/T$,
+the $\kappa_i$ are morphisms, and the universal property holds ({\color{red}why?})
+\\\vspace*{0.3cm}
+Exercise: elaborate the sum $(A,f_1)+(B,f_2)$ in $\CC/T$,
+in particular the universal property given $(X,g)$ and $h_1: (A,f_1)\to(X,g)$,
+$h_2: (B,f_2)\to(X,g)$
+
+
+ }
+
+\frame
+  {   
+    \frametitle{Products}\label{Ch4:Prod}
+
+ \begin{itemize}[<+->]
+\item The product (left) of given objects $A$ and $B$
+in an arbitrary category $\CC$ is the dual of the sum (right):
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+A \&
+C\arrow[swap]{l}{\pi_1} \arrow{r}{\pi_2}\&
+B  \&
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f_1}\&
+C\arrow{d}[description]{\exists!k} \& 
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_2}
+\\
+\& X\arrow{ul}{f_1}\arrow{u}[description]{\exists!k} \arrow[swap]{ur}{f_2}\&\&
+\& X 
+\end{tikzcd}
+\]
+\item All properties of the sum can be dualized to hold for the product
+as well, in particular uniqueness 
+\item If a product exists, 
+we denote it by $A\times B$ (leaving the $\pi_i$ often implicit).
+The unique morphisms $k:  X\to A\times B$ in the universal property are
+called \emph{mediating} morphisms and denoted by $\langle\_,\_\rangle$;
+by uniqueness $\langle\pi_1,\pi_2\rangle= id_{A\times B}$
+
+\item If $A\times B$ exists and $g: Y\to X$,
+then $g;\langle f_1,f_2\rangle = \langle g;f_1,g;f_2\rangle$
+
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Examples of products}\label{Ch4:ProdExa}
+
+% \begin{itemize}[<+->]
+%\item 
+In the category $\Set$, the span 
+$A \stackrel{\pi_1}{\leftarrow} A\times B \stackrel{\pi_2}{\to}  B$,
+with usual $\times$, $\pi_1(a,b) = a$ and $\pi_2(a,b) = b$ has the universal property
+\begin{tikzcd}[ampersand replacement=\&]
+A \&
+A\times B\arrow[swap]{l}{\pi_1} \arrow{r}{\pi_2}\&
+B  \&
+\\
+\& X\arrow{ul}{f_1}\arrow{u}[description]{\exists!k} \arrow[swap]{ur}{f_2}
+\end{tikzcd}
+by $k(x) =(f_1(x),f_2(x))$\\\vspace*{0.2cm}
+%\end{itemize}
+
+In the category $\Incl$, the preorder category of sets with inclusions,
+the span 
+$A \stackrel{\pi_1}{\leftarrow} A\cap B \stackrel{\pi_2}{\to}  B$,
+with $\pi_1= in_{A\cap B,A}$, $\pi_2= in_{A\cap B,B}$ has the universal property
+\begin{tikzcd}[ampersand replacement=\&]
+A \&
+A\cap B\arrow[swap]{l}{\pi_1} \arrow{r}{\pi_2}\&
+B
+\\
+\& X\arrow{ul}{f_1}\arrow{u}[description]{\exists!k} \arrow[swap]{ur}{f_2}
+\end{tikzcd}
+by $k =  in_{X,A\cap B}$, since we have $X \subseteq A\cap B$ when
+$X\subseteq A$ and $X\subseteq B$.
+
+Not every preorder category  has products, since products are 
+\emph{greatest lower bounds}, and they need not exist!
+ }
+
+\frame
+  {   
+    \frametitle{Surprise: products in $\Rel$}\label{Ch4:RelProd}
+
+% \begin{itemize}[<+->]
+%\item
+In the category $\Rel$, the following is {\color{red}plainly wrong: $A\times B$ with
+%the span $A \stackrel{\pi_1}{\leftarrow} A\times B \stackrel{\pi_2}{\to}  B$, with (relations)
+$\pi_1 = \set{((a,b),a)\mid a\in A, b\in B}$, $\pi_2 =  \set{((a,b),b)\mid a\in A, b\in B}$  has the universal property
+\begin{tikzcd}[ampersand replacement=\&]
+A \&
+A\times B\arrow[swap]{l}{\pi_1} \arrow{r}{\pi_2}\&
+B\\
+\& X\arrow{ul}{R_1}\arrow{u}[description]{\exists!K} \arrow[swap]{ur}{R_2}
+\end{tikzcd}
+by
+$K=\set{(x,(a,b)) \mid x\in X, a\in A, b\in B, R_1(x,a), R_2(x,b)}$}
+\\\vspace*{0.2cm}
+Counterexample: $R_1$ empty and $R_2$ not empty! ({\color{red}why?})
+\\\vspace*{0.2cm}
+We could have known better: $\Rel\simeq\Rel^{op}$ with an iso that 
+is the identity on objects. Sums and products are dual, so the objects
+of sum and product in $\Rel$ are the same, $A\uplus B$. A detailed elabora- tion
+of the product in $\Rel$ based on dualisation is in the script.
+\\\vspace*{0.2cm}
+In the category $\Gra$, products use $\times$ of $\Set$ as expected.
+ 
+}
+
+\frame
+  {   
+    \frametitle{Products and sums in slice categories}\label{Ch4:ProdSumSlice}
+
+ \begin{itemize}[<+->]
+\item Let $\CC$ be a category with objects $A,B,T$with sum and product. 
+Now (try to) consider in $\CC/T$:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow{r}{\kappa_1} \arrow[swap]{dr}{f}\&
+A+B\arrow{d}[description]{[f,g]} \& 
+B \arrow[swap]{l}{\kappa_2}\arrow{dl}{g} \&
+A\arrow[swap]{dr}{f} \&
+A\times B\arrow[swap]{l}{\pi_1} \arrow{r}{\pi_2}\arrow{d}{?}\&
+B\arrow{dl}{g}\\
+\& T\&\& \&
+T %\arrow{ul}{f_1} \arrow[swap]{ur}{f_2}
+\end{tikzcd}
+\]
+\item $\kappa_1: (A,f)\to(A+B,[f,ģ])$, $\kappa_2: (B,g)\to(A+B,[f,ģ])$ in $\CC/T$, 
+and we can prove the universal property (exercise)
+\item In the right diagram we are in trouble: 
+take $A=B=\set{1,\pi}$ and $T=\set{\zet,\rea}$
+and $f=g$ the typings $1:\zet, \pi: \rea$. 
+How to type `mixed pairs'  $(1,\pi)$, $(\pi,1)$ ? Throw them out!
+%Impossible to do this compatible with the projections.
+\item NB dualisation does give a product in the co-slice category
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Pullbacks and pushouts}\label{Ch4:PullPush}
+
+ \begin{itemize}[<+->]
+\item Pullbacks and pushouts generalize product and sum so that they become
+compatible with (co-)slices. They are each other's dual and we do pullbacks first.
+Fix a  category $\CC$.
+\item A \emph{pullback} of a co-span
+$A\stackrel{f}{\leftarrow} C \stackrel{g}{\to}B$
+is a span $A\stackrel{\pi_1}{\leftarrow} D \stackrel{\pi_2}{\to}B$ such that 
+for any span 
+$A\stackrel{h_1}{\leftarrow} X \stackrel{h_2}{\to}B$
+such that $f;h_1 = f;h_2$
+there is a unique morphism $k: X\to C$
+such that $h_i = k;\pi_i$. % and $h_2 = k;\pi_2$. 
+In a diagram:
+\begin{tikzcd}[ampersand replacement=\&]
+X\arrow[swap]{ddr}{h_2}\arrow{rrd}{h_1}\arrow{rd}[description]{\exists!k}\\
+\& 
+D \arrow[swap]{r}{\pi_1}\arrow{d}{\pi_2}\&
+A\arrow{d}{f}\\
+\&
+B\arrow{r}{g} \&
+C 
+\end{tikzcd}
+
+\item If such a pullback exists, object $D$ is denoted by $A\times_C B$ 
+% (up to unique isomorphism) 
+and the mediating morphism $k$ as $\langle f,g\rangle_C$
+
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Examples of pullbacks}\label{Ch4:Pullbexa}
+
+ \begin{itemize}[<+->]
+\item If $A\stackrel{f}{\leftarrow} C \stackrel{g}{\to}B$ in $\Set$,
+then the span $A\stackrel{\pi_1}{\leftarrow} D \stackrel{\pi_2}{\to}B$ 
+with $D=\set{(a,b) \in A\times B \mid f(a)=g(b) }$ is a pullback with
+$k(x)=(h_1(x),h_2(x))$ in:
+\begin{tikzcd}[ampersand replacement=\&]
+X\arrow[swap]{ddr}{h_2}\arrow{rrd}{h_1}\arrow{rd}[description]{\exists!k}\\
+\& 
+D \arrow[swap]{r}{\pi_1}\arrow{d}{\pi_2}\&
+A\arrow{d}{f}\\
+\&
+B\arrow{r}{g} \&
+C 
+\end{tikzcd}
+\item If $\CC$ has a terminal 1 and pullbacks, then $A\times_1 B$ is a product
+\item If such a pullback exists, object $D$ is denoted by $A\times_C B$ 
+% (up to unique isomorphism) 
+and the mediating morphism $k$ by $\langle f,g\rangle_C$
+
+ \end{itemize}
+
+ }
 
 \frame
   {   
