@@ -478,13 +478,13 @@ B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_2} \\
 by $k(p) =\left\{\begin{array}{ll} f_1(a) & \text{if $p=(a,1)$}\\f_2(b) &  \text{if $p=(b,2)$}\end{array}\right.$\\\vspace*{0.3cm}
 %\end{itemize}
 In the category $\Rel$, the co-span 
-$A\stackrel{\kappa_1}{\to} A\uplus B \stackrel{\kappa_2}{\leftarrow}B$,
+$A\stackrel{K_1}{\to} A\uplus B \stackrel{K_2}{\leftarrow}B$,
 with (relations)
-$\kappa_1 = \set{(a,(a,1))\mid a\in A}$ and $\kappa_2 = ...$  has the universal property
+$K_1 = \set{(a,(a,1))\mid a\in A}$ and $K_2 = ...$  has the universal property
 \begin{tikzcd}[ampersand replacement=\&]
-A \arrow{r}{\kappa_1} \arrow[swap]{dr}{R_1}\&
+A \arrow{r}{K_1} \arrow[swap]{dr}{R_1}\&
 A\uplus B\arrow{d}[description]{\exists!K} \& 
-B \arrow[swap]{l}{\kappa_2}\arrow{dl}{R_2} \\
+B \arrow[swap]{l}{K_2}\arrow{dl}{R_2} \\
 \& X\&
 \end{tikzcd}
 $K=\set{((c,i),x ) \mid i\in\set{1,2}, R_i(c,x)}$ %iff  $\left\{\begin{array}{ll} R_x(a,q) & \text{if $p=(a,1)$}\\R_y(b,q) &  \text{if $p=(b,2)$}\end{array}\right.$
@@ -533,7 +533,7 @@ called \emph{mediating} morphisms and denoted by $[\_,\_]$
 \begin{tikzcd}[ampersand replacement=\&]
 A \arrow{r}{\kappa_1}\arrow{dr}{f_1} \arrow[swap]{ddr}{f_1;g}\&
 A+B\arrow{d}[description]{[f_1,f_2]}\& 
-B \arrow{l}{\kappa_2}\arrow[swap]{dl}{f_2} \arrow{ddl}{f_2;g}\\
+B \arrow[swap]{l}{\kappa_2}\arrow[swap]{dl}{f_2} \arrow{ddl}{f_2;g}\\
 \& X \arrow{d}[description]{g}\\
 \& Y
 \end{tikzcd}
@@ -591,14 +591,14 @@ so $X$ and $C$ are isomorphic in $\CC$ (if fact the co-spans are!)
 
 Sums in the category $\Gra$ are based on sums in $\Set$.
 If $G=(G_V,G_E,sc^G,tg^G)$ and $H=(H_V,H_E,sc^H,tg^H)$,
-then $G+H  = (G_V \uplus H_V,G_E \uplus H_E,sc^G+sc^H,tg^G+tg^H)$,
-where $f_1+f_2 : A_1\uplus B_1 \to B_1+B_2$ is defined case-wise.\\\vspace*{0.3cm}
+then $G+H  = (G_V \uplus H_V,G_E \uplus H_E,sc^G{+}sc^H,tg^G{+}tg^H)$,
+where (fancy notation) $f_1{+}f_2 : A_1\uplus A_2 \to B_1\uplus B_2$ is defined case-wise.\\\vspace*{0.3cm}
 
 If category $\CC$ has sums, then so has the interpretation category
 $[G\to\CC]$, for any graph $G$\\\vspace*{0.3cm}
 
 If category $\CC$ has sums, and $T$ is an object of $\CC$, then the slice category
-$\CC/T$ has sums: $(A\uplus B, [f_1,f_2])$ is an object of $\CC/T$,
+$\CC/T$ has sums: $(A+B, [f_1,f_2])$ is an object of $\CC/T$,
 the $\kappa_i$ are morphisms, and the universal property holds ({\color{red}why?})
 \\\vspace*{0.3cm}
 Exercise: elaborate the sum $(A,f_1)+(B,f_2)$ in $\CC/T$,
@@ -632,7 +632,7 @@ B \arrow[swap]{l}{\kappa_2}\arrow{dl}{f_2}
 as well, in particular uniqueness 
 \item If a product exists, 
 we denote it by $A\times B$ (leaving the $\pi_i$ often implicit).
-The unique morphisms $k:  X\to A\times B$ in the universal property are
+The unique morphisms $k:  X\to A\times B$ in the universal property are again
 called \emph{mediating} morphisms and denoted by $\langle\_,\_\rangle$;
 by uniqueness $\langle\pi_1,\pi_2\rangle= id_{A\times B}$
 
@@ -700,12 +700,38 @@ $K=\set{(x,(a,b)) \mid x\in X, a\in A, b\in B, R_1(x,a), R_2(x,b)}$}
 \\\vspace*{0.2cm}
 Counterexample: $R_1$ empty and $R_2$ not empty! ({\color{red}why?})
 \\\vspace*{0.2cm}
-We could have known better: $\Rel\simeq\Rel^{op}$ with an iso that 
-is the identity on objects. Sums and products are dual, so the objects
-of sum and product in $\Rel$ are the same, $A\uplus B$. A detailed elabora- tion
-of the product in $\Rel$ based on dualisation is in the script.
-\\\vspace*{0.2cm}
-In the category $\Gra$, products use $\times$ of $\Set$ as expected.
+We could have known better: $\Rel\simeq\Rel^{op}$ with an iso $c$ that 
+is the identity on objects and converses relations. In $\Rel$ we have sum
+$A\stackrel{K_1}{\to} A\uplus B \stackrel{K_2}{\leftarrow}B$
+as on slide \ref{Ch4:SumExa}. Isos preserve sums, so
+we have in $\Rel^{op}$ a sum
+$A\stackrel{K^c_1}{\to} A\uplus B \stackrel{K^c_2}{\leftarrow}B$,
+and hence in $\Rel$ a product with the arrows reversed, which gives
+projection relations $P_1 = K^c_1 = \set{((a,1),a) \mid a\in A}: A\uplus B \to A$
+and likewise $P_2$.
+}
+
+\frame
+  {   
+    \frametitle{More examples of products}\label{Ch4:MorProdExa}
+
+ \begin{itemize}[<+->]
+\item NB in $\Rel$, $\emptyset$ is both initial and final, also since $\Rel\simeq\Rel^{op}$
+\item Although we have given a proof on the previous slide, it is
+instructive to verify the universal property with
+$P_1 = \set{((a,1),a)\mid a\in A}$, $P_2 =  \set{((b,2),b)\mid b\in B}$
+and $K=\set{(x,(a,1)) \mid R_1(x,a)}\cup \set{(x,(b,2)) \mid R_2(x,b)}$
+\begin{tikzcd}[ampersand replacement=\&]
+A \&
+A\uplus B\arrow[swap]{l}{P_1} \arrow{r}{P_2}\&
+B\\
+\& X\arrow{ul}{R_1}\arrow{u}[description]{\exists!K} \arrow[swap]{ur}{R_2}
+\end{tikzcd}
+\item Products in the category $\Gra$ are as expected:
+$G \stackrel{\pi_1}{\leftarrow} G\times H \stackrel{\pi_2}{\to}  H$,
+where $\pi_1 = (\pi_{1,V},\pi_{1,E}) : G\times H \to G$ and $\pi_2: G\times H \to$
+are graph homomorphisms defined by the projections in $\Set$
+\end{itemize}
  
 }
 
@@ -733,7 +759,7 @@ and we can prove the universal property (exercise)
 \item In the right diagram we are in trouble: 
 take $A=B=\set{1,\pi}$ and $T=\set{\zet,\rea}$
 and $f=g$ the typings $1:\zet, \pi: \rea$. 
-How to type `mixed pairs'  $(1,\pi)$, $(\pi,1)$ ? Throw them out!
+How to type `mixed pairs'  $(1,\pi)$, $(\pi,1)$? Not, just throw them out!
 %Impossible to do this compatible with the projections.
 \item NB dualisation does give a product in the co-slice category
  \end{itemize}
@@ -749,13 +775,13 @@ How to type `mixed pairs'  $(1,\pi)$, $(\pi,1)$ ? Throw them out!
 compatible with (co-)slices. They are each other's dual and we do pullbacks first.
 Fix a  category $\CC$.
 \item A \emph{pullback} of a co-span
-$A\stackrel{f}{\leftarrow} C \stackrel{g}{\to}B$
+$A\stackrel{f}{\to} C \stackrel{g}{\leftarrow}B$
 is a span $A\stackrel{\pi_1}{\leftarrow} D \stackrel{\pi_2}{\to}B$ such that 
 for any span 
 $A\stackrel{h_1}{\leftarrow} X \stackrel{h_2}{\to}B$
 such that $f;h_1 = f;h_2$
 there is a unique morphism $k: X\to C$
-such that $h_i = k;\pi_i$. % and $h_2 = k;\pi_2$. 
+such that $h_i = k;\pi_i$  % and $h_2 = k;\pi_2$. 
 In a diagram:
 \begin{tikzcd}[ampersand replacement=\&]
 X\arrow[swap]{ddr}{h_2}\arrow{rrd}{h_1}\arrow{rd}[description]{\exists!k}\\
@@ -793,14 +819,132 @@ A\arrow{d}{f}\\
 B\arrow{r}{g} \&
 C 
 \end{tikzcd}
-\item If $\CC$ has a terminal 1 and pullbacks, then $A\times_1 B$ is a product
-\item If such a pullback exists, object $D$ is denoted by $A\times_C B$ 
-% (up to unique isomorphism) 
-and the mediating morphism $k$ by $\langle f,g\rangle_C$
+\item NB $k$ is well-defined since $f(h_1(x))=g(h_2(x))$ so that $(h_1(x),h_2(x))\in D$,
+ solving the `typing problem' on slide \ref{Ch4:ProdSumSlice}
+\item Pullbacks in $\Gra$ are very much like those in $\Set$: 
+a subgraph of the product graph. This is beautifully elaborated in the script.
+
 
  \end{itemize}
 
  }
+
+\frame
+  {   
+    \frametitle{Monomorphisms characterized by pullback}\label{Ch4:PullbMono}
+
+ \begin{itemize}[<+->]
+\item Recall the definition of a monomorphism $f: A\to B$:
+if
+\begin{tikzcd}[ampersand replacement=\&]
+%1 \arrow[yshift=0.5ex]{r}{y} \& 2, \arrow[yshift=-0.5ex]{l}{z}  \&
+X \arrow[bend left]{r}{g}\arrow[bend right]{r}{h} \& 
+A \arrow{r}{f}\& B
+\end{tikzcd}
+ commutes, then $g=h$ (for all $X,g,h$)
+
+\item This we can say with pullbacks as well:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+X\arrow[swap]{ddr}{h}\arrow{rrd}{g}\arrow{rd}[description]{\exists!k}\\
+\& 
+A \arrow[swap]{r}{id_A}\arrow{d}{id_A}\&
+A\arrow{d}{f}\\
+\&
+A\arrow{r}{f} \&
+B 
+\end{tikzcd}
+\]
+\item So: $f$ is mono iff the pullback of 
+$A\stackrel{f}{\to} B\stackrel{f}{\leftarrow}A$ is
+$A\stackrel{id_A}{\leftarrow} A \stackrel{id_A}{\to}A$
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Kernels and graphs characterized by pullback}\label{Ch4:PullbKer}
+
+ \begin{itemize}[<+->]
+\item Recall the definition of the kernel of $f: A\to B$:
+$ker(f) = \set{(a,a') \in A\times A \mid f(a)=f(a')}$
+
+\item This we can say with pullbacks as well (left diagram):
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+%X\arrow[swap]{ddr}{h_2}\arrow{rrd}{h_1}\arrow{rd}[description]{\exists!k}\\
+\& 
+ker(f) \arrow{r}{\pi_1}\arrow[swap]{d}{\pi_2}\&
+A\arrow{d}{f}\& 
+graph(f) \arrow{r}{\pi_1}\arrow[swap]{d}{\pi_2}\&
+A\arrow{d}{f}\\
+\&
+A\arrow{r}{f} \&
+B 
+\&
+B\arrow{r}{id_B} \&
+B 
+\end{tikzcd}
+\]
+\item So:  
+$A\stackrel{\pi_1}{\leftarrow} ker(f) \stackrel{\pi_2}{\to}A$
+is the pullback of 
+$A\stackrel{f}{\to} B\stackrel{f}{\leftarrow}A$
+\item Also, $graph(f) = \set{(a,b) \in A\times B \mid f(a)=b}$ (right)
+\item This generalises these notions from $\Set$ to arbitrary categories
+
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Properties of pullbacks}\label{Ch4:PullbProp}
+
+ \begin{itemize}[<+->]
+\item Pullbacks are unique up to unique isomorphism
+\item If $\CC$ has 1 and pullbacks, then $A\times_1 B$ is a product
+of $A,B$ 
+\item Any slice category $\CC/T$ has pullbacks if $\CC$ has pullbacks
+\item In any slice category $\CC/T$ the object $(T,id_T)$ is final, so $\CC/T$
+has products if $\CC$ has pullbacks
+\item Pullbacks are also called \emph{fiber products}, products of preimages,
+as in $\Set$ we have $A\times_C B = \cup_{c\in C} (f^-(c) \times g^-(c))$
+(the last $C$ can be replaced by $f(A)\cap f(B)$)
+
+
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Pullback = product + equalizer}\label{Ch4:PullbProdEq}
+
+ \begin{itemize}[<+->]
+\item Given as span $A\stackrel{f}{\to} C\stackrel{g}{\leftarrow}B$ in 
+a category $C$ with products, we get a span
+$A\times B\stackrel{\pi_1;f}{\to} C\stackrel{\pi_2;g}{\leftarrow}A\times B$
+of two parallel morphisms
+\item The pullback can now be obtained if $\CC$ also has equalizers:
+\item Given to parallel morphisms $f,g: A\to B$, an \emph{equalizer}
+consists of an object $E$ and a morphism $m:E\to A$ with $m;f=m;g$
+such that for all objects $X$ and morphism $h:X\to A$ with $h;f=h;g$
+there is a unique morphism $k: X\to E$ such that $k;m = h$. In a diagram:
+\begin{tikzcd}[ampersand replacement=\&]
+X\arrow{dr}{h}\arrow{d}[description]{\exists!k}\\ 
+E \arrow[swap]{r}{m}\&
+A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&B
+\end{tikzcd}
+In $\Set$, %\left\{
+$\begin{array}{ll}E=\set{a\in A\mid f(a)=g(a)}\\m=in_{E,A}\end{array}$
+\item The pullback $A\times_C B$ is then the equalizer of the parallel
+morphisms $\pi_1;f$ and $\pi_2;g$ from $A\times B$ to $C$
+ \end{itemize}
+
+ }
+
 
 \frame
   {   
