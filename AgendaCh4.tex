@@ -729,7 +729,7 @@ B\\
 \end{tikzcd}
 \item Products in the category $\Gra$ are as expected:
 $G \stackrel{\pi_1}{\leftarrow} G\times H \stackrel{\pi_2}{\to}  H$,
-where $\pi_1 = (\pi_{1,V},\pi_{1,E}) : G\times H \to G$ and $\pi_2: G\times H \to$
+where $\pi_1 = (\pi_{1,V},\pi_{1,E}) : G\times H \to G$ and $\pi_2: G\times H \to H$
 are graph homomorphisms defined by the projections in $\Set$
 \end{itemize}
  
@@ -777,12 +777,11 @@ Fix a  category $\CC$.
 \item A \emph{pullback} of a co-span
 $A\stackrel{f}{\to} C \stackrel{g}{\leftarrow}B$
 is a span $A\stackrel{\pi_1}{\leftarrow} D \stackrel{\pi_2}{\to}B$ such that 
-for any span 
+$\pi_1;f=\pi_2;g$ and for any span 
 $A\stackrel{h_1}{\leftarrow} X \stackrel{h_2}{\to}B$
-such that $f;h_1 = f;h_2$
-there is a unique morphism $k: X\to C$
-such that $h_i = k;\pi_i$  % and $h_2 = k;\pi_2$. 
-In a diagram:
+with $h_1;f = h_2;g$
+there is a unique morphism $k: X\to D$
+such that $h_i = k;\pi_i$, i.e., % and $h_2 = k;\pi_2$. 
 \begin{tikzcd}[ampersand replacement=\&]
 X\arrow[swap]{ddr}{h_2}\arrow{rrd}{h_1}\arrow{rd}[description]{\exists!k}\\
 \& 
@@ -791,7 +790,7 @@ A\arrow{d}{f}\\
 \&
 B\arrow{r}{g} \&
 C 
-\end{tikzcd}
+\end{tikzcd} commutes
 
 \item If such a pullback exists, object $D$ is denoted by $A\times_C B$ 
 % (up to unique isomorphism) 
@@ -806,7 +805,7 @@ and the mediating morphism $k$ as $\langle f,g\rangle_C$
     \frametitle{Examples of pullbacks}\label{Ch4:Pullbexa}
 
  \begin{itemize}[<+->]
-\item If $A\stackrel{f}{\leftarrow} C \stackrel{g}{\to}B$ in $\Set$,
+\item If $A\stackrel{f}{\to} C \stackrel{g}{\leftarrow}B$ in $\Set$,
 then the span $A\stackrel{\pi_1}{\leftarrow} D \stackrel{\pi_2}{\to}B$ 
 with $D=\set{(a,b) \in A\times B \mid f(a)=g(b) }$ is a pullback with
 $k(x)=(h_1(x),h_2(x))$ in:
@@ -867,7 +866,7 @@ $A\stackrel{id_A}{\leftarrow} A \stackrel{id_A}{\to}A$
     \frametitle{Kernels and graphs characterized by pullback}\label{Ch4:PullbKer}
 
  \begin{itemize}[<+->]
-\item Recall the definition of the kernel of $f: A\to B$:
+\item Recall the definition of the kernel of $f: A\to B$ in $\Set$:
 $ker(f) = \set{(a,a') \in A\times A \mid f(a)=f(a')}$
 
 \item This we can say with pullbacks as well (left diagram):
@@ -891,7 +890,7 @@ B
 $A\stackrel{\pi_1}{\leftarrow} ker(f) \stackrel{\pi_2}{\to}A$
 is the pullback of 
 $A\stackrel{f}{\to} B\stackrel{f}{\leftarrow}A$
-\item Also, $graph(f) = \set{(a,b) \in A\times B \mid f(a)=b}$ (right)
+\item Also, $graph(f) = \set{(a,b) \in A\times B \mid f(a)=b}$ (right diagram)
 \item This generalises these notions from $\Set$ to arbitrary categories
 
  \end{itemize}
@@ -907,11 +906,12 @@ $A\stackrel{f}{\to} B\stackrel{f}{\leftarrow}A$
 \item If $\CC$ has 1 and pullbacks, then $A\times_1 B$ is a product
 of $A,B$ 
 \item Any slice category $\CC/T$ has pullbacks if $\CC$ has pullbacks
+(well elaborated in the script)
 \item In any slice category $\CC/T$ the object $(T,id_T)$ is final, so $\CC/T$
 has products if $\CC$ has pullbacks
 \item Pullbacks are also called \emph{fiber products}, products of preimages,
 as in $\Set$ we have $A\times_C B = \cup_{c\in C} (f^-(c) \times g^-(c))$
-(the last $C$ can be replaced by $f(A)\cap f(B)$)
+(the last $C$ can be replaced by $f(A)\cap g(B)$)
 
 
  \end{itemize}
@@ -920,17 +920,17 @@ as in $\Set$ we have $A\times_C B = \cup_{c\in C} (f^-(c) \times g^-(c))$
 
 \frame
   {   
-    \frametitle{Pullback = product + equalizer}\label{Ch4:PullbProdEq}
+    \frametitle{Pullback from product and equalizer}\label{Ch4:PullbProdEq}
 
  \begin{itemize}[<+->]
-\item Given as span $A\stackrel{f}{\to} C\stackrel{g}{\leftarrow}B$ in 
-a category $C$ with products, we get a span
+\item Given co-span $A\stackrel{f}{\to} C\stackrel{g}{\leftarrow}B$ in 
+category $\CC$ with products, we get a co-span
 $A\times B\stackrel{\pi_1;f}{\to} C\stackrel{\pi_2;g}{\leftarrow}A\times B$
-of two parallel morphisms
+of parallel morphisms
 \item The pullback can now be obtained if $\CC$ also has equalizers:
-\item Given to parallel morphisms $f,g: A\to B$, an \emph{equalizer}
-consists of an object $E$ and a morphism $m:E\to A$ with $m;f=m;g$
-such that for all objects $X$ and morphism $h:X\to A$ with $h;f=h;g$
+\item Given two parallel morphisms $f,g: A\to B$, an \emph{equalizer}
+consists of an object $E$ and a morphism $m:E\to A$ with $m;f=m;g$,
+such that for all objects $X$ and morphisms $h:X\to A$ with $h;f=h;g$
 there is a unique morphism $k: X\to E$ such that $k;m = h$. In a diagram:
 \begin{tikzcd}[ampersand replacement=\&]
 X\arrow{dr}{h}\arrow{d}[description]{\exists!k}\\ 
