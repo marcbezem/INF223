@@ -1,0 +1,141 @@
+\documentclass[handout]{beamer}
+%\documentclass[slides]{beamer}
+% Vary the color applet  (try out your own if you like)
+%\colorlet{structure}{red!20!black}
+%\beamertemplateshadingbackground{yellow!20}{white}
+%\usepackage{beamerthemeshadow}
+%\usepackage[utf8x]{inputenc} CONFLICT!
+\usepackage{tikz}
+%\usepackage[english,norsk,nynorsk]{babel}
+\usepackage{tikz-cd}
+\usetikzlibrary{trees}
+
+\usepackage[all]{xy}
+\usepackage{multicol}
+
+%\setbeamertemplate{navigation symbols}{}++++++
+%\setbeamertemplate{footline}[frame number]
+\usetheme{Montpellier}
+
+
+\input macros
+
+\newcommand{\To}{\Rightarrow}
+\newcommand{\Trt}{\stackrel{*}{\Rightarrow}}
+\newcommand{\ToG}{\Rightarrow_G}
+\newcommand{\redS}{{\color{red} S}}
+
+\newcommand{\bfsf}[1]{{\boldsymbol{#1}}}
+\newcommand{\Set}{\bfsf{Set}}
+\newcommand{\Gra}{\bfsf{Graph}}
+\newcommand{\CC}{\bfsf{C}}
+\newcommand{\DD}{\bfsf{D}}
+\newcommand{\EE}{\bfsf{E}}
+\newcommand{\PP}{\bfsf{P}}
+\newcommand{\HH}{\bfsf{H}}
+\newcommand{\Nat}{\bfsf{Nat}}
+\newcommand{\Incl}{\bfsf{Incl}}
+\newcommand{\Rel}{\bfsf{Rel}}
+\newcommand{\Mult}{\bfsf{Mult}}
+\newcommand{\Mon}{\bfsf{Mon}}
+\newcommand{\Cat}{\bfsf{Cat}}
+\newcommand{\CAT}{\bfsf{CAT}}
+
+\newcommand{\Kp}[1]{{\langle #1 \rangle}}
+\newcommand{\Kc}{;\!;}
+
+
+\title[INF223 presentations]{}
+
+\begin{document}
+
+\section{Monads}
+\subsection{Introduction}
+ 
+\frame
+  {   
+    \frametitle{Monads}\label{Mon5:Intro}
+
+ \begin{itemize}[<+->]
+\item Monad is a notion in CT that turned out to be useful in programming
+\item Monad was defined in CT in the 1950's and 1960's
+\item A breakthrough paper for application in CS was 
+\href{https://person.dibris.unige.it/moggi-eugenio/ftp/ic91.pdf}{\color{blue}E. Moggi, Notions of computation and monads, I\&C, 93(1), 1991}
+\item We start by giving an example, and then carefully abstract from that
+to arrive at a categorical notion
+\item Useful links are:
+ \begin{itemize}
+    \item \myurl{https://ncatlab.org/nlab/show/monad+\%28in+computer+science\%29}
+    \item \myurl{https://ncatlab.org/nlab/show/extension+system}
+ \end{itemize}
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Example of a monad (one)}\label{Mon5:ExaSetMone}
+
+ \begin{itemize}[<+->]
+\item We work in the category $\Set$ and fix a monoid $(M,1,*)$
+\item The example models functions that have side-effects, e.g., writing a
+string (strings with the empty string and concatenation form a monoid)
+\item Operation $T$ on sets is defined by $T(X)= X\times M$
+\item Map $f : X\to Y$ with side-effect $p : X\to M$ is modelled as $\Kp{f,p} : X\to T(Y)$
+%$p$ gives the monoid value as a side-effect of $f$
+\item For every set $X$ we define $unit_X: X\to T(X)$ mapping $x\in X$ to $(x,1)$
+\item For the moment $unit_X$ is just an example, but it will turn out to
+be some kind of unit element
+ \end{itemize}
+ }
+
+\frame
+  {   
+    \frametitle{Example of a monad (two)}\label{Mon5:ExaSetMtwo}
+
+ \begin{itemize}[<+->]
+\item For $\Kp{f,p}: X\to T(Y)$ and $\Kp{g,q}: Y\to T(Z)$ we define a special
+composition $\Kp{f,p}\Kc \Kp{g,q} = \Kp{f;g,r} : X\to T(Z)$ with $$r(x)=p(x)*q(f(x))$$
+This expresses that the monoid-valued-side-effect is cumulative,
+we multiply the old value $p(x)$ by the new value $q(f(x))$,
+or, we append the string $q(f(x))$ to the string $p(x)$.
+\item Indeed we get a unit law: for $\Kp{f,p}: X\to T(Y)$ we have
+$$unit_X\Kc \Kp{f,p}  = \Kp{f,p} = \Kp{f,p}\Kc unit_Y$$
+\item Also, the special composition $\Kc$ is associative
+\item Even though we have left and right units, $\Kc$ is not a multiplica- tion.
+We don't have a new \emph{monoid}, but we do have a \emph{monad}.
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Example of a monad (three)}\label{Mon5:ExaSetMthree}
+
+ \begin{itemize}[<+->]
+\item Preparing for generalization, we abstract from the example
+\item For $\Kp{f,p} : X\to T(Y)$ we define $\Kp{f,p}^T : T(X)\to T(Y)$ by
+$$\Kp{f,p}^T(x,v) = (f(x),v*p(x))$$
+\item Now we can extend $T$ to a functor by setting $$T(f) = (f; unit_Y)^T : T(X)\to T(Y)$$
+\item We verify:
+ \begin{itemize}
+    \item $T(id_X) = (id_X; unit_X)^T = (unit_X)^T = id_{T(X)}$
+    \item for all $f:X\to Y$ and $g:Y\to Z$, $T(f;g) = (f;g; unit_Z)^T$ 
+and $T(f); T(g) = (f; unit_Y)^T ; (f; unit_Z)^T$
+ \end{itemize}
+
+ \end{itemize}
+
+ }
+
+
+
+\end{document}
+
+\myurl{en.wikipedia.org/wiki/Ordered_pair}
+ \begin{itemize}
+    \item emulation halts because of the partiality of $\delta$;
+    \item emulation halts because of "head left" with head at first cell;
+    \item emulation halts because of reaching a halting state;
+    \item the emulated TM goes on forever.
+ \end{itemize}
