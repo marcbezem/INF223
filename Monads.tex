@@ -212,14 +212,13 @@ the functor $T:\Set\to\Set$ on slide \ref{Mon5:CatAbstrOne},
 the natural transformation $\eta: id_\Set\To T$
 defined by $\eta_X = unit_X$ on slide \ref{Mon5:CatAbstrTwo}, 
 the natural transformation $\mu: T;T \To T$
-on slide \ref{Mon5:CatAbstrThree}
+on slide \ref{Mon5:CatAbstrThree}. Proofs of properties:
 \item $\eta_{T(A)};\mu_A = id_{T(A)}$ means that  $(\eta_{T(A)};\mu_A)(a,m) = (a,m)$
 for all $a\in A, m\in M$. Indeed $\mu_A(\eta_{T(A)}(a,m)) = \mu_A((a,m),1) =$ $= (a,1*m) = (a,m)$
 by the left identity law in the monoid $M$
 \item Exercise: verify  $id_{T(A)} = T(\eta_A);\mu_A$ using $T(f) = f\times id_M$
 \item $T(\mu_A);\mu_A = \mu_{T(A)};\mu_A$ means that the two functions agree
-on all $(a,m,m',m'')$ (flat notation). $T(\mu_A)$ and $\mu_{T(A)}$ give images $(a,m'*m,m'')$ and $(a,m,m''*m')$. Thereafter $\mu_A$ gives $(a,m''*(m'*m))$ and $(a,(m''*m')*m)$, which are equal by
-associativity in the monoid $M$.
+on all $(a,m,m',m'')$ (flat notation). $T(\mu_A)$ and $\mu_{T(A)}$ give images $(a,m'*m,m'')$ and $(a,m,m''*m')$. Thereafter $\mu_A$ gives $(a,m''*(m'*m))$ and $(a,(m''*m')*m)$, which are equal by associativity in the monoid $M$.
  \end{itemize}
 
  }
@@ -229,11 +228,41 @@ associativity in the monoid $M$.
     \frametitle{The example was indeed a monad (two)}\label{Mon5:ExaMonadTwo}
 
  \begin{itemize}[<+->]
-\item $\_^T, \Kc$
+\item We must also check that $\_^T, \Kc$ can be defined using $T,\eta,\mu$
+ \begin{itemize}
+\item $f^T = T(f);\mu_Y$ for all $f: X\to T(Y)$\footnote{Abstractly, here and below,
+we use $f$ instead of $\Kp{f,p}:X\to T(Y)$}
+\item $f \Kc  g = f ;T(g);\mu_Z$ for all $f: X\to T(Y)$, $g: Y\to T(Z)$
+ \end{itemize}
+\item The latter $\Kc$ is called \emph{Kleisli} composition, and is proved
+associative, by using monad structure and properties only:\\
+if also $h: Z\to T(A)$, then
+$(f \Kc g) \Kc h = (f ;T(g);\mu_Z) \Kc h = f ;T(g);(\mu_Z; T(h)) ; \mu_A =
+f ;T(g);(T^2(h);\mu_{T(A)}) ; \mu_A$ by naturality (exercise: draw the naturality diagram). 
+Also, $f \Kc (g \Kc h) = f \Kc (g;T(h);\mu_A) = f; T(g;T(h);\mu_A);\mu_A =
+f; T(g);T^2(h);(T(\mu_A);\mu_A) = f; T(g);T^2(h);(\mu_{T(A)};\mu_A)$
+by functoriality and the \emph{monad associativity} law.
+
+\item Make sure you understand all the steps in these proofs
  \end{itemize}
 
  }
 
+\frame
+  {   
+    \frametitle{Monads in programming}\label{Mon5:MonadProg}
+
+ \begin{itemize}[<+->]
+\item The type of $\_^T$ is $(X\to T(Y)) \to (T(X)\to T(Y))$
+\item In programming this is massaged (equivalently) into:
+$$bind : T(X) \to (X\to T(Y)) \to T(Y)$$
+\item The interpretation is: given a monad value, for example $(x,m)$,
+and a monad function, for example $\Kp{f,p}$, bind the argument of $f$ to $x$
+and return the monad value $(f(x),m*p(x))$.
+
+ \end{itemize}
+
+ }
 
 \end{document}
 
