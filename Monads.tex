@@ -43,7 +43,7 @@
 
 \newcommand{\Kp}[1]{{\langle #1 \rangle}}
 \newcommand{\Kc}{;\!;}
-
+\newcommand{\bind}{{>}\!\!{>}\!{=}}
 
 \title[INF223 presentations]{}
 
@@ -83,9 +83,10 @@ string (strings with the empty string and concatenation form a monoid)
 \item Operation $T$ on sets is defined by $T(X)= X\times M$
 \item Map $f : X\to Y$ with side-effect $p : X\to M$ is modelled as $\Kp{f,p} : X\to T(Y)$
 %$p$ gives the monoid value as a side-effect of $f$
-\item For every set $X$ we define $unit_X: X\to T(X)$ mapping $x\in X$ to $(x,1)$
+\item For every set $X$ we define $unit_X: X\to T(X)$ mapping $x\in X$ to $(x,1)$,
+so $unit_X = \Kp{id_X,x\mapsto 1}$
 \item For the moment $unit_X$ is just an example, but it will turn out to
-be some kind of unit element
+be some kind of neutral element
  \end{itemize}
  }
 
@@ -96,7 +97,7 @@ be some kind of unit element
  \begin{itemize}[<+->]
 \item For $\Kp{f,p}: X\to T(Y)$ and $\Kp{g,q}: Y\to T(Z)$ we define a special
 composition $\Kp{f,p}\Kc \Kp{g,q} = \Kp{f;g,r} : X\to T(Z)$ with $$r(x)=p(x)*q(f(x))$$
-This expresses that the monoid-valued-side-effect is cumulative,
+Thus the monoid-valued-side-effect is cumulative,
 we multiply the old value $p(x)$ by the new value $q(f(x))$,
 or, we append the string $q(f(x))$ to the string $p(x)$.
 \item Indeed we get an identity law: for $\Kp{f,p}: X\to T(Y)$ we have
@@ -136,7 +137,7 @@ $T(id_X) = id_X \times id_M = id_{X\times M} = id_{T(X)}$
 
  \begin{itemize}[<+->]
 \item With $T$ a functor the family $unit_X: X\to T(X)$ appears to be
-a natural transformation $id_\Set \To T$, with naturality square
+a natural transformation $id_\Set \To T$, with naturality square:
 %\varepsilon:
 \[
 \begin{tikzcd}[ampersand replacement=\&]
@@ -144,7 +145,7 @@ X \arrow[swap]{d}{f} \& X  \arrow[swap]{d}{f}\arrow{r}{unit_X} \&\arrow{d}{T(f)}
 Y \& Y  \arrow{r}{unit_Y} \& T(Y)
 \end{tikzcd}
 \]
-as $(f;unit_Y)(x)=(f(x),1) = T(f)(x,1) = (unit_X;T(f))(x)$
+$(f;unit_Y)(x)=(f(x),1) = T(f)(x,1) = (unit_X;T(f))(x)$
 \item Next,  we want to get the special composition right
 \item Maps $\Kp{f,p}: X\to T(Y)$ and $\Kp{g,q}: Y\to T(Z)$ cannot be composed
 in $\Set$, but $T(\Kp{g,q}) : T(Y) \to T(T(Z))$ gives the composite
@@ -164,7 +165,7 @@ $(\Kp{f,p};T(\Kp{g,q}))(x) = (g(f(x)),q(f(x))),p(x)): T(T(Z))$
 \item Recall: $(\Kp{f,p}\Kc \Kp{g,q})(x) = (g(f(x)),p(x)*q(f(x)) : T(Z)$
 \item The missing step from $T(T(Z))$ to $T(Z)$ is taken by
 $$\mu_Z: T(T(Z))\to T(Z): ((z,m_{new}),m_{old}) \mapsto (z,m_{old}*m_{new})$$
-and $\mu$ is a natural transformation  (the monad computation):
+and $\mu$ is a natural transformation, the \emph{monad multiplication}:
 \[
 \begin{tikzcd}[ampersand replacement=\&]
 X \arrow[swap]{d}{f} \& T(T(X))  \arrow[swap]{d}{T(T(f))}\arrow{r}{\mu_X} \&\arrow{d}{T(f)} T(X)\\
@@ -186,7 +187,7 @@ since $\mu_Y(T(T(f))((x,m'),m)) = \mu_Y((f(x),m'),m) = (f(x), m*m')
  \begin{itemize}
     \item a category $\CC$
     \item a functor $T:\CC\to\CC$
-    \item a natural transformation $\eta: id_\Set \To T$ (the \emph{monad unit})
+    \item a natural transformation $\eta: id_\CC \To T$ (the \emph{monad unit})
     \item a natural transformation $\mu: T;T \To T$ (the \emph{multiplication})
  \end{itemize}
 satisfying the following properties:
@@ -197,10 +198,33 @@ satisfying the following properties:
 \item Exercise: verify that all equalities above are well-typed
 \item We carefully review the example from the previous slides to 
 make sure the it was indeed a monad. 
-The terms \emph{monad unit} etc.\ will get meaning. 
+The terms \emph{monad unit, multiplication} etc.\ will get meaning. 
  \end{itemize}
 
  }
+
+\frame
+  {   
+    \frametitle{Some informal explanations}\label{Mon5:InfoMonad}
+
+ \begin{itemize}[<+->]
+\item One view on a monad $(\CC,T,\eta,\mu)$ is that the objects $T(A)$ are $A$
+with some structure added, described by $\eta,\mu$. The following explanation
+makes only sense for some categories $\CC$, such as $\Set$ and $\HH$ 
+(sets/types + functions).
+\item $T(A)$ can be viewed as the set/type of $A$-values with extras
+\item $\eta_A : A\to T(A)$ adds a neutral extra, say 1, to any $A$ value
+\item $\eta_{T(A)} : T(A)\to T^2(A)$ adds this 1 to any $T(A)$ value $(a,e)$
+\item $\mu_A: T^2(A)\to T(A)$ reduces the two extras to one
+\item $\eta_{T(A)};\mu_A = id_{T(A)}$ means $\mu_A((a,e),1) = (a,e)$, cf.\ $e*1=e$
+\item For $f:A\to B$ the `natural' $T(f)$ maps $(a,e)$ to $(f(a),e)$
+\item Hence $T(\eta_A) : T(A)\to T^2(A)$ maps $(a,e)$ to $((a,1),e)$
+\item $T(\eta_A);\mu_A=id_{T(A)}$ means $\mu_A((a,1),e) = (a,e)$, cf.\ $1*e=e$
+\item $T(\mu_A);\mu_A = \mu_{T(A)};\mu_A$ cf.\ $(e*e')*e'' = e*(e'*e'')$
+ \end{itemize}
+
+ }
+
 
 \frame
   {   
@@ -243,7 +267,7 @@ Also, $f \Kc (g \Kc h) = f \Kc (g;T(h);\mu_A) = f; T(g;T(h);\mu_A);\mu_A =
 f; T(g);T^2(h);(T(\mu_A);\mu_A) = f; T(g);T^2(h);(\mu_{T(A)};\mu_A)$
 by functoriality and the \emph{monad associativity} law.
 
-\item Make sure you understand all the steps in these proofs
+\item Exercise: verify all the steps in these proofs
  \end{itemize}
 
  }
@@ -253,12 +277,41 @@ by functoriality and the \emph{monad associativity} law.
     \frametitle{Monads in programming}\label{Mon5:MonadProg}
 
  \begin{itemize}[<+->]
+\item $\HH$ is the \emph{syntactic category} of Haskell (types + functions).
 \item The type of $\_^T$ is $(X\to T(Y)) \to (T(X)\to T(Y))$
-\item In programming this is massaged (equivalently) into:
-$$bind : T(X) \to (X\to T(Y)) \to T(Y)$$
+\item In $\HH$ the arguments are swapped to obtain:
+$$\bind : T(X) \to (X\to T(Y)) \to T(Y)~~\text{(pronounced \emph{bind}})$$
 \item The interpretation is: given a monad value, for example $(x,m)$,
 and a monad function, for example $\Kp{f,p}$, bind the argument of $f$ to $x$
 and return the monad value $(f(x),m*p(x))$.
+\item $\eta_X$ return ....
+
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{A simple mathematical example of a monad}\label{Mon5:PowSetMonad}
+
+ \begin{itemize}[<+->]
+\item The \emph{power set monad} consists of the following data:
+ \begin{itemize}
+    \item the category $\Set$
+    \item the functor $\powset:\Set\to\Set$ (recall $\powset(f)(X) = Im_f(X)$)
+    \item the natural transformation $\eta: id_\Set \To T$, $\eta_A(a)=\set{a}$
+    \item the natural transformation $\mu$, 
+$\mu_A: \powset(\powset(A)) \to \powset(A) $ defined by 
+$\mu_A(X) = \bigcup X$ for all $X\subseteq\powset(A)$
+ \end{itemize}
+\item Exercise: figure out what $\mu_A$ does
+\item The monad properties hold:
+ \begin{itemize}
+    \item $\eta_{\powset(A)};\mu_A = id_{\powset(A)} = \powset(\eta_A);\mu_A$
+    \item $\powset(\mu_A);\mu_A = \mu_{\powset(A)};\mu_A$
+ \end{itemize}
+\item Proofs. Let $X\subseteq A$, then $\eta_{\powset(A)}(X) = \set{X}$
+and $\mu_A(\set{X}) = \bigcup\set{X} = X$.
 
  \end{itemize}
 
