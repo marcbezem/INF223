@@ -44,6 +44,7 @@
 \newcommand{\Kp}[1]{{\langle #1 \rangle}}
 \newcommand{\Kc}{;\!;}
 \newcommand{\bind}{{>}\!\!{>}\!{=}}
+\newcommand{\ttt}[1]{\text{\tt #1}}
 
 \title[INF223 presentations]{}
 
@@ -184,17 +185,17 @@ since $\mu_Y(T(T(f))((x,m'),m)) = \mu_Y((f(x),m'),m) = (f(x), m*m')
 
  \begin{itemize}[<+->]
 \item A \emph{monad} consists of the following data:
- \begin{itemize}
+ \begin{enumerate}
     \item a category $\CC$
     \item a functor $T:\CC\to\CC$
     \item a natural transformation $\eta: id_\CC \To T$ (the \emph{monad unit})
     \item a natural transformation $\mu: T;T \To T$ (the \emph{multiplication})
- \end{itemize}
+ \end{enumerate}
 satisfying the following properties:
- \begin{itemize}
+ \begin{enumerate}
     \item $\eta_{T(A)};\mu_A = id_{T(A)} = T(\eta_A);\mu_A$ (the \emph{monad identity} laws)
     \item $T(\mu_A);\mu_A = \mu_{T(A)};\mu_A$ (the \emph{monad associativity} law)
- \end{itemize}
+ \end{enumerate}
 \item Exercise: verify that all equalities above are well-typed
 \item We carefully review the example from the previous slides to 
 make sure the it was indeed a monad. 
@@ -212,10 +213,10 @@ The terms \emph{monad unit, multiplication} etc.\ will get meaning.
 with some structure added, described by $\eta,\mu$. The following explanation
 makes only sense for some categories $\CC$, such as $\Set$ and $\HH$ 
 (sets/types + functions).
-\item $T(A)$ can be viewed as the set/type of $A$-values with extras
+\item $T(A)$ can be viewed as the set/type of $A$-values with {\color{red}extras (!)}
 \item $\eta_A : A\to T(A)$ adds a neutral extra, say 1, to any $A$ value
-\item $\eta_{T(A)} : T(A)\to T^2(A)$ adds this 1 to any $T(A)$ value $(a,e)$
-\item $\mu_A: T^2(A)\to T(A)$ reduces the two extras to one
+\item $\eta_{T(A)} : T(A)\to T^2(A)$ adds this 1 to any $T(A)$-value $(a,e)$
+\item $\mu_A: T^2(A)\to T(A)$ {\color{red}combines (!)} two extras into one
 \item $\eta_{T(A)};\mu_A = id_{T(A)}$ means $\mu_A((a,e),1) = (a,e)$, cf.\ $e*1=e$
 \item For $f:A\to B$ the `natural' $T(f)$ maps $(a,e)$ to $(f(a),e)$
 \item Hence $T(\eta_A) : T(A)\to T^2(A)$ maps $(a,e)$ to $((a,1),e)$
@@ -296,23 +297,81 @@ and return the monad value $(f(x),m*p(x))$.
 
  \begin{itemize}[<+->]
 \item The \emph{power set monad} consists of the following data:
- \begin{itemize}
+ \begin{enumerate}
     \item the category $\Set$
-    \item the functor $\powset:\Set\to\Set$ (recall $\powset(f)(X) = Im_f(X)$)
+    \item the functor $\powset:\Set\to\Set$, NB $\powset(f)(X) = f(X)$, the {\color{red}image}
     \item the natural transformation $\eta: id_\Set \To T$, $\eta_A(a)=\set{a}$
     \item the natural transformation $\mu$, 
 $\mu_A: \powset(\powset(A)) \to \powset(A) $ defined by 
 $\mu_A(X) = \bigcup X$ for all $X\subseteq\powset(A)$
- \end{itemize}
-\item Exercise: figure out what $\mu_A$ does
+ \end{enumerate}
+%\item Exercise: figure out what $\mu_A$ does
 \item The monad properties hold:
- \begin{itemize}
+ \begin{enumerate}
     \item $\eta_{\powset(A)};\mu_A = id_{\powset(A)} = \powset(\eta_A);\mu_A$
     \item $\powset(\mu_A);\mu_A = \mu_{\powset(A)};\mu_A$
+ \end{enumerate}
+\item Proofs. 1. Let $X\subseteq A$, then $\eta_{\powset(A)}(X) = \set{X}$
+and $\mu_A(\set{X}) = $ $ =\bigcup\set{X} = X$. 
+Also, $\mu_A(\powset(\eta_A)(X)) = X$
+since $\powset(\eta_A)(X)=$ $=\eta_A(X)=\set{\set{x} \mid x\in X}$. 
+2. For $X\subseteq \powset^2(A)$, the {\color{red}image} 
+$\mu_A(X) = \set{\mu_A(Y)\mid Y\in X}$
+and $\mu_{\powset(A)}(X)=\bigcup X$. Applying $\mu_A$ gives
+$\set{a\in A \mid \exists Z,Y~a\in Z\in Y \in X}$ for both (exercise).
  \end{itemize}
-\item Proofs. Let $X\subseteq A$, then $\eta_{\powset(A)}(X) = \set{X}$
-and $\mu_A(\set{X}) = \bigcup\set{X} = X$.
 
+ }
+
+\frame
+  {   
+    \frametitle{The list monad}\label{Mon5:ListMonad}
+
+ \begin{itemize}[<+->]
+\item The \emph{list monad} consists of the following data:
+ \begin{enumerate}
+    \item the category $\HH$ of Haskell types and functions
+    \item the list functor $[\_]:\HH\to\HH$, NB\footnote%
+{We avoid the ambiguous notation $[f]$, which could also have type $[A\to B]$.}
+ $[\_](f)  =  map\, f$
+    \item the natural transformation $\eta: id_\HH \To \HH$, $\eta_A(a)= [a]$
+    \item the natural transformation $\mu$, 
+$\mu_A: [[A]] \to [A] $ defined by \emph{flattening}:
+$\mu_A([]) = [],~\mu_A(l::ls) = l{+}\!{+}\mu_A(ls)$
+ \end{enumerate}
+%\item Exercise: figure out what $\mu_A$ does
+\item The monad properties hold:
+ \begin{enumerate}
+    \item $\eta_{[A]};\mu_A = id_{[A]} = [\_](\eta_A);\mu_A$
+    \item $[\_](\mu_A);\mu_A = \mu_{[A]};\mu_A$
+ \end{enumerate}
+\item Exercise: prove the above properties (compare with slide \ref{Mon5:PowSetMonad})
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{The Maybe monad}\label{Mon5:ListMonad}
+
+ \begin{itemize}[<+->]
+\item The Maybe monad is useful for partial functions
+\item The \emph{Maybe monad} consists of the following data:
+ \begin{enumerate}
+    \item the category $\HH$ of Haskell types and functions
+    \item the functor \ttt{ data Maybe t = Just t | Nothing}, %($t$ a type variable)
+ \ttt{Maybe(f)(Just a) = Just (f a), Maybe(f)(\_) = Nothing},
+    \item the natural transformation $\eta: id_\HH \To \HH$, $\eta_A(a)= \ttt{Just a}$
+    \item the natural transformation $\mu: \ttt{Maybe;Maybe} \to \ttt{Maybe}$, 
+$\mu_A(\ttt{Just(Just(a))})= \ttt{Just(a)}$,  $\mu_A(\ttt{\_})= \ttt{Nothing}$
+ \end{enumerate}
+%\item Exercise: figure out what $\mu_A$ does
+\item The monad properties hold:
+ \begin{enumerate}
+    \item $\eta_{[A]};\mu_A = id_\ttt{Maybe(A)} =\ttt{Maybe}(\eta_A);\mu_A$
+    \item $\ttt{Maybe}(\mu_A);\mu_A = \mu_\ttt{Maybe(A)};\mu_A$
+ \end{enumerate}
+\item Exercise: prove the above properties
  \end{itemize}
 
  }
