@@ -275,18 +275,41 @@ by functoriality and the \emph{monad associativity} law.
 
 \frame
   {   
-    \frametitle{Monads in programming}\label{Mon5:MonadProg}
+    \frametitle{Monads in Haskell}\label{Mon5:MonadHask}
 
  \begin{itemize}[<+->]
-\item $\HH$ is the \emph{syntactic category} of Haskell (types + functions).
+\item $\HH$ is the \emph{syntactic category} of Haskell (types + functions)
 \item The type of $\_^T$ is $(X\to T(Y)) \to (T(X)\to T(Y))$
-\item In $\HH$ the arguments are swapped to obtain:
+\item In Haskell the arguments are swapped to obtain:
 $$\bind : T(X) \to (X\to T(Y)) \to T(Y)~~\text{(pronounced \emph{bind}})$$
-\item The interpretation is: given a monad value, for example $(x,m)$,
-and a monad function, for example $\Kp{f,p}$, bind the argument of $f$ to $x$
-and return the monad value $(f(x),m*p(x))$.
-\item $\eta_X$ return ....
+\item Interpretation: given $m:T(X)$ and $f: X\to T(Y)$, %to compute $(m\bind f):T(Y)$,
+bind the argument of $f$ to the $X$-value $x$ of $m$ and compute $f(x)$;
+the $Y$-value of $m\bind f$ is the $Y$-value of $f(x)$ and
+the extra of $m\bind f$ is the $\_^T$-combination of 
+the extras of $m$ and $f(x)$.
+\item $\eta_X$ is called \ttt{return} in Haskell (a kind of misnomer),
+the type subscript is left out as it can be inferred
 
+
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Monads in Haskell (ctnd)}\label{Mon5:MonadHaskCtnd}
+
+ \begin{itemize}[<+->]
+\item The monad laws now take the following (equivalent) form:
+\begin{itemize}
+    \item $((\ttt{return}\,a)\, \bind f) = f(a)$ (left unit law)
+    \item $(m\, \bind \ttt{return}) = m$ (right unit law)
+    \item $(m\, \bind f) \bind g = (m\, \bind \lambda x. (f(x) \bind g))$ (associativity)
+ \end{itemize}
+\item $\mu_X$ is definable by $\mu_X(m) = (m\bind id_{T(X)})$
+\item The monad properties (laws) from slide \ref{Mon5:CatDefMonad} can be proved
+\item Exercise (big): prove the equivalence of the monad laws in Haskell 
+and in CT (slide \ref{Mon5:CatDefMonad})
  \end{itemize}
 
  }
@@ -332,7 +355,8 @@ $\set{a\in A \mid \exists Z,Y~a\in Z\in Y \in X}$ for both (exercise).
  \begin{enumerate}
     \item the category $\HH$ of Haskell types and functions
     \item the list functor $[\_]:\HH\to\HH$, NB\footnote%
-{We avoid the ambiguous notation $[f]$, which could also have type $[A\to B]$.}
+{We avoid the ambiguous notation $[f]$, which could also have type $[A\to B]$,
+whereas the intended type here is $[A]\to [B]$.}
  $[\_](f)  =  map\, f$
     \item the natural transformation $\eta: id_\HH \To \HH$, $\eta_A(a)= [a]$
     \item the natural transformation $\mu$, 
