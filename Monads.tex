@@ -59,11 +59,11 @@
 
  \begin{itemize}[<+->]
 \item Monad is a notion in CT that turned out to be useful in programming
-\item Monad was defined in CT in the 1950's and 1960's
+\item Monads were defined in CT in the (late) 1950's and 1960's
 \item A breakthrough paper for application in CS was 
 \href{https://person.dibris.unige.it/moggi-eugenio/ftp/ic91.pdf}{\color{blue}E. Moggi, Notions of computation and monads, I\&C, 93(1), 1991}
 \item We start by giving an example, and then carefully abstract from that
-to arrive at a categorical notion
+example to arrive at a categorical notion
 \item Useful links are:
  \begin{itemize}
     \item \myurl{https://ncatlab.org/nlab/show/monad+\%28in+computer+science\%29}
@@ -151,7 +151,7 @@ $(f;unit_Y)(x)=(f(x),1) = T(f)(x,1) = (unit_X;T(f))(x)$
 \item Maps $\Kp{f,p}: X\to T(Y)$ and $\Kp{g,q}: Y\to T(Z)$ cannot be composed
 in $\Set$, but $T(\Kp{g,q}) : T(Y) \to T(T(Z))$ gives the composite
 $$\Kp{f,p};T(\Kp{g,q}) : X \to T(T(Z))$$
-\item Not there yet: type should be $X \to T(Z)$
+\item Not there yet: the latter type should be $X \to T(Z)$
  \end{itemize}
 
  }
@@ -198,8 +198,8 @@ satisfying the following properties:
  \end{enumerate}
 \item Exercise: verify that all equalities above are well-typed
 \item We carefully review the example from the previous slides to 
-make sure the it was indeed a monad. 
-The terms \emph{monad unit, multiplication} etc.\ will get meaning. 
+make sure that it was indeed a monad. 
+The terms \emph{monad unit, multiplication} etc.\ will be explained first
  \end{itemize}
 
  }
@@ -214,7 +214,7 @@ with some structure added, described by $\eta,\mu$. The following explanation
 makes only sense for some categories $\CC$, such as $\Set$ and $\HH$ 
 (sets/types + functions).
 \item $T(A)$ can be viewed as the set/type of $A$-values with {\color{red}extras (!)}
-\item $\eta_A : A\to T(A)$ adds a neutral extra, say 1, to any $A$ value
+\item $\eta_A : A\to T(A)$ adds a neutral extra, say 1, to any $A$-value
 \item $\eta_{T(A)} : T(A)\to T^2(A)$ adds this 1 to any $T(A)$-value $(a,e)$
 \item $\mu_A: T^2(A)\to T(A)$ {\color{red}combines (!)} two extras into one
 \item $\eta_{T(A)};\mu_A = id_{T(A)}$ means $\mu_A((a,e),1) = (a,e)$, cf.\ $e*1=e$
@@ -306,10 +306,13 @@ the type subscript is left out as it can be inferred
     \item $(m\, \bind \ttt{return}) = m$ (right unit law)
     \item $(m\, \bind f) \bind g = (m\, \bind \lambda x. (f(x) \bind g))$ (associativity)
  \end{itemize}
-\item $\mu_X$ is definable by $\mu_X(m) = (m\bind id_{T(X)})$
-\item The monad properties (laws) from slide \ref{Mon5:CatDefMonad} can be proved
+\item $\mu_A$ is definable by $\mu_A(m) = (m\bind id_{T(A)})$ for all $m\in T(T(A))$
+%\item The monad properties (laws) from slide \ref{Mon5:CatDefMonad} can be proved
 \item Exercise (big): prove the equivalence of the monad laws in Haskell 
 and in CT (slide \ref{Mon5:CatDefMonad})
+\item Haskell provides syntactic support for monads through the type class
+\ttt{Monad}, but the truth of the monad laws (the compiler expects them to hold)
+is your own responsibility
  \end{itemize}
 
  }
