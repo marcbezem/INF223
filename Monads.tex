@@ -62,8 +62,8 @@
 \item Monads were defined in CT in the (late) 1950's and 1960's
 \item A breakthrough paper for application in CS was 
 \href{https://person.dibris.unige.it/moggi-eugenio/ftp/ic91.pdf}{\color{blue}E. Moggi, Notions of computation and monads, I\&C, 93(1), 1991}
-\item We start by giving an example, and then carefully abstract from that
-example to arrive at a categorical notion
+\item We start by giving two examples, and then carefully abstract from 
+these to arrive at the categorical notion of a monad
 \item Useful links are:
  \begin{itemize}
     \item \myurl{https://ncatlab.org/nlab/show/monad+\%28in+computer+science\%29}
@@ -75,12 +75,68 @@ example to arrive at a categorical notion
 
 \frame
   {   
-    \frametitle{Example of a monad (one)}\label{Mon5:ExaSetMone}
+    \frametitle{A reinterpretation of multimaps}\label{Mon5:MultiMapReint}
+
+ \begin{itemize}[<+->]
+\item Recall $\Mult$ with sets as objects and morphisms $f:A\to B$ being
+\emph{multimaps}, that is, set maps $f: A\to \powset(B)$
+\item Recall the power set functor $\Set\to\Set$ mapping sets to their power set
+and $f:A\to B$  to $\powset(f) : \powset(A) \to \powset(B)$ defined by $\powset(f)(X) = f(X)$, the {\color{red}image} of any given $X\subseteq A$
+\item We reformulate the composition of $f:A\to \powset(B)$ and $g:B\to \powset(C)$
+in three steps:
+ \begin{enumerate}
+    \item form $\powset(g) : \powset(B) \to \powset(\powset(C))$
+    \item take the ordinary composition $f;\powset(g) : A \to \powset(\powset(C))$
+    \item finish by `flattening' , i.e., by postcomposing with 
+$\mu_C:$ $\powset(\powset(C)) \to \powset(C) $ defined by 
+$\mu_C(X) = \bigcup X$ for all $X\subseteq\powset(C)$
+ \end{enumerate}
+We obtain the same composition of $f$ and $g$ in $\Mult$ as in the script, Def. 2.3.30.
+Proof on next slide:
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{A reinterpretation of multimaps (cntd)}\label{Mon5:MultiMapReint}
+
+ \begin{itemize}[<+->]
+\item For any $a\in A$ we have $f(a)\subseteq B$ and {\color{red}image}
+$g(f(a)) =$ $ \set{g(y) \mid y\in f(a)}$. Each $g(y)$ is a subset of $C$.
+Applying $\mu_C$ gives $\bigcup \set{g(y) \mid y\in f(a)}$, formula (2.11)
+in the script.
+\item One can also define $\eta_A: A \to \powset(A)$ by $\eta_A(a)=\set{a}$
+\item Together, $\Set, \powset, \eta, \mu$ form the ingredients of a monad
+\item Some properties, later introduced as the monad laws: 
+ \begin{enumerate}
+\item $\powset(\eta_A)(X) = \set{\set{x}\mid x\in X}$,
+the {\color{red}image} of $X$ under $\eta_A$, and $\eta_{\powset(A)}(X) = \set{X}$,
+for any $X\subseteq A$. Their $\mu_A$ values, i.e., $\bigcup$, are $X$ for both!
+So: $\mu_A(\powset(\eta_A)(X)) = \mu_A(\eta_{\powset(A)}(X)) = X$.
+% for all $X\subseteq A$.
+\item For $X\subseteq \powset^2(A)$, the {\color{red}image} 
+$\mu_A(X) = \set{\mu_A(Y)\mid Y\in X}$
+and $\mu_{\powset(A)}(X)=\bigcup X$. Applying $\mu_A$ gives in both cases
+$\set{a\in A \mid \linebreak \exists Z,Y~a\in Z\in Y \in X}$. 
+So: 
+$\mu_A(\powset(\mu_A)(X)) = \mu_A(\mu_{\powset(A)}(X))$.
+ \end{enumerate}
+\item Exercise: find $X=\set{Y_1,Y_2}$ with 
+$\bigcup X \neq \set{\bigcup Y_1, \bigcup Y_2}$.
+Show point 2 above, i.e., $\bigcup(\bigcup X) = \bigcup \set{\bigcup Y \mid Y\in X}$
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Another example of a monad: the O of IO()}\label{Mon5:ExaSetMone}
 
  \begin{itemize}[<+->]
 \item We work in the category $\Set$ and fix a monoid $(M,1,*)$
-\item The example models functions that have side-effects, e.g., writing a
-string (strings with the empty string and concatenation form a monoid)
+\item This example models functions that write a string as side-effect
+(strings with the empty string and concatenation form a monoid)
 \item Operation $T$ on sets is defined by $T(X)= X\times M$
 \item Map $f : X\to Y$ with side-effect $p : X\to M$ is modelled as $\Kp{f,p} : X\to T(Y)$
 %$p$ gives the monoid value as a side-effect of $f$
@@ -93,7 +149,7 @@ be some kind of neutral element
 
 \frame
   {   
-    \frametitle{Example of a monad (two)}\label{Mon5:ExaSetMtwo}
+    \frametitle{Another example of a monad (ctnd)}\label{Mon5:ExaSetMctnd}
 
  \begin{itemize}[<+->]
 \item For $\Kp{f,p}: X\to T(Y)$ and $\Kp{g,q}: Y\to T(Z)$ we define a special
@@ -123,10 +179,10 @@ we extend $T$ to a functor $\Set\to\Set$
 by setting, for any $f:X\to Y$,  $$T(f) = (f; unit_Y)^T : T(X)\to T(Y)$$
 \item In effect: $T(f) = f\times id_M$ and, as required for a functor,
 \begin{itemize}
-\item for all $X$,
-$T(id_X) = id_X \times id_M = id_{X\times M} = id_{T(X)}$
-\item for all $f:X\to Y$ and $g:Y\to Z$, $T(f;g) = (f;g)\times id_M =
-(f\times id_M);(g\times id_M) = T(f); T(g)$
+\item
+$T(id_X) = id_X \times id_M = id_{X\times M} = id_{T(X)}$  for all $X$
+\item $T(f;g) = (f;g)\times id_M = (f\times id_M);(g\times id_M) = T(f); T(g)$
+for all $f:X\to Y$ and $g:Y\to Z$
 \end{itemize}
  \end{itemize}
 
@@ -147,7 +203,7 @@ Y \& Y  \arrow{r}{unit_Y} \& T(Y)
 \end{tikzcd}
 \]
 $(f;unit_Y)(x)=(f(x),1) = T(f)(x,1) = (unit_X;T(f))(x)$
-\item Next,  we want to get the special composition right
+\item We want to get the special composition right (cf.\ multimaps)
 \item Maps $\Kp{f,p}: X\to T(Y)$ and $\Kp{g,q}: Y\to T(Z)$ cannot be composed
 in $\Set$, but $T(\Kp{g,q}) : T(Y) \to T(T(Z))$ gives the composite
 $$\Kp{f,p};T(\Kp{g,q}) : X \to T(T(Z))$$
@@ -206,11 +262,44 @@ The terms \emph{monad unit, multiplication} etc.\ will be explained first
 
 \frame
   {   
+    \frametitle{Revisiting the power set monad}\label{Mon5:PowSetMonad}
+
+ \begin{itemize}[<+->]
+\item The \emph{power set monad} consists of the following data:
+ \begin{enumerate}
+    \item the category $\Set$
+    \item the functor $\powset:\Set\to\Set$, NB $\powset(f)(X) = f(X)$, the {\color{red}image}
+    \item the natural transformation $\eta: id_\Set \To T$, $\eta_A(a)=\set{a}$
+    \item the natural transformation $\mu$, 
+$\mu_A: \powset(\powset(A)) \to \powset(A) $ defined by 
+$\mu_A(X) = \bigcup X$ for all $X\subseteq\powset(A)$
+ \end{enumerate}
+\item The naturality squares commute (exercise, NB $\powset^2(f)$!):
+\begin{tikzcd}[ampersand replacement=\&]
+A \arrow[swap]{d}{f} \& 
+A  \arrow[swap]{d}{f}\arrow{r}{\eta_A} \&\arrow{d}{\powset(f)} \powset(A)\&
+\powset^2(A)\arrow[swap]{d}{\powset^2(f)}\arrow{r}{\mu_A} \&\arrow{d}{\powset(f)} \powset(A)\\
+B \& 
+B  \arrow{r}{\eta_B} \& \powset(B) \&
+\powset^2(B)\arrow{r}{\mu_B} \& \powset(B)
+\end{tikzcd}
+\item The monad laws hold (last two points on slide \ref{Mon5:MultiMapReint}):
+ \begin{enumerate}
+    \item $\eta_{\powset(A)};\mu_A = id_{\powset(A)} = \powset(\eta_A);\mu_A$
+    \item $\powset(\mu_A);\mu_A = \mu_{\powset(A)};\mu_A$
+ \end{enumerate}
+ \end{itemize}
+
+ }
+
+
+\frame
+  {   
     \frametitle{Some informal explanations}\label{Mon5:InfoMonad}
 
  \begin{itemize}[<+->]
 \item One view on a monad $(\CC,T,\eta,\mu)$ is that the objects $T(A)$ are $A$
-with some structure added, described by $\eta,\mu$. The following explanation
+with some structure added, detailed by $\eta,\mu$. The following explanation
 makes only sense for some categories $\CC$, such as $\Set$ and $\HH$ 
 (sets/types + functions).
 \item $T(A)$ can be viewed as the set/type of $A$-values with {\color{red}extras (!)}
@@ -301,11 +390,11 @@ the type subscript is left out as it can be inferred
 
  \begin{itemize}[<+->]
 \item The monad laws now take the following (equivalent) form:
-\begin{itemize}
+\begin{enumerate}
     \item $((\ttt{return}\,a)\, \bind f) = f(a)$ (left unit law)
     \item $(m\, \bind \ttt{return}) = m$ (right unit law)
     \item $(m\, \bind f) \bind g = (m\, \bind \lambda x. (f(x) \bind g))$ (associativity)
- \end{itemize}
+ \end{enumerate}
 \item $\mu_A$ is definable by $\mu_A(m) = (m\bind id_{T(A)})$ for all $m\in T(T(A))$
 %\item The monad properties (laws) from slide \ref{Mon5:CatDefMonad} can be proved
 \item Exercise (big): prove the equivalence of the monad laws in Haskell 
@@ -317,37 +406,6 @@ is your own responsibility
 
  }
 
-\frame
-  {   
-    \frametitle{A simple mathematical example of a monad}\label{Mon5:PowSetMonad}
-
- \begin{itemize}[<+->]
-\item The \emph{power set monad} consists of the following data:
- \begin{enumerate}
-    \item the category $\Set$
-    \item the functor $\powset:\Set\to\Set$, NB $\powset(f)(X) = f(X)$, the {\color{red}image}
-    \item the natural transformation $\eta: id_\Set \To T$, $\eta_A(a)=\set{a}$
-    \item the natural transformation $\mu$, 
-$\mu_A: \powset(\powset(A)) \to \powset(A) $ defined by 
-$\mu_A(X) = \bigcup X$ for all $X\subseteq\powset(A)$
- \end{enumerate}
-%\item Exercise: figure out what $\mu_A$ does
-\item The monad properties hold:
- \begin{enumerate}
-    \item $\eta_{\powset(A)};\mu_A = id_{\powset(A)} = \powset(\eta_A);\mu_A$
-    \item $\powset(\mu_A);\mu_A = \mu_{\powset(A)};\mu_A$
- \end{enumerate}
-\item Proofs. 1. Let $X\subseteq A$, then $\eta_{\powset(A)}(X) = \set{X}$
-and $\mu_A(\set{X}) = $ $ =\bigcup\set{X} = X$. 
-Also, $\mu_A(\powset(\eta_A)(X)) = X$
-since $\powset(\eta_A)(X)=$ $=\eta_A(X)=\set{\set{x} \mid x\in X}$. 
-2. For $X\subseteq \powset^2(A)$, the {\color{red}image} 
-$\mu_A(X) = \set{\mu_A(Y)\mid Y\in X}$
-and $\mu_{\powset(A)}(X)=\bigcup X$. Applying $\mu_A$ gives
-$\set{a\in A \mid \exists Z,Y~a\in Z\in Y \in X}$ for both (exercise).
- \end{itemize}
-
- }
 
 \frame
   {   
@@ -386,7 +444,7 @@ $\mu_A([]) = [],~\mu_A(l::ls) = l{+}\!{+}\mu_A(ls)$
 \item The \emph{Maybe monad} consists of the following data:
  \begin{enumerate}
     \item the category $\HH$ of Haskell types and functions
-    \item the functor \ttt{ data Maybe t = Just t | Nothing}, %($t$ a type variable)
+    \item the functor \ttt{ data Maybe t = Just t | Nothing}; %($t$ a type variable)
  \ttt{Maybe(f)(Just a) = Just (f a), Maybe(f)(\_) = Nothing},
     \item the natural transformation $\eta: id_\HH \To \HH$, $\eta_A(a)= \ttt{Just a}$
     \item the natural transformation $\mu: \ttt{Maybe;Maybe} \to \ttt{Maybe}$, 
@@ -402,6 +460,74 @@ $\mu_A(\ttt{Just(Just(a))})= \ttt{Just(a)}$,  $\mu_A(\ttt{\_})= \ttt{Nothing}$
  \end{itemize}
 
  }
+
+\frame
+  {   
+    \frametitle{The exception monad}\label{Mon5:ListMonad}
+
+ \begin{itemize}[<+->]
+\item The exception monad generalizes the
+Maybe monad to signal not only \emph{that} something has gone wrong,
+but also \emph{what}
+\item Assume $E$ is some type whose values we call \emph{exceptions}
+\item The \emph{ExcE monad} consists of the following data:
+ \begin{enumerate}
+    \item the category $\HH$ of Haskell types and functions
+    \item the functor \ttt{data ExpE t = Inl t | InE E}, in CT: $ExpE(A)=A+E$;
+%morphism%for $f:A\to B$
+ \ttt{ExpE(f)(Inl a) = Inl(f a)},  \ttt{ExpE(f)(InE e) = (InE e)}, for $f:A\to B$
+    \item the natural transformation $\eta$: \ttt{return a = Inl a}
+    \item the natural transformation $\mu$, through $\bind$: 
+$(\ttt{(Inl a)} \bind f) =  \ttt{(f a)}$,  $(\ttt{(InE e)} \bind f) =  \ttt{InE b}$
+ \end{enumerate}
+\item Exercise: prove the Haskel monad laws from slide \ref{Mon5:MonadHaskCtnd}.\\
+Hint: for $m: ExpE(A)$ distinguish cases $Inl(a)$ and $InE(e)$.
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{A monad for finite non-determinism}\label{Mon5:MonadNonDet}
+
+ \begin{itemize}[<+->]
+\item Non-determinism means that a computation can have zero or
+more results (of the same type)
+\item Finite non-determinism means that there are only finitely many results
+\item The \emph{FinNonDet monad} is a variant of the power set monad,
+slide \ref{Mon5:PowSetMonad}, where the functor is $\powset_{fin}$ on sets,
+and extended to functions $f:A\to B$ by setting $\powset_{fin}(f)(X) = f(X)$,
+and this image is indeed in $\powset_{fin}(B)$ for $X\in\powset_{fin}(A)$.
+\item Exercise: complete the definition of \emph{FinNonDet} and prove the monad laws
+ \end{itemize}
+
+
+ }
+
+\frame
+  {   
+    \frametitle{Continuation Passing Style (CPS)}\label{Mon5:CPS}
+
+ \begin{itemize}[<+->]
+\item CPS is a style in which one does not define a function directly, but instead
+defines how an extra function argument (the continuation) acts on the result
+\item The CPS form of a function $f: A\to B$ is a function $f_{\&_R} : A\to(B\to R)\to R$
+such that $f_{\&_R} (a)(g) = g(f(a))$ for all $a\in A$, $g\in B\to R$ 
+(we often omit subscript $R$ in $\&_R$)
+\item For primitive functions $f$, $f_\&$ is defined as above, using $f$
+\item Example: $(m+_\& n)(g) = g(m+n)$ for all $g:\nat\to R$
+\item For more complicated functions, the CPS form
+\begin{itemize}
+    \item can change the evaluation strategy
+    \item can make calls to other functions explicit
+    \item can reveal tail calls
+ \end{itemize}
+\item CPS is more used in compilers than in actual programming
+ \end{itemize}
+
+ }
+
+
 
 \end{document}
 
