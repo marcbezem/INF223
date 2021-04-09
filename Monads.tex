@@ -217,26 +217,25 @@ $$\Kp{f,p};T(\Kp{g,q}) : X \to T(T(Z))$$
 
 \frame
   {   
-    \frametitle{Categorical abstraction from the Writer (three)}\label{Mon5:CatAbstrThree}
+    \frametitle{Picture of the two ways of composing}\label{Mon5:PicTwoMonad}
 
- \begin{itemize}[<+->]
-\item Note $T(\Kp{g,q})(y,w) =  (\Kp{g,q}(y),w) = ((g(y),q(y)),w)$, so
-$(\Kp{f,p};T(\Kp{g,q}))(x) = (g(f(x)),q(f(x))),p(x)): T(T(Z))$
-\item Recall: $(\Kp{f,p}\Kc \Kp{g,q})(x) = (g(f(x)),p(x)*q(f(x)) : T(Z)$
-\item The missing step from $T(T(Z))$ to $T(Z)$ is taken by
-$$\mu_Z: T(T(Z))\to T(Z): ((z,m_{new}),m_{old}) \mapsto (z,m_{old}*m_{new})$$
-and $\mu$ is a natural transformation, the \emph{monad multiplication}:
-\[
+% \begin{itemize}[<+->]
+%\item The CT way (left) and the CS way (right)
+
 \begin{tikzcd}[ampersand replacement=\&]
-X \arrow[swap]{d}{f} \& T(T(X))  \arrow[swap]{d}{T(T(f))}\arrow{r}{\mu_X} \&\arrow{d}{T(f)} T(X)\\
-Y \& T(T(Y))  \arrow{r}{\mu_Y} \& T(Y)
+\&\& T(T(C))\arrow{d}{\mu_C} \&
+\\
+\& T(B)\arrow{ur}{T(g)}\& T(C) \&
+\& T(B)\arrow{r}{g^T}\& T(C)\\
+A\arrow{ur}{f}\arrow[dashed,swap]{urr}[description]{f;;g}\&B\arrow[swap]{ur}{g}\& \&
+A\arrow{ur}{f}\arrow[dashed,swap]{urr}[description]{f;;g}\&B\arrow[swap]{ur}{g}\&
 \end{tikzcd}
-\]
-since $\mu_Y(T(T(f))((x,m'),m)) = \mu_Y((f(x),m'),m) = (f(x), m*m') 
-= T(f)(x,m*m') = T(f)(\mu_X((x,m'),m))$
- \end{itemize}
+
+
+ %\end{itemize}
 
  }
+
 
 \frame
   {   
@@ -403,7 +402,8 @@ the type subscript is left out as it can be inferred
 \item Exercise (big): prove the equivalence of the monad laws in Haskell 
 and in CT (slide \ref{Mon5:CatDefMonad})
 \item Haskell provides syntactic support for monads through the type class
-\ttt{Monad}, but the truth of the monad laws (the compiler expects them to hold)
+\href{https://wiki.haskell.org/All_About_Monads}%
+{\color{blue}\ttt{Monad}}, but the truth of the monad laws (the compiler expects them to hold)
 is your own responsibility
  \end{itemize}
 
@@ -443,7 +443,8 @@ $\mu_A([]) = [],~\mu_A(l::ls) = l{+}\!{+}\mu_A(ls)$
     \frametitle{The Maybe monad}\label{Mon5:ListMonad}
 
  \begin{itemize}[<+->]
-\item The Maybe monad is useful for partial functions
+\item The \href{https://wiki.haskell.org/All_About_Monads\#The_Maybe\_monad}%
+{\color{blue}Maybe} monad is useful for partial functions
 \item The \emph{Maybe monad} consists of the following data:
  \begin{enumerate}
     \item the category $\HH$ of Haskell types and functions
@@ -466,10 +467,10 @@ $\mu_A(\ttt{Just(Just(a))})= \ttt{Just(a)}$,  $\mu_A(\ttt{\_})= \ttt{Nothing}$
 
 \frame
   {   
-    \frametitle{The exception monad}\label{Mon5:ListMonad}
+    \frametitle{The Exception monad}\label{Mon5:ListMonad}
 
  \begin{itemize}[<+->]
-\item The exception monad generalizes the
+\item The Exception monad generalizes the
 Maybe monad to signal not only \emph{that} something has gone wrong,
 but also \emph{what}
 \item Assume $E$ is some type whose values we call \emph{exceptions}
@@ -558,7 +559,7 @@ $= (\lambda f_0. c(6*(1*f_0))) (1) = c(6*1*1) = c(6)$, stack-free!
     \frametitle{The Continuation monad}\label{Mon5:MonadCont}
 
  \begin{itemize}[<+->]
-\item In Haskell this is the 
+\item In Haskell there is the 
 \href{https://wiki.haskell.org/All_About_Monads\#The_Continuation\_monad}%
 {\color{blue}Continuation} monad
 \item The \emph{Continuation monad} consists of the following data:
@@ -584,14 +585,18 @@ $\lambda a. h(a)(c)$ using $h$, and then we use $m$ to get an $R$-value
     \frametitle{State}\label{Mon5:State}
 
  \begin{itemize}[<+->]
+\item An accumulator argument is an example of the use of state
 \item Fibonacci: $f(0)=1, f(1)=1, f(n+2)=f(n+1)+f(n)$
 \item Exponential: $f(n+2)$ computes $f(n)$ twice, etc.
 \item Solution: $f(n)=g(n,1,1)$, $g(0,x,y)=y$, $g(1,x,y)=x$, $g(n+2,x,y)=g(n+1,x+y,x)$
-\item Arguments $x,y$ encode a state of two natural numbers, 
-a function $s:\set{x,y}\to\nat$
-
-
-\item Exercise: prove that the Haskell monad laws hold
+\item Arguments $x,y$ encode a state of two natural numbers 
+%a function $s:\set{x,y}\to\nat$
+\item State-encoded-in-argument is impractical  for large states
+\item Implicit machine state is not \emph{referentially transparent} (?)
+\item A Fibonacci state is a pair $(x,y) : \nat^2$, the state transforma- tion
+is $g(x,y)=(x+y,x)$, and $f(n) = \pi_1(g^n(1,0))$
+\item The State monad makes it possible to separate the use of
+state from the state-free parts of the program
  \end{itemize}
 
  }
@@ -608,20 +613,44 @@ a function $s:\set{x,y}\to\nat$
  \begin{enumerate}
     \item the category $\Set$ (or $\HH$) and a set (or type) $S$
     \item the functor $St(A) = S \to (A\times S)$, $St(f) : St(A)\to St(B)$ defined by
-$St(f)(\Kp{g,h})(s) = (f(g(s)),h(s))$ %for all $s\in S$ 
+$St(f)(\Kp{g,h})(s) = (f(g(s)),h(s))$ (NB $St$ for $St_S$)%for all $s\in S$ 
     \item the natural transformation $\eta$: $\ttt{return}\,a = \lambda s. (a,s)$
     \item $\mu$ defined through $\bind$:
-$(\Kp{g,h} \bind f ) =  \lambda s. f(g(s))(h(s))$
+$(\Kp{g,{\color{red}h}} \bind f ) =  \lambda s. f(g(s))({\color{red}h}(s))$
  \end{enumerate}
 %\item Exercise: figure out what $\mu_A$ does
 \item Types: $\Kp{g,h}: S \to (A\times S)$, $f: A\to (S \to (B\times S))$ 
 \item Explanation: a monad value in $St(A)$ is a pair of functions  $\Kp{g,h}$
-with $g:S\to A$ producing $A$-values and $h:S\to S$ changing states.
+with $g:S\to A$ producing $A$-values and ${\color{red}h}:S\to S$ the state transformer.
 Applying $f$ to this monad value yields a monad value in $St(B)$, i.e.,
-for every state $s$ we apply $f$ to the $A$-value $g(s)$ and the changed state $h(s)$.
+for every state $s$ we apply $f$ to the $A$-value $g(s)$ and 
+the changed state ${\color{red}h}(s)$. The ${\color{red}h}$ is the magic!
 \item Exercise: show that the Haskell monad laws hold
  \end{itemize}
 
+ }
+
+\frame
+  {   
+    \frametitle{Fibonacci with the State monad}\label{Mon5:FibState}
+
+ \begin{itemize}[<+->]
+\item Take $S=\nat^2$ and $A=\set{\bullet}$ ($A=()$ in Haskell) 
+\item Define $f: A\to (S\to (A\times S))$ by $f(\bullet)(x,y) = (\bullet,(x+y,x))$
+\item Define $put: S\to St(A)$ by $put(x,y) = \lambda\_.(\bullet,(x,y))$. Thus:
+ \begin{itemize}
+    \item $put(1,0)$ transforms any state to $(1,0)$ (we ignore $\bullet$)
+    \item $put(1,0) \bind f$ transforms any state to $(1,1)$
+    \item $put(1,0) \bind f \bind f$ transforms any state to $(2,1)$
+    \item $put(1,0) \bind f \bind \cdots \bind f$  transforms any state to ...
+ \end{itemize}
+a pair of successive Fibonacci numbers depending om \# of $f$'s
+\item Also: $(\eta_A(\bullet) \bind f \bind \cdots \bind f)(1,0) = (\bullet,(f_{n+1},f_n))$,
+where $n$ is the number of $f$'s and $f_n$ the $n$-th Fibonacci number
+\item Irony: this example is pure state; discussion of pro's and con's
+\item Exercise: program this in your favorite language with support for monads
+(Haskell, Skala, ...)
+ \end{itemize}
  }
 
 
