@@ -180,7 +180,7 @@ $$\Kp{f,p}^T(x,v) = (f(x),v*p(x))$$
 \item Preparing for abstraction from the example,
 we extend $T$ to a functor $\Set\to\Set$ 
 by setting, for any $f:X\to Y$,  $$T(f) = (f; unit_Y)^T : T(X)\to T(Y)$$
-\item In effect: $T(f) = f\times id_M$ and, as required for a functor,
+\item In evidence: $T(f) = f\times id_M$ and, as required for a functor,
 \begin{itemize}
 \item
 $T(id_X) = id_X \times id_M = id_{X\times M} = id_{T(X)}$  for all $X$
@@ -620,9 +620,9 @@ $(\Kp{g,{\color{red}h}} \bind f ) =  \lambda s. f(g(s))({\color{red}h}(s))$
  \end{enumerate}
 %\item Exercise: figure out what $\mu_A$ does
 \item Types: $\Kp{g,h}: S \to (A\times S)$, $f: A\to (S \to (B\times S))$ 
-\item Explanation: a monad value in $St(A)$ is a pair of functions  $\Kp{g,h}$
+\item Explanation: a monad value in $St_S(A)$ is a pair of functions  $\Kp{g,h}$
 with $g:S\to A$ producing $A$-values and ${\color{red}h}:S\to S$ the state transformer.
-Applying $f$ to this monad value yields a monad value in $St(B)$, i.e.,
+Binding $f$ to $\Kp{g,{\color{red}h}}$ yields a monad value in $St_S(B)$, i.e.,
 for every state $s$ we apply $f$ to the $A$-value $g(s)$ and 
 the changed state ${\color{red}h}(s)$. The ${\color{red}h}$ is the magic!
 \item Exercise: show that the Haskell monad laws hold
@@ -642,18 +642,62 @@ the changed state ${\color{red}h}(s)$. The ${\color{red}h}$ is the magic!
     \item $put(1,0)$ transforms any state to $(1,0)$ (we ignore $\bullet$)
     \item $put(1,0) \bind f$ transforms any state to $(1,1)$
     \item $put(1,0) \bind f \bind f$ transforms any state to $(2,1)$
-    \item $put(1,0) \bind f \bind \cdots \bind f$  transforms any state to ...
- \end{itemize}
+    \item $put(1,0) \bind f \bind \cdots \bind f$  transforms any state to
 a pair of successive Fibonacci numbers depending om \# of $f$'s
+ \end{itemize}
 \item Also: $(\eta_A(\bullet) \bind f \bind \cdots \bind f)(1,0) = (\bullet,(f_{n+1},f_n))$,
 where $n$ is the number of $f$'s and $f_n$ the $n$-th Fibonacci number
-\item Irony: this example is pure state; discussion of pro's and con's
-\item Exercise: program this in your favorite language with support for monads
-(Haskell, Skala, ...)
+\item Irony: this example is pure, it is pure state ...
+\item Discussion of pro's and con's
+%\item Exercise: program this in your favorite language with support for monads
  \end{itemize}
  }
 
+\frame
+  {   
+    \frametitle{Fibonacci with the State monad in Haskell}\label{Mon5:FibStateHask}
 
+ \begin{itemize}[<+->]
+\item Haskell uses $()$ for $\set{\bullet}$ \emph{and} for ${\bullet}$
+and has $put: S\to St_S(())$ defined by $put(s) = \lambda\_.((),s)$, changing any
+current state to the argument $s$ of $put$, paired with (uninformative) value $()$
+\item Haskell also has $get: St_S(S)$ defined by $get = \lambda s .(s,s)$,
+returning the state as the value and not changing the state
+\item \ttt{newtype State s a = State \{runState {:\!:} s->(a,s)\}}
+\item In \href{https://github.com/mauget/fibonacci}{\color{blue}this implementation}
+of Fibonacci in Haskell:
+\begin{itemize}
+    \item Fibonacci-states are triples of integers
+    \item $S= \ttt{(Integer,Integer,Integer}), \,A = \ttt{Integer}$
+    \item $\ttt{State(Integer,Integer,Integer})$ `is' the functor $St_S$ 
+    \item $\ttt{fibsState} : St_S(\ttt{Integer})$ is a State monad computation
+    \item $\ttt{evalState} : St_S(A)\to S\to A$ evaluates the result of state computation
+    $m : St_S(A)$ with initial state $s$ to its $A$-value: \\
+    \ttt{evalState m s = fst(runState m s)}
+ %   \item 
+ \end{itemize}
+
+ \end{itemize}
+ }
+
+\frame
+  {   
+    \frametitle{Monads in other programming languages}\label{Mon5:InOtherPL}
+
+ \begin{itemize}[<+->]
+
+ \item  \href{https://curiosity-driven.org/monads-in-javascript}{\color{blue}JavaScript}
+
+\item  \href{https://bartoszmilewski.com/2011/07/11/monads-in-c/}{\color{blue} C{+}{+}}
+
+\item \href{https://docs.racket-lang.org/heresy/monad-do.html}
+{\color{blue} Racket}
+
+\item \href{https://dl.acm.org/doi/pdf/10.1145/1924421.1924436}
+{\color{blue} LINQ} (= Language Independent Query)
+
+ \end{itemize}
+ }
 
 \end{document}
 
