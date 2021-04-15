@@ -320,7 +320,28 @@ B  \arrow{r}{\eta_B} \& \powset(B) \&
 
  }
 
+\frame
+  {   
+    \frametitle{The action of the power set functor on a map}\label{Mon5:PowSetActMap}
 
+ \begin{itemize}[<+->]
+\item $\powset(f)$ pushes $f$ inside the outer curly brackets of its argument
+\item This is much like $map\, f$ applied to a list $\ell$, returning a list with $f$ 
+applied to all elements of $\ell$ (same order, duplicates possible)
+\item $\powset(f)$ applied to $X\subseteq A$ returns the {\color{red}image}
+$f(X)$, the set with $f$ applied to all elements of $X$
+(any order, duplicates ignored)
+\item $\powset(f)(\set{\ldots,a,\ldots}) = \set{\ldots,f(a),\ldots}$ 
+%($f$ applied to all elements)
+\item Iterating this for $\powset^2(f)$ we get:
+ \end{itemize}
+
+$$\begin{array}{rcl}\powset^2(f)(\set{\ldots,\set{\ldots,a,\ldots},\ldots})& = &
+ \set{\ldots,\powset(f)(\set{\ldots,a,\ldots}),\ldots}\\
+& = & 
+ \set{\ldots,\set{\ldots,f(a),\ldots},\ldots}\end{array}$$
+
+ }
 \frame
   {   
     \frametitle{Some informal explanations}\label{Mon5:InfoMonad}
