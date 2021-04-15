@@ -58,12 +58,14 @@
     \frametitle{Monads}\label{Mon5:Intro}
 
  \begin{itemize}[<+->]
-\item Monad is a notion in CT that turned out to be useful in programming
-\item Monads were defined in CT in the (late) 1950's and 1960's
+\item Monads were defined in CT in the (late) 1950's and 1960's and  
+turned out to be useful in programming
 \item A breakthrough paper for application in CS was 
 \href{https://person.dibris.unige.it/moggi-eugenio/ftp/ic91.pdf}{\color{blue}E. Moggi, Notions of computation and monads, I\&C, 93(1), 1991}
+\item Idea: a computation can be more than a function from input 
+of type $A$ to output of type $B$ (side-effects, exceptions, etc.)
 \item We start by giving two examples, and then carefully abstract from 
-these to arrive at the categorical notion of a monad
+these to arrive at the (equivalent) notion(s) of a monad
 \item Useful links are:
  \begin{itemize}
     \item \myurl{https://ncatlab.org/nlab/show/monad+\%28in+computer+science\%29}
@@ -106,7 +108,7 @@ Proof on next slide:
 $g(f(a)) =$ $ \set{g(y) \mid y\in f(a)}$. Each $g(y)$ is a subset of $C$.
 Applying $\mu_C$ gives $\bigcup \set{g(y) \mid y\in f(a)}$, formula (2.11)
 in the script.
-\item One can also define $\eta_A: A \to \powset(A)$ by $\eta_A(a)=\set{a}$
+\item Also useful: $\eta_A: A \to \powset(A)$ by $\eta_A(a)=\set{a}$
 \item Together, $\Set, \powset, \eta, \mu$ form the ingredients of a monad
 \item Some properties, later introduced as the monad laws: 
  \begin{enumerate}
@@ -211,6 +213,30 @@ $(f;unit_Y)(x)=(f(x),1) = T(f)(x,1) = (unit_X;T(f))(x)$
 in $\Set$, but $T(\Kp{g,q}) : T(Y) \to T(T(Z))$ gives the composite
 $$\Kp{f,p};T(\Kp{g,q}) : X \to T(T(Z))$$
 \item Not there yet: the latter type should be $X \to T(Z)$
+ \end{itemize}
+
+ }
+
+
+\frame
+  {
+    \frametitle{Categorical abstraction (three)}\label{Mon5:CatAbstrThree}
+
+ \begin{itemize}[<+->]
+\item Note $T(\Kp{g,q})(y,w) =  (\Kp{g,q}(y),w) = ((g(y),q(y)),w)$, so
+$(\Kp{f,p};T(\Kp{g,q}))(x) = (g(f(x)),q(f(x))),p(x)): T(T(Z))$
+\item Recall: $(\Kp{f,p}\Kc \Kp{g,q})(x) = (g(f(x)),p(x)*q(f(x)) : T(Z)$
+\item The missing step from $T(T(Z))$ to $T(Z)$ is taken by
+$$\mu_Z: T(T(Z))\to T(Z): ((z,m_{new}),m_{old}) \mapsto (z,m_{old}*m_{new})$$
+and $\mu$ is a natural transformation, the \emph{monad multiplication}:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+X \arrow[swap]{d}{f} \& T(T(X))  \arrow[swap]{d}{T(T(f))}\arrow{r}{\mu_X} \&\arrow{d}{T(f)} T(X)\\
+Y \& T(T(Y))  \arrow{r}{\mu_Y} \& T(Y)
+\end{tikzcd}
+\]
+since $\mu_Y(T(T(f))((x,m'),m)) = \mu_Y((f(x),m'),m) = (f(x), m*m')
+= T(f)(x,m*m') = T(f)(\mu_X((x,m'),m))$
  \end{itemize}
 
  }
