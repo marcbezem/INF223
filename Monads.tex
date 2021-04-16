@@ -281,9 +281,9 @@ satisfying the following properties:
     \item $T(\mu_A);\mu_A = \mu_{T(A)};\mu_A$ (the \emph{monad associativity} law)
  \end{enumerate}
 \item Exercise: verify that all equalities above are well-typed
-\item We carefully review the example from the previous slides to 
-make sure that it was indeed a monad. 
-The terms \emph{monad unit, multiplication} etc.\ will be explained first
+\item We carefully review the examples from the previous slides to 
+make sure that they were indeed monads. 
+The terms \emph{monad unit, multiplication} etc.\ will be explained.
  \end{itemize}
 
  }
@@ -333,14 +333,15 @@ $f(X)$, the set with $f$ applied to all elements of $X$
 (any order, duplicates ignored)
 \item $\powset(f)(\set{\ldots,a,\ldots}) = \set{\ldots,f(a),\ldots}$ 
 %($f$ applied to all elements)
-\item Iterating this for $\powset^2(f)$ we get:
+\item Iterating this for $\powset(\powset(f))$ we get:
  \end{itemize}
-
 $$\begin{array}{rcl}\powset^2(f)(\set{\ldots,\set{\ldots,a,\ldots},\ldots})& = &
  \set{\ldots,\powset(f)(\set{\ldots,a,\ldots}),\ldots}\\
 & = & 
  \set{\ldots,\set{\ldots,f(a),\ldots},\ldots}\end{array}$$
 
+Now it should be easier to see that $\eta:id_\Set\To\powset$ and
+$\mu:\powset;\powset\To\powset$ are natural transformations.
  }
 \frame
   {   
