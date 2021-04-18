@@ -325,12 +325,13 @@ B  \arrow{r}{\eta_B} \& \powset(B) \&
     \frametitle{The action of the power set functor on a map}\label{Mon5:PowSetActMap}
 
  \begin{itemize}[<+->]
-\item $\powset(f)$ pushes $f$ inside the outer curly brackets of its argument
-\item This is much like $map\, f$ applied to a list $\ell$, returning a list with $f$ 
-applied to all elements of $\ell$ (same order, duplicates possible)
 \item $\powset(f)$ applied to $X\subseteq A$ returns the {\color{red}image}
 $f(X)$, the set with $f$ applied to all elements of $X$
 (any order, duplicates ignored)
+\item $\powset(f)$ pushes $f$ inside the outer curly brackets of its argument
+\item This is much like $map\, f$ applied to a list $\ell$, returning a list with $f$ 
+applied to all elements of $\ell$ (same order, duplicates possible)
+
 \item $\powset(f)(\set{\ldots,a,\ldots}) = \set{\ldots,f(a),\ldots}$ 
 %($f$ applied to all elements)
 \item Iterating this for $\powset(\powset(f))$ we get:
@@ -342,6 +343,8 @@ $$\begin{array}{rcl}\powset^2(f)(\set{\ldots,\set{\ldots,a,\ldots},\ldots})& = &
 
 Now it should be easier to see that $\eta:id_\Set\To\powset$ and
 $\mu:\powset;\powset\To\powset$ are natural transformations.
+Note that $f$ could be constant. Ignoring duplicates is easiest
+(idempotency rules!).
  }
 \frame
   {   
@@ -368,7 +371,7 @@ makes only sense for some categories $\CC$, such as $\Set$ and $\HH$
 
 \frame
   {   
-    \frametitle{The Writer is indeed a monad (one)}\label{Mon5:ExaMonadOne}
+    \frametitle{The Writer is indeed a monad (one)}\label{Mon5:ExaMonad}
 
  \begin{itemize}[<+->]
 \item The data in the example was: the category $\Set$, 
@@ -389,12 +392,12 @@ on all $(a,m,m',m'')$ (flat notation). $T(\mu_A)$ and $\mu_{T(A)}$ give images $
 
 \frame
   {   
-    \frametitle{The Writer is indeed a monad (two)}\label{Mon5:ExaMonadTwo}
+    \frametitle{The auxiliaries of Writer are definable in any monad}\label{Mon5:ExaMonadAux}
 
  \begin{itemize}[<+->]
 \item We must also check that $\_^T, \Kc$ can be defined using $T,\eta,\mu$
  \begin{itemize}
-\item $f^T = T(f);\mu_Y$ for all $f: X\to T(Y)$\footnote{Abstractly, here and below,
+\item the \emph{extension} $f^T = T(f);\mu_Y$ for all $f: X\to T(Y)$\footnote{Abstractly, here and below,
 we use $f$ instead of $\Kp{f,p}:X\to T(Y)$}
 \item $f \Kc  g = f ;T(g);\mu_Z$ for all $f: X\to T(Y)$, $g: Y\to T(Z)$
  \end{itemize}

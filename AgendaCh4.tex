@@ -41,6 +41,8 @@
 \newcommand{\Cat}{\bfsf{Cat}}
 \newcommand{\CAT}{\bfsf{CAT}}
 
+\newcommand{\Kp}[1]{{\langle #1 \rangle}}
+
 
 \title[INF223 presentations]{}
 
@@ -942,6 +944,109 @@ $\begin{array}{ll}E=\set{a\in A\mid f(a)=g(a)}\\m=in_{E,A}\end{array}$
 \item The pullback $A\times_C B$ is then the equalizer of the parallel
 morphisms $\pi_1;f$ and $\pi_2;g$ from $A\times B$ to $C$
  \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Preimages characterized by pullback}\label{Ch4:PullbPreim}
+
+ \begin{itemize}[<+->]
+\item Recall the preimage $f^-(b) = \set{a\in A \mid f(a)=b}$ of a map 
+$f:A\to B$ and $b\in B$; for  a subset $B'\subseteq B$, 
+the preimage $f^-(B') = \set{a\in A \mid f(a)\in B'}$ 
+\item {\color{red} NB monad looming in the dark: $f^-(B')$ is the
+`multiset image' of $B'$ under the multimap $f^-$, the flattened image!}
+\item The preimage $f^-(B')$ can be characterised  as the pullback of the 
+co-span $A\stackrel{f}{\to} B\stackrel{i}{\leftarrow}B'$ where $i=in_{B',B}$
+is the inclusion map $B'\hookrightarrow B$:
+%\[
+\begin{tikzcd}[ampersand replacement=\&]
+\set{(a,x) \mid a\in A, x\in B', f(a)=x} \arrow{r}{\pi_1}\arrow[swap]{d}{\pi_2}\&
+A\arrow{d}{f}\\
+B'\arrow{r}{i} \&
+B 
+\end{tikzcd}
+%\]
+\item Uhh, what's this $\set{(a,x) \mid a\in A, x\in B', f(a)=x}$, it's not $f^-(B')$?! OK,
+an isomorphic span is $B'\stackrel{f}{\leftarrow} f^-(B') \stackrel{in}{\hookrightarrow}A$
+\item Exercise: find the isomorphism for the isomorphic span
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{The equalizer morphism is a mono}\label{Ch4:EqMorMono}
+
+ \begin{itemize}[<+->]
+\item Assume $(E,m)$ is an equalizer and assume $h: X\to E$:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+X\arrow{dr}{h;m}\arrow[swap]{d}{h}\\ 
+E \arrow[swap]{r}{m}\&
+A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&B
+\end{tikzcd}
+\]
+\item Then $(h;m);f = h;(m;f) = h;(m;g) = (h;m);g$,
+so $h$ is uniquely defined by $h;m$ by the universal property of  $(E,m)$
+\item So if  $h;m = h';m$ for $h':X\to E$ we have $h=h'$
+\item Hence $m$ is mono
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Pullbacks reflect monos}\label{Ch4:PullReflMono}
+
+ \begin{itemize}[<+->]
+\item Assume the square below is a pullback square, $m:B\to C$ a mono,
+and $g,h: X\to D$:
+\begin{tikzcd}[ampersand replacement=\&]
+X\arrow[bend left]{dr}{h}\arrow[bend right]{dr}{g}\\
+\& 
+D \arrow[swap]{r}{\pi_1}\arrow{d}{\pi_2}\&
+A\arrow{d}{f}\\
+\&
+B\arrow{r}{m} \&
+C 
+\end{tikzcd}
+\item We prove that $\pi_1$ is mono: assume $g;\pi_1 = h;\pi_1$.
+Then $g;\pi_1;f = h;\pi_1;f$, so $g;\pi_2;m = h;\pi_2;m$ by commutativity.
+So also $g;\pi_1 = h;\pi_1$, since $m$ is mono. Hence $g=h$ is the
+unique mediating morphism.
+\item Exercise: what if $f$ is mono instead of $m$? Why?
+
+\end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Equalizer from pullbacks and product}\label{Ch4:EqByPullbProd}
+
+ \begin{itemize}[<+->]
+\item Given in a category $\CC$:
+\begin{tikzcd}[ampersand replacement=\&]
+%X\arrow{dr}{h;m}\arrow[swap]{d}{h}\\ 
+E \arrow[swap]{r}{m}\&
+A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&B
+\end{tikzcd}
+\item $(E,m)$ is an equalizer iff the following is a pullback square:
+\[
+\begin{tikzcd}[ampersand replacement=\&]
+%X\arrow[bend left]{dr}{h}\arrow[bend right]{dr}{g}\\
+E \arrow{r}{m;f}\arrow[swap]{d}{m}\&
+B\arrow{d}{\Kp{id_B,id_B}}\\
+A\arrow{r}{\Kp{f,g}} \& B\times B 
+\end{tikzcd}
+\]
+\item Recall that products can be formed by pullbacks $A\to 1_\CC \leftarrow B$
+\item Is there something more general?
+\item Yes: limits
+
+\end{itemize}
 
  }
 
