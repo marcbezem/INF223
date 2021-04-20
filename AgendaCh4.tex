@@ -1030,7 +1030,7 @@ unique mediating morphism.
 \item Given in a category $\CC$:
 \begin{tikzcd}[ampersand replacement=\&]
 %X\arrow{dr}{h;m}\arrow[swap]{d}{h}\\ 
-E \arrow[swap]{r}{m}\&
+E \arrow{r}{m}\&
 A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&B
 \end{tikzcd}
 \item $(E,m)$ is an equalizer iff the following is a pullback square:
@@ -1043,10 +1043,190 @@ A\arrow{r}{\Kp{f,g}} \& B\times B
 \end{tikzcd}
 \]
 \item Recall that products can be formed by pullbacks $A\to 1_\CC \leftarrow B$
-\item Is there something more general?
-\item Yes: limits
+\item Is there a common pattern?
+\item Yes: limits (and co-limits)
 
 \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Limits}\label{Ch4:Limits}
+
+ \begin{itemize}[<+->]
+\item Recall: A \emph{diagram of shape} $J$ is a graph homomorphism
+$\delta : J\to \CC$, $\CC$ a category
+\item Common traits of half of the universal constructions:
+ \begin{enumerate}
+    \item One starts with a diagram $\delta$ in $\CC$;
+%with a configuation of objects and morphisms
+    \item One claims the existence of a new object $L$ (the \emph{{\color{red}limit}}) with 
+morphisms {\color{red}to} $\delta$ such that the extended diagram $\delta^+$ commutes
+and every object in $\delta$ {\color{red} is reachable from} $L$;
+    \item One claims a universal property such that the new stuff in
+$\delta^+-\delta$ is unique up to unique identity
+ \end{enumerate}
+\item Visualization: a cone with top $L$ and base $\delta$ (script 4.4.118)
+\item Revisit: product, final object, equalizer, pullback
+
+\end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Co-limits, the dual of limits}\label{Ch4:CoLimits}
+
+ \begin{itemize}[<+->]
+\item Note that the dual notion of a diagram is ... a diagram
+\item Common traits of the other half of universal constructions:
+ \begin{enumerate}
+    \item One starts with a diagram $\delta$ in $\CC$;
+%with a configuation of objects and morphisms
+    \item One claims the existence of a new object $C$ (the \emph{{\color{red}colimit}}) with 
+morphisms {\color{red}from} $\delta$ such that the extended diagram $\delta^+$ commutes
+and every object in $\delta$ {\color{red} has a path to} $C$;
+    \item One claims a universal property such that the new stuff in
+$\delta^+-\delta$ is unique up to unique identity
+ \end{enumerate}
+\item Visualization: a cocone with bottom $C$ and base $\delta$ (script 4.4.119)
+\item Revisit: sum, initial object
+\item On the next slides: 
+coequalizer, pushout (= dual of pullback)
+
+\end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Equalizer and coequalizer compared}\label{Ch4:EqCoEq}
+
+ \begin{itemize}[<+->]
+\item 
+\begin{tikzcd}[ampersand replacement=\&]
+%X\arrow{dr}{h;m}\arrow[swap]{d}{h}\\ 
+E \arrow{r}{m}\&
+A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&B
+\end{tikzcd},
+dual:
+\begin{tikzcd}[ampersand replacement=\&]
+%X\arrow{dr}{h;m}\arrow[swap]{d}{h}\\ 
+A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&B  \arrow{r}{n} \& C
+\end{tikzcd} (why?)
+\item Co(co)ne:
+\begin{tikzcd}[ampersand replacement=\&]
+%X\arrow{dr}{h;m}\arrow[swap]{d}{h}\\ 
+\&E \arrow[swap]{dl}{m}\arrow{dr}{m;f} \&
+~A\arrow[swap]{dr}{f;n}\arrow[bend left]{rr}{f}\arrow[bend right]{rr}{g}\&
+\&B\arrow{dl}{n}\\
+A\arrow[bend left]{rr}{f}\arrow[bend right]{rr}{g}\&\&B~ \& C
+\end{tikzcd}
+\item 
+\begin{tikzcd}[ampersand replacement=\&]
+X\arrow{dr}{h}\arrow{d}[description]{\exists!k}\\ 
+E \arrow[swap]{r}{m}\&
+A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&B
+\end{tikzcd} dual:
+\begin{tikzcd}[ampersand replacement=\&]
+\&\&X\\ 
+A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&
+B  \arrow{r}{n}\arrow{ur}{h} \&
+C
+\arrow{u}[description]{\exists!k}
+\end{tikzcd}
+\item
+In $\Set$, %\left\{
+$E=\set{a\in A\mid f(a)=g(a)}$. What is $C$?
+
+\end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Coequalizer}\label{Ch4:CoEqSet}
+
+ \begin{itemize}[<+->]
+\item $(C,n)$ should satisfy $f;n=g;n$ and the universal property:
+if $h: B\to X$ with $f;h=g;h$, then $h=n;k$ for some unique $k$
+\item Coequalizer in $\Set$ is subtle!
+\begin{tikzcd}[ampersand replacement=\&]
+\&\&X\\ 
+A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&
+B  \arrow{r}{n}\arrow{ur}{h} \&
+C
+\arrow{u}[description]{\exists!k}
+\end{tikzcd}
+\item Exploring some trivial cases:
+ \begin{itemize}
+\item If $f=g$, then $(C,n)\simeq(B,id_B)$ (why?)
+\item If $f$ ($g$) is constant $b$ ($b'$) and  $b\neq b'$, then $n(b)=n(b')$
+and we can take $C = B-\set{b'}$ and $n(b')=b$ and else the identity
+\end{itemize}
+\item In general: $C=B/{\sim}$ where $\sim$ is smallest equivalence relation
+ on $B$ satisfying $f(a)\sim g(a)$ for all $a\in A$
+\end{itemize}
+
+}
+
+\frame
+  {   
+    \frametitle{Pushouts}\label{Ch4:Push}
+
+ \begin{itemize}[<+->]
+\item Pushout (right) is dual to pullback (left)
+\begin{tikzcd}[ampersand replacement=\&]
+X\arrow[swap]{ddr}{h_2}\arrow{rrd}{h_1}\arrow{rd}[description]{\exists!k}\\
+\& 
+D \arrow[swap]{r}{\pi_1}\arrow{d}{\pi_2}\&
+A\arrow{d}{f}
+\&
+C \arrow[swap]{r}{f}\arrow{d}{g}\&
+A\arrow[swap]{d}{\kappa_1}\arrow{rdd}{h_1}\\
+\&
+B\arrow{r}{g} \&
+C
+\&
+B\arrow{r}{\kappa_2}\arrow[swap]{drr}{h_2} \&
+D\arrow{rd}[description]{\exists!k}
+\\
+\&\&\&\&\&Y
+\end{tikzcd}  
+\item A \emph{pushout} of a span
+$A\stackrel{f}{\leftarrow} C \stackrel{g}{\to}B$
+is a cospan $A\stackrel{\kappa_1}{\to} D \stackrel{\kappa_2}{\leftarrow}B$ such that 
+$f;\kappa_1=g;\kappa_2$ and for any cospan 
+$A\stackrel{h_1}{\to} X \stackrel{h_2}{\leftarrow}B$
+with $f;h_1 = g;h_2$
+there is a unique morphism $k: D\to Y$
+such that $h_i = \kappa_i;k$ for $i=1,2$.
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Properties of pushouts}\label{Ch4:PushoProp}
+
+ \begin{itemize}[<+->]
+\item If a pushout exists, object $D$ is denoted by $A+_C B$ 
+and the mediating morphism $k$ as $[f,g]_C$
+\item Pushouts are unique up to unique isomorphism
+\item If $\CC$ has 0 and pushouts, then $A+_0 B$ is a sum of $A,B$ 
+\item Pushouts can be obtained from sum and coequalizer:
+given a span $A\stackrel{f}{\leftarrow} C \stackrel{g}{\to}B$,
+form parallel morphisms $f;\kappa_1$, $g;\kappa_2: C\to A+B$,
+their coequalizer yields the pushout
+\begin{tikzcd}[ampersand replacement=\&]
+\& A\arrow[swap]{dr}{\kappa_1}\\
+C\arrow[swap]{ur}{f}\arrow{dr}{g}\&\&
+A+B  \arrow{r}{n} \& P \\
+\& B\arrow{ur}{\kappa_2}
+\end{tikzcd}
+\item Exercise: find the cospan and prove that it is a pushout
+ \end{itemize}
 
  }
 
