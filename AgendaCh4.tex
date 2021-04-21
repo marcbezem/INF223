@@ -1042,9 +1042,10 @@ B\arrow{d}{\Kp{id_B,id_B}}\\
 A\arrow{r}{\Kp{f,g}} \& B\times B 
 \end{tikzcd}
 \]
+\item Instead of $(m;f) : E\to B$ we could have taken $(m;g)$
 \item Recall that products can be formed by pullbacks $A\to 1_\CC \leftarrow B$
 \item Is there a common pattern?
-\item Yes: limits (and co-limits)
+\item Yes: limits (and, dually, co-limits)
 
 \end{itemize}
 
@@ -1062,7 +1063,8 @@ $\delta : J\to \CC$, $\CC$ a category
     \item One starts with a diagram $\delta$ in $\CC$;
 %with a configuation of objects and morphisms
     \item One claims the existence of a new object $L$ (the \emph{{\color{red}limit}}) with 
-morphisms {\color{red}to} $\delta$ such that the extended diagram $\delta^+$ commutes
+morphisms {\color{red}to} the objects in $\delta$ such that the extended 
+diagram $\delta^+$ commutes
 and every object in $\delta$ {\color{red} is reachable from} $L$;
     \item One claims a universal property such that the new stuff in
 $\delta^+-\delta$ is unique up to unique identity
@@ -1165,11 +1167,39 @@ C
 \item If $f$ ($g$) is constant $b$ ($b'$) and  $b\neq b'$, then $n(b)=n(b')$
 and we can take $C = B-\set{b'}$ and $n(b')=b$ and else the identity
 \end{itemize}
-\item In general: $C=B/{\sim}$ where $\sim$ is smallest equivalence relation
+\item In general: $C=B/{\sim}$ where $\sim$ is smallest\footnote{%
+= intersection of all such things, or inductively defined.}
+ equivalence relation
  on $B$ satisfying $f(a)\sim g(a)$ for all $a\in A$
 \end{itemize}
 
 }
+
+\frame
+  {   
+    \frametitle{Coequalizer (ctnd)}\label{Ch4:CoEqSetCtnd}
+
+ \begin{itemize}[<+->]
+\item In general: $C=B/{\sim}$ where $\sim$ is smallest equivalence relation
+ on $B$ satisfying $f(a)\sim g(a)$ for all $a\in A$
+\item Define $n: B \to B/{\sim}$ by $n(b)= [b]_{\sim}$
+\item Proof of the universal property: assume $h:B\to X$ with $f;h=g;h$.
+The equation $n;k = h$ enforces $k([b]) = h(b)$ for all $b\in B$, so we have
+to show that this defines a function. 
+%This boild down to $h(b)=h(b')$ if $b\sim b'$.
+\vspace*{2mm}
+
+Now comes an interesting argument.
+Define $b\approx b'$ by $h(b)=h(b')$.
+Then $f(a)\approx g(a)$ for all $a\in A$, since $f;h=g;h$.
+Moreover, $\approx$ is an equivalence relation (refsymtra).
+Hence ${\sim}\subseteq{\approx}$, since $\sim$ is by definition the smallest such.
+So $h(b)=h(b')$ if $b\sim b'$.
+
+\end{itemize}
+
+}
+
 
 \frame
   {   
@@ -1230,6 +1260,59 @@ A+B  \arrow{r}{n} \& P \\
 
  }
 
+\frame
+  {   
+    \frametitle{Finite limits}\label{Ch4:FinLims}
+
+ \begin{itemize}[<+->]
+\item Recall that a limit is a top of a (commuting) cone with a universal property
+\item A limit is called finite if the cone is finite
+\item We have seen that limits of some types in a category can yield limits of
+other types as well (similarly for co-limits). Now:
+\item THM if $\CC$ has $\times$, 1, and equalizers, then $\CC$ has all finite limits
+\item Proof by example (can easily be generalized). Let $\delta$ be
+\[\begin{tikzcd}[ampersand replacement=\&]
+A\arrow[bend left]{r}{f}\&
+B \arrow[bend left]{l}{g} \arrow{r}{n}\arrow{r}{h} \&A\&C
+\end{tikzcd}\] 
+Now define: % (explanation follows):
+$X = A\times B\times A\times C$ and $Y = B\times A \times A$,
+and equalizer
+\begin{tikzcd}[ampersand replacement=\&]
+L \arrow{r}{m}\&
+X\arrow[bend left]{rr}{\Kp{\pi_2,\pi_1,\pi_3}}
+\arrow[swap, bend right]{rr}{\Kp{\pi_1;f,\pi_2;g,\pi_2;h}}\&\&Y
+\end{tikzcd}
+is the limit (next slide)
+ \end{itemize}
+
+}
+
+\frame
+  {   
+    \frametitle{Explanation of example of finite limit (ctnd)}\label{Ch4:FinLimCtnd}
+
+ \begin{itemize}[<+->]
+\item \[\begin{tikzcd}[ampersand replacement=\&]
+L \arrow{r}{m}\&
+A\times B\times A\times C \arrow[bend left]{rr}{\Kp{\pi_2,\pi_1,\pi_3}}
+\arrow[swap, bend right]{rr}{\Kp{\pi_1;f,\pi_2;g,\pi_2;h}}\&\&B\times A \times A
+\end{tikzcd}\]
+\item 
+\[\begin{tikzcd}[ampersand replacement=\&]
+\&\&~~L
+\arrow[swap]{ddl}[description]{m;\pi_1}
+\arrow[dotted, xshift=1mm]{dd}[description]{m;\pi_2}
+\arrow[dotted, xshift=2mm]{ddr}[description]{m;\pi_3}
+\arrow[dotted, xshift=2mm, yshift=0.5mm]{ddrr}[description]{m;\pi_4}
+\\\\
+\delta:\&A\arrow[bend left]{r}{f}\&
+B \arrow[bend left]{l}{g} \arrow{r}{n}\arrow{r}{h} \&A\&C
+\end{tikzcd}\] 
+\item The universal property of $(L,m)$ implies that of $(L,\delta)$
+ \end{itemize}
+
+}
 
 \frame
   {   
@@ -1238,7 +1321,6 @@ A+B  \arrow{r}{n} \& P \\
  \begin{enumerate}[<+->]
 \item 
  \end{enumerate}
-
 
 }
 
@@ -1249,6 +1331,8 @@ A+B  \arrow{r}{n} \& P \\
  \begin{itemize}[<+->]
 \item In formula (4.22) and the para above, the $h$'s should be $f_x$'s
 \item In the diagram of Cor. 4.4.110, the left lower $A$ should be $B$
+\item Lemma 4.4.85 can be simplified with $h = m;f$ instead of $\exists h$
+\item In the literature, cones are often commutative by definition (Def.\ 4.4.116/8)
  \end{itemize}
 
  }
