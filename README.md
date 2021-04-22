@@ -153,15 +153,31 @@
    1. monics are reflected by pullbacks, coding of monics by pullbacks  
    1. composition of pullbacks is a pullback and decomposition of pullbacks
 
-1. Lecture (15.04.21, week 15) TBA
+1. Lecture (15.04.21, week 15)
 
-1. Lecture (16.04.21, week 15) TBA
+   1. Monads 1
+   
+1. Lecture (16.04.21, week 15) 
 
-1. Lecture (22.04.21, week 16) TBA
+   1. Monads 2
+   
 
-1. Lecture (23.04.21, week 16) TBA
+1. Lecture (22.04.21, week 16) 
 
-1. Lecture (29.04.21, week 17) TBA
+   1. Monads 3
+   
+1. Lecture (23.04.21, week 16) 
+
+   1. Monads 4
+   
+
+1. Lecture (29.04.21, week 17) 
+
+   1. Coequalizers
+   1. Limits
+   1. Co-limits
+   1. Pushouts
+   
 
 1. Lecture (30.04.21, week 17) TBA
 
