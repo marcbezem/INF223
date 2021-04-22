@@ -505,7 +505,7 @@ $\mu_A([]) = [],~\mu_A(l::ls) = l{+}\!{+}\mu_A(ls)$
     \item the functor \ttt{ data Maybe t = Just t | Nothing}; %($t$ a type variable)
  \ttt{Maybe(f)(Just a) = Just (f a), Maybe(f)(\_) = Nothing}.
     \item the natural transformation $\eta: id_\HH \To \ttt{Maybe}$, $\eta_A(a)= \ttt{Just a}$
-    \item the natural transformation $\mu: \ttt{Maybe;Maybe} \to \ttt{Maybe}$, 
+    \item the natural transformation $\mu: \ttt{Maybe;Maybe} \To \ttt{Maybe}$, 
 $\mu_A(\ttt{Just(Just(a))})= \ttt{Just(a)}$,  $\mu_A(\ttt{\_})= \ttt{Nothing}$
  \end{enumerate}
 %\item Exercise: figure out what $\mu_A$ does
@@ -524,7 +524,7 @@ $\mu_A(\ttt{Just(Just(a))})= \ttt{Just(a)}$,  $\mu_A(\ttt{\_})= \ttt{Nothing}$
     \frametitle{The Exception monad}\label{Mon5:ListMonad}
 
  \begin{itemize}[<+->]
-\item The Exception monad empowers the
+\item The Exception monad strengthens the
 Maybe monad to signal not only \emph{that} something has gone wrong,
 but also \emph{what}
 \item Assume $E$ is some type whose values we call \emph{exceptions}
@@ -620,13 +620,13 @@ $= (\lambda f_0. c(6*(1*f_0))) (1) = c(6*1*1) = c(6)$, stack-free!
  \begin{enumerate}
     \item the category $\Set$ (or $\HH$) and a set (or type) $R$
     \item the functor $C(A) = (A\to R)\to R$, $C(f) : C(A)\to C(B)$ defined by
-$C(f)(g)(c) = g(f;c)$ for all $g: (A\to R)\to R, c: B\to R$ 
+$C(f)(g)(c) = g(f;c)$ for all $f: A\to B$, $g: (A\to R)\to R, c: B\to R$ 
     \item the natural transformation $\eta$: $\ttt{return}\, a = \lambda c. c(a)$
     \item $\mu$ defined through $\bind$: %indirectly, by $\bind$:  
 $(m \bind h) =  \lambda c. m(\lambda a. h(a)(c))$
  \end{enumerate}
 \item Types: $m: (A\to R)\to R$, $h: A\to ((B\to R)\to R)$, 
-$c: X\to R$ the $X$-continuations, for $X=A,B$.
+$c: X\to R$ the $X$-continuations, for $X=A,B$ in points 3,4.
 \item Explanation: any $B$-continuation $c$ leads to an $A$-continuation 
 $\lambda a. h(a)(c)$ using $h$, and then we use $m$ to get an $R$-value
 \item Exercise: show that the Haskell monad laws hold
@@ -646,7 +646,7 @@ $\lambda a. h(a)(c)$ using $h$, and then we use $m$ to get an $R$-value
 \item Arguments $x,y$ encode a state of two natural numbers 
 %a function $s:\set{x,y}\to\nat$
 \item State-encoded-in-argument is impractical  for large states
-\item Implicit machine state is not \emph{referentially transparent} (?)
+\item Implicit machine state is not \emph{referentially transparent} (uhh?)
 \item A Fibonacci state is a pair $(x,y) : \nat^2$, the state transforma- tion
 is $g(x,y)=(x+y,x)$, and $f(n) = \pi_1(g^n(1,0))$
 \item The State monad makes it possible to separate the use of
@@ -672,11 +672,10 @@ $St(f)(\Kp{g,h})(s) = (f(g(s)),h(s))$ (NB $St$ for $St_S$)%for all $s\in S$
     \item $\mu$ defined through $\bind$:
 $(\Kp{g,{\color{red}h}} \bind f ) =  \lambda s. f(g(s))({\color{red}h}(s))$
  \end{enumerate}
-%\item Exercise: figure out what $\mu_A$ does
 \item Types: $\Kp{g,h}: S \to (A\times S)$, $f: A\to (S \to (B\times S))$ 
-\item Explanation: a monad value in $St_S(A)$ is a pair of functions  $\Kp{g,h}$
+\item Explanation: a monad value in $St_S(A)$ is a pair of functions  $\Kp{g,{\color{red}h}}$
 with $g:S\to A$ producing $A$-values and ${\color{red}h}:S\to S$ the state transformer.
-Binding $f$ to $\Kp{g,{\color{red}h}}$ yields a monad value in $St_S(B)$, i.e.,
+Binding $f$ to $\Kp{g,{\color{red}h}}$ yields a monad value in $St_S(B)$:
 for every state $s$ we apply $f$ to the $A$-value $g(s)$ and 
 the changed state ${\color{red}h}(s)$. The ${\color{red}h}$ is the magic!
 \item Exercise: show that the Haskell monad laws hold
