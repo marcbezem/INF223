@@ -8,7 +8,6 @@
  - https://ncatlab.org/nlab/show/extension+system (monads) 
  
  There are two important breaks that can be used to work on compulsory exercises: the winter break (first week of March, week 9) and an extended Easter break (week 13 and 14). There will be a third compulsory exercise after the Easter break. 
-<!--- https://github.com/mauget/fibonacci --->
 
 1. Lecture 21.01.21 (week 3)
 
@@ -174,9 +173,9 @@
 1. Lecture (29.04.21, week 17) 
 
    1. Coequalizers
-   1. Limits
-   1. Co-limits
+   1. Limits and colimits
    1. Pushouts
+   1. Finite limits from products and equalizers
    
 
 1. Lecture (30.04.21, week 17) TBA
