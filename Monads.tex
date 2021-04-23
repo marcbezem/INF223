@@ -749,6 +749,15 @@ of Fibonacci in Haskell:
 \item \href{https://dl.acm.org/doi/pdf/10.1145/1924421.1924436}
 {\color{blue} LINQ} (= Language Independent Query)
 
+\item Programming project: recall $f(0)=1, f(1)=1, f(n+2)=$ $f(n+1)+f(n)$.
+Write in your favorite language a program that counts the number of calls to $f$
+when computing the $n^{th}$ Fibonacci number using the above definition.
+Then do this in Haskell using the State monad (or just the Writer). \\
+Tip: just clone
+\href{https://github.com/mauget/fibonacci}{\color{blue}this implementation}
+of Fibonacci in Haskell and change it to use the above definition of $f$ and
+a counter. (Of course, \ttt{fibsState} as is uses $n$ calls.)
+
  \end{itemize}
  }
 
