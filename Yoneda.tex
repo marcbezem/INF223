@@ -1,0 +1,109 @@
+\documentclass[handout]{beamer}
+%\documentclass[slides]{beamer}
+% Vary the color applet  (try out your own if you like)
+%\colorlet{structure}{red!20!black}
+%\beamertemplateshadingbackground{yellow!20}{white}
+%\usepackage{beamerthemeshadow}
+%\usepackage[utf8x]{inputenc} CONFLICT!
+\usepackage{tikz}
+%\usepackage[english,norsk,nynorsk]{babel}
+\usepackage{tikz-cd}
+\usetikzlibrary{trees}
+
+\usepackage[all]{xy}
+\usepackage{multicol}
+
+%\setbeamertemplate{navigation symbols}{}++++++
+%\setbeamertemplate{footline}[frame number]
+\usetheme{Montpellier}
+
+
+\input macros
+
+\newcommand{\To}{\Rightarrow}
+\newcommand{\Trt}{\stackrel{*}{\Rightarrow}}
+\newcommand{\ToG}{\Rightarrow_G}
+\newcommand{\redS}{{\color{red} S}}
+
+\newcommand{\bfsf}[1]{{\boldsymbol{#1}}}
+\newcommand{\Set}{\bfsf{Set}}
+\newcommand{\Gra}{\bfsf{Graph}}
+\newcommand{\CC}{\bfsf{C}}
+\newcommand{\DD}{\bfsf{D}}
+\newcommand{\EE}{\bfsf{E}}
+\newcommand{\PP}{\bfsf{P}}
+\newcommand{\HH}{\bfsf{H}}
+\newcommand{\Nat}{\bfsf{Nat}}
+\newcommand{\Incl}{\bfsf{Incl}}
+\newcommand{\Rel}{\bfsf{Rel}}
+\newcommand{\Mult}{\bfsf{Mult}}
+\newcommand{\Mon}{\bfsf{Mon}}
+\newcommand{\Cat}{\bfsf{Cat}}
+\newcommand{\CAT}{\bfsf{CAT}}
+
+\newcommand{\Kp}[1]{{\langle #1 \rangle}}
+\newcommand{\Kc}{;\!;}
+\newcommand{\bind}{{>}\!\!{>}\!{=}}
+\newcommand{\ttt}[1]{\text{\tt #1}}
+
+\title[INF223 presentations]{}
+
+\begin{document}
+
+\section{Monads}
+\subsection{Introduction}
+ 
+\frame
+  {   
+    \frametitle{You need a lemma}\label{Yon:Intro}
+
+ \begin{itemize}[<+->]
+\item Assume we have the following data:
+\begin{itemize}
+    \item a small category $\CC$
+    \item a functor $F:\CC\to\Set$
+    \item an object $c$ of $\CC$, so a functor $\CC(c,\_):\CC\to\Set$
+ \end{itemize}
+Then the set of natural transformations $\CC(c,\_)\To F$ is in bijective
+correspondence with the set $F(c)$, and this in a `natural' way
+(we will explain this and make this precise)
+\item The above statement is called the Yoneda Lemma
+\item Useful links are:
+ \begin{itemize}
+    \item \myurl{https://en.wikipedia.org/wiki/Yoneda\_lemma}
+    \item \myurl{https://ncatlab.org/nlab/show/Yoneda+lemma}
+ \end{itemize}
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Exploration of the simplest possible case}\label{Yon:Triv}
+
+ \begin{itemize}[<+->]
+\item Let $\CC$ be the trivial category, with only one object $1$ and
+ its identity morphism $id_1$. Then $\CC(1,\_):\CC\to\Set$ maps
+$1$ to $\CC(1,1) = \set{id_1}$ and $\CC(1,id_1) = id_{\set{id_1}}$
+\item Let $F:\CC\to\Set$ be a functor, then $F(1)$ is a set, and
+$F(id_1) = id_{F(1)}$
+\item Any natural transformation $\alpha: \CC(c,\_)\To F$ consists of
+only $\alpha_1: \set{id_1} \to F(1)$ and,
+conversely, any such map is a natural transformation
+since the only morphism in $\CC$ is $id_1$
+\item Yoneda now says:  $(\set{id_1} \to F(1)) \simeq F(1)$ in $\Set$
+\item Since $F$ was arbitrary we get  $(1_\Set \to X) \simeq X$ for every set $X$
+\item Thus the Yoneda lemma is a (vast) generalization of this simple fact
+ \end{itemize}
+
+ }
+
+\end{document}
+
+\myurl{en.wikipedia.org/wiki/Ordered_pair}
+ \begin{itemize}
+    \item emulation halts because of the partiality of $\delta$;
+    \item emulation halts because of "head left" with head at first cell;
+    \item emulation halts because of reaching a halting state;
+    \item the emulated TM goes on forever.
+ \end{itemize}

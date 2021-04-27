@@ -922,6 +922,75 @@ as in $\Set$ we have $A\times_C B = \cup_{c\in C} (f^-(c) \times g^-(c))$
 
 \frame
   {   
+    \frametitle{More properties of pullbacks}\label{Ch4:PullbPropMore}
+
+ \begin{itemize}[<+->]
+\item If both inner squares are pullback squares, so is the outer:
+\begin{tikzcd}[ampersand replacement=\&]
+X\arrow[swap]{ddr}{b}\arrow{rrrd}{a}\arrow{rd}[description]{\exists!k}\arrow[dotted]{rrd}\\
+\& 
+A_1 \arrow[swap]{r}{f_1}\arrow{d}{g_1}\&
+A_2\arrow[swap]{r}{f_2}\arrow{d}{g_2}\&
+A_3 \arrow{d}{g_3}\\
+\&
+B_1\arrow{r}{h_1} \&
+B_2\arrow{r}{h_2} \&
+B_3
+\end{tikzcd}  
+\item If the right inner square and the outer are pullback squares, so is the left inner:
+\begin{tikzcd}[ampersand replacement=\&]
+X\arrow[swap]{ddr}{b}\arrow[dashed]{rrrd}{a;f_2}
+\arrow{rd}[description]{\exists!k}\arrow[swap, xshift=1mm]{rrd}{a}\\
+\& 
+A_1 \arrow[swap]{r}{f_1}\arrow{d}{g_1}\&
+A_2\arrow[swap]{r}{f_2}\arrow{d}{g_2}\&
+A_3 \arrow{d}{g_3}\\
+\&
+B_1\arrow{r}{h_1} \&
+B_2\arrow{r}{h_2} \&
+B_3
+\end{tikzcd}  
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Pushouts}\label{Ch4:Push}
+
+ \begin{itemize}[<+->]
+\item Pushout (right) is dual to pullback (left)
+\begin{tikzcd}[ampersand replacement=\&]
+X\arrow[swap]{ddr}{h_2}\arrow{rrd}{h_1}\arrow{rd}[description]{\exists!k}\\
+\& 
+D \arrow[swap]{r}{\pi_1}\arrow{d}{\pi_2}\&
+A\arrow{d}{f}
+\&
+C \arrow[swap]{r}{f}\arrow{d}{g}\&
+A\arrow[swap]{d}{\kappa_1}\arrow{rdd}{h_1}\\
+\&
+B\arrow{r}{g} \&
+C
+\&
+B\arrow{r}{\kappa_2}\arrow[swap]{drr}{h_2} \&
+D\arrow{rd}[description]{\exists!k}
+\\
+\&\&\&\&\&Y
+\end{tikzcd}  
+\item A \emph{pushout} of a span
+$A\stackrel{f}{\leftarrow} C \stackrel{g}{\to}B$
+is a cospan $A\stackrel{\kappa_1}{\to} D \stackrel{\kappa_2}{\leftarrow}B$ such that 
+$f;\kappa_1=g;\kappa_2$ and for any cospan 
+$A\stackrel{h_1}{\to} X \stackrel{h_2}{\leftarrow}B$
+with $f;h_1 = g;h_2$
+there is a unique morphism $k: D\to Y$
+such that $h_i = \kappa_i;k$ for $i=1,2$.
+ \end{itemize}
+
+ }
+
+\frame
+  {   
     \frametitle{Pullback from product and equalizer}\label{Ch4:PullbProdEq}
 
  \begin{itemize}[<+->]
