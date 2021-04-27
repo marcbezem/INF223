@@ -98,6 +98,77 @@ since the only morphism in $\CC$ is $id_1$
 
  }
 
+\frame
+  {   
+    \frametitle{Exploration of the next simplest case}\label{Yon:Triv}
+
+ \begin{itemize}[<+->]
+\item Let $\CC$ be the category ${\cdot}{\to}{\cdot}$, with objects $1,2$ and
+a non-trivial morphism $f:1\to 2$. Then $\CC(1,\_):\CC\to\Set$ maps
+$1$ to $\CC(1,1) = \set{id_1}$ and $2$ to $\CC(1,2) = \set{f}$, and
+$\CC(1,f)$ is the map $\CC(1,1)\to\CC(1,2)$ sending $id_1$ to $f$  
+\item Let $F:\CC\to\Set$ be a functor, then $F(1), F(2)$ are sets, and
+$F(f)$ is a map ${F(1)}\to\set{f}$
+\item Any natural transformation $\alpha: \CC(1,\_)\To F$ consists of
+$\alpha_1: \set{id_1} \to F(1)$ and $\alpha_2: \set{f} \to F(2)$ satisfying 
+naturality: $F(f)(\alpha_1(id_1)) = \alpha_2(f)$, i.e., an element of the graph of $F(f)$
+\item Notations: $X_i = F(i)$ and $x_i =\alpha_i(\_)$ with % $x_i \in X_i$ and
+$F(f)(x_1) = x_2$
+\item Yoneda now says:   $F(1) \simeq{}$ the graph of $F(f)$
+\item This boils down to: domain and graph of $F(f)$ are isomorphic
+\item Again  the Yoneda lemma generalizes (vastly) a simple fact
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Representable functors to $\Set$}\label{Yon:ReprFun}
+
+ \begin{itemize}[<+->]
+\item Let $\CC$ be a small category and $A$ an arbitrary object in $\CC$. 
+The functor  $\CC(A,\_):\CC\to\Set$ maps objects $X$ to sets $\CC(A,X)$
+of morphisms from $A$ to $X$. Morphisms $f: X\to Y$ in $\CC$ are
+mapped to Morphisms $\CC(A,f): \CC(A,X)\to\CC(A,Y)$ by
+postcompostion with $f$: if $g:A\to X$ then $\CC(A,f)(g) = g;f$.
+\item A functor $F:\CC\to\Set$ is \emph{represented} by $A$ if
+there exists a natural isomorphism $\alpha: \CC(A,\_)\To F$.
+Intuition: $F$ describes the social life of $A$ `on the right'.
+\item Dually, we have a functor $\CC(\_,A):\CC^{op}\to\Set$
+and a notion of corepresentable functor, 
+describing the social life of $A$ `on the left' 
+(both `left' and `right' include $A$ itself).
+\item All (co)representable functors together describe $\CC$ somehow
+\item NB Yoneda gives information on natural transformations 
+$\alpha: \CC(A,\_)\To F$, not necessarily being natural isomorphisms
+
+\end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Exploration of the monoid case}\label{Yon:Mon}
+
+ \begin{itemize}[<+->]
+\item Let $\CC$ be a monoid $(M,1,*)$ as a category, i.e., $\CC$ has one object
+$\bullet$ and morphisms $m:\bullet\to\bullet$ for 
+every $m\in M$, with composition and unit as in the monoid.
+The functor $\CC(\bullet,\_)$ acting on $m$ is right multiplication with $m$ (why?).
+\item A functor $F:\CC\to\Set$ consist of a set $F(\bullet)$ and for every
+$m\in M$ a map $F(m) : F(\bullet)\to F(\bullet)$ such that $F(1)= id_{F(\bullet)}$
+and $F(m*m')=F(m);F(m')$.
+\item Any natural transformation $\alpha: \CC(\bullet,\_)\To F$ consists of
+a set 
+
+\item Yoneda now says:   $F(1) \simeq{}$ the graph of $F(f)$
+\item This boils down to: domain and graph of $F(f)$ are isomorphic
+\item Again  the Yoneda lemma generalizes (vastly) a simple fact
+ \end{itemize}
+
+ }
+
+
 \end{document}
 
 \myurl{en.wikipedia.org/wiki/Ordered_pair}
