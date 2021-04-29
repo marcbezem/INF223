@@ -937,9 +937,9 @@ B_1\arrow{r}{h_1} \&
 B_2\arrow{r}{h_2} \&
 B_3
 \end{tikzcd}  
-\item If the right inner square and the outer are pullback squares, so is the left inner:
+\item If the right inner square and the outer square are pullbacks, so is the left inner:
 \begin{tikzcd}[ampersand replacement=\&]
-X\arrow[swap]{ddr}{b}\arrow[dashed]{rrrd}{a;f_2}
+X\arrow[swap]{ddr}{b}\arrow[dashed, xshift=1mm]{rrrd}{a;f_2}
 \arrow{rd}[description]{\exists!k}\arrow[swap, xshift=1mm]{rrd}{a}\\
 \& 
 A_1 \arrow[swap]{r}{f_1}\arrow{d}{g_1}\&
@@ -954,40 +954,6 @@ B_3
 
  }
 
-\frame
-  {   
-    \frametitle{Pushouts}\label{Ch4:Push}
-
- \begin{itemize}[<+->]
-\item Pushout (right) is dual to pullback (left)
-\begin{tikzcd}[ampersand replacement=\&]
-X\arrow[swap]{ddr}{h_2}\arrow{rrd}{h_1}\arrow{rd}[description]{\exists!k}\\
-\& 
-D \arrow[swap]{r}{\pi_1}\arrow{d}{\pi_2}\&
-A\arrow{d}{f}
-\&
-C \arrow[swap]{r}{f}\arrow{d}{g}\&
-A\arrow[swap]{d}{\kappa_1}\arrow{rdd}{h_1}\\
-\&
-B\arrow{r}{g} \&
-C
-\&
-B\arrow{r}{\kappa_2}\arrow[swap]{drr}{h_2} \&
-D\arrow{rd}[description]{\exists!k}
-\\
-\&\&\&\&\&Y
-\end{tikzcd}  
-\item A \emph{pushout} of a span
-$A\stackrel{f}{\leftarrow} C \stackrel{g}{\to}B$
-is a cospan $A\stackrel{\kappa_1}{\to} D \stackrel{\kappa_2}{\leftarrow}B$ such that 
-$f;\kappa_1=g;\kappa_2$ and for any cospan 
-$A\stackrel{h_1}{\to} X \stackrel{h_2}{\leftarrow}B$
-with $f;h_1 = g;h_2$
-there is a unique morphism $k: D\to Y$
-such that $h_i = \kappa_i;k$ for $i=1,2$.
- \end{itemize}
-
- }
 
 \frame
   {   
@@ -1018,14 +984,14 @@ morphisms $\pi_1;f$ and $\pi_2;g$ from $A\times B$ to $C$
 
 \frame
   {   
-    \frametitle{Preimages characterized by pullback}\label{Ch4:PullbPreim}
+    \frametitle{Preimages characterized by pullback in $\Set$}\label{Ch4:PullbPreim}
 
  \begin{itemize}[<+->]
 \item Recall the preimage $f^-(b) = \set{a\in A \mid f(a)=b}$ of a map 
 $f:A\to B$ and $b\in B$; for  a subset $B'\subseteq B$, 
 the preimage $f^-(B') = \set{a\in A \mid f(a)\in B'}$ 
 \item {\color{red} NB monad looming in the dark: $f^-(B')$ is the
-`multiset image' of $B'$ under the multimap $f^-$, the flattened image!}
+`multimap image' of $B'$ under the multimap $f^-$, the flattened image!}
 \item The preimage $f^-(B')$ can be characterised  as the pullback of the 
 co-span $A\stackrel{f}{\to} B\stackrel{i}{\leftarrow}B'$ where $i=in_{B',B}$
 is the inclusion map $B'\hookrightarrow B$:
@@ -1083,7 +1049,7 @@ C
 \end{tikzcd}
 \item We prove that $\pi_1$ is mono: assume $g;\pi_1 = h;\pi_1$.
 Then $g;\pi_1;f = h;\pi_1;f$, so $g;\pi_2;m = h;\pi_2;m$ by commutativity.
-So also $g;\pi_1 = h;\pi_1$, since $m$ is mono. Hence $g=h$ is the
+So also $g;\pi_2 = h;\pi_2$, since $m$ is mono. Hence $g=h$ is the
 unique mediating morphism.
 \item Exercise: what if $f$ is mono instead of $m$? Why?
 
@@ -1120,13 +1086,14 @@ A\arrow{r}{\Kp{f,g}} \& B\times B
 
  }
 
+
 \frame
   {   
     \frametitle{Limits}\label{Ch4:Limits}
 
  \begin{itemize}[<+->]
 \item Recall: A \emph{diagram of shape} $J$ is a graph homomorphism
-$\delta : J\to \CC$, $\CC$ a category
+$\delta : J\to gr(\CC)$, $\CC$ a category
 \item Common traits of half of the universal constructions:
  \begin{enumerate}
     \item One starts with a diagram $\delta$ in $\CC$;
@@ -1136,10 +1103,10 @@ morphisms {\color{red}to} the objects in $\delta$ such that the extended
 diagram $\delta^+$ commutes
 and every object in $\delta$ {\color{red} is reachable from} $L$;
     \item One claims a universal property such that the new stuff in
-$\delta^+-\delta$ is unique up to unique identity
+$\delta^+-\delta$ is unique up to unique isomorphism
  \end{enumerate}
 \item Visualization: a cone with top $L$ and base $\delta$ (script 4.4.118)
-\item Revisit: product, final object, equalizer, pullback
+\item Revisit: product sl.\ref{Ch4:Prod}, final object sl.\ref{Ch4:FinalObj}, equalizer sl.\ref{Ch4:PullbProdEq}, pullback sl.\ref{Ch4:PullPush}
 
 \end{itemize}
 
@@ -1162,7 +1129,7 @@ and every object in $\delta$ {\color{red} has a path to} $C$;
 $\delta^+-\delta$ is unique up to unique identity
  \end{enumerate}
 \item Visualization: a cocone with bottom $C$ and base $\delta$ (script 4.4.119)
-\item Revisit: sum, initial object
+\item Revisit: sum sl.\ref{Ch4:EqCoEq}, initial object sl.\ref{Ch4:InitialObj}
 \item On the next slides: 
 coequalizer, pushout (= dual of pullback)
 
@@ -1269,7 +1236,6 @@ So $h(b)=h(b')$ if $b\sim b'$.
 
 }
 
-
 \frame
   {   
     \frametitle{Pushouts}\label{Ch4:Push}
@@ -1297,13 +1263,14 @@ D\arrow{rd}[description]{\exists!k}
 $A\stackrel{f}{\leftarrow} C \stackrel{g}{\to}B$
 is a cospan $A\stackrel{\kappa_1}{\to} D \stackrel{\kappa_2}{\leftarrow}B$ such that 
 $f;\kappa_1=g;\kappa_2$ and for any cospan 
-$A\stackrel{h_1}{\to} X \stackrel{h_2}{\leftarrow}B$
+$A\stackrel{h_1}{\to} Y \stackrel{h_2}{\leftarrow}B$
 with $f;h_1 = g;h_2$
 there is a unique morphism $k: D\to Y$
 such that $h_i = \kappa_i;k$ for $i=1,2$.
  \end{itemize}
 
  }
+
 
 \frame
   {   
