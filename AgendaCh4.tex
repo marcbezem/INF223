@@ -1106,7 +1106,7 @@ and every object in $\delta$ {\color{red} is reachable from} $L$;
 $\delta^+-\delta$ is unique up to unique isomorphism
  \end{enumerate}
 \item Visualization: a cone with top $L$ and base $\delta$ (script 4.4.118)
-\item Revisit: product sl.\ref{Ch4:Prod}, final object sl.\ref{Ch4:FinalObj}, equalizer sl.\ref{Ch4:PullbProdEq}, pullback sl.\ref{Ch4:PullPush}
+\item Revisit: product sl.\ref{Ch4:Prod}, final object sl.\ref{Ch4:FinalObj} (empty $\delta$!), equalizer sl.\ref{Ch4:PullbProdEq}, pullback sl.\ref{Ch4:PullPush}
 
 \end{itemize}
 
@@ -1126,12 +1126,11 @@ $\delta^+-\delta$ is unique up to unique isomorphism
 morphisms {\color{red}from} $\delta$ such that the extended diagram $\delta^+$ commutes
 and every object in $\delta$ {\color{red} has a path to} $C$;
     \item One claims a universal property such that the new stuff in
-$\delta^+-\delta$ is unique up to unique identity
+$\delta^+-\delta$ is unique up to unique isomorphism
  \end{enumerate}
 \item Visualization: a cocone with bottom $C$ and base $\delta$ (script 4.4.119)
-\item Revisit: sum sl.\ref{Ch4:EqCoEq}, initial object sl.\ref{Ch4:InitialObj}
-\item On the next slides: 
-coequalizer, pushout (= dual of pullback)
+\item Revisit: sum sl.\ref{Ch4:Prod}, initial object sl.\ref{Ch4:InitialObj} (empty $\delta$!)
+\item On the next slides: coequalizer, pushout (= dual of pullback)
 
 \end{itemize}
 
@@ -1151,14 +1150,14 @@ A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&B
 dual:
 \begin{tikzcd}[ampersand replacement=\&]
 %X\arrow{dr}{h;m}\arrow[swap]{d}{h}\\ 
-A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&B  \arrow{r}{n} \& C
+A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&B  \arrow{r}{e} \& C
 \end{tikzcd} (why?)
 \item Co(co)ne:
 \begin{tikzcd}[ampersand replacement=\&]
 %X\arrow{dr}{h;m}\arrow[swap]{d}{h}\\ 
 \&E \arrow[swap]{dl}{m}\arrow{dr}{m;f} \&
-~A\arrow[swap]{dr}{f;n}\arrow[bend left]{rr}{f}\arrow[bend right]{rr}{g}\&
-\&B\arrow{dl}{n}\\
+~A\arrow[swap]{dr}{f;e}\arrow[bend left]{rr}{f}\arrow[bend right]{rr}{g}\&
+\&B\arrow{dl}{e}\\
 A\arrow[bend left]{rr}{f}\arrow[bend right]{rr}{g}\&\&B~ \& C
 \end{tikzcd}
 \item 
@@ -1170,7 +1169,7 @@ A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&B
 \begin{tikzcd}[ampersand replacement=\&]
 \&\&X\\ 
 A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&
-B  \arrow{r}{n}\arrow{ur}{h} \&
+B  \arrow{r}{e}\arrow{ur}{h} \&
 C
 \arrow{u}[description]{\exists!k}
 \end{tikzcd}
@@ -1187,21 +1186,21 @@ $E=\set{a\in A\mid f(a)=g(a)}$. What is $C$?
     \frametitle{Coequalizer}\label{Ch4:CoEqSet}
 
  \begin{itemize}[<+->]
-\item $(C,n)$ should satisfy $f;n=g;n$ and the universal property:
-if $h: B\to X$ with $f;h=g;h$, then $h=n;k$ for some unique $k$
+\item $(C,e)$ should satisfy $f;e=g;e$ and the universal property:
+if $h: B\to X$ with $f;h=g;h$, then $h=e;k$ for some unique $k$
 \item Coequalizer in $\Set$ is subtle!
 \begin{tikzcd}[ampersand replacement=\&]
 \&\&X\\ 
 A\arrow[bend left]{r}{f}\arrow[bend right]{r}{g}\&
-B  \arrow{r}{n}\arrow{ur}{h} \&
+B  \arrow{r}{e}\arrow{ur}{h} \&
 C
 \arrow{u}[description]{\exists!k}
 \end{tikzcd}
-\item Exploring some trivial cases:
+\item Exploring some simple cases:
  \begin{itemize}
-\item If $f=g$, then $(C,n)\simeq(B,id_B)$ (why?)
-\item If $f$ ($g$) is constant $b$ ($b'$) and  $b\neq b'$, then $n(b)=n(b')$
-and we can take $C = B-\set{b'}$ and $n(b')=b$ and else the identity
+\item If $f=g$, then $(C,e)\simeq(B,id_B)$ (why must $e$ be epi?)
+\item If $f$ ($g$) is constant $b$ ($b'$) and  $b\neq b'$, then $e(b)=e(b')$
+and we can take $C = B-\set{b'}$ and $e(b')=b$ and else the identity
 \end{itemize}
 \item In general: $C=B/{\sim}$ where $\sim$ is smallest\footnote{%
 = intersection of all such things, or inductively defined.}
@@ -1218,9 +1217,9 @@ and we can take $C = B-\set{b'}$ and $n(b')=b$ and else the identity
  \begin{itemize}[<+->]
 \item In general: $C=B/{\sim}$ where $\sim$ is smallest equivalence relation
  on $B$ satisfying $f(a)\sim g(a)$ for all $a\in A$
-\item Define $n: B \to B/{\sim}$ by $n(b)= [b]_{\sim}$
+\item Define $e: B \to B/{\sim}$ by $e(b)= [b]_{\sim}$
 \item Proof of the universal property: assume $h:B\to X$ with $f;h=g;h$.
-The equation $n;k = h$ enforces $k([b]) = h(b)$ for all $b\in B$, so we have
+The equation $e;k = h$ enforces $k([b]) = h(b)$ for all $b\in B$, so we have
 to show that this defines a function. 
 %This boild down to $h(b)=h(b')$ if $b\sim b'$.
 \vspace*{2mm}
@@ -1288,7 +1287,7 @@ their coequalizer yields the pushout
 \begin{tikzcd}[ampersand replacement=\&]
 \& A\arrow[swap]{dr}{\kappa_1}\\
 C\arrow[swap]{ur}{f}\arrow{dr}{g}\&\&
-A+B  \arrow{r}{n} \& P \\
+A+B  \arrow{r}{e} \& P \\
 \& B\arrow{ur}{\kappa_2}
 \end{tikzcd}
 \item Exercise: find the cospan and prove that it is a pushout
@@ -1309,7 +1308,7 @@ other types as well (similarly for co-limits). Now:
 \item Proof by example (can easily be generalized). Let $\delta$ be
 \[\begin{tikzcd}[ampersand replacement=\&]
 A\arrow[bend left]{r}{f}\&
-B \arrow[bend left]{l}{g} \arrow{r}{n}\arrow{r}{h} \&A\&C
+B \arrow[bend left]{l}{g} \arrow{r}{e}\arrow{r}{h} \&A\&C
 \end{tikzcd}\] 
 Now define: % (explanation follows):
 $X = A\times B\times A\times C$ and $Y = B\times A \times A$,
@@ -1343,20 +1342,10 @@ A\times B\times A\times C \arrow[bend left]{rr}{\Kp{\pi_2,\pi_1,\pi_3}}
 \arrow[dotted, xshift=2mm, yshift=0.5mm]{ddrr}[description]{m;\pi_4}
 \\\\
 \delta:\&A\arrow[bend left]{r}{f}\&
-B \arrow[bend left]{l}{g} \arrow{r}{n}\arrow{r}{h} \&A\&C
+B \arrow[bend left]{l}{g} \arrow{r}{e}\arrow{r}{h} \&A\&C
 \end{tikzcd}\] 
 \item The universal property of $(L,m)$ implies that of $(L,\delta)$
  \end{itemize}
-
-}
-
-\frame
-  {   
-    \frametitle{Summary Chapter 4}\label{Ch4:Summary}
-
- \begin{enumerate}[<+->]
-\item 
- \end{enumerate}
 
 }
 
