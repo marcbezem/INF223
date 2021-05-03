@@ -23,7 +23,8 @@
 \newcommand{\To}{\Rightarrow}
 \newcommand{\Trt}{\stackrel{*}{\Rightarrow}}
 \newcommand{\ToG}{\Rightarrow_G}
-\newcommand{\redS}{{\color{red} S}}
+\newcommand{\redc}{{\color{red} c}}
+
 
 \newcommand{\bfsf}[1]{{\boldsymbol{#1}}}
 \newcommand{\Set}{\bfsf{Set}}
@@ -201,37 +202,71 @@ mapping each $n\in M$ to $\alpha_n = (m\mapsto n*m)$ %, the \emph{left action} o
 $\alpha_{n*n'} = \alpha_{n'};\alpha_n= \alpha_n\circ\alpha_{n'}$, so
 $n\mapsto\alpha_n$ defines a monoid isomorphism  from $(M,1,*)$
 to a submonoid of the transformation monoid: Cayley's Theorem
-\item Again  the Yoneda lemma generalizes a simple fact
+\item Again  the Yoneda lemma generalizes a known fact
  \end{itemize}
 
- }
-
-
-\end{document}
+}
 
 \frame
   {   
-    \frametitle{You need a lemma}\label{Yon:Intro}
+    \frametitle{You need a lemma, so formulate and prove it!}\label{Yon:Intro}
 
  \begin{itemize}[<+->]
-\item Assume we have the following data:
+\item The set of natural transformations $\CC(c,\_)\To F$ is in bijective
+correspondence with the set $F(c)$, natural in $c$ and $F$, for any
 \begin{itemize}
-    \item a small category $\CC$
-    \item a functor $F:\CC\to\Set$
-    \item an object $c$ of $\CC$, so a functor $\CC(c,\_):\CC\to\Set$
+    \item small category $\CC$
+    \item functor $F:\CC\to\Set$
+    \item object $c$ of $\CC$, defining a functor $\CC(c,\_):\CC\to\Set$
  \end{itemize}
-Then the set of natural transformations $\CC(c,\_)\To F$ is in bijective
-correspondence with the set $F(c)$, and this in a `natural' way
-(we will explain this and make this precise)
-\item The above statement is called the Yoneda Lemma
-\item Useful links are:
- \begin{itemize}
-    \item \myurl{https://en.wikipedia.org/wiki/Yoneda\_lemma}
-    \item \myurl{https://ncatlab.org/nlab/show/Yoneda+lemma}
- \end{itemize}
+\item Proving the Yoneda Lemma consists of the following steps:
+ \begin{enumerate}
+    \item Construct the bijection from $\CC(c,\_)\To F$ to $F(c)$
+    \item Extend $c\mapsto(\CC(c,\_)\To F)$ to a functor $\CC\to\Set$ and
+prove that the bijection is natural in $c$
+    \item Extend $F\mapsto(\CC(c,\_)\To F)$ to a functor $[\CC\to\Set]\to\Set$ and
+prove that the bijection is natural in $F$
+   \end{enumerate}
+\item Step 1 is a sequence of forced moves: given $\alpha: \CC(c,\_)\To F$
+construct an element of  $F(c)$ in the only way that always works (`naturally',
+even if $\CC$ is trivial)
  \end{itemize}
 
  }
+
+\frame
+  {   
+    \frametitle{Step 1, construction of the bijection}\label{Yon:bijection}
+
+ \begin{itemize}[<+->]
+\item The `enforced' definition: $\Phi_c(\alpha) = \alpha_c(id_c) \in F(c)$
+\item $\Phi_c$ is a bijection, since 1.\ injective and 2.\ surjective:
+ \begin{enumerate}
+    \item Any natural $\alpha$ is completely determined by $\alpha_c(id_c)$, 
+as $\alpha_d(f)=\alpha_d(id_c;f)=F(f)(\alpha_c(id_c))$
+\begin{tikzcd}[ampersand replacement=\&]
+\redc \arrow[swap]{d}{f} \& \CC(c,\redc)  \arrow[swap]{d}{\_;f}\arrow{r}{\alpha_\redc} \&\arrow{d}{F(f)} F(\redc) \&
+id_c \arrow[swap,mapsto]{d}{\_;f}\arrow[mapsto]{r}{\alpha_c} \&\arrow[mapsto]{d}{F(f)} \alpha_c(id_c)\\
+d \& \CC(c,d) \arrow{r}{\alpha_d} \& F(d) \&
+f \arrow[mapsto]{r}{\alpha_d} \& F(f)(\alpha_c(id_c))
+\end{tikzcd}
+    \item Given $x\in F(c)$, define $\beta_d(g)=F(g)(x)$ for any object $d$ 
+and $g\in\CC(c,d)$, then $\Phi_c(\beta)=x$ and $\beta$ is natural,
+since $\beta_e(g;f)=F(g;f)(x) = F(f)(F(g)(x))$ and $\beta_c(id_c) = x$
+
+\begin{tikzcd}[ampersand replacement=\&]
+d \arrow[swap]{d}{f} \& \CC(c,d)  \arrow[swap]{d}{\_;f}\arrow{r}{\beta_d} \&\arrow{d}{F(f)} F(d)  \& 
+g \arrow[swap, mapsto]{d}{\_;f}\arrow[mapsto]{r}{\beta_d} \&\arrow[mapsto]{d}{F(f)} F(g)(x) \\
+e \& \CC(c,e) \arrow{r}{\beta_e} \& F(e)\& g;f \arrow[mapsto]{r}{\beta_e} \& {\color{red} ?}
+\end{tikzcd}  
+\end{enumerate}
+ \end{itemize}
+
+ }
+
+\end{document}
+
+
 
 
 \myurl{en.wikipedia.org/wiki/Ordered_pair}
