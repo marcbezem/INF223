@@ -178,9 +178,9 @@
    1. Finite limits from products and equalizers
    
 
-1. Lecture (30.04.21, week 17) TBA
+1. Lecture (30.04.21, week 17) No lecture
 
-1. Lecture (06.05.21, week 18) TBA
+1. Lecture (06.05.21, week 18) Yoneda Lemma 1
 
 1. Lecture (07.05.21, week 18) TBA
 
