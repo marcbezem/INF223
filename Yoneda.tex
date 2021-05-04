@@ -106,15 +106,15 @@ since the only morphism in $\CC$ is $id_1$
 
  \begin{itemize}[<+->]
 \item Let $\CC$ be the category ${\cdot}{\to}{\cdot}$, with objects $1,2$ and
-a non-trivial morphism $f:1\to 2$. Then $\CC(1,\_):\CC\to\Set$ maps
+one morphism $f:1\to 2$, besides $id_1,id_2$. Then $\CC(1,\_):\CC\to\Set$ maps
 $1$ to $\CC(1,1) = \set{id_1}$ and $2$ to $\CC(1,2) = \set{f}$, and
 $\CC(1,f)$ is the map $\CC(1,1)\to\CC(1,2)$ sending $id_1$ to $f$  
 \item Let $F:\CC\to\Set$ be a functor, then $F(1), F(2)$ are sets, and
-$F(f)$ is a map ${F(1)}\to\set{f}$
+$F(f)$ is a map ${F(1)}\to{F(2)}$
 \item Any natural transformation $\alpha: \CC(1,\_)\To F$ consists of
 $\alpha_1: \set{id_1} \to F(1)$ and $\alpha_2: \set{f} \to F(2)$ satisfying 
 naturality: $F(f)(\alpha_1(id_1)) = \alpha_2(f)$, i.e., an element of the graph of $F(f)$
-\item Notations: $X_i = F(i)$ and $x_i =\alpha_i(\_)$ with % $x_i \in X_i$ and
+\item Simplified: $x_i =\alpha_i(\_)$ with % $x_i \in X_i$ and
 $F(f)(x_1) = x_2$
 \item Yoneda now says:   $F(1) \simeq{}$ the graph of $F(f)$
 \item This boils down to: domain and graph of $F(f)$ are isomorphic
@@ -219,13 +219,13 @@ correspondence with the set $F(c)$, natural in $c$ and $F$, for any
     \item functor $F:\CC\to\Set$
     \item object $c$ of $\CC$, defining a functor $\CC(c,\_):\CC\to\Set$
  \end{itemize}
-\item Proving the Yoneda Lemma consists of the following steps:
+\item Proving the Yoneda Lemma means taking the following steps:
  \begin{enumerate}
     \item Construct the bijection from $\CC(c,\_)\To F$ to $F(c)$
     \item Extend $c\mapsto(\CC(c,\_)\To F)$ to a functor $\CC\to\Set$ and
-prove that the bijection is natural in $c$
+prove that the bijection under 1.\ is natural in $c$
     \item Extend $F\mapsto(\CC(c,\_)\To F)$ to a functor $[\CC\to\Set]\to\Set$ and
-prove that the bijection is natural in $F$
+prove that the bijection under 1.\ is natural in $F$
    \end{enumerate}
 \item Step 1 is a sequence of forced moves: given $\alpha: \CC(c,\_)\To F$
 construct an element of  $F(c)$ in the only way that always works (`naturally',
@@ -243,7 +243,7 @@ even if $\CC$ is trivial)
 \item $\Phi_c$ is a bijection, since 1.\ injective and 2.\ surjective:
  \begin{enumerate}
     \item Any natural $\alpha$ is completely determined by $\alpha_c(id_c)$, 
-as $\alpha_d(f)=\alpha_d(id_c;f)=F(f)(\alpha_c(id_c))$
+since $\alpha_d(f)=\alpha_d(id_c;f)=F(f)(\alpha_c(id_c))$:\\
 \begin{tikzcd}[ampersand replacement=\&]
 \redc \arrow[swap]{d}{f} \& \CC(c,\redc)  \arrow[swap]{d}{\_;f}\arrow{r}{\alpha_\redc} \&\arrow{d}{F(f)} F(\redc) \&
 id_c \arrow[swap,mapsto]{d}{\_;f}\arrow[mapsto]{r}{\alpha_c} \&\arrow[mapsto]{d}{F(f)} \alpha_c(id_c)\\
@@ -251,18 +251,88 @@ d \& \CC(c,d) \arrow{r}{\alpha_d} \& F(d) \&
 f \arrow[mapsto]{r}{\alpha_d} \& F(f)(\alpha_c(id_c))
 \end{tikzcd}
     \item Given $x\in F(c)$, define $\beta_d(g)=F(g)(x)$ for any object $d$ 
-and $g\in\CC(c,d)$, then $\Phi_c(\beta)=x$ and $\beta$ is natural,
-since $\beta_e(g;f)=F(g;f)(x) = F(f)(F(g)(x))$ and $\beta_c(id_c) = x$
-
+and $g\in\CC(c,d)$, then $\Phi_c(\beta)=\beta_c(id_c) =x$ and $\beta$ is natural:
 \begin{tikzcd}[ampersand replacement=\&]
 d \arrow[swap]{d}{f} \& \CC(c,d)  \arrow[swap]{d}{\_;f}\arrow{r}{\beta_d} \&\arrow{d}{F(f)} F(d)  \& 
 g \arrow[swap, mapsto]{d}{\_;f}\arrow[mapsto]{r}{\beta_d} \&\arrow[mapsto]{d}{F(f)} F(g)(x) \\
 e \& \CC(c,e) \arrow{r}{\beta_e} \& F(e)\& g;f \arrow[mapsto]{r}{\beta_e} \& {\color{red} ?}
-\end{tikzcd}  
+\end{tikzcd}
+Indeed ${\color{red} ?}=\beta_e(g;f)=F(g;f)(x) = F(f)(F(g)(x))$
 \end{enumerate}
  \end{itemize}
 
  }
+
+\frame
+  {   
+    \frametitle{Step 2, naturality in the object $c$}\label{Yon:natural_in_c}
+
+ \begin{itemize}[<+->]
+\item To extend $c\mapsto(\CC(c,\_)\To F)$ to a functor $\CC\to\Set$, define
+for any $f:c\to d$ a map $(\CC(c,\_)\To F)\to(\CC(d,\_)\To F)$ by
+$({\color{red}f(\alpha)})_a (h) = \alpha_a(f;h)$ for all $h:d\to a$ (NB {\color{red}notation}).
+Functoriality: $id(\alpha) = \alpha$ and $(f;g)(\alpha) = g(f(\alpha))$ (why?)
+\item Now we can verify naturality in $c$ in the following diagram:
+\begin{tikzcd}[ampersand replacement=\&]
+c \arrow[swap]{d}{f} \& \CC(c,\_)\To F  \arrow[swap]{d}{\color{red}f}\arrow{r}{\Phi_c} \&\arrow{d}{F(f)} F(c) \&
+\alpha \arrow[swap,mapsto]{d}{\color{red}f}\arrow[mapsto]{r}{\Phi_c} \&\arrow[mapsto]{d}{F(f)} \alpha_c(id_c)\\
+d \& \CC(d,\_)\To F \arrow{r}{\Phi_d} \& F(d) \&
+{\color{red}f(\alpha)} \arrow[mapsto]{r}{\Phi_d} \& {\color{red}?}
+\end{tikzcd}
+
+Indeed ${\color{red} ?}=\Phi_d(f(\alpha)) = (f(\alpha))_d(id_d) = \alpha_d(f;id_d) = \alpha_d(f)$
+and the diagram commutes as in 1.\ on the previous slide.
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{Step 3, naturality in the functor $F$}\label{Yon:natural_in_F}
+
+ \begin{itemize}[<+->]
+\item Extend $F\mapsto(\CC(c,\_)\To F)$ to a functor $[\CC\to\Set]\to\Set$
+by postcomposition with $\varphi:F\To G$: 
+${\color{red}\varphi(\alpha)} = \alpha;\varphi$ (NB {\color{red}notation})
+%$(\CC(c,\_)\To F)\to(\CC(c,\_)\To G)$ by
+Functoriality: 
+$id(\alpha) = \alpha$ and $(\varphi;\psi)(\alpha) = \psi(\varphi(\alpha))$ (why?)
+\item Recall: $\Phi_c : (\CC(c,\_)\To F) \to F(c): \alpha\mapsto \alpha_c(id_c)$
+\item Define: $\Psi_c : (\CC(c,\_)\To G) \to G(c): \beta\mapsto \beta_c(id_c)$
+\item Now we can verify naturality in $F$ in the following diagram:
+\begin{tikzcd}[ampersand replacement=\&]
+F \arrow[swap]{d}{\varphi} \& \CC(c,\_)\To F  \arrow[swap]{d}{\_;\varphi}\arrow{r}{\Phi_c} \&\arrow{d}{\varphi_c} F(c) \&
+\alpha \arrow[swap,mapsto]{d}{\_;\varphi}\arrow[mapsto]{r}{\Phi_c} \&\arrow[mapsto]{d}{\varphi_c} \alpha_c(id_c)\\
+G \& \CC(c,\_)\To G \arrow{r}{\Psi_c} \& G(c) \&
+{\alpha;\varphi} \arrow[mapsto]{r}{\Psi_d} \& {\color{red}?}
+\end{tikzcd}
+
+Indeed $\Psi_d(\alpha;\varphi) = (\alpha;\varphi)_c(id_c) = \varphi_c(\alpha_c(id_c))$
+and the diagram commutes.
+ \end{itemize}
+
+ }
+
+\frame
+  {   
+    \frametitle{A puzzling application of the Yoneda Lemma in Haskell}\label{Yon:Hask}
+
+ \begin{itemize}[<+->]
+\item Recall in the Haskell category $\HH$, with types as objects and 
+functions as morphisms, the functor $[\_]:\HH\to\HH$ :
+   \begin{itemize}[<+->]
+\item mapping any type $T$ to the type $[T]$ of lists over $T$
+\item mapping any $f: T\to T'$ to $map~f: [T] \to [T']$
+   \end{itemize}
+\item The Yoneda Lemma implies that any polymorphic function
+$f$ of type $(Int\to t) \to [t]$, $t$ a type variable,
+is completely given by a list of integers, which is $f(id_{Int})$!
+\item Exercise: make sure you understand the details ($c,F,\CC(c,\_)$) % of the Yoneda Lemma
+\item Discussion
+ \end{itemize}
+
+ }
+
 
 \end{document}
 
