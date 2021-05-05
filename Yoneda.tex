@@ -70,6 +70,9 @@ correspondence with the set $F(c)$, and this in a `natural' way
 (we will explain this and make this precise)
 \item The above statement is called the 
 \href{https://en.wikipedia.org/wiki/Nobuo_Yoneda}{\color{blue}Yoneda} Lemma
+\item Definition of the bijection is a sequence of forced moves: given $\alpha: \CC(c,\_)\To F$
+construct an element of  $F(c)$ in the only way that always works (even if $\CC$ is trivial,
+{\color{red}try}!)
 \item Useful links are:
  \begin{itemize}
     \item \myurl{https://en.wikipedia.org/wiki/Yoneda\_lemma}
@@ -201,7 +204,7 @@ mapping each $n\in M$ to $\alpha_n = (m\mapsto n*m)$ %, the \emph{left action} o
 \item Note that $\alpha_1 = id_M$ and 
 $\alpha_{n*n'} = \alpha_{n'};\alpha_n= \alpha_n\circ\alpha_{n'}$, so
 $n\mapsto\alpha_n$ defines a monoid isomorphism  from $(M,1,*)$
-to a submonoid of the transformation monoid: Cayley's Theorem
+to a submonoid of $M$'s transformation monoid: Cayley's Theorem
 \item Again  the Yoneda lemma generalizes a known fact
  \end{itemize}
 
@@ -212,45 +215,29 @@ to a submonoid of the transformation monoid: Cayley's Theorem
     \frametitle{You need a lemma, so formulate and prove it!}\label{Yon:Intro}
 
  \begin{itemize}[<+->]
-\item The set of natural transformations $\CC(c,\_)\To F$ is in bijective
-correspondence with the set $F(c)$, natural in $c$ and $F$, for any
-\begin{itemize}
-    \item small category $\CC$
-    \item functor $F:\CC\to\Set$
-    \item object $c$ of $\CC$, defining a functor $\CC(c,\_):\CC\to\Set$
- \end{itemize}
+\item Given a small category $\CC$, a functor $F:\CC\to\Set$ and an
+object $c$ of $\CC$, the map $\Phi_c(\alpha) = \alpha_c(id_c)$ is
+a bijection $(\CC(c,\_)\To F)\to F(c)$ with inverse mapping $x$ to $\beta$
+with $\beta_d(g)=F(g)(x)$ for any object $d$ of $\CC$ and $g\in\CC(c,d)$.
+These bijections are natural in object $c$ and functor $F$.
 \item Proving the Yoneda Lemma means taking the following steps:
  \begin{enumerate}
-    \item Construct the bijection from $\CC(c,\_)\To F$ to $F(c)$
+    \item Prove that the claimed map is a well-defined inverse
     \item Extend $c\mapsto(\CC(c,\_)\To F)$ to a functor $\CC\to\Set$ and
-prove that the bijection under 1.\ is natural in $c$
+prove that one bijection is natural in $c$ (hence also its inverse)
     \item Extend $F\mapsto(\CC(c,\_)\To F)$ to a functor $[\CC\to\Set]\to\Set$ and
-prove that the bijection under 1.\ is natural in $F$
+prove that one bijection is natural in $F$ (so also its inverse)
    \end{enumerate}
-\item Step 1 is a sequence of forced moves: given $\alpha: \CC(c,\_)\To F$
-construct an element of  $F(c)$ in the only way that always works (`naturally',
-even if $\CC$ is trivial)
  \end{itemize}
 
  }
 
 \frame
   {   
-    \frametitle{Step 1, construction of the bijection}\label{Yon:bijection}
+    \frametitle{Step 1, verification of the claimed inverse}\label{Yon:bijection}
 
- \begin{itemize}[<+->]
-\item The `enforced' definition: $\Phi_c(\alpha) = \alpha_c(id_c) \in F(c)$
-\item $\Phi_c$ is a bijection, since 1.\ injective and 2.\ surjective:
- \begin{enumerate}
-    \item Any natural $\alpha$ is completely determined by $\alpha_c(id_c)$, 
-since $\alpha_d(f)=\alpha_d(id_c;f)=F(f)(\alpha_c(id_c))$:\\
-\begin{tikzcd}[ampersand replacement=\&]
-\redc \arrow[swap]{d}{f} \& \CC(c,\redc)  \arrow[swap]{d}{\_;f}\arrow{r}{\alpha_\redc} \&\arrow{d}{F(f)} F(\redc) \&
-id_c \arrow[swap,mapsto]{d}{\_;f}\arrow[mapsto]{r}{\alpha_c} \&\arrow[mapsto]{d}{F(f)} \alpha_c(id_c)\\
-d \& \CC(c,d) \arrow{r}{\alpha_d} \& F(d) \&
-f \arrow[mapsto]{r}{\alpha_d} \& F(f)(\alpha_c(id_c))
-\end{tikzcd}
-    \item Given $x\in F(c)$, define $\beta_d(g)=F(g)(x)$ for any object $d$ 
+ \begin{enumerate}[<+->]
+\item Given $x\in F(c)$, define $\beta_d(g)=F(g)(x)$ for any object $d$ 
 and $g\in\CC(c,d)$, then $\Phi_c(\beta)=\beta_c(id_c) =x$ and $\beta$ is natural:
 \begin{tikzcd}[ampersand replacement=\&]
 d \arrow[swap]{d}{f} \& \CC(c,d)  \arrow[swap]{d}{\_;f}\arrow{r}{\beta_d} \&\arrow{d}{F(f)} F(d)  \& 
@@ -258,8 +245,15 @@ g \arrow[swap, mapsto]{d}{\_;f}\arrow[mapsto]{r}{\beta_d} \&\arrow[mapsto]{d}{F(
 e \& \CC(c,e) \arrow{r}{\beta_e} \& F(e)\& g;f \arrow[mapsto]{r}{\beta_e} \& {\color{red} ?}
 \end{tikzcd}
 Indeed ${\color{red} ?}=\beta_e(g;f)=F(g;f)(x) = F(f)(F(g)(x))$
-\end{enumerate}
- \end{itemize}
+\item Any natural $\alpha$ is completely determined by $\alpha_c(id_c)$, 
+since $\alpha_d(f)=\alpha_d(id_c;f)=F(f)(\alpha_c(id_c))$:\\
+\begin{tikzcd}[ampersand replacement=\&]
+\redc \arrow[swap]{d}{f} \& \CC(c,\redc)  \arrow[swap]{d}{\_;f}\arrow{r}{\alpha_\redc} \&\arrow{d}{F(f)} F(\redc) \&
+id_c \arrow[swap,mapsto]{d}{\_;f}\arrow[mapsto]{r}{\alpha_c} \&\arrow[mapsto]{d}{F(f)} \alpha_c(id_c)\\
+d \& \CC(c,d) \arrow{r}{\alpha_d} \& F(d) \&
+f \arrow[mapsto]{r}{\alpha_d} \& F(f)(\alpha_c(id_c))
+\end{tikzcd}
+ \end{enumerate}
 
  }
 
@@ -281,7 +275,7 @@ d \& \CC(d,\_)\To F \arrow{r}{\Phi_d} \& F(d) \&
 \end{tikzcd}
 
 Indeed ${\color{red} ?}=\Phi_d(f(\alpha)) = (f(\alpha))_d(id_d) = \alpha_d(f;id_d) = \alpha_d(f)$
-and the diagram commutes as in 1.\ on the previous slide.
+and the diagram commutes as in 2.\ on the previous slide.
  \end{itemize}
 
  }
@@ -333,6 +327,25 @@ is completely given by a list of integers, which is $f(id_{Int})$!
 
  }
 
+\frame
+  {   
+    \frametitle{The Yoneda embedding}\label{Yon:Embed}
+
+ \begin{itemize}[<+->]
+\item The Yoneda embedding is a functor $Y: \CC^{op} \to [\CC\to\Set]$
+with $Y(c)=\CC(c,\_)$
+\item Still to define: $Y(f):\CC(c,\_)\To\CC(d,\_)$ for all $f\in\CC(d,c)$
+\item Recall $\lambda {\color{red}x}.\lambda t. \lambda g\in\CC(c,t). F(g)(x) : {\color{red}F(c)} \to (\CC(c,\_)\To F)$,
+which is a formal rendering of the inverse Yoneda bijection constructed in
+point 1 of slide \ref{Yon:bijection}
+\item Apply this to the functor $F= \CC(d,\_)$ and we get
+$\lambda {\color{red}x}.\lambda t. \lambda g\in\CC(c,t). (x;g) : {\color{red}\CC(d,c)} \to (\CC(c,\_)\To \CC(d,\_))$
+\item Precomposition with ${\color{red}x}$ is functorial, so we put $Y(f)= (f;\_)$
+\item The Yoneda Lemma implies that $Y$ is full and faithful
+\item Similarly: any small $\CC$ can be embedded in $[\CC^{op}\to\Set]$
+ \end{itemize}
+
+ }
 
 \end{document}
 
