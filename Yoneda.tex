@@ -116,9 +116,9 @@ $\CC(1,f)$ is the map $\CC(1,1)\to\CC(1,2)$ sending $id_1$ to $f$
 $F(f)$ is a map ${F(1)}\to{F(2)}$
 \item Any natural transformation $\alpha: \CC(1,\_)\To F$ consists of
 $\alpha_1: \set{id_1} \to F(1)$ and $\alpha_2: \set{f} \to F(2)$ satisfying 
-naturality: $F(f)(\alpha_1(id_1)) = \alpha_2(f)$, i.e., an element of the graph of $F(f)$
-\item Conversely, if $F(f)(x_1) = x_2$ then  $\alpha_i(\_) = x_i$ is natural
-
+naturality: $F(f)(\alpha_1(id_1)) = \alpha_2(\CC(1,f)(id_1)) = \alpha_2(f)$
+%i.e., an element of the graph of $F(f)$
+\item Conversely, if $F(f)(x_1) = x_2$ then  $\alpha_i(\_) = x_i \in F(i)$ is natural
 \item Yoneda now implies:   $F(1) \simeq{}$ the graph of $F(f)$
 \item Generally: domain and graph of any function are isomorphic
 \item Again  the Yoneda lemma generalizes (vastly) a simple fact
@@ -134,7 +134,7 @@ naturality: $F(f)(\alpha_1(id_1)) = \alpha_2(f)$, i.e., an element of the graph 
 \item Let $\CC$ be a small category and $A$ an arbitrary object in $\CC$. 
 The functor  $\CC(A,\_):\CC\to\Set$ maps objects $X$ to sets $\CC(A,X)$
 of morphisms from $A$ to $X$. Morphisms $f: X\to Y$ in $\CC$ are
-mapped to morphisms $\CC(A,f): \CC(A,X)\to\CC(A,Y)$ by
+mapped to maps $\CC(A,f): \CC(A,X)\to\CC(A,Y)$ by
 postcompostion with $f$: if $g:A\to X$ then $\CC(A,f)(g) = g;f$.
 \item A functor $F:\CC\to\Set$ is \emph{represented} by $A$ if
 there exists a natural isomorphism $\alpha: \CC(A,\_)\To F$.
@@ -199,12 +199,12 @@ $\begin{array}{l}%\vspace*{2mm}
 \text{$\alpha(1)$ can be any element in $M$}
 \end{array}$
 \item Mapping such $\alpha$'s to $\alpha(1)\in M$ is a bijection, with inverse
-mapping each $n\in M$ to $\alpha_n = (m\mapsto n*m)$ %, the \emph{left action} of $n$ on $M$
-\item Note that $\alpha_1 = id_M$ and 
-$\alpha_{n*n'} = \alpha_{n'};\alpha_n= \alpha_n\circ\alpha_{n'}$, so
-$n\mapsto\alpha_n$ defines a monoid isomorphism  from $(M,1,*)$
+mapping each $n\in M$ to $(n*\_)$, the \emph{left multiplication} by $n$
+\item Note that $(1*\_) = id_M$ and 
+$((n*n')*\_) = (n'*\_); (n*\_)=$\\$ (n*\_)\circ (n'*\_)$, so
+$(n*\_)$ defines a monoid isomorphism  from $(M,1,*)$
 to a submonoid of $M$'s transformation monoid: Cayley's Theorem
-\item Again  the Yoneda lemma generalizes a known fact
+almost for free from the Yoneda lemma!
  \end{itemize}
 
 }
@@ -245,7 +245,8 @@ e \& \CC(c,e) \arrow{r}{\beta_e} \& F(e)\& g;f \arrow[mapsto]{r}{\beta_e} \& {\c
 \end{tikzcd}
 Indeed ${\color{red} ?}=\beta_e(g;f)=F(g;f)(x) = F(f)(F(g)(x))$
 \item Any natural $\alpha$ is completely determined by $\alpha_c(id_c)$, 
-since $\alpha_d(f)=\alpha_d(id_c;f)=F(f)(\alpha_c(id_c))$:\\
+since $\alpha_d(f)=\alpha_d(id_c;f)=F(f)(\alpha_c(id_c))$
+(so $\Phi_c$ is injective):\\
 \begin{tikzcd}[ampersand replacement=\&]
 \redc \arrow[swap]{d}{f} \& \CC(c,\redc)  \arrow[swap]{d}{\_;f}\arrow{r}{\alpha_\redc} \&\arrow{d}{F(f)} F(\redc) \&
 id_c \arrow[swap,mapsto]{d}{\_;f}\arrow[mapsto]{r}{\alpha_c} \&\arrow[mapsto]{d}{F(f)} \alpha_c(id_c)\\
