@@ -180,17 +180,16 @@
 
 1. Lecture (30.04.21, week 17) No lecture
 
-1. Lecture (06.05.21, week 18) Yoneda Lemma 1
+1. Lecture (06.05.21, week 18)
+   
+   1 Yoneda Lemma 1
 
-1. Lecture (07.05.21, week 18) TBA
+1. Lecture (07.05.21, week 18)   
+   
+   1 Yoneda Lemma 2
 
-1. No lecture (13.05.21, Ascension Day, week 19) 
+1. No lectures from 13.05.21, Ascension Day
 
-1. Lecture (14.05.21, week 19) TBA
-
-1. Lecture (20.05.21, week 20) TBA
-
-1. Lecture (21.05.21, week 20) TBA
 
 
 
