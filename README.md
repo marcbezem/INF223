@@ -154,20 +154,20 @@
 
 1. Lecture (15.04.21, week 15)
 
-   1. Monads 1
+   Monads 1
    
 1. Lecture (16.04.21, week 15) 
 
-   1. Monads 2
+   Monads 2
    
 
 1. Lecture (22.04.21, week 16) 
 
-   1. Monads 3
+   Monads 3
    
 1. Lecture (23.04.21, week 16) 
 
-   1. Monads 4
+   Monads 4
    
 
 1. Lecture (29.04.21, week 17) 
@@ -182,11 +182,11 @@
 
 1. Lecture (06.05.21, week 18)
    
-   1 Yoneda Lemma 1
+   Yoneda Lemma 1
 
 1. Lecture (07.05.21, week 18)   
    
-   1 Yoneda Lemma 2
+   Yoneda Lemma 2
 
 1. No lectures from 13.05.21, Ascension Day
 
