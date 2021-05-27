@@ -1,4 +1,5 @@
 Examples of questions for the oral exam.
 
 - What is a category?
+- What is a functor? Give some examples.
 
