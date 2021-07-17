@@ -1,0 +1,146 @@
+
+Fibonacci and counting with monoids
+Åsmund Aqissiaq Arild Kløvstad
+Apr 23 at 2:36pm
+No unread replies. 5 5 replies.
+
+I had a go at counting recursive calls in Haskell based on this SO post (Links to an external site.) and I think it's actually a bit interesting.
+
+Since the writer monad includes a monoid, we can choose (Z,0,+)
+
+  and have a pretty elegant counter!
+
+fibCount :: Int -> Writer (Sum Int) Int
+fibCount 0 = tell 1 >> return 0
+fibCount 1 = tell 1 >> return 1
+fibCount n = do n1 <- fibCount (n-1)
+                n2 <- fibCount (n-2)
+                tell 1
+                return (n1 + n2)
+
+Here Sum is a type constructor that gives us the monoid for Writer, and tell is a function of Writer that applies just the monoid operation.
+
+ 
+
+I've attached the rest of my code in case anyone wants to play around with it
+Main.hs:
+
+import Control.Monad.Writer
+
+fibCount :: Int -> Writer (Sum Int) Int
+fibCount 0 = tell 1 >> return 0
+fibCount 1 = tell 1 >> return 1
+fibCount n = do n1 <- fibCount (n-1)
+                n2 <- fibCount (n-2)
+                tell 1
+                return (n1 + n2)
+
+fibArg :: Int
+fibArg = 20
+
+run :: (Int, Sum Int)
+run = runWriter $ do result <- fibCount fibArg
+                     return result
+
+main :: IO ()
+main = putStrLn $
+       "The " ++ show fibArg ++ "th Fibonacci number is "
+       ++ show (fst run)                                  -- run is a pair, the first element is our result
+       ++ ". This took "
+       ++ show (getSum $ snd run)                         -- the second element is the count of type Sum {getSum :: Int}
+       ++ " function calls"
+Search entries or author
+Filter replies by unread
+Show deleted replies    
+Reply Reply to Fibonacci and counting with monoids
+
+    Collapse Subdiscussion
+    Marc Bezem
+    Marc Bezem
+    Apr 23, 2021 Apr 23 at 5:25pm
+
+Very elegant, well done!
+
+What do you get for n = 10, 20 30?
+
+Counting only recursive call (not the base cases (= leaves of the call tree) I get:
+
+?- fibcount(10,0,N).
+N = 88 
+
+?- fibcount(20,0,N).
+N = 10945 
+
+?- fibcount(30,0,N).
+N = 1346268 
+
+The difference with counting all nodes (incl. leaves) could be exactly the 10-th , 20-th, 30-th F-number.
+
+I can change my program if necessary.
+Edited by Marc Bezem on May 7 at 1:58pm
+
+    Åsmund Aqissiaq Arild Kløvstad
+    Åsmund Aqissiaq Arild Kløvstad
+    Apr 23, 2021 Apr 23 at 5:49pm
+
+I get (with some not exactly elegant notation to extract just the counts):
+
+λ>  getSum $ snd (runWriter $ fibCount 10)
+177
+
+λ>  getSum $ snd (runWriter $ fibCount 20)
+21891
+
+λ>  getSum $ snd (runWriter $ fibCount 30)
+2692537
+
+and the differences are
+177 - 88 = 89
+21891 - 10945 = 10 946
+2692537 - 1346268 = 1 346 269
+
+which are indeed the 10th, 20th and 30th F-numbers! (If F_0 = 1)
+Edited by Åsmund Aqissiaq Arild Kløvstad on Apr 23 at 5:53pm
+Marc Bezem
+Marc Bezem
+Apr 23, 2021 Apr 23 at 6:31pm
+
+    Here is my code (in Prolog, not the ideal language for this task):
+
+    fibcount(0, X, X).
+    fibcount(1, X, X).
+    fibcount(N, I, O) :-
+        N>=2,
+        I1 is I+1,
+        Np is N+ -1,
+        Npp is Np+ -1,
+        fibcount(Np, I1, Ox),
+        fibcount(Npp, Ox, O).
+
+    This technique is informally called "threading the state through the calls". The 2nd argument is the old state, and the 3rd one is the new state. The base cases don't change the state: leaves are not counted here, easy to change). Each other call increments the old state I by one to I1, and the recursive calls do what they do, the whole state transformation is I -> I1 -> Ox -> O. Note that I don't bother to compute the Fibonacci numbers themselves :-)
+
+    One clearly sees how the monad approach improves on this. Thinks of how easy it would be to just add a line for an extra recursive call in the monad code. With "threading the state through the calls" this would be more difficult (and error-prone).
+
+Reply Reply to Comment
+Collapse Subdiscussion
+Marc Bezem
+Marc Bezem
+Apr 23, 2021 Apr 23 at 6:38pm
+
+Am I right that making "tell 1" the first line of the do-block does not change anything? Makes sense to pay for the call upon entering, instead of "recurse now, pay later".
+
+    Åsmund Aqissiaq Arild Kløvstad
+    Åsmund Aqissiaq Arild Kløvstad
+    Apr 23, 2021 Apr 23 at 6:46pm
+
+That is correct and we get "do tell" which is quite funny
+
+fibCount :: Int -> Writer (Sum Int) Int
+fibCount 0 = return 1
+fibCount 1 = return 1
+fibCount n = do tell 1
+                n1 <- fibCount (n-1)
+                n2 <- fibCount (n-2)
+                return (n1 + n2)
+
+we can also avoid counting the leaves by making the base case simply "return 1"
