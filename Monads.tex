@@ -275,7 +275,7 @@ Left is common in Category Theory, right in Computer Science
     \item a category $\CC$
     \item a functor $T:\CC\to\CC$
     \item a natural transformation $\eta: id_\CC \To T$ (the \emph{monad unit})
-    \item a natural transformation $\mu: T;T \To T$ (the \emph{multiplication})
+    \item a natural transformation $\mu: (T;T) \To T$ (the \emph{multiplication})
  \end{enumerate}
 satisfying the following properties:
  \begin{enumerate}
@@ -299,7 +299,7 @@ The terms \emph{monad unit, multiplication} etc.\ will be explained.
  \begin{enumerate}
     \item the category $\Set$
     \item the functor $\powset:\Set\to\Set$, NB $\powset(f)(X) = f(X)$, the {\color{red}image}
-    \item the natural transformation $\eta: id_\Set \To T$, $\eta_A(a)=\set{a}$
+    \item the natural transformation $\eta: id_\Set \To \powset$, $\eta_A(a)=\set{a}$
     \item the natural transformation $\mu$, 
 $\mu_A: \powset(\powset(A)) \to \powset(A) $ defined by 
 $\mu_A(X) = \bigcup X$ for all $X\subseteq\powset(A)$
@@ -380,7 +380,7 @@ makes only sense for some categories $\CC$, such as $\Set$ and $\HH$
 the functor $T:\Set\to\Set$ on slide \ref{Mon5:CatAbstrOne}, 
 the natural transformation $\eta: id_\Set\To T$
 defined by $\eta_X = unit_X$ on slide \ref{Mon5:CatAbstrTwo}, 
-the natural transformation $\mu: T;T \To T$
+the natural transformation $\mu: (T;T) \To T$
 on slide \ref{Mon5:CatAbstrThree}. Proofs of properties:
 \item $\eta_{T(A)};\mu_A = id_{T(A)}$ means that  $(\eta_{T(A)};\mu_A)(a,m) = (a,m)$
 for all $a\in A, m\in M$. Indeed $\mu_A(\eta_{T(A)}(a,m)) = \mu_A((a,m),1) =$ $= (a,1*m) = (a,m)$
